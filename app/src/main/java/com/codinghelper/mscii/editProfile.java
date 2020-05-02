@@ -12,13 +12,18 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +40,8 @@ import java.util.UUID;
 public class editProfile extends AppCompatActivity {
     private Button btn_choose;
     private Button btn_upload;
+    private EditText status;
+    private ImageButton status_btn;
     private ImageView imageView;
     private Uri filePath;
     private final int PICK_IMAGE_REQUEST=22;
@@ -48,8 +55,12 @@ public class editProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         btn_choose=findViewById(R.id.chooseImg);
+        user=FirebaseAuth.getInstance().getCurrentUser();
+        reference=FirebaseDatabase.getInstance().getReference();
         btn_upload=findViewById(R.id.uploadImg);
         imageView=findViewById(R.id.imgView);
+        status=findViewById(R.id.edit_status);
+        status_btn=findViewById(R.id.status_confirm_bt);
         storage=FirebaseStorage.getInstance();
         storageReference=storage.getReference();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -63,6 +74,35 @@ public class editProfile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 uploadImage();
+            }
+        });
+        status_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String updatestatus=status.getText().toString();
+                if (TextUtils.isEmpty(updatestatus)) {
+                    status.setError("enter new status");
+                    status.setFocusable(true);
+                    return;
+                }else{
+                    HashMap<String,String> pstatus=new HashMap<>();
+                    pstatus.put("Userstatus",updatestatus);
+                    reference.child("studentDetail").child(user.getUid()).child("Status").setValue(pstatus)
+                         .addOnCompleteListener(new OnCompleteListener<Void>() {
+                             @Override
+                             public void onComplete(@NonNull Task<Void> task) {
+                                 if(task.isSuccessful()){
+                                     Toast.makeText(editProfile.this,"Status Uploded!!",Toast.LENGTH_SHORT).show();
+                                 }else {
+                                     String message=task.getException().getMessage();
+                                     Toast.makeText(editProfile.this,"Error:"+message,Toast.LENGTH_SHORT).show();
+                                 }
+                             }
+                         });
+
+
+                }
+
             }
         });
 
@@ -103,11 +143,10 @@ public class editProfile extends AppCompatActivity {
                     ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            user=FirebaseAuth.getInstance().getCurrentUser();
-                            reference=FirebaseDatabase.getInstance().getReference().child("studentDetail").child(user.getUid()).child("Image");
                             HashMap<String,String> hashMap=new HashMap<>();
                             hashMap.put("imageUrl",String.valueOf(uri));
-                            reference.setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            reference.child("studentDetail").child(user.getUid()).child("Image")
+                                .setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Toast.makeText(editProfile.this,"Finally completed!!",Toast.LENGTH_SHORT).show();
