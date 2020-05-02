@@ -109,9 +109,10 @@
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/ic_person"
                             android:drawablePadding="10dp"
-                            android:text="Rishabh Roy"
+                            android:text="Name"
                             android:textSize="15sp"
-                            android:textColor="#44423C" />
+                            android:textColor="#44423C"
+                            android:layout_gravity="center_horizontal"/>
 
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -184,7 +185,8 @@
                             android:drawablePadding="10dp"
                             android:text="Exam roll"
                             android:textColor="#44423C"
-                            android:textSize="18sp"/>
+                            android:textSize="18sp"
+                            android:layout_gravity="center_horizontal"/>
 
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -222,7 +224,8 @@
                             android:drawablePadding="10dp"
                             android:text="phone number"
                             android:textColor="#44423C"
-                            android:textSize="15sp"/>
+                            android:textSize="15sp"
+                            android:layout_gravity="center_horizontal"/>
 
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -259,7 +262,8 @@
                             android:drawablePadding="10dp"
                             android:text="email"
                             android:textColor="#44423C"
-                            android:textSize="15sp"/>
+                            android:textSize="15sp"
+                            android:layout_gravity="center_horizontal"/>
 
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -295,7 +299,8 @@
                             android:drawablePadding="10dp"
                             android:text="session"
                             android:textColor="#44423C"
-                            android:textSize="15sp"/>
+                            android:textSize="15sp"
+                            android:layout_gravity="center_horizontal"/>
 
 
                     </com.google.android.material.textfield.TextInputLayout>
