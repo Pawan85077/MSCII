@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_bg"
+    tools:context=".Stud_signup" >
+
+
+    <TextView
+        android:id="@+id/textView3yg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:fontFamily="serif-monospace"
+        android:shadowColor="#3F51B5"
+        android:shadowDx="7"
+        android:shadowDy="7"
+        android:shadowRadius="5"
+        android:text="Sign up as"
+        android:textColor="@color/main_heading"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/lock"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="40dp"
+        android:foreground="@drawable/admin_signup_bg"
+        android:onClick="lock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3yg"
+        app:srcCompat="@drawable/main_admin" />
+
+    <ImageView
+        android:id="@+id/unlock"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginBottom="20dp"
+        android:foreground="@drawable/admin_signup_bg"
+        android:onClick="unlock"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/lock"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/lock"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:srcCompat="@drawable/main_stud_ujjwal" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADMIN"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:fontFamily="serif"
+        app:layout_constraintEnd_toEndOf="@+id/lock"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="@+id/lock"
+        app:layout_constraintTop_toBottomOf="@+id/lock" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="STUDENT"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:fontFamily="serif"
+        app:layout_constraintEnd_toEndOf="@+id/unlock"
+        app:layout_constraintStart_toStartOf="@+id/unlock"
+        app:layout_constraintTop_toBottomOf="@+id/unlock" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

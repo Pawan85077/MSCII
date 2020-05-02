@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_bg"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context="Admin_activity">
+    <TextView
+        android:id="@+id/admin_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:shadowColor="#3F51B5"
+        android:shadowDx="7"
+        android:shadowDy="7"
+        android:shadowRadius="5"
+        android:text="@string/admin_signup"
+        android:textColor="@color/main_heading"
+        android:textSize="30sp"
+        android:typeface="serif" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@drawable/spinner_admin_signup"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/afpn"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:hint="Phone No."
+                    android:inputType="number"
+                    android:paddingLeft="15sp"
+                    android:textColor="@color/slogin" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextLabel"
+                android:layout_marginTop="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/afemail"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/slogin" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                android:layout_marginTop="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/afsp"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:hint="Set Password"
+                    android:inputType="textPassword"
+                    android:paddingLeft="15sp"
+                    android:textColor="@color/slogin" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextLabel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                app:errorEnabled="true"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/afcp"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:hint="Confirm password"
+                    android:inputType="textPassword"
+                    android:paddingLeft="15sp"
+                    android:textColor="@color/slogin" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/Ad_signupad"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bt_bg"
+                android:text="@string/dButton"
+                android:textAllCaps="false"
+                android:textColor="@android:color/background_light"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

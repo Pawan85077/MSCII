@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.codinghelper.mscii">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".editProfile"></activity>
+        <activity
+            android:name=".AdminHomepage"
+            android:label="@string/title_activity_admin_homepage"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".student_homepage"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".Admin_activity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".Signup_student"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".Stud_signup"
+            android:label="@string/title_activity_stud_signup"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".aloginActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".guestPage"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".sloginActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".First"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

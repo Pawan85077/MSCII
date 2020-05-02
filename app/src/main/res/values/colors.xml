@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary">#0824BE</color>
+    <color name="colorPrimaryDark">#A5EEF8</color>
+    <color name="colorAccent">#FEFCFF</color>
+    <color name="tranparent">#00FFFFFF</color>
+    <color name="slogin">#FFFFFF</color>
+    <color name="stroke">#060607</color>
+    <color name="gradend">#1313D1</color>
+    <color name="bback">#C01533D4</color>
+    <color name="buback">#7100BCD4</color>
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#ffffff</color>
+
+    <color name="bg_spalsh">#0B2BDC</color>
+    <color name="main_heading">#02116B</color>
+
+    <color name="login_form_detail">#ccffffff</color>
+    <color name="login_form_detail_light">#3AFFFFFF</color>
+    <color name="login_form_detail_medium">#02116B</color>
+
+
+
+</resources>

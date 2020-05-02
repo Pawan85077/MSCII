@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_bg"
+    tools:context=".guestPage">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="24dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="24dp" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="193dp"
+        android:layout_height="194dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/grps"
+        android:contentDescription="@string/todo" />
+
+    <ScrollView
+        android:id="@+id/scrooll"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right1"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left1"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5">
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right1"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left1">
+
+            <Button
+                android:id="@+id/website"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/guest_bg"
+                android:text="@string/college_website"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="normal"
+                android:typeface="serif"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right1"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left1"
+                app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+
+            <Button
+                android:id="@+id/cutoff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/guest_bg"
+                android:text="@string/previous_year_cutoff"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="normal"
+                android:typeface="serif"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right1"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left1"
+                app:layout_constraintTop_toBottomOf="@+id/website" />
+
+            <Button
+                android:id="@+id/scholar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/guest_bg"
+                android:text="@string/scholarship_website"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="normal"
+                android:typeface="serif"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right1"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left1"
+                app:layout_constraintTop_toBottomOf="@+id/cutoff" />
+
+            <Button
+                android:id="@+id/fee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/guest_bg"
+                android:text="@string/fee_structure"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="normal"
+                android:typeface="serif"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right1"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left1"
+                app:layout_constraintTop_toBottomOf="@+id/scholar" />
+
+            <Button
+                android:id="@+id/placementDrive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/guest_bg"
+                android:text="@string/placementDrive"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="normal"
+                android:typeface="serif"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right1"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left1"
+                app:layout_constraintTop_toBottomOf="@+id/fee" />
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

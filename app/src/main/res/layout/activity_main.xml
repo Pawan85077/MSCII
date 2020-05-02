@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_bg"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="152dp"
+        android:layout_height="87dp"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.028"
+        app:srcCompat="@drawable/lo" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.650">
+
+        <Button
+            android:id="@+id/guest"
+            android:layout_width="250dp"
+            android:layout_height="50sp"
+            android:layout_margin="7sp"
+            android:background="@drawable/button_bg"
+            android:includeFontPadding="false"
+            android:text="@string/aButton"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+
+        <Button
+            android:id="@+id/alogin"
+            android:layout_width="250dp"
+            android:layout_height="50sp"
+            android:layout_margin="7sp"
+            android:background="@drawable/button_bg"
+            android:includeFontPadding="false"
+            android:text="@string/bButton"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+
+        <Button
+            android:id="@+id/slogin"
+            android:layout_width="250dp"
+            android:layout_height="50sp"
+            android:layout_margin="7sp"
+            android:background="@drawable/button_bg"
+            android:includeFontPadding="false"
+            android:text="@string/cButton"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/tranparent"
+        android:gravity="center"
+        android:text="@string/mainTitle"
+        android:textColor="@color/main_heading"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:shadowColor="#3F51B5"
+        android:shadowDx="7"
+        android:shadowDy="7"
+        android:shadowRadius="5"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/tranparent"
+        android:text="@string/subTitle"
+        android:textColor="@color/main_heading"
+        android:textSize="14sp"
+        android:typeface="serif"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.107" />
+
+    <Button
+        android:id="@+id/sign_up"
+        android:layout_width="250dp"
+        android:layout_height="50sp"
+        android:layout_margin="7sp"
+        android:background="@drawable/bt_bg"
+        android:includeFontPadding="false"
+        android:text="@string/dButton"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:text="@string/new_user"
+        android:textColor="#F44336"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/sign_up"
+        app:layout_constraintEnd_toStartOf="@+id/sign_up"
+        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.592" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
