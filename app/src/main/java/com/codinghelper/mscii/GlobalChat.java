@@ -103,6 +103,8 @@ public class GlobalChat extends Fragment {
                     messageInfo.put("time",CurrentTime);
                     global_message_key.updateChildren(messageInfo);
                     userMessage.setText("");
+                    scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+
                 }
             }
         });
@@ -150,7 +152,8 @@ public class GlobalChat extends Fragment {
             String charMessage=(String)((DataSnapshot)iterator.next()).getValue();
             String charName=(String)((DataSnapshot)iterator.next()).getValue();
             String charTime=(String)((DataSnapshot)iterator.next()).getValue();
-            displayText.append(charName+":\n"+charMessage+":\n"+charTime+"    "+charData+"\n\n"+"------------------------------------------------------"+"\n\n\n");
+            displayText.append(charName+":\n"+charMessage+":\n"+charTime+"    "+charData+"\n\n\n");
+            scrollView.fullScroll(ScrollView.FOCUS_DOWN);
         }
     }
 
