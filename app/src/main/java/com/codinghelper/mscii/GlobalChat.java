@@ -150,7 +150,7 @@ public class GlobalChat extends Fragment {
             String charMessage=(String)((DataSnapshot)iterator.next()).getValue();
             String charName=(String)((DataSnapshot)iterator.next()).getValue();
             String charTime=(String)((DataSnapshot)iterator.next()).getValue();
-            displayText.append(charName+":\n"+charMessage+":\n"+charTime+"    "+charData+"\n\n\n");
+            displayText.append(charName+":\n"+charMessage+":\n"+charTime+"    "+charData+"\n\n"+"------------------------------------------------------"+"\n\n\n");
         }
     }
 
