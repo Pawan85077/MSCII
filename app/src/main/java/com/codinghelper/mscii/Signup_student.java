@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,8 +36,12 @@ public class Signup_student extends AppCompatActivity {
     DatabaseReference databaseReference;
     String gender="";
     String Account="Student";
+    String selectedCourse;
+    String selectedSession;
     ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
+    String[] studentCourse = {"--Select Course--","1","2","3"};
+    String[] studentSession = {"--Select Session--","7","8","9"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +50,9 @@ public class Signup_student extends AppCompatActivity {
 
         t_username=(EditText)findViewById(R.id.un);
         t_examrall=(EditText)findViewById(R.id.rl);
-        t_session=(EditText)findViewById(R.id.ss);
+//        t_session=(EditText)findViewById(R.id.ss);
+//        uper wala remove krna hoga
+
         t_email=(EditText)findViewById(R.id.emal);
         t_phoneno=(EditText)findViewById(R.id.pn);
         t_tempassword=(EditText)findViewById(R.id.sp);
@@ -55,6 +64,47 @@ public class Signup_student extends AppCompatActivity {
         radioGenderFemale=(RadioButton)findViewById(R.id.radio_female);
 
 
+        //Course Spinner
+        Spinner spinCourse = (Spinner) findViewById(R.id.studCourse);
+        ArrayAdapter<String> courseAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, studentCourse);
+        courseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinCourse.setAdapter(courseAdapter);
+        spinCourse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedCourse = parent.getItemAtPosition(position).toString();
+                if (selectedCourse!="--Select Course--") {
+                    Toast.makeText(parent.getContext(), selectedCourse, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //Session Spinner
+        Spinner spinSession = (Spinner) findViewById(R.id.studSession);
+        ArrayAdapter<String> sessionAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, studentSession);
+        sessionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinSession.setAdapter(sessionAdapter);
+        spinSession.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedSession = parent.getItemAtPosition(position).toString();
+                if (selectedSession!="--Select Session--") {
+                    Toast.makeText(parent.getContext(), selectedSession, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
         databaseReference= FirebaseDatabase.getInstance().getReference("studentDetail");
         firebaseAuth=FirebaseAuth.getInstance();
         btn_register.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +112,13 @@ public class Signup_student extends AppCompatActivity {
             public void onClick(View view) {
                 final String userName = t_username.getText().toString();
                 final String examRall = t_examrall.getText().toString();
+//                course selected by student is stored in selectedCourse
+//                final String course = selectedCourse;
+
                 final String session = t_session.getText().toString();
+//                uper wala remove krna hoga aur niiche wala lana hoga
+//                final String session = selectedSession;
+
                 final String email = t_email.getText().toString().trim();
                 final String phoneno = t_phoneno.getText().toString();
                 String password = t_tempassword.getText().toString().trim();
@@ -98,11 +154,11 @@ public class Signup_student extends AppCompatActivity {
                     return;
 
                 }
-                if (TextUtils.isEmpty(session)) {
-                    t_session.setError("enter session");
-                    t_session.setFocusable(true);
-                    return;
-                }
+//                if (TextUtils.isEmpty(session)) {
+//                    t_session.setError("enter session");
+//                    t_session.setFocusable(true);
+//                    return;
+//                }
                 if (TextUtils.isEmpty(phoneno)) {
                     t_phoneno.setError("enter phoneno");
                     t_phoneno.setFocusable(true);
@@ -137,6 +193,7 @@ public class Signup_student extends AppCompatActivity {
                                         studentDetail information = new studentDetail(
                                                 userName,
                                                 examRall,
+//                                                course,
                                                 session,
                                                 email,
                                                 phoneno,

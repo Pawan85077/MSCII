@@ -76,21 +76,36 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/Session"
-                style="@style/TextLabel"
+            <Spinner
+                android:id="@+id/studCourse"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true">
+                android:layout_height="54dp"
+                android:background="@drawable/spinner_admin_signup"
+                android:layout_marginBottom="16dp"/>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ss"
-                    android:layout_width="match_parent"
-                    android:layout_height="54dp"
-                    android:hint="Session"
-                    android:inputType="numberSigned"
-                    android:textColor="#ffffff" />
-            </com.google.android.material.textfield.TextInputLayout>
+            <Spinner
+                android:id="@+id/studSession"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:background="@drawable/spinner_admin_signup"
+                android:layout_marginBottom="16dp"/>
+
+<!--niche wala hatana h-->
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/Session"-->
+<!--                style="@style/TextLabel"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:errorEnabled="true">-->
+
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/ss"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="54dp"-->
+<!--                    android:hint="Session"-->
+<!--                    android:inputType="numberSigned"-->
+<!--                    android:textColor="#ffffff" />-->
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
 
 
