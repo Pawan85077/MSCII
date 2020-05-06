@@ -1,16 +1,24 @@
 package com.codinghelper.mscii;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.support.v4.media.RatingCompat;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,12 +31,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
 import java.util.regex.Pattern;
 
 public class Signup_student extends AppCompatActivity {
-
-    EditText t_username,t_examrall,t_session,t_email,t_phoneno,t_tempassword,t_conpassword;
+private static final String TAG="Signup_student";
+    EditText t_username,t_examrall,t_email,t_phoneno,t_tempassword,t_conpassword;
     private Button btn_register;
+    private TextView t_session;
+    private DatePickerDialog.OnDateSetListener dateSetListener;
     RadioButton radioGenderMale,radioGenderFemale;
     DatabaseReference databaseReference;
     String gender="";
@@ -43,7 +54,7 @@ public class Signup_student extends AppCompatActivity {
 
         t_username=(EditText)findViewById(R.id.un);
         t_examrall=(EditText)findViewById(R.id.rl);
-        t_session=(EditText)findViewById(R.id.ss);
+        t_session=(TextView) findViewById(R.id.ss);
         t_email=(EditText)findViewById(R.id.emal);
         t_phoneno=(EditText)findViewById(R.id.pn);
         t_tempassword=(EditText)findViewById(R.id.sp);
@@ -57,6 +68,31 @@ public class Signup_student extends AppCompatActivity {
 
         databaseReference= FirebaseDatabase.getInstance().getReference("studentDetail");
         firebaseAuth=FirebaseAuth.getInstance();
+        t_session.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month=cal.get(Calendar.MONTH);
+                int day=cal.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog dialog = new DatePickerDialog(
+                        Signup_student.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        dateSetListener,
+                        year,month,day);
+               dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+               dialog.show();
+            }
+        });
+        dateSetListener=new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month=month+1;
+                String date=month+"/"+day+"/"+year;
+                t_session.setText(date);
+            }
+        };
+
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
