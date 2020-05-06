@@ -1,24 +1,19 @@
 package com.codinghelper.mscii;
 
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.support.v4.media.RatingCompat;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,21 +26,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Calendar;
 import java.util.regex.Pattern;
 
 public class Signup_student extends AppCompatActivity {
-private static final String TAG="Signup_student";
+
     EditText t_username,t_examrall,t_email,t_phoneno,t_tempassword,t_conpassword;
     private Button btn_register;
-    private TextView t_session;
-    private DatePickerDialog.OnDateSetListener dateSetListener;
     RadioButton radioGenderMale,radioGenderFemale;
     DatabaseReference databaseReference;
     String gender="";
     String Account="Student";
+    String selectedCourse;
+    String selectedSession;
     ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
+    String[] studentCourse = {"--Select Course--","BCA","BBA","B.Com","B.Sc.Physics","B.Sc.Chemistry","B.Sc.Mathematics"};
+    String[] studentSession = {"--Select Session--","2017-2020","2018-2021","2019-2022"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +50,8 @@ private static final String TAG="Signup_student";
 
         t_username=(EditText)findViewById(R.id.un);
         t_examrall=(EditText)findViewById(R.id.rl);
-        t_session=(TextView) findViewById(R.id.ss);
+
+
         t_email=(EditText)findViewById(R.id.emal);
         t_phoneno=(EditText)findViewById(R.id.pn);
         t_tempassword=(EditText)findViewById(R.id.sp);
@@ -66,39 +63,60 @@ private static final String TAG="Signup_student";
         radioGenderFemale=(RadioButton)findViewById(R.id.radio_female);
 
 
-        databaseReference= FirebaseDatabase.getInstance().getReference("studentDetail");
-        firebaseAuth=FirebaseAuth.getInstance();
-        t_session.setOnClickListener(new View.OnClickListener() {
+        //Course Spinner
+        Spinner spinCourse = (Spinner) findViewById(R.id.studCourse);
+        ArrayAdapter<String> courseAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, studentCourse);
+        courseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinCourse.setAdapter(courseAdapter);
+        spinCourse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month=cal.get(Calendar.MONTH);
-                int day=cal.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dialog = new DatePickerDialog(
-                        Signup_student.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        dateSetListener,
-                        year,month,day);
-               dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-               dialog.show();
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedCourse = parent.getItemAtPosition(position).toString();
+                if (selectedCourse!="--Select Course--") {
+                    Toast.makeText(parent.getContext(), selectedCourse, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
-        dateSetListener=new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month=month+1;
-                String date=month+"/"+day+"/"+year;
-                t_session.setText(date);
-            }
-        };
 
+        //Session Spinner
+        Spinner spinSession = (Spinner) findViewById(R.id.studSession);
+        ArrayAdapter<String> sessionAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, studentSession);
+        sessionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinSession.setAdapter(sessionAdapter);
+        spinSession.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedSession = parent.getItemAtPosition(position).toString();
+                if (selectedSession!="--Select Session--") {
+                    Toast.makeText(parent.getContext(), selectedSession, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        databaseReference= FirebaseDatabase.getInstance().getReference("studentDetail");
+        firebaseAuth=FirebaseAuth.getInstance();
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final String userName = t_username.getText().toString();
                 final String examRall = t_examrall.getText().toString();
-                final String session = t_session.getText().toString();
+//                course selected by student is stored in selectedCourse
+               final String course = selectedCourse;
+
+//                uper wala remove krna hoga aur niiche wala lana hoga
+                final String session = selectedSession;
+
                 final String email = t_email.getText().toString().trim();
                 final String phoneno = t_phoneno.getText().toString();
                 String password = t_tempassword.getText().toString().trim();
@@ -134,11 +152,11 @@ private static final String TAG="Signup_student";
                     return;
 
                 }
-                if (TextUtils.isEmpty(session)) {
-                    t_session.setError("enter session");
-                    t_session.setFocusable(true);
-                    return;
-                }
+//                if (TextUtils.isEmpty(session)) {
+//                    t_session.setError("enter session");
+//                    t_session.setFocusable(true);
+//                    return;
+//                }
                 if (TextUtils.isEmpty(phoneno)) {
                     t_phoneno.setError("enter phoneno");
                     t_phoneno.setFocusable(true);
@@ -177,7 +195,8 @@ private static final String TAG="Signup_student";
                                                 email,
                                                 phoneno,
                                                 gender,
-                                                Account
+                                                Account,
+                                                course
 
                                         );
 

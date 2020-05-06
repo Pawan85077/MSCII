@@ -54,6 +54,7 @@ public class ProfileFragment extends Fragment {
         final TextView Pgender=(TextView)v.findViewById(R.id.Pro_gender);
         final TextView status=(TextView)v.findViewById(R.id.status_name);
         final ImageView imageView=(ImageView)v.findViewById(R.id.profile_image);
+        final TextView Pcourse=(TextView)v.findViewById(R.id.Pro_course);
 
         Button Pedit=(Button)v.findViewById(R.id.Edit_profile);
 
@@ -82,7 +83,8 @@ public class ProfileFragment extends Fragment {
                 Picasso.get().load(Simg).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(imageView);
                 String Sstatus =String.valueOf(dataSnapshot.child("Status").child("Userstatus").getValue());
                 status.setText(" "+Sstatus);
-
+                String Stcourse =String.valueOf(dataSnapshot.child("Scourse").getValue());
+                Pcourse.setText(Stcourse);
 
             }
 

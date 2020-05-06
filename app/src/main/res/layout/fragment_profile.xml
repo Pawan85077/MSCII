@@ -344,6 +344,42 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp">
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="5dp">
+
+                        <TextView
+                            android:id="@+id/course"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="47dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="Course"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:textColor="#000"/>
+
+                        <TextView
+                            android:id="@+id/Pro_course"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_toc"
+                            android:drawablePadding="10dp"
+                            android:text="student Course"
+                            android:textColor="#44423C"
+                            android:textSize="18sp"
+                            android:layout_gravity="center_horizontal"/>
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.cardview.widget.CardView>
 
 
             </LinearLayout>
