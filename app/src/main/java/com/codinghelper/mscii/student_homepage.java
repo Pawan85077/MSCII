@@ -10,6 +10,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.nfc.Tag;
@@ -37,7 +39,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-public class student_homepage extends AppCompatActivity {
+public class  student_homepage extends AppCompatActivity {
 
     private DrawerLayout drawer;
     FirebaseAuth firebaseAuth;
@@ -92,14 +94,28 @@ public class student_homepage extends AppCompatActivity {
 
     }
 
-  /*  @Override
-    public void onBackPressed() {
-        if(drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        }else{
-            finish();
-        }
-    }*/
+
+//    on backpressed not working..... dalne se back button kaam hi nii kr raha h
+//    @Override
+//    public void onBackPressed() {
+//        AlertDialog.Builder alertDialogueBuilder = new AlertDialog.Builder(this);
+//        alertDialogueBuilder.setTitle("Confirm Exit..!!");
+//        alertDialogueBuilder.setMessage("Are you sure want to exit");
+//        alertDialogueBuilder.setCancelable(false);
+//        alertDialogueBuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                finish();
+//                Toast.makeText(student_homepage.this,"Developed by team SUPRD",Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        alertDialogueBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                Toast.makeText(student_homepage.this,"You clicked NO",Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 
    /* private void checkUserStatus(){
         FirebaseUser user= firebaseAuth.getCurrentUser();
@@ -132,7 +148,7 @@ public class student_homepage extends AppCompatActivity {
             new User(student_homepage.this).removeUser();
             startActivity(new Intent(student_homepage.this, sloginActivity.class));
             finish();
-            Toast.makeText(getApplicationContext(), "successfully logout!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Successfully logout!", Toast.LENGTH_SHORT).show();
 
         }
 

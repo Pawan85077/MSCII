@@ -40,4 +40,5 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.0-rc03'
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
 }

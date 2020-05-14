@@ -25,4 +25,9 @@
         android:name="com.codinghelper.mscii.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_developer"
+        android:name="com.codinghelper.mscii.developer_display"
+        android:label="fragment_developer_display"
+        tools:layout="@layout/fragment_developer_display" />
 </navigation>
