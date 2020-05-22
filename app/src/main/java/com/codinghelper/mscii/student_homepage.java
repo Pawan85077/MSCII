@@ -2,6 +2,7 @@ package com.codinghelper.mscii;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -10,14 +11,17 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -37,12 +41,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import static java.security.AccessController.getContext;
+
 public class student_homepage extends AppCompatActivity {
 
     private DrawerLayout drawer;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
-    DatabaseReference reference;
+    DatabaseReference reference,Rootref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +70,7 @@ public class student_homepage extends AppCompatActivity {
 
         user= firebaseAuth.getCurrentUser();
         reference= FirebaseDatabase.getInstance().getReference().child("studentDetail").child(user.getUid());
+        Rootref=FirebaseDatabase.getInstance().getReference();
         NavigationView navigationView =(NavigationView) findViewById(R.id.nav_view);
         View view=navigationView.inflateHeaderView(R.layout.student_nav_header);
         final ImageView imageView=(ImageView)view.findViewById(R.id.nimg);
@@ -73,11 +80,11 @@ public class student_homepage extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String name =String.valueOf(dataSnapshot.child("Username").getValue());
+                String name =String.valueOf(dataSnapshot.child("username").getValue());
                 String email =String.valueOf(dataSnapshot.child("Email").getValue());
                 textView.setText(name);
                 textView2.setText(email);
-                String Simg =String.valueOf(dataSnapshot.child("Image").child("imageUrl").getValue());
+                String Simg =String.valueOf(dataSnapshot.child("imageUrl").getValue());
                 Picasso.get().load(Simg).fit().centerCrop().noFade().placeholder(R.drawable.logos).into(imageView);
             }
 
@@ -127,6 +134,12 @@ public class student_homepage extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        if (id == R.id.ff_f) {
+            startActivity(new Intent(student_homepage.this, Find_friend_activity.class));
+        }
+        if (id == R.id.create_group) {
+            requestNewGroup();
+        }
         if (id == R.id.action_logout) {
             firebaseAuth.getInstance().signOut();
             new User(student_homepage.this).removeUser();
@@ -142,5 +155,45 @@ public class student_homepage extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void requestNewGroup() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(student_homepage.this,R.style.Theme_AppCompat_Light_Dialog_MinWidth);
+        builder.setTitle("Enter Group Name");
+        final EditText groupNameField=new EditText(student_homepage.this);
+        groupNameField.setHint("e.g, SUPR-D");
+        builder.setView(groupNameField);
+        builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String groupName=groupNameField.getText().toString();
+                if (TextUtils.isEmpty(groupName)) {
+                    groupNameField.setError("enter email");
+                    groupNameField.setFocusable(true);
+                }else{
+                    CreateNewGroup(groupName);
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+               dialogInterface.cancel();
+            }
+        });
+        builder.show();
 
     }
+
+    private void CreateNewGroup(final String groupName) {
+        Rootref.child("Groups").child(groupName).setValue("")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(getApplicationContext(), groupName+" is created successfully...!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+
+}

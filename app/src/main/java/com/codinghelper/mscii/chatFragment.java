@@ -29,7 +29,6 @@ public class chatFragment extends Fragment {
     private TabLayout tabLayout;
     private TabsAccessorAdaptor tabsAccessorAdaptor;
     FirebaseAuth firebaseAuth;
-    private DatabaseReference ref;
 
     public chatFragment() {
         // Required empty public constructor
@@ -42,7 +41,6 @@ public class chatFragment extends Fragment {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_chat, container, false);
         firebaseAuth = FirebaseAuth.getInstance();
-        ref= FirebaseDatabase.getInstance().getReference();
       /* ref.child("GlobalChat").setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

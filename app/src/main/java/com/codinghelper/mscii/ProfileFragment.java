@@ -66,7 +66,7 @@ public class ProfileFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String Sname =String.valueOf(dataSnapshot.child("Username").getValue());
+                String Sname =String.valueOf(dataSnapshot.child("username").getValue());
                 name.setText(Sname);
                 Pname.setText(Sname);
                 String Sroll =String.valueOf(dataSnapshot.child("Examrall").getValue());
@@ -79,9 +79,9 @@ public class ProfileFragment extends Fragment {
                 Psession.setText(Ssession);
                 String Sgender =String.valueOf(dataSnapshot.child("gender").getValue());
                 Pgender.setText("    "+Sgender);
-                String Simg =String.valueOf(dataSnapshot.child("Image").child("imageUrl").getValue());
+                String Simg =String.valueOf(dataSnapshot.child("imageUrl").getValue());
                 Picasso.get().load(Simg).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(imageView);
-                String Sstatus =String.valueOf(dataSnapshot.child("Status").child("Userstatus").getValue());
+                String Sstatus =String.valueOf(dataSnapshot.child("userstatus").getValue());
                 status.setText(" "+Sstatus);
                 String Stcourse =String.valueOf(dataSnapshot.child("Scourse").getValue());
                 Pcourse.setText(Stcourse);

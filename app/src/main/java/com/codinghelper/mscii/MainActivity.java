@@ -21,7 +21,7 @@ public class MainActivity extends AwesomeSplash {
         hideNavigationBar();
         User user=new User(MainActivity.this);
         if(user.getEmail()!=""){
-            startActivity(new Intent(MainActivity.this, student_homepage.class));
+            startActivity(new Intent(MainActivity.this, smallSplashScreen.class));
             finish();
         }
     }

@@ -128,7 +128,7 @@ public class sloginActivity extends AppCompatActivity {
                                     });
                                 } else {
                                     progressDialog.dismiss();
-                                    Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"not opened", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

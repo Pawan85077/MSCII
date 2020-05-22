@@ -25,6 +25,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.regex.Pattern;
 
@@ -35,6 +36,8 @@ public class Signup_student extends AppCompatActivity {
     RadioButton radioGenderMale,radioGenderFemale;
     DatabaseReference databaseReference;
     String gender="";
+    String status="hey! I'm using MCR infotech ";
+    String images="https://firebasestorage.googleapis.com/v0/b/mscii-8cb88.appspot.com/o/testimage.jpg?alt=media&token=7c5be373-949c-4e7a-9661-eadd2ee670f7";
     String Account="Student";
     String selectedCourse;
     String selectedSession;
@@ -196,13 +199,16 @@ public class Signup_student extends AppCompatActivity {
                                                 phoneno,
                                                 gender,
                                                 Account,
-                                                course
+                                                course,
+                                                status,
+                                                images
+
 
                                         );
 
                                         FirebaseDatabase.getInstance().getReference("studentDetail")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                               .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 progressDialog.dismiss();

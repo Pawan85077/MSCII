@@ -19,6 +19,8 @@ public class TabsAccessorAdaptor extends FragmentPagerAdapter {
                 return new GlobalChat();
             case 1:
                 return new FriendChat();
+            case 2:
+                return new ChatsFragment();
             default:
                 return null;
 
@@ -27,7 +29,7 @@ public class TabsAccessorAdaptor extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     @Nullable
@@ -35,9 +37,11 @@ public class TabsAccessorAdaptor extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position){
             case 0:
-                return "Global";
+                return "Groups";
             case 1:
                 return "Friends";
+            case 2:
+                return "Chat";
             default:
                 return null;
 

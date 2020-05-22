@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_home"
             android:title="Home" />
         <item
+            android:id="@+id/nav_notification"
+            android:icon="@android:drawable/ic_popup_reminder"
+            android:title="Notification" />
+        <item
             android:id="@+id/nav_dashboard"
             android:icon="@drawable/ic_dashboard"
             android:title="Dashboard" />
@@ -35,6 +39,16 @@
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_developer"
                 android:title="Developers" />
+            <item
+                android:id="@+id/nav_Election"
+                android:icon="?attr/actionModePasteDrawable"
+                android:title="e-Election" />
+            <item
+                android:id="@+id/nav_bank"
+                android:icon="@android:drawable/ic_menu_help"
+                android:title="Question bank" />
+
+
 
         </menu>
     </item>

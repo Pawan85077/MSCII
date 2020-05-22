@@ -1,5 +1,6 @@
 package com.codinghelper.mscii;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,9 +11,12 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -26,9 +30,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.SimpleTimeZone;
 
 
@@ -36,13 +43,11 @@ import java.util.SimpleTimeZone;
  * A simple {@link Fragment} subclass.
  */
 public class GlobalChat extends Fragment {
-    private ImageButton send_btn;
-    private EditText userMessage;
-    private ScrollView scrollView;
-    private TextView displayText;
-    private String CurrentUserId,CurrentUserName,CurrentDate,CurrentTime;
+    private ListView list_view;
+    private ArrayAdapter<String> arrayAdapter;
+    private ArrayList<String> list_of_groups=new ArrayList<>();
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference databaseReference,global,global_message_key;
+    private DatabaseReference GroupRef;
 
     public GlobalChat() {
         // Required empty public constructor
@@ -54,88 +59,37 @@ public class GlobalChat extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         firebaseAuth=FirebaseAuth.getInstance();
-        CurrentUserId=firebaseAuth.getCurrentUser().getUid();
-        databaseReference= FirebaseDatabase.getInstance().getReference().child("studentDetail");
-        global=FirebaseDatabase.getInstance().getReference().child("GlobalChat");
+        GroupRef=FirebaseDatabase.getInstance().getReference().child("Groups");
+        RetriveAndDisplyGroups();
+
         View v= inflater.inflate(R.layout.fragment_global_chat, container, false);
-        send_btn=(ImageButton)v.findViewById(R.id.send_text_btn);
-        userMessage=(EditText)v.findViewById(R.id.input_message);
-        displayText=(TextView)v.findViewById(R.id.global_chat_text);
-        scrollView=(ScrollView)v.findViewById(R.id.my_scroll_view);
-        databaseReference.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
+        list_view=(ListView)v.findViewById(R.id.list_view);
+        list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    CurrentUserName=String.valueOf(dataSnapshot.child("Username").getValue());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                String currentGroupName=adapterView.getItemAtPosition(position).toString();
+                Intent groupChatIntent=new Intent(getActivity(),GroupChatActivity.class);
+                groupChatIntent.putExtra("groupName",currentGroupName);
+                startActivity(groupChatIntent);
             }
         });
-        send_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String message=userMessage.getText().toString();
-                String messageKey=global.push().getKey();
-                if (TextUtils.isEmpty(message)) {
-                    userMessage.setError("Type something!!");
-                    userMessage.setFocusable(true);
-                    return;
-                }else{
-                    Calendar calendar_date=Calendar.getInstance();
-                    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MMM dd, yyyy");
-                    CurrentDate=simpleDateFormat.format(calendar_date.getTime());
-
-                    Calendar calendar_time=Calendar.getInstance();
-                    SimpleDateFormat simpleTimeFormat=new SimpleDateFormat("hh:mm a");
-                    CurrentTime=simpleTimeFormat.format(calendar_time.getTime());
-
-                    HashMap<String,Object> global_message=new HashMap<>();
-                    global.updateChildren(global_message);
-                    global_message_key=global.child(messageKey);
-                    HashMap<String,Object> messageInfo=new HashMap<>();
-                    messageInfo.put("name",CurrentUserName);
-                    messageInfo.put("message",message);
-                    messageInfo.put("date",CurrentDate);
-                    messageInfo.put("time",CurrentTime);
-                    global_message_key.updateChildren(messageInfo);
-                    userMessage.setText("");
-                    scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-
-                }
-            }
-        });
+        arrayAdapter=new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,list_of_groups);
+        list_view.setAdapter(arrayAdapter);
         return v;
     }
-    @Override
-    public void onStart(){
-        super.onStart();
-        global.addChildEventListener(new ChildEventListener() {
+
+    private void RetriveAndDisplyGroups() {
+        GroupRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                if(dataSnapshot.exists()){
-                    DisplayMessages(dataSnapshot);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Set<String> set=new HashSet<>();
+                Iterator iterator=dataSnapshot.getChildren().iterator();
+                while (iterator.hasNext()){
+                    set.add(((DataSnapshot)iterator.next()).getKey());
                 }
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                if(dataSnapshot.exists()){
-                    DisplayMessages(dataSnapshot);
-                }
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                list_of_groups.clear();
+                list_of_groups.addAll(set);
+                arrayAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -144,17 +98,4 @@ public class GlobalChat extends Fragment {
             }
         });
     }
-
-    private void DisplayMessages(DataSnapshot dataSnapshot) {
-        Iterator iterator=dataSnapshot.getChildren().iterator();
-        while(iterator.hasNext()){
-            String charData=(String)((DataSnapshot)iterator.next()).getValue();
-            String charMessage=(String)((DataSnapshot)iterator.next()).getValue();
-            String charName=(String)((DataSnapshot)iterator.next()).getValue();
-            String charTime=(String)((DataSnapshot)iterator.next()).getValue();
-            displayText.append(charName+":\n"+charMessage+":\n"+charTime+"    "+charData+"\n\n\n");
-            scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-        }
-    }
-
 }

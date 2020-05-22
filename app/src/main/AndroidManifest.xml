@@ -3,7 +3,7 @@
     package="com.codinghelper.mscii">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".editProfile"></activity>
+        <activity android:name=".smallSplashScreen"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity android:name=".GroupChatActivity" />
+        <activity android:name=".Show_profile_Activity" />
+        <activity
+            android:name=".Find_friend_activity"
+            android:parentActivityName=".student_homepage" />
+        <activity android:name=".editProfile" />
         <activity
             android:name=".AdminHomepage"
             android:label="@string/title_activity_admin_homepage"

@@ -67,7 +67,7 @@ public class editProfile extends AppCompatActivity {
         storage=FirebaseStorage.getInstance();
         storageReference=storage.getReference();
         firebaseAuth = FirebaseAuth.getInstance();
-        btn_choose.setOnClickListener(new View.OnClickListener() {
+                btn_choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SelectImage();
@@ -88,9 +88,9 @@ public class editProfile extends AppCompatActivity {
                     status.setFocusable(true);
                     return;
                 }else{
-                    HashMap<String,String> pstatus=new HashMap<>();
-                    pstatus.put("Userstatus",updatestatus);
-                    reference.child("studentDetail").child(user.getUid()).child("Status").setValue(pstatus)
+             //       HashMap<String,String> pstatus=new HashMap<>();
+             //       pstatus.put("Userstatus",updatestatus);
+                    reference.child("studentDetail").child(user.getUid()).child("userstatus").setValue(updatestatus)
                          .addOnCompleteListener(new OnCompleteListener<Void>() {
                              @Override
                              public void onComplete(@NonNull Task<Void> task) {
@@ -146,10 +146,10 @@ public class editProfile extends AppCompatActivity {
                     ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            HashMap<String,String> hashMap=new HashMap<>();
-                            hashMap.put("imageUrl",String.valueOf(uri));
-                            reference.child("studentDetail").child(user.getUid()).child("Image")
-                                .setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                      //      HashMap<String,String> hashMap=new HashMap<>();
+                      //      hashMap.put("imageUrl",String.valueOf(uri));
+                            reference.child("studentDetail").child(user.getUid()).child("imageUrl").setValue(String.valueOf(uri))
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Toast.makeText(editProfile.this,"Finally completed!!",Toast.LENGTH_SHORT).show();
