@@ -12,9 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".smallSplashScreen"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
+        <activity android:name=".FriendChatActivity"></activity>
+        <activity
+            android:name=".smallSplashScreen"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity android:name=".GroupChatActivity" />
         <activity android:name=".Show_profile_Activity" />
         <activity
