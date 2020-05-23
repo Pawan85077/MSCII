@@ -5,23 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FriendChatActivity">
-
-    <TextView
-        android:id="@+id/kd_toobar"
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimaryDark"
-        android:paddingLeft="15dp"
-        android:paddingTop="15dp"
-        android:text="kdkd"
-        android:textColor="#090808"
-        android:textSize="24sp" />
+        android:id="@+id/navigation_toolbar"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:elevation="4dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/private_message_list_of_user"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/kd_toobar">
+        android:layout_below="@+id/navigation_toolbar">
     </androidx.recyclerview.widget.RecyclerView>
     <LinearLayout
         android:id="@+id/chat_linear_layout"
@@ -32,7 +29,7 @@
         android:orientation="horizontal">
         <EditText
             android:id="@+id/input_frnd_message"
-            android:layout_width="340dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:hint="Type here..."
             android:padding="15dp"/>
