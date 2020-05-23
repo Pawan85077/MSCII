@@ -6,16 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".GroupChatActivity">
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/groupNameToolbar"
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimaryDark"
-        android:paddingLeft="15dp"
-        android:paddingTop="15dp"
-        android:text=" Group Name"
-        android:textColor="#090808"
-        android:textSize="24sp"/>
+        android:id="@+id/navigation_toolbar"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:elevation="4dp" />
     <ScrollView
         android:id="@+id/my_scroll_view"
         android:layout_width="match_parent"

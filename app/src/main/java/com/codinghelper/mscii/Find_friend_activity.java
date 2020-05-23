@@ -1,6 +1,7 @@
 package com.codinghelper.mscii;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,9 +30,19 @@ public class Find_friend_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_friend_activity);
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.navigation_toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Find friends");
         recyclerView=(RecyclerView)findViewById(R.id.ff_recycle);
         reference= FirebaseDatabase.getInstance().getReference().child("studentDetail");
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @Override

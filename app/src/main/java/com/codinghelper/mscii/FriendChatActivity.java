@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 public class FriendChatActivity extends AppCompatActivity {
     private  String messageReceiverID,messageReceiverName,messageReceiverImage;
@@ -27,12 +28,22 @@ public class FriendChatActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);
         LayoutInflater layoutInflater=(LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-      //  View actionBarView=layoutInflater.inflate(R.layout.cu)
+        View actionBarView=layoutInflater.inflate(R.layout.custom_chat_bar,null);
+        actionBar.setCustomView(actionBarView);
         messageReceiverID=getIntent().getExtras().get("visit_user_id").toString();
         messageReceiverName=getIntent().getExtras().get("visit_user_name").toString();
         messageReceiverImage=getIntent().getExtras().get("visit_user_image").toString();
         userName=(TextView)findViewById(R.id.custom_profile_name);
         userLastSeen=(TextView)findViewById(R.id.custom_last_seen);
         userImage=(CircularImageView)findViewById(R.id.custom_profile_image);
+        userName.setText(messageReceiverName);
+        Picasso.get().load(messageReceiverImage).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(userImage);
+
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

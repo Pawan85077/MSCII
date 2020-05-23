@@ -6,22 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".Find_friend_activity">
 
-    <TextView
-        android:id="@+id/ff_toobar"
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimaryDark"
-        android:paddingLeft="15dp"
-        android:paddingTop="15dp"
-        android:text="find friends"
-        android:textColor="#090808"
-        android:textSize="24sp" />
+        android:id="@+id/navigation_toolbar"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:elevation="4dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ff_recycle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/ff_toobar"
+        android:layout_below="@+id/navigation_toolbar"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"/>
 

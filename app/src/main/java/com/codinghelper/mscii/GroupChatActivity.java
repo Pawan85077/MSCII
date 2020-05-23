@@ -2,6 +2,7 @@ package com.codinghelper.mscii;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -34,7 +35,6 @@ public class GroupChatActivity extends AppCompatActivity {
     private ScrollView scrollView;
     private TextView displayText;
     private String currentGroupName;
-    private TextView GroupName;
     private String CurrentUserId,CurrentUserName,CurrentDate,CurrentTime;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference,GroupNameRef,global_message_key;
@@ -42,17 +42,20 @@ public class GroupChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_chat);
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.navigation_toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         firebaseAuth=FirebaseAuth.getInstance();
         CurrentUserId=firebaseAuth.getCurrentUser().getUid();
         databaseReference= FirebaseDatabase.getInstance().getReference().child("studentDetail");
         currentGroupName=getIntent().getExtras().get("groupName").toString();
         GroupNameRef=FirebaseDatabase.getInstance().getReference().child("Groups").child(currentGroupName);
+        actionBar.setTitle(currentGroupName);
         send_btn=(ImageButton)findViewById(R.id.send_text_btn);
         userMessage=(EditText)findViewById(R.id.input_message);
         displayText=(TextView)findViewById(R.id.global_chat_text);
         scrollView=(ScrollView)findViewById(R.id.my_scroll_view);
-        GroupName=(TextView)findViewById(R.id.groupNameToolbar);
-        GroupName.setText(currentGroupName);
         GetUserInfo();
         send_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +93,11 @@ public class GroupChatActivity extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
     @Override
     public void onStart(){
