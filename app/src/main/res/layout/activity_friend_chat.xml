@@ -18,7 +18,9 @@
         android:id="@+id/private_message_list_of_user"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/navigation_toolbar">
+        android:background="@android:color/darker_gray"
+        android:layout_below="@+id/navigation_toolbar"
+        android:layout_above="@+id/chat_linear_layout">
     </androidx.recyclerview.widget.RecyclerView>
     <LinearLayout
         android:id="@+id/chat_linear_layout"

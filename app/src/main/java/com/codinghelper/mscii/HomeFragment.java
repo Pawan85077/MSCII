@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 
@@ -32,6 +34,11 @@ public class HomeFragment extends Fragment {
 
 
         View v = inflater.inflate(R.layout.fragment_home, container, false);
+      //  androidx.appcompat.widget.Toolbar toolbar = v.findViewById(R.id.navigation_toolbar);
+      //  ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+      //  ActionBar actionBar=((AppCompatActivity)getActivity()).getSupportActionBar();
+      //  actionBar.setDisplayHomeAsUpEnabled(true);
+      //  actionBar.setTitle("Welcome User");
         return v;
     }
 
