@@ -34,6 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.collection.LLRBNode;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.logging.Handler;
 
@@ -45,7 +46,7 @@ public class sloginActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
-    DatabaseReference reference;
+    DatabaseReference reference,UserRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class sloginActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this, R.style.AlertDialogTheme);
         progressDialog.setMessage("Loging In...");
         firebaseAuth = FirebaseAuth.getInstance();
+        UserRef=FirebaseDatabase.getInstance().getReference().child("studentDetail");
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,11 +112,23 @@ public class sloginActivity extends AppCompatActivity {
                                                 String ACtype =String.valueOf(dataSnapshot.child("AccountType").getValue());
                                                 String DAT="Student";
                                                 if(ACtype.equals(DAT)){
-                                                    progressDialog.dismiss();
-                                                    User user=new User(sloginActivity.this);
-                                                    user.setEmail(email);
-                                                    startActivity(new Intent(sloginActivity.this, student_homepage.class));
-                                                    finish();
+                                                    String currentUserId=firebaseAuth.getCurrentUser().getUid();
+                                                    String deviceToken= FirebaseInstanceId.getInstance().getToken();
+                                                    UserRef.child(currentUserId).child("device_token")
+                                                            .setValue(deviceToken)
+                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                   if(task.isSuccessful()){
+                                                                       progressDialog.dismiss();
+                                                                       User user=new User(sloginActivity.this);
+                                                                       user.setEmail(email);
+                                                                       startActivity(new Intent(sloginActivity.this, student_homepage.class));
+                                                                       finish();
+                                                                   }
+                                                                }
+                                                            });
+
                                                 }
                                                 else{
                                                     progressDialog.dismiss();

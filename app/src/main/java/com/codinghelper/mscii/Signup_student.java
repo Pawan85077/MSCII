@@ -25,6 +25,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Picasso;
 
 import java.util.regex.Pattern;
@@ -34,7 +35,7 @@ public class Signup_student extends AppCompatActivity {
     EditText t_username,t_examrall,t_email,t_phoneno,t_tempassword,t_conpassword;
     private Button btn_register;
     RadioButton radioGenderMale,radioGenderFemale;
-    DatabaseReference databaseReference;
+    DatabaseReference rootRef;
     String gender="";
     String status="hey! I'm using MCR infotech ";
     String images="https://firebasestorage.googleapis.com/v0/b/mscii-8cb88.appspot.com/o/testimage.jpg?alt=media&token=7c5be373-949c-4e7a-9661-eadd2ee670f7";
@@ -107,7 +108,6 @@ public class Signup_student extends AppCompatActivity {
         });
 
 
-        databaseReference= FirebaseDatabase.getInstance().getReference("studentDetail");
         firebaseAuth=FirebaseAuth.getInstance();
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,6 +190,8 @@ public class Signup_student extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
+                                        final String deviceToken= FirebaseInstanceId.getInstance().getToken();
+                                        final String currentUserId=firebaseAuth.getCurrentUser().getUid();
 
                                         studentDetail information = new studentDetail(
                                                 userName,
@@ -211,6 +213,9 @@ public class Signup_student extends AppCompatActivity {
                                                .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
+                                                rootRef=FirebaseDatabase.getInstance().getReference();
+                                                rootRef.child("studentDetail").child(currentUserId).child("device_token")
+                                                        .setValue(deviceToken);
                                                 progressDialog.dismiss();
                                                 Toast.makeText(getApplicationContext(), "Register complete", Toast.LENGTH_SHORT).show();
                                                 startActivity(new Intent(Signup_student.this, sloginActivity.class));

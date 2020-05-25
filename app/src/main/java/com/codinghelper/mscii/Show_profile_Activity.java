@@ -19,12 +19,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+
 public class Show_profile_Activity extends AppCompatActivity {
 private String senderUserId, receiverUserID,currentState;
 private CircularImageView userImage;
 private TextView userProfilename,userProfileStatus;
 private Button AddRequest,RemoveRequest;
-private DatabaseReference reference,addRequestref,friendref;
+private DatabaseReference reference,addRequestref,friendref,NotificationRef;
 private FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ private FirebaseAuth auth;
         RemoveRequest=(Button)findViewById(R.id.remove_friend);
         reference= FirebaseDatabase.getInstance().getReference().child("studentDetail");
         addRequestref= FirebaseDatabase.getInstance().getReference().child("Add Friend Request");
+        NotificationRef=FirebaseDatabase.getInstance().getReference().child("Notifications");
         friendref= FirebaseDatabase.getInstance().getReference().child("Friend list");
         //user position=current state
         currentState="new";
@@ -255,9 +258,22 @@ private FirebaseAuth auth;
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            AddRequest.setEnabled(true);
-                                            currentState="request_sent";
-                                            AddRequest.setText("Cancel Request");
+                                            HashMap<String,String> friendNotificationMap =new HashMap<>();
+                                            friendNotificationMap.put("from",senderUserId);
+                                            friendNotificationMap.put("type","request");
+                                            NotificationRef.child(receiverUserID).push()
+                                                    .setValue(friendNotificationMap)
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if(task.isSuccessful()){
+                                                                AddRequest.setEnabled(true);
+                                                                currentState="request_sent";
+                                                                AddRequest.setText("Cancel Request");
+                                                            }
+                                                        }
+                                                    });
+
                                         }
                                     });
 

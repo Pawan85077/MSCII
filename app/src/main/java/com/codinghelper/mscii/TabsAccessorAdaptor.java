@@ -7,11 +7,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 public class TabsAccessorAdaptor extends FragmentPagerAdapter {
-    TabsAccessorAdaptor(@NonNull FragmentManager fm) {
+    TabsAccessorAdaptor( FragmentManager fm) {
         super(fm);
     }
 
-    @NonNull
     @Override
     public Fragment getItem(int position) {
         switch (position){
