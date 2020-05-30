@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".NotificationFragment">
+    tools:context=".Explore">
 
     <!-- TODO: Update blank fragment layout -->
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/notification"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:textSize="20dp"
+        android:text="Explore" />
+
 </RelativeLayout>
