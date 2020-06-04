@@ -8,13 +8,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <LinearLayout
+            android:id="@+id/ql"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/question_asker_profile_image"
-                android:layout_width="47dp"
-                android:layout_height="47dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:cropToPadding="true"
                 app:civ_border="false"/>
              <TextView
@@ -23,8 +24,15 @@
                  android:layout_height="wrap_content"
                  android:text=" Questions"
                  android:textColor="@android:color/black"
-                 android:textSize="30sp"/>
+                 android:textSize="20sp"/>
         </LinearLayout>
+        <View
+            android:id="@+id/vl1"
+            android:layout_width="match_parent"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_height="2dp"
+            android:background="#2EBA34"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,8 +40,8 @@
             android:orientation="horizontal">
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/Answerer_profile_image"
-                android:layout_width="47dp"
-                android:layout_height="47dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:cropToPadding="true"
                 app:civ_border="false"/>
         <TextView
@@ -41,15 +49,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
-            android:hint="Not answer yet!!"
-            android:textSize="30sp"/>
+            android:textSize="20sp"/>
         </LinearLayout>
         <Button
             android:id="@+id/flagBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="47dp"
-            android:text="Answer" />
+            android:text="Answer"
+            android:background="@drawable/question_bt_bg"
+            android:textAllCaps="false"
+            android:textSize="15sp"/>
 
 
     </LinearLayout>

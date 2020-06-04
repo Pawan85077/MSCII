@@ -1,6 +1,7 @@
 package com.codinghelper.mscii;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -74,7 +75,12 @@ public class Activities extends Fragment {
                     protected void onBindViewHolder(@NonNull QuestionViewHolder holder,final int position, @NonNull StudentQuestion model) {
                         Toast.makeText(getActivity(), "151", Toast.LENGTH_SHORT).show();
                         holder.Questions.setText(" "+model.getQuestionAsked());
-                        holder.Answers.setText(" "+model.getAnswer());
+                        if(model.getAnswer().equals("Not answered yet!!")){
+                            holder.Answers.setTextColor(Color.parseColor("#FF0000"));
+                            holder.Answers.setText(" "+model.getAnswer());
+                        }else {
+                            holder.Answers.setText(" "+model.getAnswer());
+                        }
                         Picasso.get().load(model.getAskerImage()).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(holder.AskerImage);
                         Picasso.get().load(model.getAnswererImage()).fit().centerCrop().noFade().into(holder.AnswererImage);
                         final String question_id=getRef(position).getKey();
