@@ -7,10 +7,31 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
+
+    <EditText
+        android:id="@+id/search"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="20dp"
-        android:text="Explore" />
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:paddingStart="20sp"
+        android:textSize="20sp"
+        android:background="@color/colorPrimaryDark"
+        android:hint="Search" />
+
+    <Button
+        android:id="@+id/buttonAsk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:text="Ask"/>
+
+
+
 
 </RelativeLayout>

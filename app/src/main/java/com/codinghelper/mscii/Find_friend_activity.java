@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -52,11 +53,12 @@ public class Find_friend_activity extends AppCompatActivity {
                 new FirebaseRecyclerOptions.Builder<Friends>()
                 .setQuery(reference,Friends.class)
                 .build();
+
         FirebaseRecyclerAdapter<Friends,FindFriendViewHolder> adapter=
                 new FirebaseRecyclerAdapter<Friends, FindFriendViewHolder>(options) {
                     @Override
                     protected void onBindViewHolder(@NonNull FindFriendViewHolder holder, final int position, @NonNull Friends model) {
-                       holder.userName.setText(model.getUsername());
+                        holder.userName.setText(model.getUsername());
                        holder.userStatus.setText(model.getUserstatus());
                        Picasso.get().load(model.getImageUrl()).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(holder.ProfileImage);
                        holder.itemView.setOnClickListener(new View.OnClickListener() {

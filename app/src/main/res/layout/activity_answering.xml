@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".answeringActivity">
+    <TextView
+        android:id="@+id/VAns"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="watching:"/>
+    <View
+        android:id="@+id/first"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_below="@+id/VAns"
+        android:background="@color/colorPrimary"/>
+    <TextView
+        android:id="@+id/Discuss"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/first"
+        android:text="Discuss Chat Window on Cunstruction"/>
+    <View
+        android:id="@+id/second"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_below="@+id/Discuss"
+        android:background="@color/colorPrimary"/>
+
+    <EditText
+        android:id="@+id/AnsweringLayout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:inputType="textMultiLine"
+        android:layout_below="@id/second"
+        android:hint="Answer here.."
+        />
+    <Button
+        android:id="@+id/post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/AnsweringLayout"
+        android:text="Post"/>
+
+</RelativeLayout>
