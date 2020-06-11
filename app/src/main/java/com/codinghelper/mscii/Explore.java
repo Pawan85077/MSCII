@@ -120,20 +120,25 @@ public class Explore extends Fragment {
                 }else{
                      SearchBar.setText("");
                    //  userQuestion.push().child("QuestionAsked").setValue(question)
+
                        Root.child(currentUserID).addValueEventListener(new ValueEventListener() {
                            @Override
                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                if (dataSnapshot.exists()) {
                                    String key=userQuestion.push().getKey();
                                    String Simg =String.valueOf(dataSnapshot.child("imageUrl").getValue());
+                                   String Sname =String.valueOf(dataSnapshot.child("username").getValue());
                                    HashMap rec=new HashMap();
                                    rec.put("QuestionAsked",question);
                                    rec.put("askerUID",currentUserID);
                                    rec.put("Answer","Not answered yet!!");
                                    rec.put("AskerImage",Simg);
                                    rec.put("Topic",Topic);
+                                  // rec.put("position","AnsPosition");
                                    rec.put("AnswererImage","https://firebasestorage.googleapis.com/v0/b/mscii-8cb88.appspot.com/o/error%20Symbol.jfif?alt=media&token=22e6d309-bfe1-4da6-a95c-496c15d8cffb");
-
+                                   rec.put("AnswererId","Not yet");
+                                   rec.put("AskerName",Sname);
+                                   rec.put("AnswererName","unknown");
                                    userQuestion.child(key).updateChildren(rec).addOnCompleteListener(new OnCompleteListener() {
                                        @Override
                                        public void onComplete(@NonNull Task task) {
@@ -142,6 +147,7 @@ public class Explore extends Fragment {
                                            }
                                        }
                                    });
+
 
                                }
                            }

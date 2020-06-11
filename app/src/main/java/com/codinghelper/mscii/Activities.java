@@ -27,28 +27,20 @@ import com.google.firebase.database.ValueEventListener;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
-import java.util.Objects;
-
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class Activities extends Fragment {
     private RecyclerView recyclerView;
     private DatabaseReference userQuestion;
     private FirebaseAuth mAuth;
-    private String currentUserId,askerID;
+    private String currentUserId,askerID,CurrentPos;
 
 
     public Activities() {
-        // Required empty public constructor
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_activities, container, false);
         recyclerView=(RecyclerView)v.findViewById(R.id.Question_recycle);
         mAuth=FirebaseAuth.getInstance();
@@ -63,23 +55,20 @@ public class Activities extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Toast.makeText(getActivity(), "143", Toast.LENGTH_LONG).show();
         FirebaseRecyclerOptions<StudentQuestion> options=
                 new FirebaseRecyclerOptions.Builder<StudentQuestion>()
                         .setQuery(userQuestion,StudentQuestion.class)
                         .build();
-        Toast.makeText(getActivity(), "148", Toast.LENGTH_SHORT).show();
         FirebaseRecyclerAdapter<StudentQuestion,QuestionViewHolder> adapter=
                 new FirebaseRecyclerAdapter<StudentQuestion, QuestionViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull QuestionViewHolder holder,final int position, @NonNull StudentQuestion model) {
-                        Toast.makeText(getActivity(), "151", Toast.LENGTH_SHORT).show();
-                        holder.Questions.setText(" "+model.getQuestionAsked());
+                    protected void onBindViewHolder(@NonNull QuestionViewHolder holder, int position, @NonNull StudentQuestion model) {
+                        holder.Questions.setText(model.getQuestionAsked());
                         if(model.getAnswer().equals("Not answered yet!!")){
                             holder.Answers.setTextColor(Color.parseColor("#FF0000"));
-                            holder.Answers.setText(" "+model.getAnswer());
+                            holder.Answers.setText(model.getAnswer());
                         }else {
-                            holder.Answers.setText(" "+model.getAnswer());
+                            holder.Answers.setText(model.getAnswer());
                         }
                         Picasso.get().load(model.getAskerImage()).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(holder.AskerImage);
                         Picasso.get().load(model.getAnswererImage()).fit().centerCrop().noFade().into(holder.AnswererImage);
@@ -88,7 +77,6 @@ public class Activities extends Fragment {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                  askerID=String.valueOf(dataSnapshot.child("askerUID").getValue());
-
                             }
 
                             @Override
@@ -99,42 +87,21 @@ public class Activities extends Fragment {
                         holder.Flagbtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                              //  String question_id=getRef(position).getKey();
-                                assert question_id != null;
-                               /* userQuestion.child(question_id).addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {*/
-                                      //  String askerID=String.valueOf(dataSnapshot.child("askerUID").getValue());
-                                        if(!currentUserId.equals(askerID)){
-                                            Toast.makeText(getActivity(),askerID , Toast.LENGTH_LONG).show();
-                                            Intent profileIntent=new Intent(getActivity(),answeringActivity.class);
-                                            profileIntent.putExtra("question_id",question_id);
-                                            startActivity(profileIntent);
-                                            Toast.makeText(getActivity(), askerID, Toast.LENGTH_LONG).show();
-                                        }else{
-                                            Toast.makeText(getActivity(), "you can't answer your own question!", Toast.LENGTH_LONG).show();
 
-                                        }
-
-
-                                 //   }
-
-                                  /*  @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                    }
-                                });*/
-
+                                userQuestion.child(question_id).child("AnswererId").setValue(currentUserId);
+                                Toast.makeText(getActivity(), askerID, Toast.LENGTH_LONG).show();
+                                Intent profileIntent = new Intent(getActivity(), answeringActivity.class);
+                                profileIntent.putExtra("question_id", question_id);
+                                profileIntent.putExtra("current_answerer_id", currentUserId);
+                                startActivity(profileIntent);
                             }
                         });
-
                     }
 
                     @NonNull
                     @Override
                     public QuestionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.question_view,parent,false);
-                        Toast.makeText(getActivity(), "162", Toast.LENGTH_SHORT).show();
                         QuestionViewHolder viewHolder=new QuestionViewHolder(view);
                         return viewHolder;
                     }
