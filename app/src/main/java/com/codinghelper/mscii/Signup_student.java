@@ -37,6 +37,9 @@ public class Signup_student extends AppCompatActivity {
     RadioButton radioGenderMale,radioGenderFemale;
     DatabaseReference rootRef;
     String gender="";
+    String TeacherNotes="";
+    String StudentNotes="";
+    String FavNotes="";
     String status="hey! I'm using MCR infotech ";
     String images="https://firebasestorage.googleapis.com/v0/b/mscii-8cb88.appspot.com/o/testimage.jpg?alt=media&token=7c5be373-949c-4e7a-9661-eadd2ee670f7";
     String Account="Student";
@@ -203,7 +206,10 @@ public class Signup_student extends AppCompatActivity {
                                                 Account,
                                                 course,
                                                 status,
-                                                images
+                                                images,
+                                                TeacherNotes,
+                                                StudentNotes,
+                                                FavNotes
 
 
                                         );
