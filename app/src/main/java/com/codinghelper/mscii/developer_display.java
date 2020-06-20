@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
+import android.widget.LinearLayout;
+
 /**
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.

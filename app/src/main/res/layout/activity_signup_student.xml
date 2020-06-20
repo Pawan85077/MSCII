@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/splash_bg"
-    tools:context=".Signup_student"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".Signup_student">
 
     <TextView
         android:id="@+id/textView3"
@@ -30,8 +30,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="10dp">
 
         <LinearLayout
@@ -80,33 +80,32 @@
                 android:id="@+id/studCourse"
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
-                android:background="@drawable/spinner_admin_signup"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/spinner_admin_signup" />
 
             <Spinner
                 android:id="@+id/studSession"
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
-                android:background="@drawable/spinner_admin_signup"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/spinner_admin_signup" />
 
-<!--niche wala hatana h-->
-<!--            <com.google.android.material.textfield.TextInputLayout-->
-<!--                android:id="@+id/Session"-->
-<!--                style="@style/TextLabel"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:errorEnabled="true">-->
+            <!--niche wala hatana h-->
+            <!--            <com.google.android.material.textfield.TextInputLayout-->
+            <!--                android:id="@+id/Session"-->
+            <!--                style="@style/TextLabel"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                app:errorEnabled="true">-->
 
-<!--                <com.google.android.material.textfield.TextInputEditText-->
-<!--                    android:id="@+id/ss"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="54dp"-->
-<!--                    android:hint="Session"-->
-<!--                    android:inputType="numberSigned"-->
-<!--                    android:textColor="#ffffff" />-->
-<!--            </com.google.android.material.textfield.TextInputLayout>-->
-
+            <!--                <com.google.android.material.textfield.TextInputEditText-->
+            <!--                    android:id="@+id/ss"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="54dp"-->
+            <!--                    android:hint="Session"-->
+            <!--                    android:inputType="numberSigned"-->
+            <!--                    android:textColor="#ffffff" />-->
+            <!--            </com.google.android.material.textfield.TextInputLayout>-->
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -230,7 +229,6 @@
         </LinearLayout>
 
     </ScrollView>
-
 
 
 </LinearLayout>
