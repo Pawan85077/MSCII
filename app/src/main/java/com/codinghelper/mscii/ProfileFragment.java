@@ -82,7 +82,7 @@ public class ProfileFragment extends Fragment {
                 String Simg =String.valueOf(dataSnapshot.child("imageUrl").getValue());
                 Picasso.get().load(Simg).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(imageView);
                 String Sstatus =String.valueOf(dataSnapshot.child("userstatus").getValue());
-                status.setText(" "+Sstatus);
+                status.setText(Sstatus);
                 String Stcourse =String.valueOf(dataSnapshot.child("Scourse").getValue());
                 Pcourse.setText(Stcourse);
 

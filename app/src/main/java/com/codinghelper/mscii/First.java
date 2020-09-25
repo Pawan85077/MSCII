@@ -36,6 +36,7 @@ public class First extends AppCompatActivity {
             public void onClick(View view) {
 
                     startActivity(new Intent(First.this, sloginActivity.class));
+                    finish();
 
 
             }

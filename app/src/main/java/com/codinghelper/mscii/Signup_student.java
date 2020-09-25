@@ -41,7 +41,7 @@ public class Signup_student extends AppCompatActivity {
     String StudentNotes="";
     String FavNotes="";
     String status="hey! I'm using MCR infotech ";
-    String images="https://firebasestorage.googleapis.com/v0/b/mscii-8cb88.appspot.com/o/testimage.jpg?alt=media&token=7c5be373-949c-4e7a-9661-eadd2ee670f7";
+    String images="https://firebasestorage.googleapis.com/v0/b/mscii-8cb88.appspot.com/o/logos.png?alt=media&token=1383c782-bbbf-41a0-a03b-924c6cf7b149";
     String Account="Student";
     String selectedCourse;
     String selectedSession;

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#28A6CCC7"
     tools:context=".Explore">
 
     <!-- TODO: Update blank fragment layout -->
@@ -11,66 +12,324 @@
 
     <EditText
         android:id="@+id/search"
-        android:layout_width="250dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="108dp"
-        android:background="@color/colorPrimaryDark"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:hint="Search"
-        android:inputType="textPersonName"
-        android:paddingStart="20sp"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.36"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/s_bg"
+        android:textSize="20sp"/>
+
+        <Spinner
+            android:id="@+id/selectTopic"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/search"/>
+
 
     <Button
         android:id="@+id/buttonAsk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/search"
         android:layout_centerHorizontal="true"
-        android:text="Ask"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/search"
-        app:layout_constraintStart_toStartOf="@+id/search"
-        app:layout_constraintTop_toBottomOf="@+id/search" />
-
-    <Spinner
-        android:id="@+id/selectTopic"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="248dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAsk"
-        app:layout_constraintStart_toStartOf="@+id/search" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/Computer"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAsk">
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:orientation="vertical">
-        <ImageButton
-            android:id="@+id/ComputerBtn"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_computer_black_24dp"/>
-        <TextView
-            android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/s_bg"
+        android:fontFamily="monospace"
+        android:text="ask"
+        android:textAllCaps="false"
+        android:textSize="16sp"/>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/buttonAsk"
+    android:layout_marginTop="60dp">
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Computer"
-            android:textColor="@color/bckg"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textSize="20dp"/>
-       </LinearLayout>
-    </androidx.cardview.widget.CardView>
+            android:orientation="horizontal">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Computer"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/buttonAsk"
+                app:cardBackgroundColor="#E8A5EEF8"
+                app:cardCornerRadius="20dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/ComputerBtn"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_computer_black_24dp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Computer"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textSize="20dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Maths"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/buttonAsk"
+                app:cardBackgroundColor="#E8A5EEF8"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:cardCornerRadius="20dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/MathsBtn"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_exposure_black_24dp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Maths"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textSize="20dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Physics"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/buttonAsk"
+                app:cardBackgroundColor="#E8A5EEF8"
+                app:cardCornerRadius="20dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/PhysicsBtn"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_physics_charging_50_black_24dp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Physics"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textSize="20dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/English"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/buttonAsk"
+                app:cardBackgroundColor="#E8A5EEF8"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="20dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/EnglishBtn"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_english_by_alpha_black_24dp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="English"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textSize="20dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Hindi"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/buttonAsk"
+                app:cardBackgroundColor="#E8A5EEF8"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="20dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/HindiBtn"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_hindi_black_24dp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Hindi"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textSize="20dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Bio"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/buttonAsk"
+                app:cardBackgroundColor="#E8A5EEF8"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="20dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/BioBtn"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_bio_black_24dp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Bio"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textSize="20dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/History"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/buttonAsk"
+                app:cardBackgroundColor="#E8A5EEF8"
+                app:cardCornerRadius="20dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/HistoryBtn"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_hist_boat_black_24dp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="History"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textSize="20dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Geography"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/buttonAsk"
+                app:cardBackgroundColor="#E8A5EEF8"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                app:cardCornerRadius="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/GeographyBtn"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_geo_black_24dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Geography"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Links"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/buttonAsk"
+                app:cardBackgroundColor="#E8A5EEF8"
+                app:cardCornerRadius="20dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/LinksBtn"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_link_black_24dp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Links"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textSize="20dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
+
+</RelativeLayout>

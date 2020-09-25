@@ -65,13 +65,15 @@ public class Activities extends Fragment {
                     protected void onBindViewHolder(@NonNull QuestionViewHolder holder, int position, @NonNull StudentQuestion model) {
                         holder.Questions.setText(model.getQuestionAsked());
                         if(model.getAnswer().equals("Not answered yet!!")){
-                            holder.Answers.setTextColor(Color.parseColor("#FF0000"));
+                            holder.Answers.setTextColor(Color.parseColor("#FF8000"));
                             holder.Answers.setText(model.getAnswer());
                         }else {
                             holder.Answers.setText(model.getAnswer());
                         }
+                        holder.Askername.setText(model.getAskerName());
+                        holder.topic.setText(model.getTopic());
                         Picasso.get().load(model.getAskerImage()).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(holder.AskerImage);
-                        Picasso.get().load(model.getAnswererImage()).fit().centerCrop().noFade().into(holder.AnswererImage);
+                        Picasso.get().load(model.getAnswererImage()).fit().noFade().into(holder.AnswererImage);
                         final String question_id=getRef(position).getKey();
                         userQuestion.child(question_id).addValueEventListener(new ValueEventListener() {
                             @Override
@@ -114,7 +116,7 @@ public class Activities extends Fragment {
         TextView Answers;
         CircularImageView AskerImage;
         CircularImageView AnswererImage;
-        Button Flagbtn;
+        Button Flagbtn,Askername,topic;
         public QuestionViewHolder(@NonNull View itemView) {
             super(itemView);
             Questions=itemView.findViewById(R.id.AllQuestion);
@@ -122,6 +124,8 @@ public class Activities extends Fragment {
             Answers=itemView.findViewById(R.id.Answer2ques);
             AnswererImage=itemView.findViewById(R.id.Answerer_profile_image);
             AskerImage=itemView.findViewById(R.id.question_asker_profile_image);
+            Askername=itemView.findViewById(R.id.name);
+            topic=itemView.findViewById(R.id.sub);
         }
     }
 }
