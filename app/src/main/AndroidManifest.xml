@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ComputerActivity"></activity>
         <activity android:name=".answeringActivity" />
-        
+
         <activity android:name=".FriendChatActivity" />
         <activity
             android:name=".smallSplashScreen"

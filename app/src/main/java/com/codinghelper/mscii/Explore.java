@@ -134,7 +134,7 @@ public class Explore extends Fragment {
                                    rec.put("Answer","Not answered yet!!");
                                    rec.put("AskerImage",Simg);
                                    rec.put("Topic",Topic);
-                                  // rec.put("position","AnsPosition");
+                                   rec.put("position","answer");
                                    rec.put("AnswererImage","https://firebasestorage.googleapis.com/v0/b/mscii-8cb88.appspot.com/o/skull%20(1).png?alt=media&token=22a5e53b-4270-40b9-bbf2-41109c135557");
                                    rec.put("AnswererId","Not yet");
                                    rec.put("AskerName",Sname);

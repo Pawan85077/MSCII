@@ -86,12 +86,12 @@ public class Activities extends Fragment {
 
                             }
                         });
+                        holder.Flagbtn.setText(model.getposition());
                         holder.Flagbtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
 
                                 userQuestion.child(question_id).child("AnswererId").setValue(currentUserId);
-                                Toast.makeText(getActivity(), askerID, Toast.LENGTH_LONG).show();
                                 Intent profileIntent = new Intent(getActivity(), answeringActivity.class);
                                 profileIntent.putExtra("question_id", question_id);
                                 profileIntent.putExtra("current_answerer_id", currentUserId);
