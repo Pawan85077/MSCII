@@ -178,7 +178,7 @@ public class editProfile extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedsong = parent.getItemAtPosition(position).toString();
                 if (selectedsong!="--Select song--") {
-                    Toast.makeText(parent.getContext(), selectedsong, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(parent.getContext(), selectedsong, Toast.LENGTH_LONG).show();
                     if(selectedsong.equals("Rainbow"))
                     {
                         songUrl="https://drive.google.com/file/d/14hx36vsL70h19txJ8evOtLaoCxSOrLFw/view?usp=sharing";

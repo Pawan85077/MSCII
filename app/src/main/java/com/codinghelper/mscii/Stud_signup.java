@@ -22,6 +22,7 @@ public class Stud_signup extends AppCompatActivity {
     public void unlock(View view){
         Toast.makeText(getApplicationContext(),"STUDENT SIGNUP",Toast.LENGTH_SHORT).show();
         startActivity(new Intent(Stud_signup.this,Signup_student.class));
+        finish();
 
     }
     @Override
