@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#28A6CCC7"
+    android:background="@color/colorPrimaryDark"
     tools:context=".Explore">
 
     <!-- TODO: Update blank fragment layout -->
@@ -60,7 +60,6 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_below="@id/buttonAsk"
-                app:cardBackgroundColor="#E8A5EEF8"
                 app:cardCornerRadius="20dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -87,7 +86,6 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_below="@id/buttonAsk"
-                app:cardBackgroundColor="#E8A5EEF8"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 app:cardCornerRadius="20dp">
@@ -116,7 +114,6 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_below="@id/buttonAsk"
-                app:cardBackgroundColor="#E8A5EEF8"
                 app:cardCornerRadius="20dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -149,7 +146,6 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_below="@id/buttonAsk"
-                app:cardBackgroundColor="#E8A5EEF8"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 app:cardCornerRadius="20dp">
@@ -178,7 +174,6 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_below="@id/buttonAsk"
-                app:cardBackgroundColor="#E8A5EEF8"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
@@ -209,7 +204,6 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_below="@id/buttonAsk"
-                app:cardBackgroundColor="#E8A5EEF8"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 app:cardCornerRadius="20dp">
@@ -244,7 +238,6 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_below="@id/buttonAsk"
-                app:cardBackgroundColor="#E8A5EEF8"
                 app:cardCornerRadius="20dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -271,7 +264,6 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_below="@id/buttonAsk"
-                app:cardBackgroundColor="#E8A5EEF8"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 app:cardCornerRadius="20dp">
@@ -303,7 +295,6 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_below="@id/buttonAsk"
-                app:cardBackgroundColor="#E8A5EEF8"
                 app:cardCornerRadius="20dp">
                 <LinearLayout
                     android:layout_width="match_parent"

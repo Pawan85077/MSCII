@@ -40,6 +40,7 @@ public class Signup_student extends AppCompatActivity {
     String TeacherNotes="";
     String StudentNotes="";
     String FavNotes="";
+    String userSongurl="https://drive.google.com/file/d/15T-kh_wvTpFMv_7RPrr9oRL0uixckzKX/view?usp=sharing";
     String status="hey! I'm using MCR infotech ";
     String images="https://firebasestorage.googleapis.com/v0/b/mscii-8cb88.appspot.com/o/logos.png?alt=media&token=1383c782-bbbf-41a0-a03b-924c6cf7b149";
     String Account="Student";
@@ -209,7 +210,8 @@ public class Signup_student extends AppCompatActivity {
                                                 images,
                                                 TeacherNotes,
                                                 StudentNotes,
-                                                FavNotes
+                                                FavNotes,
+                                                userSongurl
 
 
                                         );

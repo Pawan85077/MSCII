@@ -33,7 +33,9 @@
 
 </LinearLayout>
 
+
     <LinearLayout
+        android:id="@+id/ll4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/layout_button"
@@ -64,7 +66,42 @@
                 android:layout_height="wrap_content"
                 app:srcCompat="@android:drawable/checkbox_on_background" />
         </LinearLayout>
+        <Spinner
+            android:id="@+id/studsem"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_below="@+id/edit_status"
+            android:background="@drawable/spinner_admin_signup" />
+        <Spinner
+            android:id="@+id/song"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_below="@+id/studsem"
+            android:background="@drawable/spinner_admin_signup" />
+        <LinearLayout
+
+            android:id="@+id/ll5"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/chooseImgb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="choose image"/>
+
+            <Button
+                android:id="@+id/uploadImgb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="upload image" />
+
+        </LinearLayout>
     </LinearLayout>
+
 
 
 

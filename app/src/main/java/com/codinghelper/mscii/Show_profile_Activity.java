@@ -3,9 +3,12 @@ package com.codinghelper.mscii;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;              //1....2...3...are the code sequence matlb code iss number ke hisab ke sath chlaga
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,8 +27,9 @@ import java.util.HashMap;
 public class Show_profile_Activity extends AppCompatActivity {
 private String senderUserId, receiverUserID,currentState;
 private CircularImageView userImage;
-private TextView userProfilename,userProfileStatus;
-private Button AddRequest,RemoveRequest;
+private ImageView Background;
+private TextView userProfilename,userProfileStatus,userSession,userCourse,userSem;
+private Button AddRequest,RemoveRequest,Playsong;
 private DatabaseReference reference,addRequestref,friendref,NotificationRef;
 private FirebaseAuth auth;
     @Override
@@ -34,12 +38,17 @@ private FirebaseAuth auth;
         setContentView(R.layout.activity_show_profile_);
         auth=FirebaseAuth.getInstance();
         senderUserId=auth.getCurrentUser().getUid();
+        Background=(ImageView)findViewById(R.id.profileBackround);
         receiverUserID=getIntent().getExtras().get("visit_user_id").toString();
         userImage=(CircularImageView)findViewById(R.id.visit_profile_image);
         userProfilename=(TextView)findViewById(R.id.visit_username);
         userProfileStatus=(TextView)findViewById(R.id.visit_userstatus);
+        userCourse=(TextView)findViewById(R.id.visit_course);
+        userSession=(TextView)findViewById(R.id.visit_session);
+        userSem=(TextView)findViewById(R.id.visit_sem);
         AddRequest=(Button)findViewById(R.id.add_friend);
         RemoveRequest=(Button)findViewById(R.id.remove_friend);
+        Playsong=(Button)findViewById(R.id.playbtn);
         reference= FirebaseDatabase.getInstance().getReference().child("studentDetail");
         addRequestref= FirebaseDatabase.getInstance().getReference().child("Add Friend Request");
         NotificationRef=FirebaseDatabase.getInstance().getReference().child("Notifications");
@@ -48,6 +57,27 @@ private FirebaseAuth auth;
         currentState="new";
         //1.
         RetriveUserInfo();
+        Playsong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reference.child(receiverUserID).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            String SongUrl =String.valueOf(dataSnapshot.child("userSong").getValue());
+                            Uri uri = Uri.parse(SongUrl);
+                            Intent launchWeb = new Intent(Intent.ACTION_VIEW, uri);
+                            startActivity(launchWeb);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
     }
 //1-->
     private void RetriveUserInfo() {
@@ -57,10 +87,18 @@ private FirebaseAuth auth;
                if(dataSnapshot.exists()&&(dataSnapshot.hasChild("imageUrl"))){
                    String Simg =String.valueOf(dataSnapshot.child("imageUrl").getValue());
                    Picasso.get().load(Simg).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(userImage);
+                   String Sback =String.valueOf(dataSnapshot.child("imageUrlBackground").getValue());
+                   Picasso.get().load(Sback).fit().centerCrop().noFade().placeholder(R.drawable.bk).into(Background);
                    String Sname =String.valueOf(dataSnapshot.child("username").getValue());
                    userProfilename.setText(Sname);
                    String Sstatus =String.valueOf(dataSnapshot.child("userstatus").getValue());
                    userProfileStatus.setText(" "+Sstatus);
+                   String Scourse =String.valueOf(dataSnapshot.child("Scourse").getValue());
+                   userCourse.setText(" "+Scourse);
+                   String Ssession =String.valueOf(dataSnapshot.child("session").getValue());
+                   userSession.setText(" "+Ssession);
+                   String Ssem =String.valueOf(dataSnapshot.child("userSem").getValue());
+                   userSem.setText(" Semister "+Ssem);
                  //2.
                    ManageAddRequest();
 
