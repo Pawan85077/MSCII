@@ -51,7 +51,7 @@ public class editProfile extends AppCompatActivity {
     private Button btn_choose;
     private Button btn_upload;
     private Button btn_chooseb;
-    private Button btn_uploadb;
+    private Button btn_uploadb,delpro;
     private EditText status;
     private ImageButton status_btn;
     private ImageView imageView;
@@ -59,7 +59,7 @@ public class editProfile extends AppCompatActivity {
     private Uri filePathb,resultUrib;
     private final int PICK_IMAGE_REQUEST=22;
     private FirebaseStorage storage;
-    private StorageReference storageReference;
+    private StorageReference storageReference,referencetTo;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
     String selectedSem;
@@ -72,6 +72,7 @@ public class editProfile extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
         btn_chooseb=findViewById(R.id.chooseImgb);
         btn_uploadb=findViewById(R.id.uploadImgb);
+        delpro=findViewById(R.id.delpropic);
         btn_choose=findViewById(R.id.chooseImg);
         user=FirebaseAuth.getInstance().getCurrentUser();
         reference=FirebaseDatabase.getInstance().getReference();
@@ -93,6 +94,7 @@ public class editProfile extends AppCompatActivity {
         btn_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 uploadImage();
             }
         });
@@ -106,6 +108,32 @@ public class editProfile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 uploadImageb();
+            }
+        });
+        delpro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reference.child("studentDetail").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            String Simg =String.valueOf(dataSnapshot.child("imageUrl").getValue());
+                            referencetTo=FirebaseStorage.getInstance().getReferenceFromUrl(Simg);
+                            referencetTo.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Toast.makeText(editProfile.this,"Pic deleted",Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
         status_btn.setOnClickListener(new View.OnClickListener() {

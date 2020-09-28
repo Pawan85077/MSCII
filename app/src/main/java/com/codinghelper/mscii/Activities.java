@@ -1,5 +1,6 @@
 package com.codinghelper.mscii;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,8 @@ public class Activities extends Fragment {
     private DatabaseReference userQuestion;
     private FirebaseAuth mAuth;
     private String currentUserId,askerID,CurrentPos;
+    ProgressDialog progressDialog;
+
 
 
     public Activities() {
@@ -45,6 +49,9 @@ public class Activities extends Fragment {
         recyclerView=(RecyclerView)v.findViewById(R.id.Question_recycle);
         mAuth=FirebaseAuth.getInstance();
         currentUserId=mAuth.getCurrentUser().getUid();
+        progressDialog = new ProgressDialog(getActivity(),R.style.AlertDialogTheme);
+        progressDialog.setMessage("loading..");
+        progressDialog.setCanceledOnTouchOutside(false);
         userQuestion= FirebaseDatabase.getInstance().getReference().child("Questions");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setReverseLayout(true);
@@ -55,6 +62,7 @@ public class Activities extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        progressDialog.show();
         FirebaseRecyclerOptions<StudentQuestion> options=
                 new FirebaseRecyclerOptions.Builder<StudentQuestion>()
                         .setQuery(userQuestion,StudentQuestion.class)
@@ -105,6 +113,7 @@ public class Activities extends Fragment {
                     public QuestionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.question_view,parent,false);
                         QuestionViewHolder viewHolder=new QuestionViewHolder(view);
+                        progressDialog.dismiss();
                         return viewHolder;
                     }
                 };

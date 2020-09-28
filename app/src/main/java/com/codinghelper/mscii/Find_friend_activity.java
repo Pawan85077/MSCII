@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,6 +28,8 @@ import com.squareup.picasso.Picasso;
 public class Find_friend_activity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private DatabaseReference reference;
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +42,9 @@ public class Find_friend_activity extends AppCompatActivity {
         recyclerView=(RecyclerView)findViewById(R.id.ff_recycle);
         reference= FirebaseDatabase.getInstance().getReference().child("studentDetail");
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        progressDialog = new ProgressDialog(this,R.style.AlertDialogTheme);
+        progressDialog.setMessage("loading..");
+        progressDialog.setCanceledOnTouchOutside(false);
     }
     @Override
     public boolean onSupportNavigateUp() {
@@ -49,6 +55,7 @@ public class Find_friend_activity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        progressDialog.show();
         FirebaseRecyclerOptions<Friends> options=
                 new FirebaseRecyclerOptions.Builder<Friends>()
                 .setQuery(reference,Friends.class)
@@ -79,6 +86,7 @@ public class Find_friend_activity extends AppCompatActivity {
                     public FindFriendViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.user_display_layout,parent,false);
                         FindFriendViewHolder viewHolder=new FindFriendViewHolder(view);
+                        progressDialog.dismiss();
                         return viewHolder;
                     }
                 };

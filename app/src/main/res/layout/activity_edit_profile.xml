@@ -100,6 +100,11 @@
                 android:text="upload image" />
 
         </LinearLayout>
+        <Button
+            android:id="@+id/delpropic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete profile pic"/>
     </LinearLayout>
 
 

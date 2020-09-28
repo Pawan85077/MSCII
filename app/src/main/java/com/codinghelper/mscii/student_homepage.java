@@ -30,8 +30,12 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthCredential;
 import com.google.firebase.auth.UserInfo;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
@@ -41,6 +45,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 import static java.security.AccessController.getContext;
 
 public class student_homepage extends AppCompatActivity {
@@ -48,7 +54,7 @@ public class student_homepage extends AppCompatActivity {
     private DrawerLayout drawer;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
-    DatabaseReference reference,Rootref;
+    DatabaseReference reference,Rootref,deleteref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,11 +154,80 @@ public class student_homepage extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "successfully logout!", Toast.LENGTH_SHORT).show();
 
         }
+        if (id == R.id.action_Delete) {
+            requestToDeleteAccount();
+        }
 
       /*  if(id==R.id.nav_profile){
             startActivity(new Intent(student_homepage.this, Profile.class));
         }*/
         return super.onOptionsItemSelected(item);
+    }
+
+    private void requestToDeleteAccount() {
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(student_homepage.this,R.style.Theme_AppCompat_Light_Dialog_MinWidth);
+        builder.setTitle("Delete account");
+        builder.setIcon(R.drawable.ic_warning);
+        final TextView Warning=new TextView(student_homepage.this);
+        Warning.setTextSize(16);
+        Warning.setText("                                                                                  "+"Are you sure want to delete account!!");
+        builder.setView(Warning);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                final AlertDialog.Builder builder2=new AlertDialog.Builder(student_homepage.this,R.style.Theme_AppCompat_Light_Dialog_MinWidth);
+                builder2.setTitle("Proofs that's you!!");
+                final EditText groupNameField=new EditText(student_homepage.this);
+                groupNameField.setHint("Password");
+                builder2.setView(groupNameField);
+                builder2.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                          AuthCredential credential;
+                          String password=groupNameField.getText().toString();
+                          credential= EmailAuthProvider.getCredential(user.getEmail(),password);
+                        user.reauthenticate(credential)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                reference.removeValue();
+                                new User(student_homepage.this).removeUser();
+                                user.delete()
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful()){
+                                                    Toast.makeText(getApplicationContext(),"Account deleted", Toast.LENGTH_SHORT).show();
+                                                    startActivity(new Intent(student_homepage.this, sloginActivity.class));
+                                                    finish();
+
+                                                }else {
+                                                    Toast.makeText(getApplicationContext(),"Error occured", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+                            }
+                        });
+                    }
+                });
+                builder2.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                builder2.show();
+
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        builder.show();
     }
 
     private void requestNewGroup() {
