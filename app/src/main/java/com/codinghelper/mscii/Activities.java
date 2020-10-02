@@ -104,9 +104,9 @@ public class Activities extends Fragment {
                         holder.Flagbtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                userQuestion.child(question_id).child("AnswererId").setValue(currentUserId);
                                 if(!model.getposition().equals("Live")){
                                     if(!model.getaskerUID().equals(currentUserId)){
+                                        userQuestion.child(question_id).child("AnswererId").setValue(currentUserId);
                                         Intent profileIntent = new Intent(getActivity(), answeringActivity.class);
                                         profileIntent.putExtra("question_id", question_id);
                                         profileIntent.putExtra("current_answerer_id", currentUserId);
