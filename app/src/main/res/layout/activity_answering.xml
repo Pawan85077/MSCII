@@ -4,45 +4,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1B00BCD4"
     tools:context=".answeringActivity">
-    <TextView
-        android:id="@+id/VAns"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="watching:"/>
-    <View
-        android:id="@+id/first"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:layout_below="@+id/VAns"
-        android:background="@color/colorPrimary"/>
+
+
     <TextView
         android:id="@+id/Discuss"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_below="@id/first"
-        android:text="Discuss Chat Window on Cunstruction"/>
-    <View
-        android:id="@+id/second"
+        android:layout_height="wrap_content"
+        android:background="#2F424242"
+        android:textColor="#0E0E0E"
+        android:paddingLeft="10dp"
+        android:padding="10dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Question display here"/>
+    <Button
+        android:id="@+id/moveLive"
         android:layout_width="match_parent"
-        android:layout_height="5dp"
+        android:layout_height="20dp"
+        android:text="Go live"
+        android:textAllCaps="false"
         android:layout_below="@+id/Discuss"
-        android:background="@color/colorPrimary"/>
+        android:background="#F5F8FF"
+        android:gravity="left"
+        android:paddingLeft="10dp"/>
 
+<ScrollView
+    android:id="@+id/sc1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/moveLive"
+    android:layout_above="@+id/lll1">
     <EditText
         android:id="@+id/AnsweringLayout"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:hint="Answer here.."
-        android:gravity="top"
-        android:layout_below="@id/second"/>
+        android:fontFamily="sans-serif-black"
+        android:background="@color/tranparent"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:gravity="top"/>
 
+</ScrollView>
+<LinearLayout
+    android:id="@+id/lll1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true">
     <Button
         android:id="@+id/post"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/AnsweringLayout"
-        android:text="Post"/>
+        android:text="Post"
+        android:background="@drawable/s_bg"
+        android:gravity="center"/>
+</LinearLayout>
+
 
 </RelativeLayout>

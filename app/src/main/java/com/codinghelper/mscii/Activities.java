@@ -70,7 +70,7 @@ public class Activities extends Fragment {
         FirebaseRecyclerAdapter<StudentQuestion,QuestionViewHolder> adapter=
                 new FirebaseRecyclerAdapter<StudentQuestion, QuestionViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull QuestionViewHolder holder, int position, @NonNull StudentQuestion model) {
+                    protected void onBindViewHolder(@NonNull QuestionViewHolder holder, int position, @NonNull final StudentQuestion model) {
                         holder.Questions.setText(model.getQuestionAsked());
                         if(model.getAnswer().equals("Not answered yet!!")){
                             holder.Answers.setTextColor(Color.parseColor("#FF8000"));
@@ -81,7 +81,7 @@ public class Activities extends Fragment {
                         holder.Askername.setText(model.getAskerName());
                         holder.topic.setText(model.getTopic());
                         Picasso.get().load(model.getAskerImage()).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(holder.AskerImage);
-                        Picasso.get().load(model.getAnswererImage()).fit().noFade().into(holder.AnswererImage);
+                        Picasso.get().load(model.getAnswererImage()).fit().noFade().placeholder(R.drawable.main_stud).into(holder.AnswererImage);
                         final String question_id=getRef(position).getKey();
                         userQuestion.child(question_id).addValueEventListener(new ValueEventListener() {
                             @Override
@@ -94,16 +94,35 @@ public class Activities extends Fragment {
 
                             }
                         });
+                       /* del.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                userQuestion.child(question_id).removeValue();
+                            }
+                        });*/
                         holder.Flagbtn.setText(model.getposition());
                         holder.Flagbtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-
                                 userQuestion.child(question_id).child("AnswererId").setValue(currentUserId);
-                                Intent profileIntent = new Intent(getActivity(), answeringActivity.class);
-                                profileIntent.putExtra("question_id", question_id);
-                                profileIntent.putExtra("current_answerer_id", currentUserId);
-                                startActivity(profileIntent);
+                                if(!model.getposition().equals("Live")){
+                                    if(!model.getaskerUID().equals(currentUserId)){
+                                        Intent profileIntent = new Intent(getActivity(), answeringActivity.class);
+                                        profileIntent.putExtra("question_id", question_id);
+                                        profileIntent.putExtra("current_answerer_id", currentUserId);
+                                        startActivity(profileIntent);
+                                        userQuestion.child(question_id).child("position").setValue("Live");
+                                    }else{
+                                        Toast.makeText(getActivity(), "you cant answer ur question", Toast.LENGTH_LONG).show();
+                                    }
+
+
+                                }else {
+                                    Intent profileIntent = new Intent(getActivity(), LiveActivity.class);
+                                    profileIntent.putExtra("question_id", question_id);
+                                    startActivity(profileIntent);
+                                }
+
                             }
                         });
                     }
@@ -137,4 +156,5 @@ public class Activities extends Fragment {
             topic=itemView.findViewById(R.id.sub);
         }
     }
+
 }

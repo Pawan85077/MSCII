@@ -3,12 +3,12 @@ package com.codinghelper.mscii;
 import com.google.firebase.database.DatabaseReference;
 
 public class StudentQuestion {
-    private String QuestionAsked,Answer,AskerImage,AnswererImage,AskerName,Topic,position;
+    private String QuestionAsked,Answer,AskerImage,AnswererImage,AskerName,Topic,position,askerUID;
 
     public StudentQuestion() {
     }
 
-    public StudentQuestion(String QuestionAsked,String Answer,String AskerImage,String AnswererImage,String AskerName,String Topic,String position) {
+    public StudentQuestion(String QuestionAsked,String Answer,String AskerImage,String AnswererImage,String AskerName,String Topic,String position,String askerUID) {
         this.QuestionAsked = QuestionAsked;
         this.Answer=Answer;
         this.AskerImage=AskerImage;
@@ -16,6 +16,7 @@ public class StudentQuestion {
         this.AskerName=AskerName;
         this.Topic=Topic;
         this.position=position;
+        this.askerUID=askerUID;
     }
 
     public String getQuestionAsked() {
@@ -39,6 +40,8 @@ public class StudentQuestion {
     public String getposition() {
         return position;
     }
-
+    public String getaskerUID() {
+        return askerUID;
+    }
 
 }

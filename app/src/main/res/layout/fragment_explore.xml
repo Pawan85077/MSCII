@@ -67,18 +67,17 @@
                     android:orientation="vertical">
                     <ImageButton
                         android:id="@+id/ComputerBtn"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
                         android:background="@drawable/ic_computer_black_24dp"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Computer"
-                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                        android:textStyle="bold"
+                        android:textColor="#CE000000"
                         android:gravity="center"
-                        android:textSize="20dp"/>
+                        android:textSize="15dp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
