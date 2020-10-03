@@ -37,6 +37,8 @@ public class Signup_student extends AppCompatActivity {
     RadioButton radioGenderMale,radioGenderFemale;
     DatabaseReference rootRef;
     String gender="";
+    Integer q=0;
+    Integer a=0;
     String TeacherNotes="";
     String StudentNotes="";
     String FavNotes="";
@@ -211,7 +213,9 @@ public class Signup_student extends AppCompatActivity {
                                                 TeacherNotes,
                                                 StudentNotes,
                                                 FavNotes,
-                                                userSongurl
+                                                userSongurl,
+                                                q,
+                                                a
 
 
                                         );

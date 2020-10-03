@@ -29,6 +29,7 @@ public class answeringActivity extends AppCompatActivity {
     private String Sans;
     private DatabaseReference reference,root;
     private FirebaseAuth mAuth;
+    long value;
     private String currentUserId,receiver_question_Id,CurrentAnswererId;
 
     @Override
@@ -78,11 +79,15 @@ public class answeringActivity extends AppCompatActivity {
                         Answer.setText("");
                         if (!ans.isEmpty()) {
                         reference.child(receiver_question_Id).child("Answer").setValue(ans);
-                        root.child(CurrentAnswererId).addValueEventListener(new ValueEventListener() {
+                        //unconfirmed change but working fine addvalueeentlistner
+                        root.child(CurrentAnswererId).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 String Simg = String.valueOf(dataSnapshot.child("imageUrl").getValue());
                                 String Sname =String.valueOf(dataSnapshot.child("username").getValue());
+                                value= (long)dataSnapshot.child("countA").getValue();
+                                value=value+1;
+                                root.child(CurrentAnswererId).child("countA").setValue(value);
                                 reference.child(receiver_question_Id).child("AnswererImage").setValue(Simg);
                                 reference.child(receiver_question_Id).child("AnswererName").setValue(Sname);
                                 reference.child(receiver_question_Id).child("position").setValue("update");

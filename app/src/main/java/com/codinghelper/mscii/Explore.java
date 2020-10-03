@@ -56,6 +56,8 @@ public class Explore extends Fragment {
     String[] selectTopic = {"--Select Topic--","Computer","MAths","physics"};
     String selectedTopic;
     ImageButton Computer;
+    long value;
+    Integer j;
 
 
 
@@ -83,6 +85,8 @@ public class Explore extends Fragment {
         ArrayAdapter<String> courseAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, selectTopic);
         courseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinTopic.setAdapter(courseAdapter);
+
+       // Root.child(currentUserID).child("countA").setValue(j);
         spinTopic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -123,13 +127,25 @@ public class Explore extends Fragment {
                      SearchBar.setText("");
                    //  userQuestion.push().child("QuestionAsked").setValue(question)
 
-                       Root.child(currentUserID).addValueEventListener(new ValueEventListener() {
+
+
+
+                   /* */
+
+
+
+
+                    //unconfirmed change but working fine addvalueeentlistner
+                       Root.child(currentUserID).addListenerForSingleValueEvent(new ValueEventListener() {
                            @Override
                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                if (dataSnapshot.exists()) {
                                    String key=userQuestion.push().getKey();
                                    String Simg =String.valueOf(dataSnapshot.child("imageUrl").getValue());
                                    String Sname =String.valueOf(dataSnapshot.child("username").getValue());
+                                   value= (long)dataSnapshot.child("countQ").getValue();
+                                   value=value+1;
+                                   Root.child(currentUserID).child("countQ").setValue(value);
                                    HashMap rec=new HashMap();
                                    rec.put("QuestionAsked",question);
                                    rec.put("askerUID",currentUserID);
@@ -145,6 +161,23 @@ public class Explore extends Fragment {
                                        @Override
                                        public void onComplete(@NonNull Task task) {
                                            if(task.isSuccessful()){
+                                              /* Root.child(currentUserID).addValueEventListener(new ValueEventListener() {
+                                                   @Override
+                                                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                       String Sqcount = String.valueOf(dataSnapshot.child("countQ").getValue());
+                                                       int a=Integer.parseInt(Sqcount);
+                                                       a++;
+                                                       String Strq=Integer.toString(a);
+                                                       Toast.makeText(getActivity(), Strq, Toast.LENGTH_LONG).show();
+
+                                                   }
+
+                                                   @Override
+                                                   public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                   }
+                                               });*/
+                                              // Root.child(currentUserID).child("countQ").setValue(Strq);
                                                Toast.makeText(getActivity(), "your Question is available on Activities page", Toast.LENGTH_LONG).show();
                                            }
                                        }
@@ -159,7 +192,8 @@ public class Explore extends Fragment {
 
                            }
                        });
-            }
+
+                }
             }
         });
 

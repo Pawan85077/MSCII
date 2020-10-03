@@ -28,7 +28,7 @@ public class Show_profile_Activity extends AppCompatActivity {
 private String senderUserId, receiverUserID,currentState;
 private CircularImageView userImage;
 private ImageView Background;
-private TextView userProfilename,userProfileStatus,userSession,userCourse,userSem;
+private TextView userProfilename,userProfileStatus,userSession,userCourse,userSem,sq,sa;
 private Button AddRequest,RemoveRequest,Playsong;
 private DatabaseReference reference,addRequestref,friendref,NotificationRef;
 private FirebaseAuth auth;
@@ -38,6 +38,8 @@ private FirebaseAuth auth;
         setContentView(R.layout.activity_show_profile_);
         auth=FirebaseAuth.getInstance();
         senderUserId=auth.getCurrentUser().getUid();
+        sq=(TextView)findViewById(R.id.q);
+        sa=(TextView)findViewById(R.id.a);
         Background=(ImageView)findViewById(R.id.profileBackround);
         receiverUserID=getIntent().getExtras().get("visit_user_id").toString();
         userImage=(CircularImageView)findViewById(R.id.visit_profile_image);
@@ -99,6 +101,10 @@ private FirebaseAuth auth;
                    userSession.setText(" "+Ssession);
                    String Ssem =String.valueOf(dataSnapshot.child("userSem").getValue());
                    userSem.setText(" Semister "+Ssem);
+                   String Sq =String.valueOf(dataSnapshot.child("countQ").getValue());
+                   sq.setText(Sq);
+                   String Sa =String.valueOf(dataSnapshot.child("countA").getValue());
+                   sa.setText(Sa);
                  //2.
                    ManageAddRequest();
 

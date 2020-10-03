@@ -96,12 +96,41 @@
 
 
     </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/ccc2"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cc2"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true">
+        <View
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="#6D5B675C"/>
+        <TextView
+            android:id="@+id/q"
+            android:layout_width="155dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:text="q"
+            android:textSize="25dp"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/a"
+            android:layout_width="155dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:text="a"
+            android:textSize="25dp"
+            android:gravity="center"/>
+    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cc3"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/cc2"
+        android:layout_below="@id/ccc2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp">
         <RelativeLayout
