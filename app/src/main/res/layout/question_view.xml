@@ -89,17 +89,59 @@
                 android:textColor="#D1673AB7"
                 android:textSize="15sp" />
         </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <Button
+        android:id="@+id/flagBtn"
+        android:layout_width="69dp"
+        android:layout_height="33dp"
+        android:layout_marginLeft="38dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/s_bg"
+        android:fontFamily="monospace"
+        android:text="answer"
+        android:textAllCaps="false" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+<!--        <Button-->
+<!--            android:id="@+id/tup"-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:background="@drawable/ic_baseline_favorite_border_24"/>-->
+        <com.sackcentury.shinebuttonlib.ShineButton
+            android:id="@+id/tup"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+            app:allow_random_color="false"
+            app:btn_color="#ffffff"
+            app:enable_flashing="true"
+            app:big_shine_color="@color/badge_background_color"
+            app:click_animation_duration="200"
+            app:shine_animation_duration="1500"
+            app:shine_turn_angle="20"
+            app:small_shine_offset_angle="20"
+            app:shine_distance_multiple="2"
+            app:small_shine_color="@color/bg_spalsh"
+            app:shine_count="8"
+            app:siShape="@raw/star"
+            app:btn_fill_color="#FFC107"/>
+        <TextView
+            android:id="@+id/countLikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="0"/>
+    </LinearLayout>
 
-        <Button
-            android:id="@+id/flagBtn"
-            android:layout_width="69dp"
-            android:layout_height="33dp"
-            android:layout_marginLeft="38dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/s_bg"
-            android:fontFamily="monospace"
-            android:text="answer"
-            android:textAllCaps="false" />
+
+</LinearLayout>
+
 
 
     </LinearLayout>

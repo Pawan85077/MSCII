@@ -79,6 +79,7 @@ public class answeringActivity extends AppCompatActivity {
                         Answer.setText("");
                         if (!ans.isEmpty()) {
                         reference.child(receiver_question_Id).child("Answer").setValue(ans);
+                        reference.child(receiver_question_Id).child("FinalAnswererId").setValue(currentUserId);
                         //unconfirmed change but working fine addvalueeentlistner
                         root.child(CurrentAnswererId).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override

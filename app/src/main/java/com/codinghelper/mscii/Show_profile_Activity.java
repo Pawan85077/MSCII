@@ -10,6 +10,7 @@ import android.view.View;              //1....2...3...are the code sequence matl
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,9 +29,9 @@ public class Show_profile_Activity extends AppCompatActivity {
 private String senderUserId, receiverUserID,currentState;
 private CircularImageView userImage;
 private ImageView Background;
-private TextView userProfilename,userProfileStatus,userSession,userCourse,userSem,sq,sa;
+private TextView userProfilename,userProfileStatus,userSession,userCourse,userSem,sq,sa,moder,moderdel;
 private Button AddRequest,RemoveRequest,Playsong;
-private DatabaseReference reference,addRequestref,friendref,NotificationRef;
+private DatabaseReference reference,addRequestref,friendref,NotificationRef,bannedref;
 private FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,8 @@ private FirebaseAuth auth;
         sq=(TextView)findViewById(R.id.q);
         sa=(TextView)findViewById(R.id.a);
         Background=(ImageView)findViewById(R.id.profileBackround);
+        moder=(TextView)findViewById(R.id.mod);
+        moderdel=(TextView)findViewById(R.id.model);
         receiverUserID=getIntent().getExtras().get("visit_user_id").toString();
         userImage=(CircularImageView)findViewById(R.id.visit_profile_image);
         userProfilename=(TextView)findViewById(R.id.visit_username);
@@ -52,12 +55,36 @@ private FirebaseAuth auth;
         RemoveRequest=(Button)findViewById(R.id.remove_friend);
         Playsong=(Button)findViewById(R.id.playbtn);
         reference= FirebaseDatabase.getInstance().getReference().child("studentDetail");
+        bannedref= FirebaseDatabase.getInstance().getReference();
         addRequestref= FirebaseDatabase.getInstance().getReference().child("Add Friend Request");
         NotificationRef=FirebaseDatabase.getInstance().getReference().child("Notifications");
         friendref= FirebaseDatabase.getInstance().getReference().child("Friend list");
         //user position=current state
         currentState="new";
         //1.
+        moderdel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reference.child(senderUserId).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String Madmod =String.valueOf(dataSnapshot.child("Level").getValue());
+                        if(Madmod.equals("moderator")){
+                            bannedref.child("BannedAccount").child("BannedRequest").setValue(receiverUserID);
+                            Toast.makeText(getApplicationContext(),"ID will be deleted under 24 hours !!", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(getApplicationContext(),"Only moderator can delete someone ID !!", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
         RetriveUserInfo();
         Playsong.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,7 +132,15 @@ private FirebaseAuth auth;
                    sq.setText(Sq);
                    String Sa =String.valueOf(dataSnapshot.child("countA").getValue());
                    sa.setText(Sa);
-                 //2.
+                   if(Integer.parseInt(Sq)>=20&&Integer.parseInt(Sa)>=20){
+                       reference.child(receiverUserID).child("Level").setValue("moderator");
+                   }else {
+                       reference.child(receiverUserID).child("Level").setValue("");
+                   }
+                   String Madmod =String.valueOf(dataSnapshot.child("Level").getValue());
+                   moder.setText(Madmod);
+
+                   //2.
                    ManageAddRequest();
 
                }

@@ -24,7 +24,20 @@
         android:layout_height="4dp"
         android:background="@color/colorAccent"
         android:layout_below="@+id/profileBackround"/>
+    <TextView
+        android:id="@+id/mod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"/>
 
+    <TextView
+        android:id="@+id/model"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textSize="20dp"
+        android:text="Delete id"/>
 
 
 

@@ -27,15 +27,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.sackcentury.shinebuttonlib.ShineButton;
 import com.squareup.picasso.Picasso;
+
+import java.util.Objects;
 
 public class Activities extends Fragment {
     private RecyclerView recyclerView;
-    private DatabaseReference userQuestion;
+    private DatabaseReference userQuestion,Likesref,root;
     private FirebaseAuth mAuth;
-    private String currentUserId,askerID,CurrentPos;
+    private String currentUserId;
     ProgressDialog progressDialog;
-
+    boolean Likechecker = false;
 
 
     public Activities() {
@@ -53,6 +56,8 @@ public class Activities extends Fragment {
         progressDialog.setMessage("loading..");
         progressDialog.setCanceledOnTouchOutside(false);
         userQuestion= FirebaseDatabase.getInstance().getReference().child("Questions");
+        root= FirebaseDatabase.getInstance().getReference().child("studentDetail");
+        Likesref= FirebaseDatabase.getInstance().getReference().child("LikesC");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
@@ -70,36 +75,90 @@ public class Activities extends Fragment {
         FirebaseRecyclerAdapter<StudentQuestion,QuestionViewHolder> adapter=
                 new FirebaseRecyclerAdapter<StudentQuestion, QuestionViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull QuestionViewHolder holder, int position, @NonNull final StudentQuestion model) {
+                    protected void onBindViewHolder(@NonNull final QuestionViewHolder holder, int position, @NonNull final StudentQuestion model) {
                         holder.Questions.setText(model.getQuestionAsked());
                         if(model.getAnswer().equals("Not answered yet!!")){
+                            holder.up.setVisibility(View.INVISIBLE);
+                            holder.Likes.setVisibility(View.INVISIBLE);
                             holder.Answers.setTextColor(Color.parseColor("#FF8000"));
                             holder.Answers.setText(model.getAnswer());
                         }else {
                             holder.Answers.setText(model.getAnswer());
+                            holder.up.setVisibility(View.VISIBLE);
+                            holder.Likes.setVisibility(View.VISIBLE);
                         }
                         holder.Askername.setText(model.getAskerName());
                         holder.topic.setText(model.getTopic());
                         Picasso.get().load(model.getAskerImage()).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(holder.AskerImage);
                         Picasso.get().load(model.getAnswererImage()).fit().noFade().placeholder(R.drawable.main_stud).into(holder.AnswererImage);
                         final String question_id=getRef(position).getKey();
-                        userQuestion.child(question_id).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                 askerID=String.valueOf(dataSnapshot.child("askerUID").getValue());
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
-                       /* del.setOnClickListener(new View.OnClickListener() {
+                        holder.Askername.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                userQuestion.child(question_id).removeValue();
+                                Intent profileIntent=new Intent(getActivity(),Show_profile_Activity.class);
+                                profileIntent.putExtra("visit_user_id",model.getaskerUID());
+                                startActivity(profileIntent);
                             }
-                        });*/
+                        });
+                        holder.AnswererImage.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                userQuestion.child(question_id).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        String Sfinal =String.valueOf(dataSnapshot.child("FinalAnswererId").getValue());
+                                        Intent profileIntent=new Intent(getActivity(),Show_profile_Activity.class);
+                                        profileIntent.putExtra("visit_user_id",Sfinal);
+                                        startActivity(profileIntent);
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+                        });
+                        holder.AskerImage.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent profileIntent=new Intent(getActivity(),Show_profile_Activity.class);
+                                profileIntent.putExtra("visit_user_id",model.getaskerUID());
+                                startActivity(profileIntent);
+                            }
+                        });
+                        holder.setLikesButtonStatus(question_id);
+
+                        holder.up.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Likechecker =true;
+                               Likesref.addValueEventListener(new ValueEventListener() {
+                                   @Override
+                                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                       if(Likechecker){
+                                           if(dataSnapshot.child(question_id).hasChild(currentUserId)){
+                                               Likesref.child(question_id).child(currentUserId).removeValue();
+                                               Likechecker = false;
+                                           }else {
+                                               Likesref.child(question_id).child(currentUserId).setValue(true);
+
+                                               Likechecker = false;
+
+
+                                           }
+                                       }
+                                   }
+
+                                   @Override
+                                   public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                   }
+                               });
+                            }
+                        });
+
                         holder.Flagbtn.setText(model.getposition());
                         holder.Flagbtn.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -142,19 +201,54 @@ public class Activities extends Fragment {
     public static class QuestionViewHolder extends RecyclerView.ViewHolder{
         TextView Questions;
         TextView Answers;
+        TextView       Likes;
         CircularImageView AskerImage;
         CircularImageView AnswererImage;
         Button Flagbtn,Askername,topic;
+        ShineButton up,down;
+        int countLikes;
+        String currentUserId;
+        DatabaseReference Likesref,root;
         public QuestionViewHolder(@NonNull View itemView) {
             super(itemView);
             Questions=itemView.findViewById(R.id.AllQuestion);
             Flagbtn=itemView.findViewById(R.id.flagBtn);
+            root= FirebaseDatabase.getInstance().getReference();
             Answers=itemView.findViewById(R.id.Answer2ques);
             AnswererImage=itemView.findViewById(R.id.Answerer_profile_image);
             AskerImage=itemView.findViewById(R.id.question_asker_profile_image);
             Askername=itemView.findViewById(R.id.name);
             topic=itemView.findViewById(R.id.sub);
+            up=itemView.findViewById(R.id.tup);
+            Likesref= FirebaseDatabase.getInstance().getReference().child("LikesC");
+            currentUserId=FirebaseAuth.getInstance().getCurrentUser().getUid();
+                Likes=itemView.findViewById(R.id.countLikes);
+        }
+
+        public void setLikesButtonStatus(final String questionID){
+            Likesref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.child(questionID).hasChild(currentUserId)){
+                        countLikes=(int)dataSnapshot.child(questionID).getChildrenCount();
+                      //  up.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                        Likes.setText(Integer.toString(countLikes));
+
+
+                    }else {
+                        countLikes=(int)dataSnapshot.child(questionID).getChildrenCount();
+                      //  up.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+                        Likes.setText(Integer.toString(countLikes));
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
     }
+
 
 }
