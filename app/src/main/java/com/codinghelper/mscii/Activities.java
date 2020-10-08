@@ -34,7 +34,7 @@ import java.util.Objects;
 
 public class Activities extends Fragment {
     private RecyclerView recyclerView;
-    private DatabaseReference userQuestion,Likesref,root;
+    private DatabaseReference userQuestion,Likesref,root,Watchref;
     private FirebaseAuth mAuth;
     private String currentUserId;
     ProgressDialog progressDialog;

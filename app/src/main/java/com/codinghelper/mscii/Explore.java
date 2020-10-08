@@ -49,7 +49,7 @@ import java.util.HashMap;
  */
 public class Explore extends Fragment {
     private EditText SearchBar;
-    private Button Askbtn;
+    private Button Askbtn,flyGame;
     private DatabaseReference Root,userQuestion;
     private FirebaseAuth auth;
     private String currentUserID;
@@ -77,6 +77,7 @@ public class Explore extends Fragment {
         SearchBar=(EditText)v.findViewById(R.id.search);
         Computer=(ImageButton)v.findViewById(R.id.ComputerBtn);
         Askbtn=(Button)v.findViewById(R.id.buttonAsk);
+        flyGame=(Button)v.findViewById(R.id.game);
         auth=FirebaseAuth.getInstance();
         currentUserID=auth.getCurrentUser().getUid();
         userQuestion=FirebaseDatabase.getInstance().getReference().child("Questions");
@@ -85,6 +86,12 @@ public class Explore extends Fragment {
         ArrayAdapter<String> courseAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, selectTopic);
         courseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinTopic.setAdapter(courseAdapter);
+        flyGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), splashGameScreen.class));
+            }
+        });
 
        // Root.child(currentUserID).child("countA").setValue(j);
         spinTopic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
