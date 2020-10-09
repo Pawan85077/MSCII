@@ -10,6 +10,7 @@
         android:name="com.codinghelper.mscii.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+
     <fragment
         android:id="@+id/nav_dashboard"
         android:name="com.codinghelper.mscii.dashboardFragment"
@@ -20,14 +21,22 @@
         android:name="com.codinghelper.mscii.chatFragment"
         android:label="Chat"
         tools:layout="@layout/fragment_chat" />
+
     <fragment
         android:id="@+id/nav_home"
         android:name="com.codinghelper.mscii.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" />
+
     <fragment
         android:id="@+id/nav_notification"
         android:name="com.codinghelper.mscii.NotificationFragment"
         android:label="Notification"
         tools:layout="@layout/fragment_notification" />
+
+    <fragment
+        android:id="@+id/nav_developer"
+        android:name="com.codinghelper.mscii.developer_display"
+        android:label="Developer"
+        tools:layout="@layout/fragment_developer_display" />
 </navigation>

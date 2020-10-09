@@ -322,27 +322,27 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-<!--                        <TextView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginLeft="25dp"-->
-<!--                            android:layout_marginTop="5dp"-->
-<!--                            android:fontFamily="@font/artifika"-->
-<!--                            android:text="Developer"-->
-<!--                            android:textColor="#1656CC"-->
-<!--                            android:textSize="25sp"-->
-<!--                            android:textStyle="bold" />-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/artifika"
+                            android:text="Developer"
+                            android:textColor="#1656CC"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
 
-<!--                        <TextView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginLeft="15dp"-->
-<!--                            android:layout_marginTop="5dp"-->
-<!--                            android:fontFamily="@font/aclonica"-->
-<!--                            android:text="Team"-->
-<!--                            android:textColor="#540661"-->
-<!--                            android:textSize="25sp"-->
-<!--                            android:textStyle="bold" />-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/aclonica"
+                            android:text="Team"
+                            android:textColor="#540661"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -351,16 +351,16 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-<!--                        <TextView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginLeft="25dp"-->
-<!--                            android:layout_marginTop="5dp"-->
-<!--                            android:fontFamily="@font/wallpoet"-->
-<!--                            android:text="Marwari College Ranchi"-->
-<!--                            android:textColor="#429C29"-->
-<!--                            android:textSize="17sp"-->
-<!--                            android:textStyle="bold" />-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/wallpoet"
+                            android:text="Marwari College Ranchi"
+                            android:textColor="#429C29"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -388,37 +388,37 @@
                                     android:layout_centerHorizontal="true"
                                     app:civ_border="false"/>
 
-<!--                                <TextView-->
-<!--                                    android:id="@+id/full_name"-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_below="@+id/profile_image"-->
-<!--                                    android:layout_centerHorizontal="true"-->
-<!--                                    android:layout_marginLeft="25dp"-->
-<!--                                    android:layout_marginTop="5dp"-->
-<!--                                    android:fontFamily="@font/trade_winds"-->
-<!--                                    android:includeFontPadding="false"-->
-<!--                                    android:text="Pawan Kumar"-->
-<!--                                    android:textAlignment="center"-->
-<!--                                    android:textColor="#000000"-->
-<!--                                    android:textSize="17sp"-->
-<!--                                    android:textStyle="bold" />-->
+                                <TextView
+                                    android:id="@+id/full_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/profile_image"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="25dp"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/trade_winds"
+                                    android:includeFontPadding="false"
+                                    android:text="Pawan Kumar"
+                                    android:textAlignment="center"
+                                    android:textColor="#000000"
+                                    android:textSize="17sp"
+                                    android:textStyle="bold" />
 
-<!--                                <TextView-->
-<!--                                    android:id="@+id/course_name"-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_below="@+id/full_name"-->
-<!--                                    android:layout_centerHorizontal="true"-->
-<!--                                    android:layout_marginLeft="25dp"-->
-<!--                                    android:layout_marginTop="5dp"-->
-<!--                                    android:fontFamily="@font/acme"-->
-<!--                                    android:includeFontPadding="false"-->
-<!--                                    android:text="BCA    2018-21"-->
-<!--                                    android:textAlignment="center"-->
-<!--                                    android:textColor="#DC3D3E42"-->
-<!--                                    android:textSize="15sp"-->
-<!--                                    android:textStyle="bold" />-->
+                                <TextView
+                                    android:id="@+id/course_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/full_name"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="25dp"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/acme"
+                                    android:includeFontPadding="false"
+                                    android:text="BCA    2018-21"
+                                    android:textAlignment="center"
+                                    android:textColor="#DC3D3E42"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
 
 
                             </RelativeLayout>
@@ -436,37 +436,37 @@
                                     android:layout_marginLeft="30dp"
                                     app:civ_border="false" />
 
-<!--                                <TextView-->
-<!--                                    android:id="@+id/full_name2"-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_below="@+id/profile_image2"-->
-<!--                                    android:layout_centerHorizontal="true"-->
-<!--                                    android:layout_marginLeft="25dp"-->
-<!--                                    android:layout_marginTop="5dp"-->
-<!--                                    android:fontFamily="@font/trade_winds"-->
-<!--                                    android:includeFontPadding="false"-->
-<!--                                    android:text="Ujjwal Kumar"-->
-<!--                                    android:textAlignment="center"-->
-<!--                                    android:textColor="#000000"-->
-<!--                                    android:textSize="17sp"-->
-<!--                                    android:textStyle="bold" />-->
+                                <TextView
+                                    android:id="@+id/full_name2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/profile_image2"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="25dp"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/trade_winds"
+                                    android:includeFontPadding="false"
+                                    android:text="Ujjwal Kumar"
+                                    android:textAlignment="center"
+                                    android:textColor="#000000"
+                                    android:textSize="17sp"
+                                    android:textStyle="bold" />
 
-<!--                                <TextView-->
-<!--                                    android:id="@+id/course_name2"-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_below="@+id/full_name2"-->
-<!--                                    android:layout_centerHorizontal="true"-->
-<!--                                    android:layout_marginLeft="25dp"-->
-<!--                                    android:layout_marginTop="5dp"-->
-<!--                                    android:fontFamily="@font/acme"-->
-<!--                                    android:includeFontPadding="false"-->
-<!--                                    android:text="BCA    2018-21"-->
-<!--                                    android:textAlignment="center"-->
-<!--                                    android:textColor="#DC3D3E42"-->
-<!--                                    android:textSize="15sp"-->
-<!--                                    android:textStyle="bold" />-->
+                                <TextView
+                                    android:id="@+id/course_name2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/full_name2"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="25dp"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/acme"
+                                    android:includeFontPadding="false"
+                                    android:text="BCA    2018-21"
+                                    android:textAlignment="center"
+                                    android:textColor="#DC3D3E42"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
 
 
                             </RelativeLayout>
@@ -493,37 +493,37 @@
                                     android:layout_centerHorizontal="true"
                                     app:civ_border="false"/>
 
-<!--                                <TextView-->
-<!--                                    android:id="@+id/full_name3"-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_below="@+id/profile_image3"-->
-<!--                                    android:layout_centerHorizontal="true"-->
-<!--                                    android:layout_marginLeft="25dp"-->
-<!--                                    android:layout_marginTop="5dp"-->
-<!--                                    android:fontFamily="@font/trade_winds"-->
-<!--                                    android:includeFontPadding="false"-->
-<!--                                    android:text="Rishabh Roy"-->
-<!--                                    android:textAlignment="center"-->
-<!--                                    android:textColor="#000000"-->
-<!--                                    android:textSize="17sp"-->
-<!--                                    android:textStyle="bold" />-->
+                                <TextView
+                                    android:id="@+id/full_name3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/profile_image3"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="25dp"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/trade_winds"
+                                    android:includeFontPadding="false"
+                                    android:text="Rishabh Roy"
+                                    android:textAlignment="center"
+                                    android:textColor="#000000"
+                                    android:textSize="17sp"
+                                    android:textStyle="bold" />
 
-<!--                                <TextView-->
-<!--                                    android:id="@+id/course_name3"-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_below="@+id/full_name3"-->
-<!--                                    android:layout_centerHorizontal="true"-->
-<!--                                    android:layout_marginLeft="25dp"-->
-<!--                                    android:layout_marginTop="5dp"-->
-<!--                                    android:fontFamily="@font/acme"-->
-<!--                                    android:includeFontPadding="false"-->
-<!--                                    android:text="BCA    2018-21"-->
-<!--                                    android:textAlignment="center"-->
-<!--                                    android:textColor="#DC3D3E42"-->
-<!--                                    android:textSize="15sp"-->
-<!--                                    android:textStyle="bold" />-->
+                                <TextView
+                                    android:id="@+id/course_name3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/full_name3"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="25dp"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/acme"
+                                    android:includeFontPadding="false"
+                                    android:text="BCA    2018-21"
+                                    android:textAlignment="center"
+                                    android:textColor="#DC3D3E42"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
 
 
                             </RelativeLayout>
@@ -541,37 +541,37 @@
                                     android:layout_centerHorizontal="true"
                                     app:civ_border="false"/>
 
-<!--                                <TextView-->
-<!--                                    android:id="@+id/full_name4"-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_below="@+id/profile_image4"-->
-<!--                                    android:layout_centerHorizontal="true"-->
-<!--                                    android:layout_marginLeft="25dp"-->
-<!--                                    android:layout_marginTop="5dp"-->
-<!--                                    android:fontFamily="@font/trade_winds"-->
-<!--                                    android:includeFontPadding="false"-->
-<!--                                    android:text="Sandeep Kumar"-->
-<!--                                    android:textAlignment="center"-->
-<!--                                    android:textColor="#000000"-->
-<!--                                    android:textSize="17sp"-->
-<!--                                    android:textStyle="bold" />-->
+                                <TextView
+                                    android:id="@+id/full_name4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/profile_image4"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="25dp"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/trade_winds"
+                                    android:includeFontPadding="false"
+                                    android:text="Sandeep Kumar"
+                                    android:textAlignment="center"
+                                    android:textColor="#000000"
+                                    android:textSize="17sp"
+                                    android:textStyle="bold" />
 
-<!--                                <TextView-->
-<!--                                    android:id="@+id/course_name4"-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_below="@+id/full_name4"-->
-<!--                                    android:layout_centerHorizontal="true"-->
-<!--                                    android:layout_marginLeft="25dp"-->
-<!--                                    android:layout_marginTop="5dp"-->
-<!--                                    android:fontFamily="@font/acme"-->
-<!--                                    android:includeFontPadding="false"-->
-<!--                                    android:text="BCA    2018-21"-->
-<!--                                    android:textAlignment="center"-->
-<!--                                    android:textColor="#DC3D3E42"-->
-<!--                                    android:textSize="15sp"-->
-<!--                                    android:textStyle="bold" />-->
+                                <TextView
+                                    android:id="@+id/course_name4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/full_name4"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="25dp"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/acme"
+                                    android:includeFontPadding="false"
+                                    android:text="BCA    2018-21"
+                                    android:textAlignment="center"
+                                    android:textColor="#DC3D3E42"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
 
 
                             </RelativeLayout>
@@ -621,27 +621,27 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-<!--                        <TextView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginLeft="25dp"-->
-<!--                            android:layout_marginTop="5dp"-->
-<!--                            android:fontFamily="@font/warnes"-->
-<!--                            android:text="Our"-->
-<!--                            android:textColor="#1656CC"-->
-<!--                            android:textSize="25sp"-->
-<!--                            android:textStyle="bold" />-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/warnes"
+                            android:text="Our"
+                            android:textColor="#1656CC"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
 
-<!--                        <TextView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginLeft="15dp"-->
-<!--                            android:layout_marginTop="5dp"-->
-<!--                            android:fontFamily="@font/aclonica"-->
-<!--                            android:text="Mission"-->
-<!--                            android:textColor="#540661"-->
-<!--                            android:textSize="25sp"-->
-<!--                            android:textStyle="bold" />-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/aclonica"
+                            android:text="Mission"
+                            android:textColor="#540661"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
