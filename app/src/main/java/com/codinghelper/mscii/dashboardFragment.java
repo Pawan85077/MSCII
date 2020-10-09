@@ -31,7 +31,7 @@ public class dashboardFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
         //initToolbar();
 
-        getActivity().setTitle("");
+        getActivity().setTitle("Dashboard");
         return rootView;
 
 
