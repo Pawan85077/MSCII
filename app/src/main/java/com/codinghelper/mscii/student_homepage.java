@@ -82,7 +82,7 @@ public class student_homepage extends AppCompatActivity {
         final ImageView imageView=(ImageView)view.findViewById(R.id.nimg);
         final TextView textView=(TextView)view.findViewById(R.id.ntitle);
         final  TextView textView2=(TextView)view.findViewById(R.id.nsubtitle);
-       // imageView.setImageResource(R.drawable.capt);
+        // imageView.setImageResource(R.drawable.capt);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -123,7 +123,6 @@ public class student_homepage extends AppCompatActivity {
             startActivity(new Intent(student_homepage.this, MainActivity.class));
         }
     }
-
     @Override
     protected void onStart() {
         checkUserStatus();
@@ -184,31 +183,31 @@ public class student_homepage extends AppCompatActivity {
                 builder2.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                          AuthCredential credential;
-                          String password=groupNameField.getText().toString();
-                          credential= EmailAuthProvider.getCredential(user.getEmail(),password);
+                        AuthCredential credential;
+                        String password=groupNameField.getText().toString();
+                        credential= EmailAuthProvider.getCredential(user.getEmail(),password);
                         user.reauthenticate(credential)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                reference.removeValue();
-                                new User(student_homepage.this).removeUser();
-                                user.delete()
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if(task.isSuccessful()){
-                                                    Toast.makeText(getApplicationContext(),"Account deleted", Toast.LENGTH_SHORT).show();
-                                                    startActivity(new Intent(student_homepage.this, sloginActivity.class));
-                                                    finish();
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        reference.removeValue();
+                                        new User(student_homepage.this).removeUser();
+                                        user.delete()
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if(task.isSuccessful()){
+                                                            Toast.makeText(getApplicationContext(),"Account deleted", Toast.LENGTH_SHORT).show();
+                                                            startActivity(new Intent(student_homepage.this, sloginActivity.class));
+                                                            finish();
 
-                                                }else {
-                                                    Toast.makeText(getApplicationContext(),"Error occured", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        });
-                            }
-                        });
+                                                        }else {
+                                                            Toast.makeText(getApplicationContext(),"Error occured", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+                                                });
+                                    }
+                                });
                     }
                 });
                 builder2.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -251,7 +250,7 @@ public class student_homepage extends AppCompatActivity {
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-               dialogInterface.cancel();
+                dialogInterface.cancel();
             }
         });
         builder.show();

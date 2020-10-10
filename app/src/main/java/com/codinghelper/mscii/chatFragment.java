@@ -53,6 +53,7 @@ public class chatFragment extends Fragment {
         viewPager.setAdapter(tabsAccessorAdaptor);
         tabLayout=(TabLayout)v.findViewById(R.id.main_tab);
         tabLayout.setupWithViewPager(viewPager);
+        getActivity().setTitle("Chat");
         return v;
     }
 

@@ -59,30 +59,24 @@ public class HomeFragment extends Fragment {
 
                if(menuItem.getItemId()==R.id.navigation_explore){
                    fragment=new Explore();
-
-
-
                }
                else if(menuItem.getItemId()==R.id.navigation_activities){
                    fragment=new Activities();
                 /*   FragmentManager fragmentManager=getFragmentManager();
                    FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
                    fragmentTransaction.replace(R.id.nav_host_fragment_home,fragment).addToBackStack(null).commit();*/
-
-
                }
                else if(menuItem.getItemId()==R.id.navigation_grade){
                    fragment=new Grade();
                  /*  FragmentManager fragmentManager=getFragmentManager();
                    FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
                    fragmentTransaction.replace(R.id.nav_host_fragment_home,fragment).addToBackStack(null).commit();*/
-
-
                }
                return loadFragment(fragment);
            }
        });
         loadFragment(new Explore());
+
         return v;
     }
 
