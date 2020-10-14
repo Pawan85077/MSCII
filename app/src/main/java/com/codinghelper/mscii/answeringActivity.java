@@ -51,10 +51,33 @@ public class answeringActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
              //   startActivity(new Intent(answeringActivity.this, LiveActivity.class));
-                Toast.makeText(getApplicationContext(),"6666777744443333222222!!", Toast.LENGTH_LONG).show();
-                Intent profileIntent = new Intent(answeringActivity.this, LiveActivity.class);
-                profileIntent.putExtra("question_id", receiver_question_Id);
-                startActivity(profileIntent);
+//                Intent profileIntent = new Intent(answeringActivity.this, LiveActivity.class);
+//                profileIntent.putExtra("question_id", receiver_question_Id);
+//                startActivity(profileIntent);
+
+
+
+
+                root.child(currentUserId).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String Simg = String.valueOf(dataSnapshot.child("imageUrl").getValue());
+                        String jk=reference.child(receiver_question_Id).child("people").push().getKey();
+                        reference.child(receiver_question_Id).child("people").child(jk).child("peopleImage").setValue(Simg);
+                        Intent profileIntent = new Intent(answeringActivity.this, LiveActivity.class);
+                        profileIntent.putExtra("question_id", receiver_question_Id);
+                        profileIntent.putExtra("pid",jk);
+                        startActivity(profileIntent);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
 
             }
         });
