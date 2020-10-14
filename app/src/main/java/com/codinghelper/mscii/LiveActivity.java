@@ -3,16 +3,25 @@ package com.codinghelper.mscii;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +29,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mikhaellopez.circularimageview.CircularImageView;
+import com.sackcentury.shinebuttonlib.ShineButton;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,26 +41,39 @@ import java.util.Objects;
 
 public class LiveActivity extends AppCompatActivity {
     private TextView qnView;
-    String receiver_question_Id;
-    DatabaseReference reference;
+    String receiver_question_Id,receiver_pid;
+    DatabaseReference reference,Watchref;
     private ImageButton send_btn;
+    private RecyclerView recyclerView;
     private EditText userMessage;
     private ScrollView scrollView;
     private TextView displayText,Liveans;
     private String currentGroupName;
     private String CurrentUserId,CurrentUserName,CurrentDate,CurrentTime;
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference databaseReference,GroupNameRef,global_message_key;
+    private DatabaseReference databaseReference,GroupNameRef,global_message_key,referencetopeople,root;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live);
         qnView=(TextView)findViewById(R.id.DiscussLive);
+        recyclerView=(RecyclerView)findViewById(R.id.watch_recycle);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        //linearLayoutManager.setReverseLayout(true);
+        //linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
         Liveans=(TextView)findViewById(R.id.lans);
         receiver_question_Id= Objects.requireNonNull(Objects.requireNonNull(getIntent().getExtras()).get("question_id")).toString();
+        receiver_pid= Objects.requireNonNull(getIntent().getExtras().get("pid")).toString();
         reference= FirebaseDatabase.getInstance().getReference().child("Questions");
+        root= FirebaseDatabase.getInstance().getReference().child("studentDetail");
+        referencetopeople= FirebaseDatabase.getInstance().getReference().child("Questions").child(receiver_question_Id).child("people");
 
+
+
+
+        Watchref=FirebaseDatabase.getInstance().getReference().child("Watching");
         firebaseAuth=FirebaseAuth.getInstance();
         CurrentUserId=firebaseAuth.getCurrentUser().getUid();
         databaseReference= FirebaseDatabase.getInstance().getReference().child("studentDetail");
@@ -58,6 +83,11 @@ public class LiveActivity extends AppCompatActivity {
         displayText=(TextView)findViewById(R.id.global_chat_text1);
         scrollView=(ScrollView)findViewById(R.id.my_scroll_view1);
         GetUserInfo();
+
+
+
+
+
         reference.child(receiver_question_Id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -153,6 +183,48 @@ public class LiveActivity extends AppCompatActivity {
     @Override
     public void onStart(){
         super.onStart();
+
+
+        FirebaseRecyclerOptions<watch> options=
+                new FirebaseRecyclerOptions.Builder<watch>()
+                        .setQuery(referencetopeople,watch.class)
+                        .build();
+        FirebaseRecyclerAdapter<watch, LiveActivity.WatchViewHolder> adapter=
+                new FirebaseRecyclerAdapter<watch, LiveActivity.WatchViewHolder>(options) {
+                    @Override
+                    protected void onBindViewHolder(@NonNull final LiveActivity.WatchViewHolder holder, int position, @NonNull final watch model) {
+                        //holder.Questions.setText(model.getQuestionAsked());
+                        //String question_id=getRef(position).getKey();
+                       // Picasso.get().load(model.getAskerImage()).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(holder.AskerImage);
+                        Picasso.get().load(model.getpeopleImage()).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(holder.watcherImage);
+
+                    }
+
+                    @NonNull
+                    @Override
+                    public LiveActivity.WatchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.watching,parent,false);
+                        LiveActivity.WatchViewHolder viewHolder=new LiveActivity.WatchViewHolder(view);
+                        return viewHolder;
+                    }
+                };
+        recyclerView.setAdapter(adapter);
+        adapter.startListening();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         GroupNameRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -186,6 +258,36 @@ public class LiveActivity extends AppCompatActivity {
     }
 
 
+
+    public static class WatchViewHolder extends RecyclerView.ViewHolder{
+
+        CircularImageView watcherImage;
+
+        public WatchViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            watcherImage=itemView.findViewById(R.id.watch_profile_image);
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private void DisplayMessages(DataSnapshot dataSnapshot) {
         Iterator iterator=dataSnapshot.getChildren().iterator();
         while(iterator.hasNext()){
@@ -215,11 +317,9 @@ public class LiveActivity extends AppCompatActivity {
         });
     }
 
-   /* @Override
+    @Override
     public void onBackPressed() {
-        Intent profileIntent = new Intent(LiveActivity.this, answeringActivity.class);
-        profileIntent.putExtra("question_id",receiver_question_Id);
-        startActivity(profileIntent);
         super.onBackPressed();
-    }*/
+        referencetopeople.child(receiver_pid).removeValue();
+    }
 }

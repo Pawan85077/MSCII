@@ -92,7 +92,7 @@ public class answeringActivity extends AppCompatActivity {
                                 reference.child(receiver_question_Id).child("AnswererImage").setValue(Simg);
                                 reference.child(receiver_question_Id).child("AnswererName").setValue(Sname);
                                 reference.child(receiver_question_Id).child("position").setValue("update");
-
+                                reference.child(receiver_question_Id).child("people").removeValue();
                             }
 
                             @Override

@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     android:background="#1B00BCD4"
     tools:context=".Show_profile_Activity">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
     <Button
         android:id="@+id/bckbutton"
         android:layout_width="30dp"
@@ -239,6 +236,5 @@
         android:visibility="invisible" />
 
 
-    </ScrollView>
 
 </RelativeLayout>

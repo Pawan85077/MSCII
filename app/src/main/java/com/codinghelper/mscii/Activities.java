@@ -34,7 +34,7 @@ import java.util.Objects;
 
 public class Activities extends Fragment {
     private RecyclerView recyclerView;
-    private DatabaseReference userQuestion,Likesref,root,Watchref;
+    private DatabaseReference userQuestion,Likesref,root;
     private FirebaseAuth mAuth;
     private String currentUserId;
     ProgressDialog progressDialog;
@@ -56,6 +56,7 @@ public class Activities extends Fragment {
         progressDialog.setMessage("loading..");
         progressDialog.setCanceledOnTouchOutside(false);
         userQuestion= FirebaseDatabase.getInstance().getReference().child("Questions");
+       // Watchref=FirebaseDatabase.getInstance().getReference().child("Questions");
         root= FirebaseDatabase.getInstance().getReference().child("studentDetail");
         Likesref= FirebaseDatabase.getInstance().getReference().child("LikesC");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -177,9 +178,25 @@ public class Activities extends Fragment {
 
 
                                 }else {
-                                    Intent profileIntent = new Intent(getActivity(), LiveActivity.class);
-                                    profileIntent.putExtra("question_id", question_id);
-                                    startActivity(profileIntent);
+
+                                    root.child(currentUserId).addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            String Simg = String.valueOf(dataSnapshot.child("imageUrl").getValue());
+                                            String jk=userQuestion.child(question_id).child("people").push().getKey();
+                                            userQuestion.child(question_id).child("people").child(jk).child("peopleImage").setValue(Simg);
+                                            Intent profileIntent = new Intent(getActivity(), LiveActivity.class);
+                                            profileIntent.putExtra("question_id", question_id);
+                                            profileIntent.putExtra("pid",jk);
+                                            startActivity(profileIntent);
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
                                 }
 
                             }
@@ -249,6 +266,7 @@ public class Activities extends Fragment {
             });
         }
     }
+
 
 
 }

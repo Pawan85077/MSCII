@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".LiveActivity">
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/watch_recycle"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/lans"/>
+
     <TextView
         android:id="@+id/DiscussLive"
         android:layout_width="match_parent"
@@ -28,7 +37,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/mytyping1"
-        android:layout_marginTop="55dp">
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="60dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -64,5 +74,7 @@
             android:src="@android:drawable/ic_menu_send"/>
 
     </LinearLayout>
+
+
 
 </RelativeLayout>
