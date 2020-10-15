@@ -58,24 +58,25 @@ public class answeringActivity extends AppCompatActivity {
 
 
 
-                root.child(currentUserId).addValueEventListener(new ValueEventListener() {
+               /* root.child(currentUserId).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String Simg = String.valueOf(dataSnapshot.child("imageUrl").getValue());
+                        String Simg = String.valueOf(dataSnapshot.child("imageUrl").getValue());*/
                         String jk=reference.child(receiver_question_Id).child("people").push().getKey();
-                        reference.child(receiver_question_Id).child("people").child(jk).child("peopleImage").setValue(Simg);
+                        reference.child(receiver_question_Id).child("people").child(jk).child("peopleUID").setValue(currentUserId);
                         Intent profileIntent = new Intent(answeringActivity.this, LiveActivity.class);
                         profileIntent.putExtra("question_id", receiver_question_Id);
                         profileIntent.putExtra("pid",jk);
                         startActivity(profileIntent);
 
-                    }
+                   /* }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
-                });
+                });*/
+
 
 
 
@@ -115,7 +116,8 @@ public class answeringActivity extends AppCompatActivity {
                                 reference.child(receiver_question_Id).child("AnswererImage").setValue(Simg);
                                 reference.child(receiver_question_Id).child("AnswererName").setValue(Sname);
                                 reference.child(receiver_question_Id).child("position").setValue("update");
-                                reference.child(receiver_question_Id).child("people").removeValue();
+                              //  reference.child(receiver_question_Id).child("people").removeValue();
+                              //  reference.child(receiver_question_Id).child("LiveGroup").removeValue();
                             }
 
                             @Override

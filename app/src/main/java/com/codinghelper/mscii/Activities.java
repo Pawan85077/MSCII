@@ -179,24 +179,25 @@ public class Activities extends Fragment {
 
                                 }else {
 
-                                    root.child(currentUserId).addValueEventListener(new ValueEventListener() {
+                                   /* root.child(currentUserId).addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            String Simg = String.valueOf(dataSnapshot.child("imageUrl").getValue());
+                                            String Simg = String.valueOf(dataSnapshot.child("imageUrl").getValue());*/
                                             String jk=userQuestion.child(question_id).child("people").push().getKey();
-                                            userQuestion.child(question_id).child("people").child(jk).child("peopleImage").setValue(Simg);
+                                            userQuestion.child(question_id).child("people").child(jk).child("peopleUID").setValue(currentUserId);
+
                                             Intent profileIntent = new Intent(getActivity(), LiveActivity.class);
                                             profileIntent.putExtra("question_id", question_id);
                                             profileIntent.putExtra("pid",jk);
                                             startActivity(profileIntent);
+                                      //  }
 
-                                        }
-
-                                        @Override
+                                       /* @Override
                                         public void onCancelled(@NonNull DatabaseError databaseError) {
 
                                         }
-                                    });
+                                    });*/
+
                                 }
 
                             }

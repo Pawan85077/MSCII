@@ -51,7 +51,7 @@ public class LiveActivity extends AppCompatActivity {
     private String currentGroupName;
     private String CurrentUserId,CurrentUserName,CurrentDate,CurrentTime;
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference databaseReference,GroupNameRef,global_message_key,referencetopeople,root;
+    private DatabaseReference databaseReference,GroupNameRef1,global_message_key,referencetopeople,root,Livereference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +60,8 @@ public class LiveActivity extends AppCompatActivity {
         qnView=(TextView)findViewById(R.id.DiscussLive);
         recyclerView=(RecyclerView)findViewById(R.id.watch_recycle);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        //linearLayoutManager.setReverseLayout(true);
-        //linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         Liveans=(TextView)findViewById(R.id.lans);
         receiver_question_Id= Objects.requireNonNull(Objects.requireNonNull(getIntent().getExtras()).get("question_id")).toString();
@@ -77,7 +77,12 @@ public class LiveActivity extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         CurrentUserId=firebaseAuth.getCurrentUser().getUid();
         databaseReference= FirebaseDatabase.getInstance().getReference().child("studentDetail");
-        GroupNameRef=FirebaseDatabase.getInstance().getReference().child("LiveGroup");
+
+
+       // GroupNameRef=FirebaseDatabase.getInstance().getReference().child("LiveGroup");
+        Livereference= FirebaseDatabase.getInstance().getReference().child("Questions").child(receiver_question_Id).child("LiveGroup");
+
+
         send_btn=(ImageButton)findViewById(R.id.send_text_btn1);
         userMessage=(EditText)findViewById(R.id.input_message1);
         displayText=(TextView)findViewById(R.id.global_chat_text1);
@@ -119,7 +124,7 @@ public class LiveActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String message=userMessage.getText().toString();
-                String messageKey=GroupNameRef.push().getKey();
+                String messageKey=Livereference.push().getKey();
                 if (TextUtils.isEmpty(message)) {
                     userMessage.setError("Type something!!");
                     userMessage.setFocusable(true);
@@ -134,10 +139,10 @@ public class LiveActivity extends AppCompatActivity {
                     CurrentTime=simpleTimeFormat.format(calendar_time.getTime());
 
                     HashMap<String,Object> global_message=new HashMap<>();
-                    GroupNameRef.updateChildren(global_message);
-                    global_message_key=GroupNameRef.child(messageKey);
+                    Livereference.updateChildren(global_message);
+                    global_message_key=Livereference.child(messageKey);
                     HashMap<String,Object> messageInfo=new HashMap<>();
-                    GroupNameRef.updateChildren(messageInfo);
+                    Livereference.updateChildren(messageInfo);
                     HashMap<String,Object> privateMessageInfo=new HashMap<>();
                     privateMessageInfo.put("name",CurrentUserName);
                     privateMessageInfo.put("message",message);
@@ -196,8 +201,19 @@ public class LiveActivity extends AppCompatActivity {
                         //holder.Questions.setText(model.getQuestionAsked());
                         //String question_id=getRef(position).getKey();
                        // Picasso.get().load(model.getAskerImage()).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(holder.AskerImage);
-                        Picasso.get().load(model.getpeopleImage()).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(holder.watcherImage);
+                        databaseReference.child(model.getpeopleUID()).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                String Simg = String.valueOf(dataSnapshot.child("imageUrl").getValue());
+                                Picasso.get().load(Simg).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(holder.watcherImage);
 
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
                     }
 
                     @NonNull
@@ -225,7 +241,7 @@ public class LiveActivity extends AppCompatActivity {
 
 
 
-        GroupNameRef.addChildEventListener(new ChildEventListener() {
+        Livereference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 if(dataSnapshot.exists()){

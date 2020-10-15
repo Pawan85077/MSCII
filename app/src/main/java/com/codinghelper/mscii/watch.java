@@ -1,15 +1,15 @@
 package com.codinghelper.mscii;
 
 public class watch {
-    private String peopleImage;
+    private String peopleUID;
     public watch() {
     }
 
-    public watch(String peopleImage){
-       this.peopleImage=peopleImage;
+    public watch(String peopleUID){
+       this.peopleUID=peopleUID;
     }
 
-    public String getpeopleImage() {
-        return peopleImage;
+    public String getpeopleUID() {
+        return peopleUID;
     }
 }
