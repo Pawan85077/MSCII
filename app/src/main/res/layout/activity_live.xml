@@ -51,8 +51,7 @@
                 android:textSize="20sp"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:layout_marginStart="2dp"
-                android:layout_marginEnd="2dp"
-                android:layout_marginBottom="60dp"/>
+                android:layout_marginEnd="2dp"/>
         </LinearLayout>
     </ScrollView>
     <LinearLayout
@@ -65,6 +64,7 @@
             android:id="@+id/input_message1"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
+            android:background="@color/badge_background_color"
             android:hint="Type here..."
             android:padding="17dp"/>
         <ImageButton

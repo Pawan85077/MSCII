@@ -44,6 +44,7 @@ public class LiveActivity extends AppCompatActivity {
     String receiver_question_Id,receiver_pid;
     DatabaseReference reference,Watchref;
     private ImageButton send_btn;
+    CircularImageView globali;
     private RecyclerView recyclerView;
     private EditText userMessage;
     private ScrollView scrollView;
@@ -311,7 +312,8 @@ public class LiveActivity extends AppCompatActivity {
             String charMessage=(String)((DataSnapshot)iterator.next()).getValue();
             String charName=(String)((DataSnapshot)iterator.next()).getValue();
             String charTime=(String)((DataSnapshot)iterator.next()).getValue();
-            displayText.append(charName+":\n"+charMessage+":\n"+charTime+"    "+charData+"\n\n\n");
+            displayText.setTextSize(16);
+            displayText.append(charName+":\n"+charMessage+"\n\n");
             scrollView.fullScroll(ScrollView.FOCUS_DOWN);
         }
     }
@@ -323,6 +325,9 @@ public class LiveActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     CurrentUserName=String.valueOf(dataSnapshot.child("username").getValue());
+
+
+
                 }
             }
 
