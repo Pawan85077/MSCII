@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +33,7 @@ public class answeringActivity extends AppCompatActivity {
     private DatabaseReference reference,root;
     private FirebaseAuth mAuth;
     long value;
+    private TextWatcher ttxt = null;
     private String currentUserId,receiver_question_Id,CurrentAnswererId;
 
     @Override
@@ -47,6 +51,38 @@ public class answeringActivity extends AppCompatActivity {
         currentUserId=mAuth.getCurrentUser().getUid();
         root= FirebaseDatabase.getInstance().getReference().child("studentDetail");
         reference= FirebaseDatabase.getInstance().getReference().child("Questions");
+
+
+       /* Answer.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                String ans = Answer.getText().toString();
+                reference.child(receiver_question_Id).child("currentAnswer").setValue(ans);
+                return false;
+            }
+        });*/
+
+       ttxt=new TextWatcher() {
+           @Override
+           public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+           }
+
+           @Override
+           public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+               String ans = Answer.getText().toString();
+               reference.child(receiver_question_Id).child("currentAnswer").setValue(ans);
+           }
+
+           @Override
+           public void afterTextChanged(Editable editable) {
+
+           }
+       };
+
+        Answer.addTextChangedListener(ttxt);
+
         mvLive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,6 +134,10 @@ public class answeringActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if(currentUserId.equals(CurrentAnswererId)) {
+
+                        reference.child(receiver_question_Id).child("currentAnswer").removeValue();
+
+
 
                         String ans = Answer.getText().toString();
                         Answer.setText("");
@@ -151,6 +191,8 @@ public class answeringActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 
     @Override

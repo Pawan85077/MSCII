@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -48,7 +49,7 @@ public class LiveActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private EditText userMessage;
     private ScrollView scrollView;
-    private TextView displayText,Liveans;
+    private TextView displayText,Liveans,currentLiveans;
     private String currentGroupName;
     private String CurrentUserId,CurrentUserName,CurrentDate,CurrentTime;
     private FirebaseAuth firebaseAuth;
@@ -64,6 +65,7 @@ public class LiveActivity extends AppCompatActivity {
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+        currentLiveans=(TextView)findViewById(R.id.live_ans);
         Liveans=(TextView)findViewById(R.id.lans);
         receiver_question_Id= Objects.requireNonNull(Objects.requireNonNull(getIntent().getExtras()).get("question_id")).toString();
         receiver_pid= Objects.requireNonNull(getIntent().getExtras().get("pid")).toString();
@@ -97,7 +99,9 @@ public class LiveActivity extends AppCompatActivity {
         reference.child(receiver_question_Id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               String Sansss = String.valueOf(dataSnapshot.child("AnswererId").getValue());
+                String Sansss = String.valueOf(dataSnapshot.child("AnswererId").getValue());
+                String Sanscurrent = String.valueOf(dataSnapshot.child("currentAnswer").getValue());
+                currentLiveans.setText(Sanscurrent);
                 databaseReference.child(Sansss).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -337,6 +341,8 @@ public class LiveActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     @Override
     public void onBackPressed() {

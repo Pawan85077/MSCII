@@ -25,11 +25,23 @@
         android:padding="10dp"
         android:fontFamily="sans-serif-black"
         android:text="Question display here"/>
+
+   <ScrollView
+       android:id="@+id/current_ans"
+       android:layout_below="@+id/DiscussLive"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/live_ans"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/buback"/>
+   </ScrollView>
     <TextView
         android:id="@+id/lans"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/DiscussLive"
+        android:layout_below="@+id/current_ans"
         android:background="@color/buback"
         android:text="user answering....."/>
     <ScrollView
