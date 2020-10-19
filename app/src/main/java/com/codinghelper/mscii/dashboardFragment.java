@@ -288,7 +288,11 @@ public class dashboardFragment extends Fragment {
                 if (transferrableImageURL.isEmpty()){
                     notUploadedSnackBar(sx);
                 }else
-                    Toast.makeText(getContext().getApplicationContext(), ""+transferrableImageURL, Toast.LENGTH_SHORT).show();
+                {
+                    Intent fullScreenDocIntent = new Intent(getContext().getApplicationContext(),UserDocumentView.class);
+                    fullScreenDocIntent.setData(Uri.parse(transferrableImageURL));
+                    startActivity(fullScreenDocIntent);
+                }
             }
 
             @Override
