@@ -8,7 +8,7 @@ public class studentDetail {
     }
 
     public studentDetail(String username, String examrall, String session, String email, String phoneno, String gender,String AccountType,String course,
-                         String userstatus,String imageUrl,String TeacherNotes,String StudentNotes,String FavNotes,String userSong,Integer countQ,Integer countA,Integer TotalLikes ) {
+                         String userstatus,String imageUrl,String TeacherNotes,String StudentNotes,String FavNotes,String userSong,Integer countQ,Integer countA,Integer TotalLikes) {
         this.username = username;
         Examrall = examrall;
         this.session = session;

@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".student_homepage"
     tools:openDrawer="start">
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -16,8 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:orientation="vertical"
-            android:id="@+id/layoutToolbar"
-            app:layout_constraintTop_toTopOf="parent">
+            android:id="@+id/layoutToolbar">
 
 
             <androidx.appcompat.widget.Toolbar
@@ -35,17 +34,30 @@
         <fragment
             android:id="@+id/navHostfrag"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/layoutToolbar"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/layoutToolbar"
             app:layout_constraintBottom_toBottomOf="parent"
             android:name="androidx.navigation.fragment.NavHostFragment"
             app:defaultNavHost="true"
+            android:layout_above="@+id/nav_view_home"
             app:navGraph="@navigation/main"/>
 
 
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/nav_view_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="?android:attr/windowBackground"
+            app:itemIconTint="@color/colorPrimaryDark"
+            app:itemTextColor="@android:color/black"
+            app:menu="@menu/bottom_nav_menu"
+            app:labelVisibilityMode="labeled"
+            tools:layout_editor_absoluteX="42dp" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

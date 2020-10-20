@@ -139,6 +139,8 @@
             android:gravity="center"/>
     </androidx.cardview.widget.CardView>
 
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cc3"
         android:layout_width="310dp"
@@ -214,7 +216,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/cc3"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="0dp"
         android:background="@drawable/s_bg"
         android:fontFamily="sans-serif-black"
         android:text="Add friend"
@@ -234,6 +236,7 @@
         android:fontFamily="sans-serif-black"
         android:textSize="20dp"
         android:visibility="invisible" />
+
 
 
 

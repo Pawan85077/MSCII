@@ -36,7 +36,7 @@ public class First extends AppCompatActivity {
             public void onClick(View view) {
 
                     startActivity(new Intent(First.this, sloginActivity.class));
-                    finish();
+                   // finish();
 
 
             }
@@ -58,7 +58,7 @@ public class First extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(First.this,Stud_signup.class));
-                finish();
+               // finish();
             }
         });
     }

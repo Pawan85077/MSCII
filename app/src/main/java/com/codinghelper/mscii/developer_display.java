@@ -26,4 +26,5 @@ public class developer_display extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_developer_display, container, false);
     }
+
 }

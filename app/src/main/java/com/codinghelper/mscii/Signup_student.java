@@ -197,7 +197,6 @@ public class Signup_student extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        final String deviceToken= FirebaseInstanceId.getInstance().getToken();
                                         final String currentUserId=firebaseAuth.getCurrentUser().getUid();
 
                                         studentDetail information = new studentDetail(
@@ -220,6 +219,7 @@ public class Signup_student extends AppCompatActivity {
                                                 l
 
 
+
                                         );
 
                                         FirebaseDatabase.getInstance().getReference("studentDetail")
@@ -228,6 +228,7 @@ public class Signup_student extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 rootRef=FirebaseDatabase.getInstance().getReference();
+                                                String deviceToken= FirebaseInstanceId.getInstance().getToken();
                                                 rootRef.child("studentDetail").child(currentUserId).child("device_token")
                                                         .setValue(deviceToken);
                                                 progressDialog.dismiss();

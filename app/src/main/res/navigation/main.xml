@@ -39,4 +39,20 @@
         android:name="com.codinghelper.mscii.developer_display"
         android:label="Developer"
         tools:layout="@layout/fragment_developer_display" />
+
+    <fragment
+        android:id="@+id/navigation_explore"
+        android:name="com.codinghelper.mscii.Explore"
+        android:label="Explore"
+        tools:layout="@layout/fragment_explore" />
+    <fragment
+        android:id="@+id/navigation_activities"
+        android:name="com.codinghelper.mscii.Activities"
+        android:label="Activities"
+        tools:layout="@layout/fragment_activities" />
+    <fragment
+        android:id="@+id/navigation_grade"
+        android:name="com.codinghelper.mscii.Grade"
+        android:label="Grade"
+        tools:layout="@layout/fragment_grade" />
 </navigation>

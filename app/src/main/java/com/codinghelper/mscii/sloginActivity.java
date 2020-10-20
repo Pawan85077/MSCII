@@ -36,6 +36,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.collection.LLRBNode;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.logging.Handler;
 
 public class sloginActivity extends AppCompatActivity {
@@ -124,7 +127,7 @@ public class sloginActivity extends AppCompatActivity {
                                                                        User user=new User(sloginActivity.this);
                                                                        user.setEmail(email);
                                                                        startActivity(new Intent(sloginActivity.this, student_homepage.class));
-                                                                       finish();
+                                                                     //  finish();
                                                                    }
                                                                 }
                                                             });
@@ -206,9 +209,10 @@ public class sloginActivity extends AppCompatActivity {
 
 
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return super.onSupportNavigateUp();
-    }
+
+//    @Override
+//    public boolean onSupportNavigateUp() {
+//        onBackPressed();
+//        return super.onSupportNavigateUp();
+//    }
 }

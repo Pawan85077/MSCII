@@ -20,6 +20,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +33,10 @@ public class chatFragment extends Fragment {
     private TabLayout tabLayout;
     private TabsAccessorAdaptor tabsAccessorAdaptor;
     FirebaseAuth firebaseAuth;
+    DatabaseReference Root;
+    String currentUserID;
+
+
 
     public chatFragment() {
         // Required empty public constructor
@@ -49,12 +57,16 @@ public class chatFragment extends Fragment {
             }
         });*/
         viewPager=(ViewPager)v.findViewById(R.id.chattab);
+        currentUserID=firebaseAuth.getCurrentUser().getUid();
         tabsAccessorAdaptor=new TabsAccessorAdaptor(getChildFragmentManager());
         viewPager.setAdapter(tabsAccessorAdaptor);
+        Root= FirebaseDatabase.getInstance().getReference().child("studentDetail");
         tabLayout=(TabLayout)v.findViewById(R.id.main_tab);
         tabLayout.setupWithViewPager(viewPager);
         getActivity().setTitle("Chat");
         return v;
     }
+
+
 
 }

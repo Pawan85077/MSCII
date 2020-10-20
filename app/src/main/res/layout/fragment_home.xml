@@ -5,25 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
-        app:itemIconTint="@color/colorPrimaryDark"
-        app:itemTextColor="@android:color/black"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_nav_menu" />
-
-    <FrameLayout
-        android:id="@+id/nav_host_fragment_home"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/nav_view_home">
-
-
-    </FrameLayout>
+<WebView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/badge_background_color"
+    android:id="@+id/webView"/>
 
 </RelativeLayout>

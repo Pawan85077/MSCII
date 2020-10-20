@@ -11,12 +11,12 @@ public class Friends {
         this.username = username;
         this.imageUrl = imageUrl;
         this.userstatus = userstatus;
+
     }
 
     public String getUsername() {
         return username;
     }
-
     public void setUsername(String username) {
         this.username = username;
     }

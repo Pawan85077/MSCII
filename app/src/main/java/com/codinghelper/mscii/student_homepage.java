@@ -9,35 +9,29 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.EmailAuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthCredential;
-import com.google.firebase.auth.UserInfo;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,16 +39,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import java.util.Objects;
-
-import static java.security.AccessController.getContext;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
 
 public class student_homepage extends AppCompatActivity {
 
     private DrawerLayout drawer;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
-    DatabaseReference reference,Rootref,deleteref;
+    String currentUserID;
+    DatabaseReference reference,Rootref,deleteref,Root;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +65,7 @@ public class student_homepage extends AppCompatActivity {
 
         drawer = findViewById(R.id.student_homepage);
         firebaseAuth = FirebaseAuth.getInstance();
-
+        currentUserID=firebaseAuth.getCurrentUser().getUid();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -76,8 +73,10 @@ public class student_homepage extends AppCompatActivity {
 
         user= firebaseAuth.getCurrentUser();
         reference= FirebaseDatabase.getInstance().getReference().child("studentDetail").child(user.getUid());
+        Root= FirebaseDatabase.getInstance().getReference().child("studentDetail");
         Rootref=FirebaseDatabase.getInstance().getReference();
         NavigationView navigationView =(NavigationView) findViewById(R.id.nav_view);
+        BottomNavigationView navView = (BottomNavigationView)findViewById(R.id.nav_view_home);
         View view=navigationView.inflateHeaderView(R.layout.student_nav_header);
         final ImageView imageView=(ImageView)view.findViewById(R.id.nimg);
         final TextView textView=(TextView)view.findViewById(R.id.ntitle);
@@ -99,20 +98,75 @@ public class student_homepage extends AppCompatActivity {
 
             }
         });
+        AppBarConfiguration appBarConfiguration=new AppBarConfiguration.Builder(R.id.nav_profile,R.id.nav_dashboard,R.id.nav_home,R.id.nav_chat,R.id.nav_notification,R.id.nav_developer,R.id.navigation_explore,R.id.navigation_activities,R.id.navigation_grade)
+                .setDrawerLayout(drawer)
+                .build();
         NavController navController = Navigation.findNavController(this,R.id.navHostfrag);
+        NavigationUI.setupActionBarWithNavController(this,navController,appBarConfiguration);
         NavigationUI.setupWithNavController(navigationView,navController);
-
+        NavigationUI.setupWithNavController(navView,navController);
 
     }
 
-  /*  @Override
+    @Override
+    protected void onStart() {
+        super.onStart();
+        updateUserStatus("online");
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+      //  updateUserStatus("offline");
+    }
+
+
+    private void updateUserStatus(String state) {
+       String saveCurrentTime, saveCurrentDate;
+       Calendar calendar=Calendar.getInstance();
+       SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+       saveCurrentDate=currentDate.format(calendar.getTime());
+
+       SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
+       saveCurrentTime=currentTime.format(calendar.getTime());
+
+       HashMap<String,Object> onlineState=new HashMap<>();
+       onlineState.put("time",saveCurrentTime);
+       onlineState.put("date",saveCurrentDate);
+       onlineState.put("state",state);
+
+       Root.child(currentUserID).child("userOnlineState").updateChildren(onlineState);
+   }
+
+
+  //  boolean doubleBackToExitPressedOnce = false;
+
+    @Override
     public void onBackPressed() {
-        if(drawer.isDrawerOpen(GravityCompat.START)) {
+        if(drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
-        }else{
-            finish();
+        }else {
+            super.onBackPressed();
         }
-    }*/
+       /* if (doubleBackToExitPressedOnce) {
+        //    updateUserStatus("offline");
+            super.onBackPressed();
+            return;
+
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);*/
+    }
 
    /* private void checkUserStatus(){
         FirebaseUser user= firebaseAuth.getCurrentUser();
@@ -149,8 +203,8 @@ public class student_homepage extends AppCompatActivity {
             firebaseAuth.getInstance().signOut();
             new User(student_homepage.this).removeUser();
             startActivity(new Intent(student_homepage.this, sloginActivity.class));
-            finish();
             Toast.makeText(getApplicationContext(), "successfully logout!", Toast.LENGTH_SHORT).show();
+            finish();
 
         }
         if (id == R.id.action_Delete) {

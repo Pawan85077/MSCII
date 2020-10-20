@@ -29,7 +29,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +43,8 @@ public class FriendChatActivity extends AppCompatActivity {
     private ImageButton SendMessageButton;
     private EditText MessageInputText;
     private FirebaseAuth mAuth;
-    private DatabaseReference RootRef;
+    String currentUserID;
+    private DatabaseReference RootRef,Root;
     private final List<Messages> messagesList=new ArrayList<>();
     private LinearLayoutManager linearLayoutManager;
     private MessageAdapter messageAdapter;
@@ -67,6 +70,9 @@ public class FriendChatActivity extends AppCompatActivity {
         messageReceiverID=getIntent().getExtras().get("visit_user_id").toString();
         messageReceiverName=getIntent().getExtras().get("visit_user_name").toString();
         messageReceiverImage=getIntent().getExtras().get("visit_user_image").toString();
+
+        Root= FirebaseDatabase.getInstance().getReference().child("studentDetail");
+
         userName=(TextView)findViewById(R.id.custom_profile_name);
         userLastSeen=(TextView)findViewById(R.id.custom_last_seen);
         userImage=(CircularImageView)findViewById(R.id.custom_profile_image);
@@ -154,6 +160,8 @@ public class FriendChatActivity extends AppCompatActivity {
 
         }
     }
+
+
 
     @Override
     public boolean onSupportNavigateUp() {
