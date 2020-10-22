@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -46,7 +48,7 @@ public class LiveActivity extends AppCompatActivity {
     DatabaseReference reference,Watchref;
     private ImageButton send_btn;
     CircularImageView globali;
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView,recyclerView1;
     private EditText userMessage;
     private ScrollView scrollView;
     private TextView displayText,Liveans,currentLiveans;
@@ -61,10 +63,15 @@ public class LiveActivity extends AppCompatActivity {
         setContentView(R.layout.activity_live);
         qnView=(TextView)findViewById(R.id.DiscussLive);
         recyclerView=(RecyclerView)findViewById(R.id.watch_recycle);
+        recyclerView1=(RecyclerView)findViewById(R.id.Live_recycle_adaptor);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(this);
+       // linearLayoutManager2.setReverseLayout(true);
+       // linearLayoutManager2.setStackFromEnd(true);
+        recyclerView1.setLayoutManager(linearLayoutManager2);
         currentLiveans=(TextView)findViewById(R.id.live_ans);
         Liveans=(TextView)findViewById(R.id.lans);
         receiver_question_Id= Objects.requireNonNull(Objects.requireNonNull(getIntent().getExtras()).get("question_id")).toString();
@@ -88,8 +95,8 @@ public class LiveActivity extends AppCompatActivity {
 
         send_btn=(ImageButton)findViewById(R.id.send_text_btn1);
         userMessage=(EditText)findViewById(R.id.input_message1);
-        displayText=(TextView)findViewById(R.id.global_chat_text1);
-        scrollView=(ScrollView)findViewById(R.id.my_scroll_view1);
+       // displayText=(TextView)findViewById(R.id.global_chat_text1);
+       // scrollView=(ScrollView)findViewById(R.id.my_scroll_view1);
         GetUserInfo();
 
 
@@ -150,12 +157,16 @@ public class LiveActivity extends AppCompatActivity {
                     Livereference.updateChildren(messageInfo);
                     HashMap<String,Object> privateMessageInfo=new HashMap<>();
                     privateMessageInfo.put("name",CurrentUserName);
+
+                    privateMessageInfo.put("senderID",CurrentUserId);
+
+
                     privateMessageInfo.put("message",message);
                     privateMessageInfo.put("date",CurrentDate);
                     privateMessageInfo.put("time",CurrentTime);
                     global_message_key.updateChildren(privateMessageInfo);
                     userMessage.setText("");
-                    scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                    //scrollView.fullScroll(ScrollView.FOCUS_DOWN);
 
                 }
             }
@@ -232,6 +243,63 @@ public class LiveActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         adapter.startListening();
 
+       /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+
+
+        FirebaseRecyclerOptions<Livechatadaptor> options1=
+                new FirebaseRecyclerOptions.Builder<Livechatadaptor>()
+                        .setQuery(Livereference,Livechatadaptor.class)
+                        .build();
+        FirebaseRecyclerAdapter<Livechatadaptor, LiveActivity.LiveWatchViewHolder> adapter1=
+                new FirebaseRecyclerAdapter<Livechatadaptor, LiveActivity.LiveWatchViewHolder>(options1) {
+                    @Override
+                    protected void onBindViewHolder(@NonNull final LiveActivity.LiveWatchViewHolder holder, int position, @NonNull Livechatadaptor model) {
+                        holder.receiver.setVisibility(View.INVISIBLE);
+                        holder.receiverImage.setVisibility(View.INVISIBLE);
+                        holder.sender.setVisibility(View.INVISIBLE);
+                       if(model.getsenderID().equals(CurrentUserId)){
+                           holder.sender.setVisibility(View.VISIBLE);
+                           holder.sender.setBackgroundResource(R.drawable.sender_messages_layout);
+                           holder.sender.setTextColor(Color.BLACK);
+                           holder.sender.setText(model.getmessage());
+                       }else{
+                           holder.receiverImage.setVisibility(View.VISIBLE);
+                           holder.receiver.setVisibility(View.VISIBLE);
+                           holder.receiver.setBackgroundResource(R.drawable.receiver_messages_layout);
+                           holder.receiver.setTextColor(Color.BLACK);
+                           holder.receiver.setText(model.getmessage());
+                       }
+                       databaseReference.child(model.getsenderID()).addValueEventListener(new ValueEventListener() {
+                           @Override
+                           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                               String Simg = String.valueOf(dataSnapshot.child("imageUrl").getValue());
+                               Picasso.get().load(Simg).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(holder.receiverImage);
+
+                           }
+
+                           @Override
+                           public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                           }
+                       });
+                    }
+
+                    @NonNull
+                    @Override
+                    public LiveActivity.LiveWatchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_messages_layout,parent,false);
+                        LiveActivity.LiveWatchViewHolder viewHolder=new LiveActivity.LiveWatchViewHolder(view);
+                        return viewHolder;
+                    }
+                };
+        recyclerView1.setAdapter(adapter1);
+
+       // recyclerView1.getLayoutManager().smoothScrollToPosition(recyclerView1,new RecyclerView.State(),recyclerView1.getAdapter().getItemCount());
+        adapter1.startListening();
+
+
+
+        /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 
 
@@ -239,25 +307,22 @@ public class LiveActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
+/*********************************************************************************************************************/
 
         Livereference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 if(dataSnapshot.exists()){
-                    DisplayMessages(dataSnapshot);
+              //      DisplayMessages(dataSnapshot);
+                    recyclerView1.smoothScrollToPosition(recyclerView1.getAdapter().getItemCount());
+
                 }
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 if(dataSnapshot.exists()){
-                    DisplayMessages(dataSnapshot);
+                 //   DisplayMessages(dataSnapshot);
                 }
             }
 
@@ -276,6 +341,14 @@ public class LiveActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+        /*********************************************************************************************************************/
+
+
+
+
     }
 
 
@@ -293,6 +366,32 @@ public class LiveActivity extends AppCompatActivity {
 
 
     }
+
+
+    /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+
+
+    public static class LiveWatchViewHolder extends RecyclerView.ViewHolder{
+        TextView sender,receiver;
+        CircularImageView receiverImage;
+
+        public LiveWatchViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            sender=itemView.findViewById(R.id.sender_message_text);
+            receiver=itemView.findViewById(R.id.receiver_message_text);
+            receiverImage=itemView.findViewById(R.id.message_profile_image);
+
+        }
+
+
+    }
+
+
+    /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+
+
+
 
 
 
@@ -315,6 +414,7 @@ public class LiveActivity extends AppCompatActivity {
             String charData=(String)((DataSnapshot)iterator.next()).getValue();
             String charMessage=(String)((DataSnapshot)iterator.next()).getValue();
             String charName=(String)((DataSnapshot)iterator.next()).getValue();
+            String charSenderID=(String)((DataSnapshot)iterator.next()).getValue();
             String charTime=(String)((DataSnapshot)iterator.next()).getValue();
             displayText.setTextSize(16);
             displayText.append(charName+":\n"+charMessage+"\n\n");

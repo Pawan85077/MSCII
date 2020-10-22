@@ -44,7 +44,18 @@
         android:layout_below="@+id/current_ans"
         android:background="@color/buback"
         android:text="user answering....."/>
-    <ScrollView
+
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Live_recycle_adaptor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/lans"
+        android:layout_above="@+id/mytyping1"
+        android:layout_toLeftOf="@+id/watch_recycle"/>
+<!--    <ScrollView
         android:id="@+id/my_scroll_view1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,7 +76,7 @@
                 android:layout_marginStart="2dp"
                 android:layout_marginEnd="2dp"/>
         </LinearLayout>
-    </ScrollView>
+    </ScrollView>-->
     <LinearLayout
         android:id="@+id/mytyping1"
         android:layout_width="match_parent"

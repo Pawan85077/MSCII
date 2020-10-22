@@ -284,7 +284,9 @@ public class student_homepage extends AppCompatActivity {
     }
 
     private void requestNewGroup() {
-        AlertDialog.Builder builder=new AlertDialog.Builder(student_homepage.this,R.style.Theme_AppCompat_Light_Dialog_MinWidth);
+        startActivity(new Intent(this, CreateGroup.class));
+
+       /* AlertDialog.Builder builder=new AlertDialog.Builder(student_homepage.this,R.style.Theme_AppCompat_Light_Dialog_MinWidth);
         builder.setTitle("Enter Group Name");
         final EditText groupNameField=new EditText(student_homepage.this);
         groupNameField.setHint("e.g, SUPR-D");
@@ -307,7 +309,7 @@ public class student_homepage extends AppCompatActivity {
                 dialogInterface.cancel();
             }
         });
-        builder.show();
+        builder.show();*/
 
     }
 

@@ -14,7 +14,14 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:elevation="4dp" />
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/groupChatRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/navigation_toolbar"
+        android:layout_above="@+id/mytyping"/>
+
+  <!--  <ScrollView
         android:id="@+id/my_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,7 +42,7 @@
                 android:layout_marginEnd="2dp"
                 android:layout_marginBottom="60dp"/>
         </LinearLayout>
-    </ScrollView>
+    </ScrollView>-->
     <LinearLayout
         android:id="@+id/mytyping"
         android:layout_width="match_parent"

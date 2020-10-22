@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash"
+    tools:context=".CreateGroup">
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/create_group_image"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="125dp"
+        app:srcCompat="@drawable/guest2"
+        android:layout_centerHorizontal="true"
+        app:civ_border="true"
+        app:civ_border_color="@color/colorAccent"/>
+    <EditText
+        android:id="@+id/group_name"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/create_group_image"
+        android:layout_centerHorizontal="true"
+        android:hint="Group title"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:fontFamily="@font/artifika"
+        android:background="@drawable/s_bg"
+        android:layout_marginTop="10dp"/>
+    <EditText
+        android:id="@+id/group_description"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/group_name"
+        android:layout_centerHorizontal="true"
+        android:hint="Group description"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:inputType="textMultiLine"
+        android:fontFamily="@font/artifika"
+        android:background="@drawable/s_bg"
+        android:layout_marginTop="10dp"/>
+
+<Button
+    android:id="@+id/confirm_group"
+    android:layout_width="300dp"
+    android:layout_height="50dp"
+    android:text="Create"
+    android:layout_below="@+id/group_description"
+    android:layout_centerHorizontal="true"
+    android:textSize="20sp"
+    android:gravity="center"
+    android:fontFamily="@font/artifika"
+    android:background="@drawable/s_bg"
+    android:layout_marginTop="10dp"/>
+
+<ProgressBar
+    android:id="@+id/progress_bar"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/confirm_group"
+    android:layout_centerHorizontal="true"
+    android:visibility="invisible"
+    android:layout_marginTop="10dp"/>
+
+
+</RelativeLayout>
