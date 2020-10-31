@@ -20,8 +20,10 @@
 
     <color name="divider_gray">#6A000000</color>
     <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
 
-<!--    some Beautiful colours-->
+
+    <!--    some Beautiful colours-->
     <color name="overlay_dark_10">#1A000000</color>
     <color name="overlay_dark_20">#33000000</color>
     <color name="overlay_dark_30">#4D000000</color>

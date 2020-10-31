@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/resumeLine"
+            android:layout_width="50dp"
+            android:layout_height="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/grey_10" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Document Options Menu"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/grey_800"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:background="@color/grey_10" />
+
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            style="@style/RippleStyleBlack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="15dp"
+            android:paddingTop="10dp">
+
+            <LinearLayout
+                android:id="@+id/lyt_preview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:padding="15dp"
+                    android:background="@drawable/ic_eye"
+                    android:backgroundTint="@color/grey_60"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="10dp"
+                    android:text="View Full Screen"
+                    android:textSize="16dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/grey_90" />
+
+            </LinearLayout>
+
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            style="@style/RippleStyleBlack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp">
+
+            <LinearLayout
+                android:id="@+id/lyt_share"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:padding="15dp"
+                    android:background="@drawable/ic_share"
+                    android:backgroundTint="@color/grey_60"/>
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Share"
+                    android:textSize="16dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/grey_90" />
+
+            </LinearLayout>
+
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            style="@style/RippleStyleBlack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp">
+
+            <LinearLayout
+                android:id="@+id/lyt_get_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:padding="15dp"
+                    android:background="@drawable/ic_delete"
+                    android:backgroundTint="@color/grey_60"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Delete "
+                    android:textSize="16dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/grey_90" />
+
+            </LinearLayout>
+
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -3,26 +3,39 @@ package com.codinghelper.mscii;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -47,23 +60,31 @@ public class dashboardFragment extends Fragment {
     FirebaseAuth firebaseAuthx;
     FirebaseUser currentUser;
     DatabaseReference reference;
-
+    private StorageReference storageReference;
 
     //Upload Buttons
-    private Button resume;
-    private Button thumbImpression;
+    private Button resumeUpload;
+    private Button thumbImpressionUpload;
 
-    //Documents cards Views
-    private CardView resumeCard;
+    //ImageViews
+    private ImageView resumeImageView;
+
+    //ProgressBars
+    private ProgressBar resumeProgressBar;
+
+
+    //
+    private BottomSheetBehavior mBehavior;
+    private BottomSheetDialog mBottomSheetDialog;
+    private View bottom_sheet;
+
 
     //pick variable
     private static final int pick = 2;
 
     //Doc_Category and doc_Type
-    static String docCategory = "";
-    static String docType = "";
-
-    static String transferrableImageURL;
+    private static String docCategory = "";
+    private static String docType = "";
 
 
     public dashboardFragment() {
@@ -74,6 +95,7 @@ public class dashboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
@@ -86,12 +108,19 @@ public class dashboardFragment extends Fragment {
         storageGraduation = FirebaseStorage.getInstance().getReference().child("graduation_Documents/");
 
 
-        //Defining upload buttons
-        resume = (Button) rootView.findViewById(R.id.resume);
-        thumbImpression = (Button) rootView.findViewById(R.id.thumbImpression);
+        bottom_sheet = rootView.findViewById(R.id.bottom_sheet);
+        mBehavior = BottomSheetBehavior.from(bottom_sheet);
 
-        //Defining cardViews
-        resumeCard = (CardView)rootView.findViewById(R.id.resumeCard);
+        //Defining upload buttons
+        resumeUpload = (Button) rootView.findViewById(R.id.resumeUpload);
+        thumbImpressionUpload = (Button) rootView.findViewById(R.id.thumbImpression);
+
+        //Defining Image Views
+        resumeImageView = (ImageView)rootView.findViewById(R.id.resumeImageView);
+
+
+        //Getting Image URLs Status yto update name to Re_upload
+        //getImageURLsStatus();
 
         //Handling Expand and Collapse
         RelativeLayout UtilityDocHeader = (RelativeLayout) rootView.findViewById(R.id.utilityDocHeader);
@@ -102,6 +131,9 @@ public class dashboardFragment extends Fragment {
             public void onClick(View view) {
                 if(UtilityDocScroll.getVisibility() == View.GONE){
                     UtilityDocScroll.setVisibility(View.VISIBLE);
+                    docCategory = "utilityDocuments";
+                    docType = "resume";
+                    fetchStatus(docCategory,docType);
                     UtilityExpandCollapse.setBackgroundResource(R.drawable.ic_colapse);
                 }else {
                     UtilityDocScroll.setVisibility(View.GONE);
@@ -158,36 +190,39 @@ public class dashboardFragment extends Fragment {
             }
         });
 
-        //Card Views click action
-        resumeCard.setOnClickListener(new View.OnClickListener() {
+        //View Buttons click action
+//        resumeView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                docCategory = "utilityDocuments";
+//                docType = "resume";
+//                final String s = "Resume";
+//                getImageAndOpenIt(docCategory,docType,s);
+//            }
+//        });
+
+        //ImageViews Onclick Listener
+        resumeImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                docCategory = "utilityDocuments";
+                docType = "resume";
+                showBottomSheetDialog(docCategory,docType);
+            }
+        });
+
+        //Upload Buttons Action
+        resumeUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 docCategory = "utilityDocuments";
                 docType = "resume";
                 final String s = "Resume";
-                getImageAndOpenIt(docCategory,docType,s);
-            }
-        });
-
-        //Upload Buttons Action
-        resume.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                docCategory = "utilityDocuments";
-                docType = "resume";
+//                getImageAndOpenIt(docCategory,docType,s);
+//                confirmThenUpload(docCategory,docType,s);
                 openGallery();
             }
         });
-
-        thumbImpression.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                docCategory = "utilityDocuments";
-                docType = "thumbImpression";
-                openGallery();
-            }
-        });
-
 
 
         //initToolbar();
@@ -264,34 +299,49 @@ public class dashboardFragment extends Fragment {
         }
     }
 
-    //snack bar when image is not uploaded
-    private void notUploadedSnackBar(String s) {
-        Snackbar snackbar = Snackbar.make(getView(), "Opps.. Seems like your\n" + s +" is not uploaded yet...!!!", Snackbar.LENGTH_LONG)
-                .setAction("UPLOAD", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        openGallery();
-                    }
-                });
-        snackbar.show();
-    }
+    private void fetchStatus(String docCategoryx, String docTypex) {
+        final String docTypexx = docTypex;
 
-    //function to get image url and open in another layout..
-    private void getImageAndOpenIt(String docCategory,String docType,String s){
-        final String docTypex = docType;
-        final String sx = s;
-        DatabaseReference ref = reference.child("personalDocuments").child(docCategory);
+        //URLs of images
+        final String[] resumeURL = new String[1];
+
+        // defining ProgressBars
+        resumeProgressBar = (ProgressBar)getView().findViewById(R.id.resumeProgress);
+
+        DatabaseReference ref = reference.child("personalDocuments").child(docCategoryx);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                transferrableImageURL = String.valueOf(dataSnapshot.child(docTypex).getValue());
-                if (transferrableImageURL.isEmpty()){
-                    notUploadedSnackBar(sx);
-                }else
+                resumeURL[0] = String.valueOf(dataSnapshot.child(docTypexx).getValue());
+                if(URLUtil.isValidUrl(resumeURL[0]))
                 {
-                    Intent fullScreenDocIntent = new Intent(getContext().getApplicationContext(),UserDocumentView.class);
-                    fullScreenDocIntent.setData(Uri.parse(transferrableImageURL));
-                    startActivity(fullScreenDocIntent);
+                    resumeImageView.setVisibility(View.VISIBLE);
+                    resumeProgressBar.setVisibility(View.VISIBLE);
+                    resumeUpload.setVisibility(View.INVISIBLE);
+                    if (resumeImageView !=null)
+                    {
+                        Glide.with(getContext().getApplicationContext())
+                                .load(resumeURL[0])
+                                .listener(new RequestListener<Drawable>() {
+                                    @Override
+                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                        resumeProgressBar.setVisibility(View.GONE);
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                        resumeProgressBar.setVisibility(View.GONE);
+                                        return false;
+                                    }
+                                })
+                                .into(resumeImageView);
+                    }
+
+                }else{
+                    resumeImageView.setVisibility(View.INVISIBLE);
+                    resumeProgressBar.setVisibility(View.INVISIBLE);
+                    resumeUpload.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -302,6 +352,260 @@ public class dashboardFragment extends Fragment {
         });
     }
 
+    //Show Bottom sheet dialogue
+    private void showBottomSheetDialog(final String docCategoryy, final String docTypey) {
+
+        final String[] imageUrl = new String[1];
+        final DatabaseReference ref = reference.child("personalDocuments").child(docCategoryy);
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                imageUrl[0] = String.valueOf(dataSnapshot.child(docTypey).getValue());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+        if (mBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+            mBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }
+
+        final View view = getLayoutInflater().inflate(R.layout.bottom_sheet_delete, null);
+
+        ((View) view.findViewById(R.id.lyt_preview)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext().getApplicationContext(), "Showing Document in Full-Screen Mode", Toast.LENGTH_SHORT).show();
+                if (URLUtil.isValidUrl(imageUrl[0])){
+                    Intent fullScreenDocIntent = new Intent(getContext().getApplicationContext(),UserDocumentView.class);
+                    fullScreenDocIntent.putExtra("docCategory",docCategoryy);
+                    fullScreenDocIntent.putExtra("docType",docTypey);
+                    startActivity(fullScreenDocIntent);
+                }
+                mBottomSheetDialog.dismiss();
+            }
+        });
+
+        ((View) view.findViewById(R.id.lyt_share)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(getContext().getApplicationContext(), "Share clicked", Toast.LENGTH_SHORT).show();
+                if (URLUtil.isValidUrl(imageUrl[0]))
+                {
+                    Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                    sharingIntent.setType("text/plain");
+                    String shareBody = "Here is a link of my uploaded document from MCR Infotech mobile App\n\nClick on the Link below to view\n\n";
+                    String shareSub = "MCR Infotech";
+                    sharingIntent.putExtra(Intent.EXTRA_SUBJECT,shareSub);
+                    sharingIntent.putExtra(Intent.EXTRA_TEXT,shareBody+imageUrl[0]);
+                    startActivity(Intent.createChooser(sharingIntent,"Share using"));
+                }
+                mBottomSheetDialog.dismiss();
+            }
+        });
+
+        ((View) view.findViewById(R.id.lyt_get_link)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(getContext().getApplicationContext(), "Get link clicked", Toast.LENGTH_SHORT).show();
+                if (URLUtil.isValidUrl(imageUrl[0]))
+                {
+                    storageReference=FirebaseStorage.getInstance().getReferenceFromUrl(imageUrl[0]);
+                    storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(getContext().getApplicationContext(),"Document deleted successfully",Toast.LENGTH_SHORT).show();
+                            ref.child(docTypey).removeValue();
+                            Log.e("onSuccess:", " deleted file");
+                            fetchStatus(docCategoryy,docTypey);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.e("onFailure:", " could not delete file");
+                        }
+                    });
+                }
+                mBottomSheetDialog.dismiss();
+            }
+        });
+
+
+        mBottomSheetDialog = new BottomSheetDialog(getContext());
+        mBottomSheetDialog.setContentView(view);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mBottomSheetDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+
+        mBottomSheetDialog.show();
+        mBottomSheetDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                mBottomSheetDialog = null;
+            }
+        });
+    }
+
+
+    //snack bar when image is not uploaded
+//    private void notUploadedSnackBar(String s) {
+//        Snackbar snackbar = Snackbar.make(getView(), "Opps.. Seems like your\n" + s +" is not uploaded yet...!!!", Snackbar.LENGTH_LONG)
+//                .setAction("UPLOAD", new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        docCategory = "utilityDocuments";
+//                        docType = "resume";
+//                        openGallery();
+//                    }
+//                });
+//        snackbar.show();
+//    }
+
+    //function to get image url and open in another layout..
+//    private void getImageAndOpenIt(final String docCategory, String docType, String s){
+//        final String docTypex = docType;
+//        final String sx = s;
+//        DatabaseReference ref = reference.child("personalDocuments").child(docCategory);
+//        ref.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                String transferrableImageURL = String.valueOf(dataSnapshot.child(docTypex).getValue());
+//                if (URLUtil.isValidUrl(transferrableImageURL)){
+//                    resumeUpload.setText("VIEW");
+//                    Intent fullScreenDocIntent = new Intent(getContext().getApplicationContext(),UserDocumentView.class);
+//                    fullScreenDocIntent.putExtra("docCategory",docCategory);
+//                    fullScreenDocIntent.putExtra("docType",docTypex);
+//                    startActivity(fullScreenDocIntent);
+//                }else
+//                {
+//                    //notUploadedSnackBar(sx);
+//                    resumeUpload.setText("UPLOAD");
+//                    resumeUpload.setBackgroundResource(R.color.grey_10);
+//                    resumeUpload.setTextColor(ContextCompat.getColor(getContext().getApplicationContext(),R.color.divider_gray));
+//                    openGallery();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
+
+    //Function to confirm from user before reUpload : If 1st time then Upload normally
+//    private void confirmThenUpload(final String docCategory,String docType,String s)
+//    {
+//        final String docTypex = docType;
+//        final String sx = s;
+//        DatabaseReference ref = reference.child("personalDocuments").child(docCategory);
+//        ref.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                String transferrableImageURL = String.valueOf(dataSnapshot.child(docTypex).getValue());
+//                if (URLUtil.isValidUrl(transferrableImageURL)){
+//                    //showBottomSheetDialog(docCategory,docTypex,sx);
+//                }else
+//                {
+//                    openGallery();
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
+
+    //Need to be corrected Later
+//    private void getImageURLsStatus()
+//    {
+//        //for Utility documents
+//        final DatabaseReference refUtility = reference.child("personalDocuments").child("utilityDocuments");
+//        refUtility.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                String s = String.valueOf(dataSnapshot.child("resume").getValue());
+//                if(URLUtil.isValidUrl(s)){
+//                        resumeUpload.setText("VIEW");
+//                        //resumeView.setBackgroundResource(R.color.amber_900);
+//                        //resumeView.setTextColor(ContextCompat.getColor(getContext().getApplicationContext(),R.color.white));
+//                }else{
+//                    resumeUpload.setText("UPLOAD");
+//                    resumeUpload.setBackgroundResource(R.color.grey_10);
+//                    resumeUpload.setTextColor(ContextCompat.getColor(getContext().getApplicationContext(),R.color.divider_gray));
+//                }
+//
+//                String urlThumbImpression = String.valueOf(dataSnapshot.child("thumbImpression").getValue());
+//                if (dataSnapshot.hasChild("thumbImpression")){
+//                    thumbImpressionUpload.setText("Re-UPLOAD");
+//                }else {
+//                    thumbImpressionUpload.setText("UPLOAD");
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
+
+//    private void showBottomSheetDialog(final String docCategory,String docType,String ss)
+//    {
+//        final String docTypex = docType;
+//        final String sx = ss;
+//        if (mBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+//            mBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+//        }
+//
+//        final View view = getLayoutInflater().inflate(R.layout.bottom_sheet_delete, null);
+//        ((TextView) view.findViewById(R.id.bottom_sheet_title)).setText("Alert Message...!!!");
+//        ((TextView) view.findViewById(R.id.bottom_sheet_details)).setText("Seems Like you have already uploaded your " +sx+". If you further proceed then old document will be self deleted and replaced by new one.");
+//        (view.findViewById(R.id.bt_preview)).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mBottomSheetDialog.dismiss();
+//                getImageAndOpenIt(docCategory,docTypex,sx);
+//                mBottomSheetDialog.dismiss();
+//            }
+//        });
+//        (view.findViewById(R.id.bt_cancel)).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mBottomSheetDialog.dismiss();
+//            }
+//        });
+//
+//        (view.findViewById(R.id.bt_proceed)).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mBottomSheetDialog.dismiss();
+//                openGallery();
+//                mBottomSheetDialog.dismiss();
+//            }
+//        });
+//
+//        mBottomSheetDialog = new BottomSheetDialog(getContext());
+//        mBottomSheetDialog.setContentView(view);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            mBottomSheetDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//        }
+//
+//        mBottomSheetDialog.show();
+//        mBottomSheetDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//            @Override
+//            public void onDismiss(DialogInterface dialog) {
+//                mBottomSheetDialog = null;
+//            }
+//        });
+//    }
 
     //    private void initToolbar() {
 //        Toolbar toolbar = (Toolbar)getView().findViewById(R.id.toolbar);
@@ -310,4 +614,19 @@ public class dashboardFragment extends Fragment {
 //        Tools.setSystemBarColor(this);
 //    }
 
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        if(visits==1)
+//        {
+//            Toast.makeText(getContext().getApplicationContext(),"visits: 1",Toast.LENGTH_SHORT).show();
+//        }else{
+//            getChildFragmentManager().beginTransaction().detach(this).commit();
+//            getChildFragmentManager().beginTransaction().attach(this).commit();
+//            mBottomSheetDialog.dismiss();
+//            char uhi = (char) visits;
+//            Toast.makeText(getContext().getApplicationContext(),"visits: "+uhi,Toast.LENGTH_SHORT).show();
+//        }
+//        visits++;
+//    }
 }
