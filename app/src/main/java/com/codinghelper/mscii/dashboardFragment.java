@@ -64,12 +64,26 @@ public class dashboardFragment extends Fragment {
     //Upload Buttons
     private Button resumeUpload;
     private Button thumbImpressionUpload;
+    private Button signatureUpload;
+    private Button casteCertificateUpload;
+    private Button aadharUpload;
+
 
     //ImageViews
     private ImageView resumeImageView;
+    private ImageView thumbImpressionImageView;
+    private ImageView signatureImageView;
+    private ImageView casteCertificateImageView;
+    private ImageView aadharImageView;
+
 
     //ProgressBars
-    private ProgressBar resumeProgressBar;
+    private ProgressBar resumeProgress;
+    private ProgressBar thumbImpressionProgress;
+    private ProgressBar signatureProgress;
+    private ProgressBar casteCertificateProgress;
+    private ProgressBar aadharProgress;
+
 
 
     //Bottom Sheet utilities
@@ -112,10 +126,17 @@ public class dashboardFragment extends Fragment {
 
         //Defining upload buttons
         resumeUpload = (Button) rootView.findViewById(R.id.resumeUpload);
-        thumbImpressionUpload = (Button) rootView.findViewById(R.id.thumbImpression);
+        thumbImpressionUpload = (Button) rootView.findViewById(R.id.thumbImpressionUpload);
+        signatureUpload = (Button) rootView.findViewById(R.id.signatureUpload);
+        casteCertificateUpload = (Button) rootView.findViewById(R.id.casteCertificateUpload);
+        aadharUpload = (Button) rootView.findViewById(R.id.aadharUpload);
 
         //Defining Image Views
         resumeImageView = (ImageView)rootView.findViewById(R.id.resumeImageView);
+        thumbImpressionImageView = (ImageView)rootView.findViewById(R.id.thumbImpressionImageView);
+        signatureImageView = (ImageView)rootView.findViewById(R.id.signatureImageView);
+        casteCertificateImageView = (ImageView)rootView.findViewById(R.id.casteCertificateImageView);
+        aadharImageView = (ImageView)rootView.findViewById(R.id.aadharImageView);
 
         //Handling Expand and Collapse
         RelativeLayout UtilityDocHeader = (RelativeLayout) rootView.findViewById(R.id.utilityDocHeader);
@@ -195,13 +216,84 @@ public class dashboardFragment extends Fragment {
             }
         });
 
+        thumbImpressionImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                docCategory = "utilityDocuments";
+                docType = "thumbImpression";
+                showBottomSheetDialog(docCategory,docType);
+            }
+        });
+
+        signatureImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                docCategory = "utilityDocuments";
+                docType = "signature";
+                showBottomSheetDialog(docCategory,docType);
+            }
+        });
+
+        casteCertificateImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                docCategory = "utilityDocuments";
+                docType = "casteCertificate";
+                showBottomSheetDialog(docCategory,docType);
+            }
+        });
+
+        aadharImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                docCategory = "utilityDocuments";
+                docType = "aadharCard";
+                showBottomSheetDialog(docCategory,docType);
+            }
+        });
+
         //Upload Buttons OnclickListener
         resumeUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 docCategory = "utilityDocuments";
                 docType = "resume";
-                //final String s = "Resume";
+                openGallery();
+            }
+        });
+
+        thumbImpressionUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                docCategory = "utilityDocuments";
+                docType = "thumbImpression";
+                openGallery();
+            }
+        });
+
+        signatureUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                docCategory = "utilityDocuments";
+                docType = "signature";
+                openGallery();
+            }
+        });
+
+        casteCertificateUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                docCategory = "utilityDocuments";
+                docType = "casteCertificate";
+                openGallery();
+            }
+        });
+
+        aadharUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                docCategory = "utilityDocuments";
+                docType = "aadharCard";
                 openGallery();
             }
         });
@@ -287,19 +379,30 @@ public class dashboardFragment extends Fragment {
 
         //URLs of images
         final String[] resumeURL = new String[1];
+        final String[] thumbImpressionURL = new String[1];
+        final String[] signatureURL = new String[1];
+        final String[] casteCertificateURL = new String[1];
+        final String[] aadharCardURL = new String[1];
+
 
         // defining ProgressBars
-        resumeProgressBar = (ProgressBar)getView().findViewById(R.id.resumeProgress);
+        resumeProgress = (ProgressBar)getView().findViewById(R.id.resumeProgress);
+        thumbImpressionProgress = (ProgressBar)getView().findViewById(R.id.thumbImpressionProgress);
+        signatureProgress = (ProgressBar)getView().findViewById(R.id.signatureProgress);
+        casteCertificateProgress = (ProgressBar)getView().findViewById(R.id.casteCertificateProgress);
+        aadharProgress = (ProgressBar)getView().findViewById(R.id.aadharProgress);
 
         DatabaseReference ref = reference.child("personalDocuments").child(docCategoryx);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                //for Resume
                 resumeURL[0] = String.valueOf(dataSnapshot.child("resume").getValue());
                 if(URLUtil.isValidUrl(resumeURL[0]))
                 {
                     resumeImageView.setVisibility(View.VISIBLE);
-                    resumeProgressBar.setVisibility(View.VISIBLE);
+                    resumeProgress.setVisibility(View.VISIBLE);
                     resumeUpload.setVisibility(View.INVISIBLE);
                     if (resumeImageView !=null)
                     {
@@ -308,14 +411,14 @@ public class dashboardFragment extends Fragment {
                                 .listener(new RequestListener<Drawable>() {
                                     @Override
                                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                        resumeProgressBar.setVisibility(View.GONE);
+                                        resumeProgress.setVisibility(View.GONE);
                                         Toast.makeText(getContext().getApplicationContext(), "Error loading document\nPls check your internet connectivity", Toast.LENGTH_SHORT).show();
                                         return false;
                                     }
 
                                     @Override
                                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                        resumeProgressBar.setVisibility(View.GONE);
+                                        resumeProgress.setVisibility(View.GONE);
                                         return false;
                                     }
                                 })
@@ -324,8 +427,144 @@ public class dashboardFragment extends Fragment {
 
                 }else{
                     resumeImageView.setVisibility(View.INVISIBLE);
-                    resumeProgressBar.setVisibility(View.INVISIBLE);
+                    resumeProgress.setVisibility(View.INVISIBLE);
                     resumeUpload.setVisibility(View.VISIBLE);
+                }
+
+                //for thumb Impression
+                thumbImpressionURL[0] = String.valueOf(dataSnapshot.child("thumbImpression").getValue());
+                if(URLUtil.isValidUrl(thumbImpressionURL[0]))
+                {
+                    thumbImpressionImageView.setVisibility(View.VISIBLE);
+                    thumbImpressionProgress.setVisibility(View.VISIBLE);
+                    thumbImpressionUpload.setVisibility(View.INVISIBLE);
+                    if (thumbImpressionImageView !=null)
+                    {
+                        Glide.with(getContext().getApplicationContext())
+                                .load(thumbImpressionURL[0])
+                                .listener(new RequestListener<Drawable>() {
+                                    @Override
+                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                        thumbImpressionProgress.setVisibility(View.GONE);
+                                        Toast.makeText(getContext().getApplicationContext(), "Error loading document\nPls check your internet connectivity", Toast.LENGTH_SHORT).show();
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                        thumbImpressionProgress.setVisibility(View.GONE);
+                                        return false;
+                                    }
+                                })
+                                .into(thumbImpressionImageView);
+                    }
+
+                }else{
+                    thumbImpressionImageView.setVisibility(View.INVISIBLE);
+                    thumbImpressionProgress.setVisibility(View.INVISIBLE);
+                    thumbImpressionUpload.setVisibility(View.VISIBLE);
+                }
+
+                //for Signature
+                signatureURL[0] = String.valueOf(dataSnapshot.child("signature").getValue());
+                if(URLUtil.isValidUrl(signatureURL[0]))
+                {
+                    signatureImageView.setVisibility(View.VISIBLE);
+                    signatureProgress.setVisibility(View.VISIBLE);
+                    signatureUpload.setVisibility(View.INVISIBLE);
+                    if (signatureImageView !=null)
+                    {
+                        Glide.with(getContext().getApplicationContext())
+                                .load(signatureURL[0])
+                                .listener(new RequestListener<Drawable>() {
+                                    @Override
+                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                        signatureProgress.setVisibility(View.GONE);
+                                        Toast.makeText(getContext().getApplicationContext(), "Error loading document\nPls check your internet connectivity", Toast.LENGTH_SHORT).show();
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                        signatureProgress.setVisibility(View.GONE);
+                                        return false;
+                                    }
+                                })
+                                .into(signatureImageView);
+                    }
+
+                }else{
+                    signatureImageView.setVisibility(View.INVISIBLE);
+                    signatureProgress.setVisibility(View.INVISIBLE);
+                    signatureUpload.setVisibility(View.VISIBLE);
+                }
+
+                //for Caste certificate
+                casteCertificateURL[0] = String.valueOf(dataSnapshot.child("casteCertificate").getValue());
+                if(URLUtil.isValidUrl(casteCertificateURL[0]))
+                {
+                    casteCertificateImageView.setVisibility(View.VISIBLE);
+                    casteCertificateProgress.setVisibility(View.VISIBLE);
+                    casteCertificateUpload.setVisibility(View.INVISIBLE);
+                    if (casteCertificateImageView !=null)
+                    {
+                        Glide.with(getContext().getApplicationContext())
+                                .load(casteCertificateURL[0])
+                                .listener(new RequestListener<Drawable>() {
+                                    @Override
+                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                        casteCertificateProgress.setVisibility(View.GONE);
+                                        Toast.makeText(getContext().getApplicationContext(), "Error loading document\nPls check your internet connectivity", Toast.LENGTH_SHORT).show();
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                        casteCertificateProgress.setVisibility(View.GONE);
+                                        return false;
+                                    }
+                                })
+                                .into(casteCertificateImageView);
+                    }
+
+                }else{
+                    casteCertificateImageView.setVisibility(View.INVISIBLE);
+                    casteCertificateProgress.setVisibility(View.INVISIBLE);
+                    casteCertificateUpload.setVisibility(View.VISIBLE);
+                }
+
+                //for Aadhar Card
+                aadharCardURL[0] = String.valueOf(dataSnapshot.child("aadharCard").getValue());
+                if(URLUtil.isValidUrl(aadharCardURL[0]))
+                {
+                    aadharImageView.setVisibility(View.VISIBLE);
+                    aadharProgress.setVisibility(View.VISIBLE);
+                    aadharUpload.setVisibility(View.INVISIBLE);
+                    if (aadharImageView !=null)
+                    {
+                        Glide.with(getContext().getApplicationContext())
+                                .load(aadharCardURL[0])
+                                .listener(new RequestListener<Drawable>() {
+                                    @Override
+                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                        aadharProgress.setVisibility(View.GONE);
+                                        Toast.makeText(getContext().getApplicationContext(), "Error loading document\nPls check your internet connectivity", Toast.LENGTH_SHORT).show();
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                        aadharProgress.setVisibility(View.GONE);
+                                        return false;
+                                    }
+                                })
+                                .into(aadharImageView);
+                    }
+
+                }else{
+                    aadharImageView.setVisibility(View.INVISIBLE);
+                    aadharProgress.setVisibility(View.INVISIBLE);
+                    aadharUpload.setVisibility(View.VISIBLE);
                 }
             }
 

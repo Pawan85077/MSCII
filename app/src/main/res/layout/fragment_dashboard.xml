@@ -441,7 +441,7 @@
                         android:background="@color/grey_10"
                         android:padding="2dp"
                         android:layout_margin="2dp"
-                        android:visibility="gone">
+                        >
 <!--                        ye krna hai uper android:visibility="gone"-->
 
                         <LinearLayout
@@ -450,6 +450,7 @@
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
 
+<!--                            resume-->
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/resumeCard"
                                 android:layout_width="100dp"
@@ -463,11 +464,11 @@
                                     <TextView
                                         android:id="@+id/resumeText"
                                         android:layout_width="match_parent"
-                                        android:layout_height="18dp"
+                                        android:layout_height="25dp"
                                         android:text="Resume"
                                         android:textColor="@color/black"
                                         android:textSize="15dp"
-                                        android:layout_margin="7dp"
+                                        android:layout_margin="5dp"
                                         android:gravity="center"/>
                                     <View
                                         android:id="@+id/resumeLine"
@@ -511,117 +512,256 @@
                                 </LinearLayout>
 
                             </androidx.cardview.widget.CardView>
+
+<!--                            thumb Impression-->
                             <androidx.cardview.widget.CardView
+                                android:id="@+id/thumbImpressionCard"
                                 android:layout_width="100dp"
-                                android:layout_height="110dp"
+                                android:layout_height="120dp"
                                 android:layout_margin="5dp"
                                 app:cardBackgroundColor="#FFFFFF">
-                                <RelativeLayout
+                                <LinearLayout
                                     android:layout_width="wrap_content"
-                                    android:layout_height="fill_parent">
+                                    android:layout_height="fill_parent"
+                                    android:orientation="vertical">
                                     <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Thumb\nImpression"
-                                        android:textSize="16dp"
-                                        android:layout_margin="8dp"
-                                        android:layout_alignParentTop="true"
-                                        android:gravity="center"/>
-                                    <Button
-                                        android:id="@+id/thumbImpression"
+                                        android:id="@+id/thumbImpressionText"
                                         android:layout_width="match_parent"
                                         android:layout_height="25dp"
-                                        android:layout_margin="10dp"
-                                        android:background="@color/amber_900"
-                                        android:text="UPLOAD"
-                                        android:textColor="#FFFFFF"
-                                        android:textStyle="bold"
-                                        android:layout_alignParentBottom="true"/>
-                                </RelativeLayout>
+                                        android:text="Thumb\nimpression"
+                                        android:textColor="@color/black"
+                                        android:textSize="10dp"
+                                        android:layout_margin="5dp"
+                                        android:gravity="center"/>
+                                    <View
+                                        android:id="@+id/thumbImpressionLine"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1px"
+                                        android:background="@color/grey_10" />
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+                                        <ImageView
+                                            android:id="@+id/thumbImpressionImageView"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="#FFFFFF"
+                                            android:padding="4dp"
+                                            android:layout_centerInParent="true"
+                                            android:layout_margin="2dp"
+                                            android:visibility="invisible"/>
+                                        <ProgressBar
+                                            android:id="@+id/thumbImpressionProgress"
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:foregroundGravity="center"
+                                            android:layout_centerInParent="true"
+                                            android:visibility="visible"
+                                            android:indeterminate="true"
+                                            android:indeterminateTintMode="src_atop"
+                                            android:indeterminateTint="@color/light_blue_600"/>
+                                        <Button
+                                            android:id="@+id/thumbImpressionUpload"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="10dp"
+                                            android:text="UPLOAD"
+                                            android:gravity="center"
+                                            android:layout_centerInParent="true"/>
+
+                                    </RelativeLayout>
+
+                                </LinearLayout>
 
                             </androidx.cardview.widget.CardView>
+
+<!--                            Signature-->
                             <androidx.cardview.widget.CardView
+                                android:id="@+id/signatureCard"
                                 android:layout_width="100dp"
-                                android:layout_height="110dp"
+                                android:layout_height="120dp"
                                 android:layout_margin="5dp"
                                 app:cardBackgroundColor="#FFFFFF">
-                                <RelativeLayout
+                                <LinearLayout
                                     android:layout_width="wrap_content"
-                                    android:layout_height="fill_parent">
+                                    android:layout_height="fill_parent"
+                                    android:orientation="vertical">
                                     <TextView
+                                        android:id="@+id/signatureText"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="25dp"
                                         android:text="Signature"
-                                        android:textSize="18dp"
-                                        android:layout_margin="8dp"
-                                        android:layout_alignParentTop="true"
+                                        android:textColor="@color/black"
+                                        android:textSize="15dp"
+                                        android:layout_margin="5dp"
                                         android:gravity="center"/>
-                                    <Button
+                                    <View
+                                        android:id="@+id/signatureLine"
                                         android:layout_width="match_parent"
-                                        android:layout_height="25dp"
-                                        android:layout_margin="10dp"
-                                        android:background="@color/amber_900"
-                                        android:text="UPLOAD"
-                                        android:textColor="#FFFFFF"
-                                        android:textStyle="bold"
-                                        android:layout_alignParentBottom="true"/>
-                                </RelativeLayout>
+                                        android:layout_height="1px"
+                                        android:background="@color/grey_10" />
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+                                        <ImageView
+                                            android:id="@+id/signatureImageView"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="#FFFFFF"
+                                            android:padding="4dp"
+                                            android:layout_centerInParent="true"
+                                            android:layout_margin="2dp"
+                                            android:visibility="invisible"/>
+                                        <ProgressBar
+                                            android:id="@+id/signatureProgress"
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:foregroundGravity="center"
+                                            android:layout_centerInParent="true"
+                                            android:visibility="visible"
+                                            android:indeterminate="true"
+                                            android:indeterminateTintMode="src_atop"
+                                            android:indeterminateTint="@color/light_blue_600"/>
+                                        <Button
+                                            android:id="@+id/signatureUpload"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="10dp"
+                                            android:text="UPLOAD"
+                                            android:gravity="center"
+                                            android:layout_centerInParent="true"/>
+
+                                    </RelativeLayout>
+
+                                </LinearLayout>
 
                             </androidx.cardview.widget.CardView>
+
+<!--                            Caste Certificate-->
                             <androidx.cardview.widget.CardView
+                                android:id="@+id/casteCertificateCard"
                                 android:layout_width="100dp"
-                                android:layout_height="110dp"
+                                android:layout_height="120dp"
                                 android:layout_margin="5dp"
                                 app:cardBackgroundColor="#FFFFFF">
-                                <RelativeLayout
+                                <LinearLayout
                                     android:layout_width="wrap_content"
-                                    android:layout_height="fill_parent">
+                                    android:layout_height="fill_parent"
+                                    android:orientation="vertical">
                                     <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Caste\nCertificate"
-                                        android:textSize="18dp"
-                                        android:layout_margin="8dp"
-                                        android:layout_alignParentTop="true"
-                                        android:gravity="center"/>
-                                    <Button
+                                        android:id="@+id/casteCertificateText"
                                         android:layout_width="match_parent"
                                         android:layout_height="25dp"
-                                        android:layout_margin="10dp"
-                                        android:background="@color/amber_900"
-                                        android:text="UPLOAD"
-                                        android:textColor="#FFFFFF"
-                                        android:textStyle="bold"
-                                        android:layout_alignParentBottom="true"/>
-                                </RelativeLayout>
+                                        android:text="Caste\ncertificate"
+                                        android:textColor="@color/black"
+                                        android:textSize="10dp"
+                                        android:layout_margin="5dp"
+                                        android:gravity="center"/>
+                                    <View
+                                        android:id="@+id/casteCertificateLine"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1px"
+                                        android:background="@color/grey_10" />
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+                                        <ImageView
+                                            android:id="@+id/casteCertificateImageView"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="#FFFFFF"
+                                            android:padding="4dp"
+                                            android:layout_centerInParent="true"
+                                            android:layout_margin="2dp"
+                                            android:visibility="invisible"/>
+                                        <ProgressBar
+                                            android:id="@+id/casteCertificateProgress"
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:foregroundGravity="center"
+                                            android:layout_centerInParent="true"
+                                            android:visibility="visible"
+                                            android:indeterminate="true"
+                                            android:indeterminateTintMode="src_atop"
+                                            android:indeterminateTint="@color/light_blue_600"/>
+                                        <Button
+                                            android:id="@+id/casteCertificateUpload"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="10dp"
+                                            android:text="UPLOAD"
+                                            android:gravity="center"
+                                            android:layout_centerInParent="true"/>
+
+                                    </RelativeLayout>
+
+                                </LinearLayout>
 
                             </androidx.cardview.widget.CardView>
+
+<!--                            Aadhar card-->
                             <androidx.cardview.widget.CardView
+                                android:id="@+id/aadharCard"
                                 android:layout_width="100dp"
-                                android:layout_height="110dp"
+                                android:layout_height="120dp"
                                 android:layout_margin="5dp"
                                 app:cardBackgroundColor="#FFFFFF">
-                                <RelativeLayout
+                                <LinearLayout
                                     android:layout_width="wrap_content"
-                                    android:layout_height="fill_parent">
+                                    android:layout_height="fill_parent"
+                                    android:orientation="vertical">
                                     <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Aadhar\nCard"
-                                        android:textSize="18dp"
-                                        android:layout_margin="8dp"
-                                        android:layout_alignParentTop="true"
-                                        android:gravity="center"/>
-                                    <Button
+                                        android:id="@+id/aadharText"
                                         android:layout_width="match_parent"
                                         android:layout_height="25dp"
-                                        android:layout_margin="10dp"
-                                        android:background="@color/amber_900"
-                                        android:text="UPLOAD"
-                                        android:textColor="#FFFFFF"
-                                        android:textStyle="bold"
-                                        android:layout_alignParentBottom="true"/>
-                                </RelativeLayout>
+                                        android:text="Aadhar\ncard"
+                                        android:textColor="@color/black"
+                                        android:textSize="10dp"
+                                        android:layout_margin="5dp"
+                                        android:gravity="center"/>
+                                    <View
+                                        android:id="@+id/aadharLine"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1px"
+                                        android:background="@color/grey_10" />
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+                                        <ImageView
+                                            android:id="@+id/aadharImageView"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="#FFFFFF"
+                                            android:padding="4dp"
+                                            android:layout_centerInParent="true"
+                                            android:layout_margin="2dp"
+                                            android:visibility="invisible"/>
+                                        <ProgressBar
+                                            android:id="@+id/aadharProgress"
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:foregroundGravity="center"
+                                            android:layout_centerInParent="true"
+                                            android:visibility="visible"
+                                            android:indeterminate="true"
+                                            android:indeterminateTintMode="src_atop"
+                                            android:indeterminateTint="@color/light_blue_600"/>
+                                        <Button
+                                            android:id="@+id/aadharUpload"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="10dp"
+                                            android:text="UPLOAD"
+                                            android:gravity="center"
+                                            android:layout_centerInParent="true"/>
+
+                                    </RelativeLayout>
+
+                                </LinearLayout>
 
                             </androidx.cardview.widget.CardView>
                         </LinearLayout>
