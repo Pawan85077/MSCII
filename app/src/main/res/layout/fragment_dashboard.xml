@@ -441,7 +441,7 @@
                         android:background="@color/grey_10"
                         android:padding="2dp"
                         android:layout_margin="2dp"
-                        >
+                        android:visibility="gone">
 <!--                        ye krna hai uper android:visibility="gone"-->
 
                         <LinearLayout
