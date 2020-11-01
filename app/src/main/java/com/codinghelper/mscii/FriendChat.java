@@ -127,10 +127,11 @@ public class FriendChat extends Fragment {
                             String Sstatus =String.valueOf(dataSnapshot.child("userstatus").getValue());
                             String pic1 =String.valueOf(dataSnapshot.child("states1").getValue());
                             String pic2 =String.valueOf(dataSnapshot.child("states2").getValue());
-                            if(!pic1.equals("no")&&pic2.equals("no")){
-                                holder.linearLayout.setBackgroundColor(getResources().getColor(R.color.amber_500));
-                            }else {
+                            if(pic1.equals("no")&&pic2.equals("no")){
                                 holder.linearLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+
+                            }else {
+                                holder.linearLayout.setBackgroundColor(getResources().getColor(R.color.amber_500));
 
                             }
 
