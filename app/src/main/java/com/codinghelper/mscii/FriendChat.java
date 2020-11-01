@@ -1,5 +1,6 @@
 package com.codinghelper.mscii;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -35,6 +38,9 @@ public class FriendChat extends Fragment {
     private DatabaseReference Friendsref,UserRef;
     private FirebaseAuth auth;
     private String currentUserID;
+    ProgressDialog progressDialog;
+    CircularImageView userStatusImage;
+    LinearLayout Linear_status;
     public FriendChat() {
         // Required empty public constructor
     }
@@ -46,12 +52,57 @@ public class FriendChat extends Fragment {
         // Inflate the layout for this fragment
         friendsView= inflater.inflate(R.layout.fragment_friend_chat, container, false);
         myFriendList=(RecyclerView)friendsView.findViewById(R.id.friend_list);
+        Linear_status=(LinearLayout)friendsView.findViewById(R.id.status_cantain);
         myFriendList.setLayoutManager(new LinearLayoutManager(getContext()));
         auth=FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(getActivity(),R.style.AlertDialogTheme);
+        progressDialog.setMessage("loading..");
+        progressDialog.setCanceledOnTouchOutside(false);
         currentUserID=auth.getCurrentUser().getUid();
         Friendsref= FirebaseDatabase.getInstance().getReference().child("Friend list").child(currentUserID);
         UserRef= FirebaseDatabase.getInstance().getReference().child("studentDetail");
+        userStatusImage=(CircularImageView)friendsView.findViewById(R.id.user_profile_status);
 
+        UserRef.child(currentUserID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String Simg =String.valueOf(dataSnapshot.child("imageUrl").getValue());
+                Picasso.get().load(Simg).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(userStatusImage);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        Linear_status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                UserRef.child(currentUserID).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String Simg1 =String.valueOf(dataSnapshot.child("states1").getValue());
+                        String Simg2 =String.valueOf(dataSnapshot.child("states2").getValue());
+                        if(Simg1.equals("no")&&Simg2.equals("no")){
+                            Intent profileIntent=new Intent(getActivity(),upload_status.class);
+                            startActivity(profileIntent);
+                        }else {
+                            Intent profileIntent=new Intent(getActivity(),Status_viewer.class);
+                            profileIntent.putExtra("visit_user_id",currentUserID);
+                            startActivity(profileIntent);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+        });
         return friendsView;
     }
 
@@ -66,7 +117,7 @@ public class FriendChat extends Fragment {
                 = new FirebaseRecyclerAdapter<Friends, FriendsViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull final FriendsViewHolder holder, int position, @NonNull Friends model) {
-                String userIDs=getRef(position).getKey();
+                final String userIDs=getRef(position).getKey();
                 UserRef.child(userIDs).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -74,9 +125,52 @@ public class FriendChat extends Fragment {
                             String Simg =String.valueOf(dataSnapshot.child("imageUrl").getValue());
                             String Sname =String.valueOf(dataSnapshot.child("username").getValue());
                             String Sstatus =String.valueOf(dataSnapshot.child("userstatus").getValue());
-                            holder.userName.setText(Sname);
+                            String pic1 =String.valueOf(dataSnapshot.child("states1").getValue());
+                            String pic2 =String.valueOf(dataSnapshot.child("states2").getValue());
+                            if(!pic1.equals("no")&&pic2.equals("no")){
+                                holder.linearLayout.setBackgroundColor(getResources().getColor(R.color.amber_500));
+                            }else {
+                                holder.linearLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+
+                            }
+
+                                holder.userName.setText(Sname);
                             holder.userStatus.setText(Sstatus);
                             Picasso.get().load(Simg).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(holder.profileImage);
+                            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+
+                                    UserRef.child(userIDs).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            String Simg1 =String.valueOf(dataSnapshot.child("states1").getValue());
+                                            String Simg2 =String.valueOf(dataSnapshot.child("states2").getValue());
+                                            if(Simg1.equals("no")&&Simg2.equals("no")){
+                                                progressDialog.show();
+                                                Intent profileIntent=new Intent(getActivity(),Show_profile_Activity.class);
+                                                profileIntent.putExtra("visit_user_id",userIDs);
+                                                startActivity(profileIntent);
+                                                progressDialog.dismiss();
+                                            }else {
+                                                Intent profileIntent=new Intent(getActivity(),Status_viewer.class);
+                                                profileIntent.putExtra("visit_user_id",userIDs);
+                                                startActivity(profileIntent);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+
+
+
+
+                                }
+                            });
 
 
                         }
@@ -103,12 +197,13 @@ public class FriendChat extends Fragment {
     public static class FriendsViewHolder extends RecyclerView.ViewHolder{
         TextView userName, userStatus;
         CircularImageView profileImage;
+        LinearLayout linearLayout;
         public FriendsViewHolder(@NonNull View itemView) {
             super(itemView);
             userName=itemView.findViewById(R.id.user_profile_name);
             userStatus=itemView.findViewById(R.id.user_profile_status);
             profileImage=itemView.findViewById(R.id.user_profile_image);
-
+            linearLayout=itemView.findViewById(R.id.lback);
 
         }
     }

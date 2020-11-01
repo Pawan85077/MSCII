@@ -72,12 +72,12 @@
             android:layout_height="54dp"
             android:layout_below="@+id/edit_status"
             android:background="@drawable/spinner_admin_signup" />
-        <Spinner
+      <!--  <Spinner
             android:id="@+id/song"
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:layout_below="@+id/studsem"
-            android:background="@drawable/spinner_admin_signup" />
+            android:background="@drawable/spinner_admin_signup" />-->
         <LinearLayout
 
             android:id="@+id/ll5"
@@ -105,6 +105,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Delete profile pic"/>
+        <Button
+            android:id="@+id/upload_song"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="upload song"/>
     </LinearLayout>
 
 

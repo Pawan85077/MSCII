@@ -48,6 +48,8 @@ public class Signup_student extends AppCompatActivity {
     String images="https://firebasestorage.googleapis.com/v0/b/mscii-8cb88.appspot.com/o/logos.png?alt=media&token=1383c782-bbbf-41a0-a03b-924c6cf7b149";
     String Account="Student";
     String selectedCourse;
+    String states1="no";
+    String states2="no";
     String selectedSession;
     ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
@@ -216,7 +218,10 @@ public class Signup_student extends AppCompatActivity {
                                                 userSongurl,
                                                 q,
                                                 a,
-                                                l
+                                                l,
+                                                states1,
+                                                states2
+
 
 
 

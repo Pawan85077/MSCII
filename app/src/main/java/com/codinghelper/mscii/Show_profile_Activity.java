@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.view.View;              //1....2...3...are the code sequence matlb code iss number ke hisab ke sath chlaga
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,20 +26,28 @@ import com.google.firebase.database.ValueEventListener;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public class Show_profile_Activity extends AppCompatActivity {
 private String senderUserId, receiverUserID,currentState;
 private CircularImageView userImage;
 private ImageView Background;
+MediaPlayer player;
+
 private TextView userProfilename,userProfileStatus,userSession,userCourse,userSem,sq,sa,moder,moderdel;
 private Button AddRequest,RemoveRequest,Playsong;
-private DatabaseReference reference,addRequestref,friendref,NotificationRef,bannedref;
+private DatabaseReference reference1,addRequestref,friendref,NotificationRef,bannedref;
 private FirebaseAuth auth;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_profile_);
+        player =new MediaPlayer();
+        player.setAudioStreamType(AudioManager.STREAM_MUSIC);
         auth=FirebaseAuth.getInstance();
         senderUserId=auth.getCurrentUser().getUid();
         sq=(TextView)findViewById(R.id.q);
@@ -54,7 +65,7 @@ private FirebaseAuth auth;
         AddRequest=(Button)findViewById(R.id.add_friend);
         RemoveRequest=(Button)findViewById(R.id.remove_friend);
         Playsong=(Button)findViewById(R.id.playbtn);
-        reference= FirebaseDatabase.getInstance().getReference().child("studentDetail");
+        reference1= FirebaseDatabase.getInstance().getReference().child("studentDetail");
         bannedref= FirebaseDatabase.getInstance().getReference();
         addRequestref= FirebaseDatabase.getInstance().getReference().child("Add Friend Request");
         NotificationRef=FirebaseDatabase.getInstance().getReference().child("Notifications");
@@ -65,7 +76,7 @@ private FirebaseAuth auth;
         moderdel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                reference.child(senderUserId).addValueEventListener(new ValueEventListener() {
+                reference1.child(senderUserId).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         String Madmod =String.valueOf(dataSnapshot.child("Level").getValue());
@@ -86,31 +97,64 @@ private FirebaseAuth auth;
             }
         });
         RetriveUserInfo();
+
+
+
         Playsong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                reference.child(receiverUserID).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
-                            String SongUrl =String.valueOf(dataSnapshot.child("userSong").getValue());
-                            Uri uri = Uri.parse(SongUrl);
-                            Intent launchWeb = new Intent(Intent.ACTION_VIEW, uri);
-                            startActivity(launchWeb);
-                        }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+                if(!player.isPlaying()){
+                    player.start();
+                    Playsong.setBackgroundResource(R.drawable.ic_baseline_pause_circle_outline_24);
+                    Toast.makeText(getApplicationContext(),"start!!",Toast.LENGTH_SHORT).show();
+                }else {
+                    player.pause();
+                    Playsong.setBackgroundResource(R.drawable.ic_play_circle_outline_black_24dp);
+                    Toast.makeText(getApplicationContext(),"stop!!",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        PrepareMediaPlayer();
+        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                Playsong.setBackgroundResource(R.drawable.ic_play_circle_outline_black_24dp);
+                player.reset();
+                PrepareMediaPlayer();
             }
         });
     }
-//1-->
+
+    private void PrepareMediaPlayer() {
+
+        player.reset();
+
+        reference1.child(receiverUserID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    String SongUrl =String.valueOf(dataSnapshot.child("audioUrl").getValue());
+                    try {
+                        player.reset();
+                        player.setDataSource(SongUrl);
+                        player.prepare();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    //1-->
     private void RetriveUserInfo() {
-        reference.child(receiverUserID).addValueEventListener(new ValueEventListener() {
+        reference1.child(receiverUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                if(dataSnapshot.exists()&&(dataSnapshot.hasChild("imageUrl"))){
@@ -133,9 +177,9 @@ private FirebaseAuth auth;
                    String Sa =String.valueOf(dataSnapshot.child("countA").getValue());
                    sa.setText(Sa);
                    if(Integer.parseInt(Sq)>=20&&Integer.parseInt(Sa)>=20){
-                       reference.child(receiverUserID).child("Level").setValue("moderator");
+                       reference1.child(receiverUserID).child("Level").setValue("moderator");
                    }else {
-                       reference.child(receiverUserID).child("Level").setValue("");
+                       reference1.child(receiverUserID).child("Level").setValue("");
                    }
                    String Madmod =String.valueOf(dataSnapshot.child("Level").getValue());
                    moder.setText(Madmod);
@@ -359,5 +403,13 @@ private FirebaseAuth auth;
                         }
                     }
                 });
+    }
+
+    @Override
+    public void onBackPressed() {
+        player.stop();
+        player.reset();
+
+        super.onBackPressed();
     }
 }

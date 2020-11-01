@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -11,6 +13,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaMetadataRetriever;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -35,6 +39,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -43,15 +49,21 @@ import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public class editProfile extends AppCompatActivity {
     private Button btn_choose;
     private Button btn_upload;
     private Button btn_chooseb;
-    private Button btn_uploadb,delpro;
+    private Button btn_uploadb,delpro,btn_uploadSong;
     private EditText status;
     private ImageButton status_btn;
     private ImageView imageView;
@@ -70,6 +82,7 @@ public class editProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+        btn_uploadSong=(Button)findViewById(R.id.upload_song);
         btn_chooseb=findViewById(R.id.chooseImgb);
         btn_uploadb=findViewById(R.id.uploadImgb);
         delpro=findViewById(R.id.delpropic);
@@ -110,23 +123,37 @@ public class editProfile extends AppCompatActivity {
                 uploadImageb();
             }
         });
+        btn_uploadSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent();
+                intent.setType("audio/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+
+                startActivityForResult(
+                        Intent.createChooser(
+                                intent,"select Audio from here..."),2);
+            }
+        });
         delpro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                reference.child("studentDetail").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+
+                reference.child("studentDetail").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
-                            String Simg =String.valueOf(dataSnapshot.child("imageUrl").getValue());
-                            referencetTo=FirebaseStorage.getInstance().getReferenceFromUrl(Simg);
+                        if(dataSnapshot.hasChild("imageUrl")){
+                           String picUrl= String.valueOf(dataSnapshot.child("imageUrl").getValue());
+                            referencetTo=FirebaseStorage.getInstance().getReferenceFromUrl(picUrl);
                             referencetTo.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    Toast.makeText(editProfile.this,"Pic deleted",Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(editProfile.this,"Pic deleted",Toast.LENGTH_SHORT).show();
 
-                                }
-                            });
+                    }
+                });
                         }
+
                     }
 
                     @Override
@@ -134,6 +161,15 @@ public class editProfile extends AppCompatActivity {
 
                     }
                 });
+
+                //  referencetTo=FirebaseStorage.getInstance().getReferenceFromUrl(Simg);
+               /* referencetTo.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(editProfile.this,"Pic deleted",Toast.LENGTH_SHORT).show();
+
+                    }
+                });*/
             }
         });
         status_btn.setOnClickListener(new View.OnClickListener() {
@@ -159,6 +195,10 @@ public class editProfile extends AppCompatActivity {
                                  }
                              }
                          });
+
+
+
+
 
 
                 }
@@ -197,7 +237,7 @@ public class editProfile extends AppCompatActivity {
         });
 
 
-        Spinner spinSong = (Spinner) findViewById(R.id.song);
+       /* Spinner spinSong = (Spinner) findViewById(R.id.song);
         ArrayAdapter<String> songAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, studentSong);
         songAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinSong.setAdapter(songAdapter);
@@ -311,7 +351,7 @@ public class editProfile extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
 
     }
@@ -349,7 +389,10 @@ public class editProfile extends AppCompatActivity {
             if(resultCode==RESULT_OK)
             {
                 resultUri=result.getUri();
-                  Bitmap bitmap = null;
+                File file=new File(resultUri.getPath());
+                int file_size=Integer.parseInt(String.valueOf(file.length()/1024));
+                Toast.makeText(editProfile.this,String.valueOf(file_size)+"kb",Toast.LENGTH_SHORT).show();
+                Bitmap bitmap = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),resultUri);
                 imageView.setImageBitmap(bitmap);
@@ -359,6 +402,63 @@ public class editProfile extends AppCompatActivity {
             }
             }
         }
+
+
+
+        if(requestCode==2 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
+            filePath=data.getData();
+            MediaPlayer mediaPlayer=MediaPlayer.create(this,filePath);
+            int Second=(mediaPlayer.getDuration()/1000);
+            if(Second>30){
+                Toast.makeText(editProfile.this,"Audio must be less than equal to 30 second",Toast.LENGTH_LONG).show();
+            }else {
+                if(filePath!=null){
+                    final ProgressDialog progressDialog=new ProgressDialog(this);
+                    progressDialog.setTitle("Uploading...");
+                    progressDialog.show();
+                    final StorageReference ref=storageReference.child("audio/"+ UUID.randomUUID().toString());
+                    ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+                            ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    reference.child("studentDetail").child(user.getUid()).child("audioUrl").setValue(String.valueOf(uri))
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Toast.makeText(editProfile.this,"Audio uploaded successfully!!",Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+
+                                }
+                            });
+                        }
+                    })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(editProfile.this,"Failed!"+e.getMessage(),Toast.LENGTH_SHORT).show();
+
+                                }
+                            })
+                            .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                    double progress=(100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                                    progressDialog.setMessage("Uploaded"+(int)progress+"%");
+                                }
+                            });
+                }
+            }
+        }
+
+
+
+
+
     }
     private void  uploadImage(){
         if(resultUri!=null){
