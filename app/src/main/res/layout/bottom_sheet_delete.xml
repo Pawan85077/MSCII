@@ -49,7 +49,7 @@
             android:paddingTop="10dp">
 
             <LinearLayout
-                android:id="@+id/lyt_preview"
+                android:id="@+id/viewFullScreenImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -87,7 +87,7 @@
             android:paddingTop="15dp">
 
             <LinearLayout
-                android:id="@+id/lyt_share"
+                android:id="@+id/shareImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -126,7 +126,7 @@
             android:paddingTop="15dp">
 
             <LinearLayout
-                android:id="@+id/lyt_get_link"
+                android:id="@+id/deleteImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"

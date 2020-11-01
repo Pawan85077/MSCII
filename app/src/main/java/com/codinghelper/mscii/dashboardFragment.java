@@ -2,6 +2,7 @@ package com.codinghelper.mscii;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -55,9 +56,7 @@ import com.theartofdev.edmodo.cropper.CropImage;
  */
 public class dashboardFragment extends Fragment {
 
-    private Uri filePathx,resultUrix;
     StorageReference storageUtility,storageTenth,storageTwelfth,storageGraduation;
-    FirebaseAuth firebaseAuthx;
     FirebaseUser currentUser;
     DatabaseReference reference;
     private StorageReference storageReference;
@@ -73,7 +72,7 @@ public class dashboardFragment extends Fragment {
     private ProgressBar resumeProgressBar;
 
 
-    //
+    //Bottom Sheet utilities
     private BottomSheetBehavior mBehavior;
     private BottomSheetDialog mBottomSheetDialog;
     private View bottom_sheet;
@@ -118,10 +117,6 @@ public class dashboardFragment extends Fragment {
         //Defining Image Views
         resumeImageView = (ImageView)rootView.findViewById(R.id.resumeImageView);
 
-
-        //Getting Image URLs Status yto update name to Re_upload
-        //getImageURLsStatus();
-
         //Handling Expand and Collapse
         RelativeLayout UtilityDocHeader = (RelativeLayout) rootView.findViewById(R.id.utilityDocHeader);
         final HorizontalScrollView UtilityDocScroll = (HorizontalScrollView) rootView.findViewById(R.id.utilityDocCardScroll);
@@ -132,8 +127,8 @@ public class dashboardFragment extends Fragment {
                 if(UtilityDocScroll.getVisibility() == View.GONE){
                     UtilityDocScroll.setVisibility(View.VISIBLE);
                     docCategory = "utilityDocuments";
-                    docType = "resume";
-                    fetchStatus(docCategory,docType);
+                    //docType = "resume";
+                    fetchUtilityDocumentsStatus(docCategory);
                     UtilityExpandCollapse.setBackgroundResource(R.drawable.ic_colapse);
                 }else {
                     UtilityDocScroll.setVisibility(View.GONE);
@@ -190,18 +185,7 @@ public class dashboardFragment extends Fragment {
             }
         });
 
-        //View Buttons click action
-//        resumeView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                docCategory = "utilityDocuments";
-//                docType = "resume";
-//                final String s = "Resume";
-//                getImageAndOpenIt(docCategory,docType,s);
-//            }
-//        });
-
-        //ImageViews Onclick Listener
+        //Image Views OnclickListener
         resumeImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -211,15 +195,13 @@ public class dashboardFragment extends Fragment {
             }
         });
 
-        //Upload Buttons Action
+        //Upload Buttons OnclickListener
         resumeUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 docCategory = "utilityDocuments";
                 docType = "resume";
-                final String s = "Resume";
-//                getImageAndOpenIt(docCategory,docType,s);
-//                confirmThenUpload(docCategory,docType,s);
+                //final String s = "Resume";
                 openGallery();
             }
         });
@@ -238,6 +220,7 @@ public class dashboardFragment extends Fragment {
         startActivityForResult(gallery,pick);
     }
 
+    //Called automatically when image is selected
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -299,8 +282,8 @@ public class dashboardFragment extends Fragment {
         }
     }
 
-    private void fetchStatus(String docCategoryx, String docTypex) {
-        final String docTypexx = docTypex;
+    //fetching Utility documents status
+    private void fetchUtilityDocumentsStatus(String docCategoryx) {
 
         //URLs of images
         final String[] resumeURL = new String[1];
@@ -312,7 +295,7 @@ public class dashboardFragment extends Fragment {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                resumeURL[0] = String.valueOf(dataSnapshot.child(docTypexx).getValue());
+                resumeURL[0] = String.valueOf(dataSnapshot.child("resume").getValue());
                 if(URLUtil.isValidUrl(resumeURL[0]))
                 {
                     resumeImageView.setVisibility(View.VISIBLE);
@@ -326,6 +309,7 @@ public class dashboardFragment extends Fragment {
                                     @Override
                                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                                         resumeProgressBar.setVisibility(View.GONE);
+                                        Toast.makeText(getContext().getApplicationContext(), "Error loading document\nPls check your internet connectivity", Toast.LENGTH_SHORT).show();
                                         return false;
                                     }
 
@@ -376,7 +360,7 @@ public class dashboardFragment extends Fragment {
 
         final View view = getLayoutInflater().inflate(R.layout.bottom_sheet_delete, null);
 
-        ((View) view.findViewById(R.id.lyt_preview)).setOnClickListener(new View.OnClickListener() {
+        ((View) view.findViewById(R.id.viewFullScreenImage)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext().getApplicationContext(), "Showing Document in Full-Screen Mode", Toast.LENGTH_SHORT).show();
@@ -390,10 +374,9 @@ public class dashboardFragment extends Fragment {
             }
         });
 
-        ((View) view.findViewById(R.id.lyt_share)).setOnClickListener(new View.OnClickListener() {
+        ((View) view.findViewById(R.id.shareImage)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(getContext().getApplicationContext(), "Share clicked", Toast.LENGTH_SHORT).show();
                 if (URLUtil.isValidUrl(imageUrl[0]))
                 {
                     Intent sharingIntent = new Intent(Intent.ACTION_SEND);
@@ -408,27 +391,47 @@ public class dashboardFragment extends Fragment {
             }
         });
 
-        ((View) view.findViewById(R.id.lyt_get_link)).setOnClickListener(new View.OnClickListener() {
+        ((View) view.findViewById(R.id.deleteImage)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(getContext().getApplicationContext(), "Get link clicked", Toast.LENGTH_SHORT).show();
                 if (URLUtil.isValidUrl(imageUrl[0]))
                 {
-                    storageReference=FirebaseStorage.getInstance().getReferenceFromUrl(imageUrl[0]);
-                    storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),R.style.AlertDialogTheme);
+                    builder.setTitle("Delete Confirmation");
+                    builder.setIcon(R.drawable.ic_warning);
+                    builder.setMessage("Are you sure ?\nDo you really wanna delete selected document ?");
+                    builder.setPositiveButton("PROCEED", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(getContext().getApplicationContext(),"Document deleted successfully",Toast.LENGTH_SHORT).show();
-                            ref.child(docTypey).removeValue();
-                            Log.e("onSuccess:", " deleted file");
-                            fetchStatus(docCategoryy,docTypey);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.e("onFailure:", " could not delete file");
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            storageReference=FirebaseStorage.getInstance().getReferenceFromUrl(imageUrl[0]);
+                            storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(getContext().getApplicationContext(),"Document deleted successfully",Toast.LENGTH_SHORT).show();
+                                    ref.child(docTypey).removeValue();
+                                    Log.e("onSuccess:", " deleted file");
+
+                                    //calling all categories status
+                                    //later have to put switch cases for early loading
+                                    fetchUtilityDocumentsStatus(docCategoryy);
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getContext().getApplicationContext(),"SERVER ERROR...!!!\nCould not delete document",Toast.LENGTH_SHORT).show();
+                                    Log.e("onFailure:", " could not delete file");
+                                }
+                            });
                         }
                     });
+                    builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast.makeText(getContext().getApplicationContext(),"You calcelled deletion",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    builder.show();
+
                 }
                 mBottomSheetDialog.dismiss();
             }
@@ -451,182 +454,4 @@ public class dashboardFragment extends Fragment {
     }
 
 
-    //snack bar when image is not uploaded
-//    private void notUploadedSnackBar(String s) {
-//        Snackbar snackbar = Snackbar.make(getView(), "Opps.. Seems like your\n" + s +" is not uploaded yet...!!!", Snackbar.LENGTH_LONG)
-//                .setAction("UPLOAD", new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        docCategory = "utilityDocuments";
-//                        docType = "resume";
-//                        openGallery();
-//                    }
-//                });
-//        snackbar.show();
-//    }
-
-    //function to get image url and open in another layout..
-//    private void getImageAndOpenIt(final String docCategory, String docType, String s){
-//        final String docTypex = docType;
-//        final String sx = s;
-//        DatabaseReference ref = reference.child("personalDocuments").child(docCategory);
-//        ref.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                String transferrableImageURL = String.valueOf(dataSnapshot.child(docTypex).getValue());
-//                if (URLUtil.isValidUrl(transferrableImageURL)){
-//                    resumeUpload.setText("VIEW");
-//                    Intent fullScreenDocIntent = new Intent(getContext().getApplicationContext(),UserDocumentView.class);
-//                    fullScreenDocIntent.putExtra("docCategory",docCategory);
-//                    fullScreenDocIntent.putExtra("docType",docTypex);
-//                    startActivity(fullScreenDocIntent);
-//                }else
-//                {
-//                    //notUploadedSnackBar(sx);
-//                    resumeUpload.setText("UPLOAD");
-//                    resumeUpload.setBackgroundResource(R.color.grey_10);
-//                    resumeUpload.setTextColor(ContextCompat.getColor(getContext().getApplicationContext(),R.color.divider_gray));
-//                    openGallery();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
-
-    //Function to confirm from user before reUpload : If 1st time then Upload normally
-//    private void confirmThenUpload(final String docCategory,String docType,String s)
-//    {
-//        final String docTypex = docType;
-//        final String sx = s;
-//        DatabaseReference ref = reference.child("personalDocuments").child(docCategory);
-//        ref.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                String transferrableImageURL = String.valueOf(dataSnapshot.child(docTypex).getValue());
-//                if (URLUtil.isValidUrl(transferrableImageURL)){
-//                    //showBottomSheetDialog(docCategory,docTypex,sx);
-//                }else
-//                {
-//                    openGallery();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
-
-    //Need to be corrected Later
-//    private void getImageURLsStatus()
-//    {
-//        //for Utility documents
-//        final DatabaseReference refUtility = reference.child("personalDocuments").child("utilityDocuments");
-//        refUtility.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                String s = String.valueOf(dataSnapshot.child("resume").getValue());
-//                if(URLUtil.isValidUrl(s)){
-//                        resumeUpload.setText("VIEW");
-//                        //resumeView.setBackgroundResource(R.color.amber_900);
-//                        //resumeView.setTextColor(ContextCompat.getColor(getContext().getApplicationContext(),R.color.white));
-//                }else{
-//                    resumeUpload.setText("UPLOAD");
-//                    resumeUpload.setBackgroundResource(R.color.grey_10);
-//                    resumeUpload.setTextColor(ContextCompat.getColor(getContext().getApplicationContext(),R.color.divider_gray));
-//                }
-//
-//                String urlThumbImpression = String.valueOf(dataSnapshot.child("thumbImpression").getValue());
-//                if (dataSnapshot.hasChild("thumbImpression")){
-//                    thumbImpressionUpload.setText("Re-UPLOAD");
-//                }else {
-//                    thumbImpressionUpload.setText("UPLOAD");
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
-
-//    private void showBottomSheetDialog(final String docCategory,String docType,String ss)
-//    {
-//        final String docTypex = docType;
-//        final String sx = ss;
-//        if (mBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-//            mBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-//        }
-//
-//        final View view = getLayoutInflater().inflate(R.layout.bottom_sheet_delete, null);
-//        ((TextView) view.findViewById(R.id.bottom_sheet_title)).setText("Alert Message...!!!");
-//        ((TextView) view.findViewById(R.id.bottom_sheet_details)).setText("Seems Like you have already uploaded your " +sx+". If you further proceed then old document will be self deleted and replaced by new one.");
-//        (view.findViewById(R.id.bt_preview)).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mBottomSheetDialog.dismiss();
-//                getImageAndOpenIt(docCategory,docTypex,sx);
-//                mBottomSheetDialog.dismiss();
-//            }
-//        });
-//        (view.findViewById(R.id.bt_cancel)).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mBottomSheetDialog.dismiss();
-//            }
-//        });
-//
-//        (view.findViewById(R.id.bt_proceed)).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mBottomSheetDialog.dismiss();
-//                openGallery();
-//                mBottomSheetDialog.dismiss();
-//            }
-//        });
-//
-//        mBottomSheetDialog = new BottomSheetDialog(getContext());
-//        mBottomSheetDialog.setContentView(view);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            mBottomSheetDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//        }
-//
-//        mBottomSheetDialog.show();
-//        mBottomSheetDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-//            @Override
-//            public void onDismiss(DialogInterface dialog) {
-//                mBottomSheetDialog = null;
-//            }
-//        });
-//    }
-
-    //    private void initToolbar() {
-//        Toolbar toolbar = (Toolbar)getView().findViewById(R.id.toolbar);
-//        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-//        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        Tools.setSystemBarColor(this);
-//    }
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        if(visits==1)
-//        {
-//            Toast.makeText(getContext().getApplicationContext(),"visits: 1",Toast.LENGTH_SHORT).show();
-//        }else{
-//            getChildFragmentManager().beginTransaction().detach(this).commit();
-//            getChildFragmentManager().beginTransaction().attach(this).commit();
-//            mBottomSheetDialog.dismiss();
-//            char uhi = (char) visits;
-//            Toast.makeText(getContext().getApplicationContext(),"visits: "+uhi,Toast.LENGTH_SHORT).show();
-//        }
-//        visits++;
-//    }
 }
