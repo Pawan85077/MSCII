@@ -40,5 +40,34 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- For admin homepage spinner-->
+    <string-array name="adminSpinner1">
+        <item>--Select Department/Course--</item>
+        <item>BCA</item>
+        <item>IT</item>
+        <item>BCM</item>
+        <item>BBA</item>
+        <item>Maths</item>
+        <item>Physics</item>
+        <item>Chemistry</item>
+        <item>Botany</item>
+        <item>Zoology</item>
+        <item>Bio Technology</item>
+    </string-array>
+
+    <string-array name="adminSpinner2">
+        <item>--Select Session--</item>
+        <item>2016-19</item>
+        <item>2017-20</item>
+        <item>2018-21</item>
+        <item>2019-22</item>
+        <item>2020-23</item>
+        <item>2021-24</item>
+        <item>2021-25</item>
+        <item>2022-26</item>
+        <item>2023-27</item>
+        <item>2024-28</item>
+    </string-array>
+
 
 </resources>

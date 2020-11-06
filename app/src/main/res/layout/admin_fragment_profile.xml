@@ -16,12 +16,12 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="220dp"
-            android:background="@drawable/nature"
+            android:background="@drawable/splash_bg"
             android:padding="20dp">
 
 
             <com.mikhaellopez.circularimageview.CircularImageView
-                android:id="@+id/profile_image"
+                android:id="@+id/admin_profile_image"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:src="@drawable/main_stud"
@@ -30,10 +30,10 @@
 
 
             <TextView
-                android:id="@+id/full_name"
+                android:id="@+id/admin_pro_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/profile_image"
+                android:layout_below="@+id/admin_profile_image"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:includeFontPadding="false"
@@ -53,7 +53,7 @@
             android:padding="20dp">
 
             <Button
-                android:id="@+id/Edit_profile"
+                android:id="@+id/Edit_admin_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/profile_btbg"
@@ -106,7 +106,7 @@
                             android:textColor="#000" />
 
                         <TextView
-                            android:id="@+id/status_name"
+                            android:id="@+id/admin_status_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -144,7 +144,7 @@
                             android:textColor="#000" />
 
                         <TextView
-                            android:id="@+id/pro_name"
+                            android:id="@+id/admin_full_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/ic_person"
@@ -184,7 +184,7 @@
                             android:textSize="18sp"/>
 
                         <TextView
-                            android:id="@+id/pro_phone"
+                            android:id="@+id/admin_pro_phone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/ic_phone"
@@ -221,7 +221,7 @@
                             android:textSize="18sp"/>
 
                         <TextView
-                            android:id="@+id/pro_email"
+                            android:id="@+id/admin_pro_email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/ic_email"
