@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -112,6 +113,9 @@ public class dashboardFragment extends Fragment {
         // Inflate the layout for this fragment
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
+
+        //fullScreen
+        //requireActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         reference= FirebaseDatabase.getInstance().getReference().child("studentDetail").child(currentUser.getUid());
@@ -693,4 +697,22 @@ public class dashboardFragment extends Fragment {
     }
 
 
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//        requireActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//    }
+
+//
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+//    }
 }
