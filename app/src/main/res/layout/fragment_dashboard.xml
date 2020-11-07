@@ -48,12 +48,12 @@
                         android:layout_marginLeft="20dp"
                         android:textColor="#B0000000"/>
                 </LinearLayout>
-<!--                <com.mikhaellopez.circularimageview.CircularImageView-->
-<!--                    android:layout_width="40dp"-->
-<!--                    android:layout_height="40dp"-->
-<!--                    android:layout_alignParentEnd="true"-->
-<!--                    android:layout_margin="20dp"-->
-<!--                    android:background="@drawable/main_stud"/>-->
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/main_stud"/>
 
             </RelativeLayout>
 
@@ -120,15 +120,15 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_centerInParent="true"
-                                app:srcCompat="@drawable/shape_circle"
-                                app:tint="@color/orange_400" />
+                                android:src="@drawable/shape_circle"
+                                android:tint="@color/orange_400"/>
 
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_centerInParent="true"
-                                app:srcCompat="@drawable/ic_level"
-                                app:tint="@android:color/white" />
+                                android:src="@drawable/ic_level"
+                                android:tint="@android:color/white" />
 
                         </RelativeLayout>
 
@@ -189,15 +189,15 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_centerInParent="true"
-                                app:srcCompat="@drawable/shape_circle"
-                                app:tint="@color/indigo_400" />
+                                android:src="@drawable/shape_circle"
+                                android:tint="@color/indigo_400" />
 
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_centerInParent="true"
-                                app:srcCompat="@drawable/ic_friends"
-                                app:tint="@android:color/white" />
+                                android:src="@drawable/ic_friends"
+                                android:tint="@android:color/white" />
 
                         </RelativeLayout>
 
@@ -268,15 +268,15 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_centerInParent="true"
-                                app:srcCompat="@drawable/shape_circle"
-                                app:tint="@color/red_300" />
+                                android:src="@drawable/shape_circle"
+                                android:tint="@color/red_300" />
 
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_centerInParent="true"
-                                app:srcCompat="@drawable/ic_question_answered"
-                                app:tint="@android:color/white" />
+                                android:src="@drawable/ic_question_answered"
+                                android:tint="@android:color/white" />
 
                         </RelativeLayout>
 
@@ -338,15 +338,15 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_centerInParent="true"
-                                app:srcCompat="@drawable/shape_circle"
-                                app:tint="@color/light_green_500" />
+                                android:src="@drawable/shape_circle"
+                                android:tint="@color/light_green_500" />
 
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_centerInParent="true"
-                                app:srcCompat="@drawable/ic_upvotes"
-                                app:tint="@android:color/white" />
+                                android:src="@drawable/ic_upvotes"
+                                android:tint="@android:color/white" />
 
                         </RelativeLayout>
 
