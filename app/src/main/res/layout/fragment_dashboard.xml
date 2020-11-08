@@ -116,19 +116,19 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp">
 
-<!--                            <ImageView-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="match_parent"-->
-<!--                                android:layout_centerInParent="true"-->
-<!--                                android:src="@drawable/shape_circle"-->
-<!--                                android:tint="@color/orange_400"/>-->
-                            <com.mikhaellopez.circularimageview.CircularImageView
+                            <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_centerInParent="true"
-                                android:background="@drawable/shape_circle"
-                                android:backgroundTint="@color/orange_400"
-                                />
+                                android:src="@drawable/shape_circle"
+                                android:tint="@color/orange_400"/>
+<!--                            <com.mikhaellopez.circularimageview.CircularImageView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_centerInParent="true"-->
+<!--                                android:background="@drawable/shape_circle"-->
+<!--                                android:backgroundTint="@color/orange_400"-->
+<!--                                />-->
 
                             <ImageView
                                 android:layout_width="20dp"
@@ -192,19 +192,19 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp">
 
-<!--                            <ImageView-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="match_parent"-->
-<!--                                android:layout_centerInParent="true"-->
-<!--                                android:src="@drawable/shape_circle"-->
-<!--                                android:tint="@color/indigo_400" />-->
-                            <com.mikhaellopez.circularimageview.CircularImageView
+                            <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_centerInParent="true"
-                                android:background="@drawable/shape_circle"
-                                android:backgroundTint="@color/indigo_400"
-                                />
+                                android:src="@drawable/shape_circle"
+                                android:tint="@color/indigo_400" />
+<!--                            <com.mikhaellopez.circularimageview.CircularImageView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_centerInParent="true"-->
+<!--                                android:background="@drawable/shape_circle"-->
+<!--                                android:backgroundTint="@color/indigo_400"-->
+<!--                                />-->
 
 
                             <ImageView
@@ -279,19 +279,19 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp">
 
-<!--                            <ImageView-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="match_parent"-->
-<!--                                android:layout_centerInParent="true"-->
-<!--                                android:src="@drawable/shape_circle"-->
-<!--                                android:tint="@color/red_300" />-->
-                            <com.mikhaellopez.circularimageview.CircularImageView
+                            <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_centerInParent="true"
-                                android:background="@drawable/shape_circle"
-                                android:backgroundTint="@color/red_300"
-                                />
+                                android:src="@drawable/shape_circle"
+                                android:tint="@color/red_300" />
+<!--                            <com.mikhaellopez.circularimageview.CircularImageView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_centerInParent="true"-->
+<!--                                android:background="@drawable/shape_circle"-->
+<!--                                android:backgroundTint="@color/red_300"-->
+<!--                                />-->
 
 
                             <ImageView
@@ -357,19 +357,19 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp">
 
-<!--                            <ImageView-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="match_parent"-->
-<!--                                android:layout_centerInParent="true"-->
-<!--                                android:src="@drawable/shape_circle"-->
-<!--                                android:tint="@color/light_green_500" />-->
-                            <com.mikhaellopez.circularimageview.CircularImageView
+                            <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_centerInParent="true"
-                                android:background="@drawable/shape_circle"
-                                android:backgroundTint="@color/light_green_500"
-                                />
+                                android:src="@drawable/shape_circle"
+                                android:tint="@color/light_green_500" />
+<!--                            <com.mikhaellopez.circularimageview.CircularImageView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_centerInParent="true"-->
+<!--                                android:background="@drawable/shape_circle"-->
+<!--                                android:backgroundTint="@color/light_green_500"-->
+<!--                                />-->
 
 
                             <ImageView
