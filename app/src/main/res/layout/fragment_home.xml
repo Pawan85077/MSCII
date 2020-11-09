@@ -2,13 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
+    android:background="#28A6CCC7"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<WebView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/badge_background_color"
-    android:id="@+id/webView"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/user_update"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"/>
 
 </RelativeLayout>

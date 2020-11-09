@@ -175,7 +175,7 @@ public class editProfile extends AppCompatActivity {
         status_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String updatestatus=status.getText().toString();
+                final String updatestatus=status.getText().toString();
                 if (TextUtils.isEmpty(updatestatus)) {
                     status.setError("enter new status");
                     status.setFocusable(true);
@@ -188,6 +188,9 @@ public class editProfile extends AppCompatActivity {
                              @Override
                              public void onComplete(@NonNull Task<Void> task) {
                                  if(task.isSuccessful()){
+                                     String id=reference.child("PublicView").push().getKey();
+                                     reference.child("PublicView").child(id).child("peopleUID").setValue(user.getUid());
+                                     reference.child("PublicView").child(id).child("publicBio").setValue(updatestatus);
                                      Toast.makeText(editProfile.this,"Status Uploded!!",Toast.LENGTH_SHORT).show();
                                  }else {
                                      String message=task.getException().getMessage();
@@ -237,121 +240,6 @@ public class editProfile extends AppCompatActivity {
         });
 
 
-       /* Spinner spinSong = (Spinner) findViewById(R.id.song);
-        ArrayAdapter<String> songAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, studentSong);
-        songAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinSong.setAdapter(songAdapter);
-        spinSong.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedsong = parent.getItemAtPosition(position).toString();
-                if (selectedsong!="--Select song--") {
-                    Toast.makeText(parent.getContext(), selectedsong, Toast.LENGTH_LONG).show();
-                    if(selectedsong.equals("Rainbow"))
-                    {
-                        songUrl="https://drive.google.com/file/d/14hx36vsL70h19txJ8evOtLaoCxSOrLFw/view?usp=sharing";
-                        reference.child("studentDetail").child(user.getUid()).child("userSong").setValue(songUrl)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
-                                            Toast.makeText(editProfile.this,"song uploaded",Toast.LENGTH_SHORT).show();
-                                        }else {
-                                            String message=task.getException().getMessage();
-                                            Toast.makeText(editProfile.this,"Error:"+message,Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-                    }
-                    else if(selectedsong.equals("Despacito"))
-                    {
-                        String songUrl="https://drive.google.com/file/d/14nzSn57egWrsCWPcTOlbOr5-5z4ra1w9/view?usp=sharing";
-                        reference.child("studentDetail").child(user.getUid()).child("userSong").setValue(songUrl)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
-                                            Toast.makeText(editProfile.this,"song uploaded",Toast.LENGTH_SHORT).show();
-                                        }else {
-                                            String message=task.getException().getMessage();
-                                            Toast.makeText(editProfile.this,"Error:"+message,Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-                    }
-                    else if(selectedsong.equals("let me love you"))
-                    {
-                        String songUrl="https://drive.google.com/file/d/14usKxF8R4zLGyt2qx7Ajp-unbGSFtOUn/view?usp=sharing";
-                        reference.child("studentDetail").child(user.getUid()).child("userSong").setValue(songUrl)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
-                                            Toast.makeText(editProfile.this,"song uploaded",Toast.LENGTH_SHORT).show();
-                                        }else {
-                                            String message=task.getException().getMessage();
-                                            Toast.makeText(editProfile.this,"Error:"+message,Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-                    }
-                    else if(selectedsong.equals("Tum he Ana"))
-                    {
-                        String songUrl="https://drive.google.com/file/d/151wVcT1H0YHWsLTae3HjxrdIxg4DVm5u/view?usp=sharing";
-                        reference.child("studentDetail").child(user.getUid()).child("userSong").setValue(songUrl)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
-                                            Toast.makeText(editProfile.this,"song uploaded",Toast.LENGTH_SHORT).show();
-                                        }else {
-                                            String message=task.getException().getMessage();
-                                            Toast.makeText(editProfile.this,"Error:"+message,Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-                    }
-                    else if(selectedsong.equals("teddy"))
-                    {
-                        String songUrl="https://drive.google.com/file/d/14jaVIVvIaw26uwO4hMqDB2DzLpdZH_xc/view?usp=sharing";
-                        reference.child("studentDetail").child(user.getUid()).child("userSong").setValue(songUrl)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
-                                            Toast.makeText(editProfile.this,"song uploaded",Toast.LENGTH_SHORT).show();
-                                        }else {
-                                            String message=task.getException().getMessage();
-                                            Toast.makeText(editProfile.this,"Error:"+message,Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-                    }
-                    else if(selectedsong.equals("Tujhe kitna Chahne Lage"))
-                    {
-                        String songUrl="https://drive.google.com/file/d/15Ad5aa-j1WD0cXkr4F-aU4IMddoS4PBW/view?usp=sharing";
-                        reference.child("studentDetail").child(user.getUid()).child("userSong").setValue(songUrl)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
-                                            Toast.makeText(editProfile.this,"song uploaded",Toast.LENGTH_SHORT).show();
-                                        }else {
-                                            String message=task.getException().getMessage();
-                                            Toast.makeText(editProfile.this,"Error:"+message,Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-                    }
-
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });*/
 
 
     }
@@ -423,11 +311,14 @@ public class editProfile extends AppCompatActivity {
                             progressDialog.dismiss();
                             ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
-                                public void onSuccess(Uri uri) {
+                                public void onSuccess(final Uri uri) {
                                     reference.child("studentDetail").child(user.getUid()).child("audioUrl").setValue(String.valueOf(uri))
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
+                                                    String id=reference.child("PublicView").push().getKey();
+                                                    reference.child("PublicView").child(id).child("peopleUID").setValue(user.getUid());
+                                                    reference.child("PublicView").child(id).child("publicSong").setValue(String.valueOf(uri));
                                                     Toast.makeText(editProfile.this,"Audio uploaded successfully!!",Toast.LENGTH_SHORT).show();
                                                 }
                                             });
@@ -473,13 +364,16 @@ public class editProfile extends AppCompatActivity {
                     Toast.makeText(editProfile.this,"Image Uploaded!!",Toast.LENGTH_SHORT).show();
                     ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
-                        public void onSuccess(Uri uri) {
+                        public void onSuccess(final Uri uri) {
                       //      HashMap<String,String> hashMap=new HashMap<>();
                       //      hashMap.put("imageUrl",String.valueOf(uri));
                             reference.child("studentDetail").child(user.getUid()).child("imageUrl").setValue(String.valueOf(uri))
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
+                                    String id=reference.child("PublicView").push().getKey();
+                                    reference.child("PublicView").child(id).child("peopleUID").setValue(user.getUid());
+                                    reference.child("PublicView").child(id).child("publicImage").setValue(String.valueOf(uri));
                                     Toast.makeText(editProfile.this,"Finally completed!!",Toast.LENGTH_SHORT).show();
                                 }
                             });
