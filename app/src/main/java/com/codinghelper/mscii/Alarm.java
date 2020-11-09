@@ -30,6 +30,7 @@ public class Alarm extends BroadcastReceiver {
     DatabaseReference reference;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
+    String receiverUserID;
     StorageReference referencedel;
 
 
@@ -39,8 +40,8 @@ public class Alarm extends BroadcastReceiver {
         firebaseAuth=FirebaseAuth.getInstance();
         user=firebaseAuth.getCurrentUser();
         reference= FirebaseDatabase.getInstance().getReference();
-
-        reference.child("studentDetail").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        receiverUserID =intent.getExtras().get("visit_user_id").toString();
+        reference.child("studentDetail").child(receiverUserID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
@@ -52,7 +53,7 @@ public class Alarm extends BroadcastReceiver {
                             referencedel.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    reference.child("studentDetail").child(user.getUid()).child("states1").setValue("no");
+                                    reference.child("studentDetail").child(receiverUserID).child("states1").setValue("no");
                                     NotificationHelper notificationHelper = new NotificationHelper(context);
                                     NotificationCompat.Builder nb = notificationHelper.getChannelNotification("Aleart","your status update deleted");
                                     notificationHelper.getManager().notify(1,nb.build());
@@ -67,7 +68,7 @@ public class Alarm extends BroadcastReceiver {
                             referencedel.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    reference.child("studentDetail").child(user.getUid()).child("states2").setValue("no");
+                                    reference.child("studentDetail").child(receiverUserID).child("states2").setValue("no");
                                     NotificationHelper notificationHelper = new NotificationHelper(context);
                                     NotificationCompat.Builder nb = notificationHelper.getChannelNotification("Aleart","your status update deleted");
                                     notificationHelper.getManager().notify(1,nb.build());

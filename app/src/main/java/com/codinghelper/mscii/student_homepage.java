@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -25,6 +26,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -37,6 +40,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -200,11 +205,81 @@ public class student_homepage extends AppCompatActivity {
             requestNewGroup();
         }
         if (id == R.id.action_logout) {
-            firebaseAuth.getInstance().signOut();
-            new User(student_homepage.this).removeUser();
-            startActivity(new Intent(student_homepage.this, sloginActivity.class));
-            Toast.makeText(getApplicationContext(), "successfully logout!", Toast.LENGTH_SHORT).show();
-            finish();
+
+            Rootref.child("studentDetail").child(currentUserID).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists()){
+                        final String Simg1 =String.valueOf(dataSnapshot.child("states1").getValue());
+                        final String Simg2 =String.valueOf(dataSnapshot.child("states2").getValue());
+
+                        if(Simg1.equals("no")&&Simg2.equals("no")){
+                            firebaseAuth.getInstance().signOut();
+                            new User(student_homepage.this).removeUser();
+                            startActivity(new Intent(student_homepage.this, sloginActivity.class));
+                            Toast.makeText(getApplicationContext(), "successfully logout!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }else {
+                            AlertDialog.Builder builder=new AlertDialog.Builder(student_homepage.this,R.style.Theme_AppCompat_Light_Dialog_MinWidth);
+                            builder.setTitle("you need to delete your status before logout!!");
+
+                            builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+            if(!Simg1.equals("no")){
+                            StorageReference referenceDel= FirebaseStorage.getInstance().getReferenceFromUrl(Simg1);
+                            referenceDel.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Rootref.child("studentDetail").child(currentUserID).child("states1").setValue("no");
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext(),e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                        if(!Simg2.equals("no")){
+                            StorageReference referencedel=FirebaseStorage.getInstance().getReferenceFromUrl(Simg2);
+                            referencedel.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Rootref.child("studentDetail").child(currentUserID).child("states2").setValue("no");
+                                }
+                            });
+                        }
+                                    Toast.makeText(getApplicationContext(), "status deleted, now you can logout!!", Toast.LENGTH_SHORT).show();
+
+
+                                }
+                            });
+                            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.cancel();
+                                }
+                            });
+                            builder.show();
+                        }
+
+
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+
+
+
+
+
 
         }
         if (id == R.id.action_Delete) {

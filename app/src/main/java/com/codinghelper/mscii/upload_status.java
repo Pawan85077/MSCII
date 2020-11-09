@@ -258,9 +258,10 @@ public class upload_status extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(Void aVoid) {
 
-                                            int saveCurrentTime=36000;
+                                            int saveCurrentTime=300;
 
                                             Intent i=new Intent(upload_status.this,Alarm.class);
+                                            i.putExtra("visit_user_id",user.getUid());
                                             PendingIntent pendingIntent=PendingIntent.getBroadcast(getApplicationContext(),0,i,0);
                                             AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
                                             alarmManager.setExact(AlarmManager.RTC_WAKEUP,System.currentTimeMillis()+saveCurrentTime*1000,pendingIntent);
@@ -316,9 +317,10 @@ public class upload_status extends AppCompatActivity {
                                         public void onSuccess(Void aVoid) {
 
 
-                                            int saveCurrentTime=36000;
+                                            int saveCurrentTime=300;
 
                                             Intent i=new Intent(upload_status.this,Alarm.class);
+                                            i.putExtra("visit_user_id",user.getUid());
                                             PendingIntent pendingIntent=PendingIntent.getBroadcast(getApplicationContext(),0,i,0);
                                             AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
                                             alarmManager.setExact(AlarmManager.RTC_WAKEUP,System.currentTimeMillis()+saveCurrentTime*1000,pendingIntent);
