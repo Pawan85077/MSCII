@@ -52,6 +52,9 @@ public class AdminHomepage extends AppCompatActivity {
                         case R.id.nav_message2:
                             selectedFragment = new AdminMessageFragment();
                             break;
+                        case R.id.nav_student2:
+                            selectedFragment = new AdminStudentFragment();
+                            break;
                         case R.id.nav_profile2:
                             selectedFragment = new AdminProfileFragment();
                             break;
