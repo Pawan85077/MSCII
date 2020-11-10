@@ -39,6 +39,11 @@
         android:name="com.codinghelper.mscii.developer_display"
         android:label="Developer"
         tools:layout="@layout/fragment_developer_display" />
+    <fragment
+        android:id="@+id/nav_admin_feed"
+        android:name="com.codinghelper.mscii.StudentAdminFeedMainPage2"
+        android:label="Developer"
+        tools:layout="@layout/fragment_student_admin_feed_main_page2" />
 
     <fragment
         android:id="@+id/navigation_explore"

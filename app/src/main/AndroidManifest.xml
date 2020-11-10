@@ -16,30 +16,43 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Status_viewer"
-            android:launchMode="singleTask"/>
-        <activity android:name=".upload_status"
-            android:launchMode="singleTask"/>
-        <activity android:name=".Add_group_member"
-            android:launchMode="singleTask"/>
-        <activity android:name=".CreateGroup"
-            android:launchMode="singleTask"/>
-        <activity android:name=".UserDocumentView"
-            android:launchMode="singleTask"/>
-        <activity android:name=".GameOver"
-            android:launchMode="singleTask"/>
-        <activity android:name=".splashGameScreen"
-            android:launchMode="singleTask"/>
-        <activity android:name=".gameFirstPage"
-            android:launchMode="singleTask"/>
-        <activity android:name=".LiveActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".ComputerActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".answeringActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".FriendChatActivity"
-            android:launchMode="singleTask"/>
+        <activity android:name=".StudentAdminFeedMainPage"></activity>
+        <activity
+            android:name=".Status_viewer"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".upload_status"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".Add_group_member"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".CreateGroup"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".UserDocumentView"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".GameOver"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".splashGameScreen"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".gameFirstPage"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".LiveActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ComputerActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".answeringActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".FriendChatActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name=".smallSplashScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

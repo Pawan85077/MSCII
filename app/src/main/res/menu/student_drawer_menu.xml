@@ -13,6 +13,10 @@
             android:icon="@android:drawable/ic_popup_reminder"
             android:title="Notification" />
         <item
+            android:id="@+id/nav_admin_feed"
+            android:icon="@drawable/admin"
+            android:title="Admin Feed" />
+        <item
             android:id="@+id/nav_dashboard"
             android:icon="@drawable/ic_dashboard"
             android:title="Dashboard" />
