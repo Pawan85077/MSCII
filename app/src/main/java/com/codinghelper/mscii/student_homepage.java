@@ -103,7 +103,7 @@ public class student_homepage extends AppCompatActivity {
 
             }
         });
-        AppBarConfiguration appBarConfiguration=new AppBarConfiguration.Builder(R.id.nav_profile,R.id.nav_dashboard,R.id.nav_home,R.id.nav_chat,R.id.nav_notification,R.id.nav_developer,R.id.navigation_explore,R.id.navigation_activities,R.id.navigation_grade)
+        AppBarConfiguration appBarConfiguration=new AppBarConfiguration.Builder(R.id.nav_profile,R.id.nav_dashboard,R.id.nav_home,R.id.nav_chat,R.id.nav_notification,R.id.nav_developer,R.id.navigation_explore,R.id.navigation_activities,R.id.navigation_grade,R.id.nav_admin_feed)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this,R.id.navHostfrag);
