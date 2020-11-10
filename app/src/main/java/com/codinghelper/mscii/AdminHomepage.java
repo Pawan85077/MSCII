@@ -1,18 +1,15 @@
 package com.codinghelper.mscii;
 
+import android.app.ActionBar;
 import android.os.Bundle;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
-import android.view.MenuItem;
-import android.view.View;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AdminHomepage extends AppCompatActivity {
 
@@ -20,17 +17,9 @@ public class AdminHomepage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_homepage);
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        Toolbar toolbar = findViewById(R.id.admin_toolbar);
+        setSupportActionBar(toolbar);
+
 
 
         BottomNavigationView bottomNav = findViewById(R.id.admin_bottom_navigation);

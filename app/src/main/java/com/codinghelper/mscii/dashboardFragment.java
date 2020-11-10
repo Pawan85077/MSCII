@@ -1,6 +1,7 @@
 package com.codinghelper.mscii;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -19,12 +20,16 @@ import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -317,6 +322,8 @@ public class dashboardFragment extends Fragment {
     }
 
     //Called automatically when image is selected
+    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
+    @SuppressLint("WrongConstant")
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -335,11 +342,14 @@ public class dashboardFragment extends Fragment {
                     final ProgressDialog progressDialog=new ProgressDialog(getContext());
                     progressDialog.setTitle("Uploading your Document...");
                     progressDialog.show();
+
+
                     final StorageReference ref=storageUtility.child(currentUser.getUid() + docType);
                     ref.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
+
                             Toast.makeText(getContext().getApplicationContext(),"Document Uploaded",Toast.LENGTH_SHORT).show();
                             ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
@@ -368,7 +378,7 @@ public class dashboardFragment extends Fragment {
                                 @Override
                                 public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                                     double progress=(100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                                    progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                                    progressDialog.setMessage("Uploaded "+(int)progress+" %");
                                 }
                             });
                 }

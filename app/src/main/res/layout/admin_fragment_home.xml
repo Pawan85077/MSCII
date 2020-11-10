@@ -1,109 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/nav_home1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_bg">
-    <!--    <com.google.android.material.appbar.AppBarLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:theme="@style/AppTheme.AppBarOverlay">-->
+    android:background="@color/grey_10"
+    android:paddingTop="60dp">
 
-    <!--        <androidx.appcompat.widget.Toolbar-->
-    <!--            android:id="@+id/toolbar"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="?attr/actionBarSize"-->
-    <!--            android:background="?attr/colorPrimary"/>-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/admin_home_RecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-    <!--    </com.google.android.material.appbar.AppBarLayout>-->
-
-
-<!--    <ScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_marginTop="30dp">-->
-
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical">-->
-
-<!--            <androidx.cardview.widget.CardView-->
-<!--                android:id="@+id/cardview"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginLeft="30dp"-->
-<!--                android:layout_marginTop="60dp"-->
-<!--                android:layout_marginRight="30dp"-->
-<!--                android:background="#8F58B6">-->
-
-
-<!--                <EditText-->
-<!--                    android:id="@+id/editText"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_alignParentStart="true"-->
-<!--                    android:layout_alignParentTop="true"-->
-<!--                    android:layout_alignParentEnd="true"-->
-<!--                    android:ems="18"-->
-<!--                    android:gravity="start|top"-->
-<!--                    android:inputType="textMultiLine"-->
-<!--                    android:hint="Type Your Message Here....." />-->
-
-<!--            </androidx.cardview.widget.CardView>-->
-
-<!--            <Spinner-->
-<!--                android:id="@+id/spinner1"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@+id/cardview"-->
-<!--                android:layout_centerHorizontal="true"-->
-<!--                android:layout_marginLeft="30dp"-->
-<!--                android:layout_marginTop="30dp"-->
-<!--                android:layout_marginRight="30dp"-->
-<!--                android:background="@drawable/spinner_admin_signup" />-->
-
-<!--            <Spinner-->
-<!--                android:id="@+id/spinner2"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@+id/spinner1"-->
-<!--                android:layout_centerHorizontal="true"-->
-<!--                android:layout_marginLeft="30dp"-->
-<!--                android:layout_marginTop="30dp"-->
-<!--                android:layout_marginRight="30dp"-->
-<!--                android:background="@drawable/spinner_admin_signup" />-->
-
-<!--            <Button-->
-<!--                android:id="@+id/button1"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginLeft="30dp"-->
-<!--                android:layout_marginTop="30dp"-->
-<!--                android:layout_marginRight="30dp"-->
-<!--                android:layout_below="@+id/spinner2"-->
-<!--                android:layout_centerHorizontal="true"-->
-<!--                android:text="Send"-->
-<!--                android:textSize="25sp"-->
-<!--                android:textColor="@color/space_white"-->
-<!--                android:background="@drawable/bt_bg"/>-->
-
-
-
-<!--        </LinearLayout>-->
-
-
-
-<!--    </ScrollView>-->
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home Fragment"
-        android:textSize="45sp"
-        android:textColor="#B18605"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"/>
-
-</RelativeLayout>
+</FrameLayout>
