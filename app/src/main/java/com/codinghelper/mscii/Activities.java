@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -81,10 +82,11 @@ public class Activities extends Fragment {
                         if(model.getAnswer().equals("Not answered yet!!")){
                             holder.up.setVisibility(View.INVISIBLE);
                             holder.Likes.setVisibility(View.INVISIBLE);
-                            holder.Answers.setTextColor(Color.parseColor("#FF8000"));
-                            holder.Answers.setText(model.getAnswer());
+                            holder.Answers.loadData("Not answered yet","text/html",null);
                         }else {
-                            holder.Answers.setText(model.getAnswer());
+                          //  holder.Answers.setText(model.getAnswer());
+                            holder.Answers.getSettings().setJavaScriptEnabled(true);
+                            holder.Answers.loadData(model.getAnswer(),"text/html",null);
                             holder.up.setVisibility(View.VISIBLE);
                             holder.Likes.setVisibility(View.VISIBLE);
                         }
@@ -218,7 +220,7 @@ public class Activities extends Fragment {
     }
     public static class QuestionViewHolder extends RecyclerView.ViewHolder{
         TextView Questions;
-        TextView Answers;
+        WebView Answers;
         TextView       Likes;
         CircularImageView AskerImage;
         CircularImageView AnswererImage;
