@@ -81,11 +81,37 @@
                 android:cropToPadding="true"
                 app:civ_border="false"/>
 
-            <WebView
-                android:id="@+id/Answer2ques"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:ignore="WebViewLayout" />
+                android:paddingStart="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switchAns"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View  "
+                        android:textColor="@color/blue_900"
+                        android:background="@color/amber_300"/>
+
+                </LinearLayout>
+
+
+
+                <WebView
+                    android:id="@+id/Answer2ques"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:ignore="WebViewLayout"
+                    android:visibility="invisible"/>
+            </LinearLayout>
+
+
 
            <!-- <TextView
                 android:id="@+id/Answer2ques"

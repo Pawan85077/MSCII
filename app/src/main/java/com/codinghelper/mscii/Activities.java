@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,17 +81,30 @@ public class Activities extends Fragment {
                     @Override
                     protected void onBindViewHolder(@NonNull final QuestionViewHolder holder, int position, @NonNull final StudentQuestion model) {
                         holder.Questions.setText(model.getQuestionAsked());
-                        if(model.getAnswer().equals("Not answered yet!!")){
-                            holder.up.setVisibility(View.INVISIBLE);
-                            holder.Likes.setVisibility(View.INVISIBLE);
-                            holder.Answers.loadData("Not answered yet","text/html",null);
-                        }else {
-                          //  holder.Answers.setText(model.getAnswer());
-                            holder.Answers.getSettings().setJavaScriptEnabled(true);
-                            holder.Answers.loadData(model.getAnswer(),"text/html",null);
-                            holder.up.setVisibility(View.VISIBLE);
-                            holder.Likes.setVisibility(View.VISIBLE);
-                        }
+                        holder.aSwitch.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (holder.aSwitch.isChecked()) {
+
+                                    holder.Answers.setVisibility(View.VISIBLE);
+                                    if (model.getAnswer().equals("Not answered yet!!")) {
+                                        holder.up.setVisibility(View.INVISIBLE);
+                                        holder.Likes.setVisibility(View.INVISIBLE);
+                                        holder.Answers.loadData("Not answered yet", "text/html", null);
+                                    } else {
+                                        //  holder.Answers.setText(model.getAnswer());
+                                        holder.Answers.getSettings().setJavaScriptEnabled(true);
+                                        holder.Answers.loadData(model.getAnswer(), "text/html", null);
+                                        holder.up.setVisibility(View.VISIBLE);
+                                        holder.Likes.setVisibility(View.VISIBLE);
+                                    }
+                                }else {
+                                    holder.Answers.loadData("","text/html",null);
+                                    holder.Answers.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                        });
+
                         holder.Askername.setText(model.getAskerName());
                         holder.topic.setText(model.getTopic());
                         Picasso.get().load(model.getAskerImage()).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(holder.AskerImage);
@@ -226,6 +241,7 @@ public class Activities extends Fragment {
         CircularImageView AnswererImage;
         Button Flagbtn,Askername,topic;
         ShineButton up,down;
+        SwitchCompat aSwitch;
         int countLikes;
         String currentUserId;
         DatabaseReference Likesref,root;
@@ -233,6 +249,7 @@ public class Activities extends Fragment {
             super(itemView);
             Questions=itemView.findViewById(R.id.AllQuestion);
             Flagbtn=itemView.findViewById(R.id.flagBtn);
+            aSwitch=itemView.findViewById(R.id.switchAns);
             root= FirebaseDatabase.getInstance().getReference();
             Answers=itemView.findViewById(R.id.Answer2ques);
             AnswererImage=itemView.findViewById(R.id.Answerer_profile_image);
