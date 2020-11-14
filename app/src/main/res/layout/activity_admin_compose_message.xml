@@ -60,6 +60,7 @@
                     android:text="Sender's department name"
                     android:textSize="17dp"
                     android:textColor="@color/black"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"/>
 
@@ -130,6 +131,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/composeTo_RecyclerView"
+                        android:paddingTop="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
 
@@ -170,6 +172,7 @@
                     android:layout_marginRight="10dp"
                     android:textSize="17dp"
                     android:textColor="@color/black"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                     android:fontFamily="sans-serif-medium"
                     android:cursorVisible="true"
                     android:textCursorDrawable="@color/black"
@@ -204,6 +207,7 @@
                 android:textCursorDrawable="@color/black"
                 android:textIsSelectable="true"
                 android:textColorHighlight="@color/green_100"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:linksClickable="true"
                 android:autoLink="all"/>
 
@@ -214,7 +218,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="120dp"
                 android:layout_marginBottom="30dp"
                 android:text="send"
                 android:background="@color/green_500"
