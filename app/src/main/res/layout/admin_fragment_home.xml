@@ -1,14 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_home1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_below="@+id/admin_toolbar"
+    android:orientation="vertical"
+    android:layout_weight="0.6"
     android:background="@color/grey_10"
-    android:paddingTop="60dp">
+    android:stateListAnimator="@null"
+    android:layout_marginTop="60dp">
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/composeMessageFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:backgroundTint="#FDF3F6"
+        android:layout_margin="16dp"
+        android:text="Compose"
+        android:textSize="15dp"
+        android:textColor="@color/pink_500"
+        android:textAlignment="textStart"
+        app:icon="@drawable/ic_create"
+        app:iconSize="25dp"
+        app:iconGravity="start"
+        app:iconTint="@color/pink_500"
+        android:elevation="6dp"
+        app:strokeColor="@color/pink_500"
+        app:strokeWidth="0.1dp"
+        tools:ignore="RtlCompat" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/admin_home_RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-</FrameLayout>
+
+</RelativeLayout>

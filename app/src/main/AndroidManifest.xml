@@ -16,7 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".StudentAdminFeedMainPage"></activity>
+        <activity
+            android:name=".AdminComposeMessage"
+        />
+        <activity android:name=".StudentAdminFeedMainPage" />
         <activity
             android:name=".Status_viewer"
             android:launchMode="singleTask" />
@@ -53,9 +56,7 @@
         <activity
             android:name=".FriendChatActivity"
             android:launchMode="singleTask" />
-        <activity
-            android:name=".smallSplashScreen"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".smallSplashScreen" />
         <activity android:name=".GroupChatActivity" />
         <activity android:name=".Show_profile_Activity" />
         <activity
@@ -64,8 +65,7 @@
         <activity android:name=".editProfile" />
         <activity
             android:name=".AdminHomepage"
-            android:label="@string/title_activity_admin_homepage"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_admin_homepage" />
         <activity
             android:name=".student_homepage"
             android:launchMode="singleTask" />
@@ -78,8 +78,7 @@
         <activity
             android:name=".Stud_signup"
             android:label="@string/title_activity_stud_signup"
-            android:launchMode="singleTask"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:launchMode="singleTask" />
         <activity
             android:name=".aloginActivity"
             android:launchMode="singleTask" />

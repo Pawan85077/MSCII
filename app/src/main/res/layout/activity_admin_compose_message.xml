@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AdminComposeMessage">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/compose_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        app:titleTextColor="@color/grey_80"
+        app:title="Compose"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Light"
+        app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
+        />
+
+<!--    fromLayout-->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/mainScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:clipToPadding="false"
+        android:scrollbars="none"
+        android:background="@color/white"
+        android:scrollingCache="true"
+        android:layout_below="@id/compose_toolbar"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <LinearLayout
+                android:id="@+id/fromLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="From"
+                    android:textSize="17dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sender's department name"
+                    android:textSize="17dp"
+                    android:textColor="@color/black"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"/>
+
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey_5"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"/>
+
+            <LinearLayout
+                android:id="@+id/toLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="To"
+                    android:textSize="17dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"/>
+
+                <RelativeLayout
+                    android:id="@+id/composeToRL"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="0.6"
+                    android:background="@color/grey_10"
+                    android:paddingLeft="10dp"
+                    android:stateListAnimator="@null">
+
+                    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                        android:id="@+id/add_RecepientsFAB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="55dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_below="@+id/composeTo_RecyclerView"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:backgroundTint="@color/green_50"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="Add recipient"
+                        android:textSize="15dp"
+                        android:textColor="@color/green_500"
+                        android:textAlignment="textStart"
+                        app:icon="@drawable/ic_add"
+                        app:iconSize="25dp"
+                        app:iconGravity="start"
+                        app:iconTint="@color/green_500"
+                        android:elevation="6dp"
+                        app:strokeColor="@color/green_500"
+                        app:strokeWidth="0.1dp"
+                        tools:ignore="RtlCompat" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/composeTo_RecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey_5"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"/>
+
+            <LinearLayout
+                android:id="@+id/subjectLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Subject"
+                    android:textSize="17dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"/>
+
+                <EditText
+                    android:id="@+id/composeMessageSubject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="17dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif-medium"
+                    android:cursorVisible="true"
+                    android:textCursorDrawable="@color/black"
+                    android:textIsSelectable="true"
+                    android:textColorHighlight="@color/green_100"
+                    android:linksClickable="true"
+                    android:autoLink="all"/>
+
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey_5"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"/>
+
+            <EditText
+                android:id="@+id/composeMessageBody"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:hint="Compose Message"
+                android:textSize="17dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey_500"
+                android:cursorVisible="true"
+                android:textCursorDrawable="@color/black"
+                android:textIsSelectable="true"
+                android:textColorHighlight="@color/green_100"
+                android:linksClickable="true"
+                android:autoLink="all"/>
+
+
+            <Button
+                android:id="@+id/composeSendButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="30dp"
+                android:text="send"
+                android:background="@color/green_500"
+                android:textColor="#ffffff"/>
+
+
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

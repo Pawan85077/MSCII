@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -57,6 +58,8 @@ public class AdminHomeFragment extends Fragment {
         //return inflater.inflate(R.layout.admin_fragment_home, container, false);
         View view = inflater.inflate(R.layout.admin_fragment_home, container, false);
 
+        final ExtendedFloatingActionButton composeMessageFAB = view.findViewById(R.id.composeMessageFAB);
+        composeMessageFAB.shrink();
 
         Rootref= FirebaseDatabase.getInstance().getReference();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -68,8 +71,42 @@ public class AdminHomeFragment extends Fragment {
         AdminRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         AdminRecyclerView.setAdapter(admin_recycler_adapter);
 //        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        //FAB click listener
+        composeMessageFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                ExtendedFloatingActionButton extFab = (ExtendedFloatingActionButton)view;
+//                if(extFab.isExtended())
+//                    extFab.shrink();
+//                else
+//                    extFab.extend();
+                Intent composeMessageIntent = new Intent(getContext(),AdminComposeMessage.class);
+                startActivity(composeMessageIntent);
+            }
+        });
+
+        AdminRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                if(dy > 0) {
+                    //scroll Down
+                    if (composeMessageFAB.isExtended()) composeMessageFAB.shrink();
+                }else if (dy <0){
+                    //scroll up
+                    if(!composeMessageFAB.isExtended()) composeMessageFAB.extend();
+                }
+            }
+        });
+
+        getActivity().setTitle("Homepage");
         return view;
     }
 
@@ -135,5 +172,7 @@ public class AdminHomeFragment extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
 
