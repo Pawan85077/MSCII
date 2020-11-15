@@ -1,5 +1,8 @@
 package com.codinghelper.mscii;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.Toolbar;
@@ -7,9 +10,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
@@ -69,6 +78,8 @@ public class AdminComposeMessage extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Toast.makeText(this, "Message discarded successfully...!!!", Toast.LENGTH_SHORT).show();
         super.onBackPressed();
     }
+
 }
