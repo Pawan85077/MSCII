@@ -81,7 +81,7 @@ public class AdminHomeFragment extends Fragment {
 //                    extFab.shrink();
 //                else
 //                    extFab.extend();
-                Intent composeMessageIntent = new Intent(getContext(),AdminComposeMessage.class);
+                Intent composeMessageIntent = new Intent(getContext(),AdminAddRecepients.class);
                 startActivity(composeMessageIntent);
             }
         });

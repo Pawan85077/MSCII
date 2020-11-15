@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +20,13 @@ public class AdminAddRecepients extends AppCompatActivity implements View.OnClic
 
     LinearLayout layoutLists;
     Button buttonAdd;
+    Button buttonSubmitList;
 
     //Lists of strings for department and session spinner
     List<String> departmentsLists = new ArrayList<>();
     List<String> sessionLists = new ArrayList<>();
+
+    ArrayList<Admin_composeRecyclerValue_from_AddRecipients> admin_composeRecyclerValue_from_addRecipientsArrayList = new ArrayList<>();
 
 
     @Override
@@ -45,8 +50,10 @@ public class AdminAddRecepients extends AppCompatActivity implements View.OnClic
 
         layoutLists = findViewById(R.id.recipients_List);
         buttonAdd = findViewById(R.id.add_NewRecipient);
+        buttonSubmitList = findViewById(R.id.submit_Recipients_List);
 
         buttonAdd.setOnClickListener(this);
+        buttonSubmitList.setOnClickListener(this);
 
         //DEPARTMENT lIST ITEMS
         departmentsLists.add("--Select Department--");
@@ -55,8 +62,8 @@ public class AdminAddRecepients extends AppCompatActivity implements View.OnClic
         departmentsLists.add("BCM");
         departmentsLists.add("BBA");
         departmentsLists.add("Maths");
-        departmentsLists.add("Physics");
-        departmentsLists.add("Chemistry");
+        departmentsLists.add("Physics Department");
+        departmentsLists.add("Chemistry Department");
         departmentsLists.add("Botany");
         departmentsLists.add("Zoology");
         departmentsLists.add("Bio Technology");
@@ -79,7 +86,72 @@ public class AdminAddRecepients extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        addView();
+
+        switch (v.getId()){
+
+            case R.id.add_NewRecipient:
+                addView();
+                break;
+
+            case R.id.submit_Recipients_List:
+
+                if (checkIfValidAndRead()){
+
+                    finish();
+                    Intent intent = new Intent(AdminAddRecepients.this,AdminComposeMessage.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("list",admin_composeRecyclerValue_from_addRecipientsArrayList);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+
+                }
+
+                break;
+        }
+
+
+    }
+
+    private boolean checkIfValidAndRead() {
+
+        admin_composeRecyclerValue_from_addRecipientsArrayList.clear();
+        boolean result = true;
+
+        for (int i=0; i<layoutLists.getChildCount(); i++){
+
+            View recepientsView = layoutLists.getChildAt(i);
+            AppCompatSpinner spinnerDepartments = (AppCompatSpinner)recepientsView.findViewById(R.id.spinner_departments);
+            AppCompatSpinner spinnerSession = (AppCompatSpinner)recepientsView.findViewById(R.id.spinner_session);
+
+            Admin_composeRecyclerValue_from_AddRecipients admin_composeRecyclerValue_from_addRecipients = new Admin_composeRecyclerValue_from_AddRecipients();
+
+            if (spinnerDepartments.getSelectedItemPosition()!=0){
+                admin_composeRecyclerValue_from_addRecipients.setDepartmentName(departmentsLists.get(spinnerDepartments.getSelectedItemPosition()));
+            }else {
+                result = false;
+                break;
+            }
+
+            if (spinnerSession.getSelectedItemPosition()!=0){
+                admin_composeRecyclerValue_from_addRecipients.setSessionName(sessionLists.get(spinnerSession.getSelectedItemPosition()));
+            }else {
+                result = false;
+                break;
+            }
+
+            admin_composeRecyclerValue_from_addRecipientsArrayList.add(admin_composeRecyclerValue_from_addRecipients);
+
+        }
+
+        if (admin_composeRecyclerValue_from_addRecipientsArrayList.size() == 0){
+            result = false;
+            Toast.makeText(this, "Add at least one recipient", Toast.LENGTH_SHORT).show();
+        }else if (!result){
+            Toast.makeText(this, "Enter all details correctly", Toast.LENGTH_SHORT).show();
+        }
+
+
+        return result;
     }
 
     private void addView() {
