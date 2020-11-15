@@ -16,9 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".AdminComposeMessage"
-        />
+        <activity android:name=".AdminAddRecepients"></activity>
+        <activity android:name=".AdminComposeMessage" />
         <activity android:name=".StudentAdminFeedMainPage" />
         <activity
             android:name=".Status_viewer"

@@ -25,7 +25,7 @@ public class Admin_composeTo_Recycler_Adapter extends RecyclerView.Adapter<Admin
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 30;
     }
 
     class AdminComposeToViewHolder extends RecyclerView.ViewHolder{
