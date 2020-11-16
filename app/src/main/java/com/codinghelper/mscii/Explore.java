@@ -165,6 +165,7 @@ public class Explore extends Fragment {
                                    rec.put("FinalAnswererId","Not yet");
                                    rec.put("AskerName",Sname);
                                    rec.put("AnswererName","unknown");
+                                   rec.put("reportedTimes",0);
                                    userQuestion.child(key).updateChildren(rec).addOnCompleteListener(new OnCompleteListener() {
                                        @Override
                                        public void onComplete(@NonNull Task task) {

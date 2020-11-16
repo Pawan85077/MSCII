@@ -43,7 +43,7 @@ public class Activities extends Fragment {
     private String currentUserId;
     ProgressDialog progressDialog;
     boolean Likechecker = false;
-    int reportValue=0;
+    int reportValue;
 
 
     public Activities() {
@@ -267,8 +267,22 @@ public class Activities extends Fragment {
                                 }else if(model.getposition().equals("Report")){
                                     userQuestion.child(question_id).child("position").setValue("Reported");
                                     userQuestion.child(question_id).child("reported").setValue("yes");
-                                    reportValue++;
-                                    userQuestion.child(question_id).child("reportedTimes").setValue(reportValue);
+                                    userQuestion.child(question_id).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            String Sfinal =String.valueOf(dataSnapshot.child("reportedTimes").getValue());
+                                            reportValue=Integer.parseInt(Sfinal);
+                                            reportValue++;
+                                            userQuestion.child(question_id).child("reportedTimes").setValue(reportValue);
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+
                                     Toast.makeText(getActivity(), "Reported successful", Toast.LENGTH_LONG).show();
                                 }else {
                                     reportReason();
