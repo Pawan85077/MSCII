@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -42,6 +43,7 @@ public class Activities extends Fragment {
     private String currentUserId;
     ProgressDialog progressDialog;
     boolean Likechecker = false;
+    int reportValue=0;
 
 
     public Activities() {
@@ -81,6 +83,8 @@ public class Activities extends Fragment {
                     @Override
                     protected void onBindViewHolder(@NonNull final QuestionViewHolder holder, int position, @NonNull final StudentQuestion model) {
                         holder.Questions.setText(model.getQuestionAsked());
+
+
                         holder.aSwitch.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -105,11 +109,51 @@ public class Activities extends Fragment {
                             }
                         });
 
+
                         holder.Askername.setText(model.getAskerName());
                         holder.topic.setText(model.getTopic());
                         Picasso.get().load(model.getAskerImage()).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(holder.AskerImage);
                         Picasso.get().load(model.getAnswererImage()).fit().noFade().placeholder(R.drawable.main_stud).into(holder.AnswererImage);
                         final String question_id=getRef(position).getKey();
+                        userQuestion.child(question_id).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                String Sfinal =String.valueOf(dataSnapshot.child("FinalAnswererId").getValue());
+                                String Sreport =String.valueOf(dataSnapshot.child("reportedTimes").getValue());
+                                String Ssreport =String.valueOf(dataSnapshot.child("reported").getValue());
+                                holder.showReport.setVisibility(View.INVISIBLE);
+                                holder.showReport.setEnabled(false);
+                                holder.reports.setVisibility(View.INVISIBLE);
+                                if(Ssreport.equals("yes")){
+                                    holder.showReport.setVisibility(View.VISIBLE);
+                                    holder.showReport.setEnabled(true);
+                                    holder.reports.setVisibility(View.VISIBLE);
+                                    holder.reports.setText(Sreport);
+                                }
+                                if(Sfinal.equals(currentUserId)){
+                                    holder.editAns.setVisibility(View.VISIBLE);
+                                    holder.editAns.setEnabled(true);
+                                    holder.editAns.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Intent profileIntent = new Intent(getActivity(), answeringActivity.class);
+                                            profileIntent.putExtra("question_id", question_id);
+                                            profileIntent.putExtra("current_answerer_id", currentUserId);
+                                            startActivity(profileIntent);
+                                        }
+                                    });
+                                }else{
+                                    holder.editAns.setVisibility(View.INVISIBLE);
+                                    holder.editAns.setEnabled(false);
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
                         holder.Askername.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -176,12 +220,17 @@ public class Activities extends Fragment {
                                });
                             }
                         });
-
+                        holder.showReport.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                reportReason();
+                            }
+                        });
                         holder.Flagbtn.setText(model.getposition());
                         holder.Flagbtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                if(!model.getposition().equals("Live")){
+                                if(model.getposition().equals("answer")){
                                     if(!model.getaskerUID().equals(currentUserId)){
                                         userQuestion.child(question_id).child("AnswererId").setValue(currentUserId);
                                         Intent profileIntent = new Intent(getActivity(), answeringActivity.class);
@@ -194,7 +243,7 @@ public class Activities extends Fragment {
                                     }
 
 
-                                }else {
+                                }else if(model.getposition().equals("Live")){
 
                                    /* root.child(currentUserId).addValueEventListener(new ValueEventListener() {
                                         @Override
@@ -215,6 +264,15 @@ public class Activities extends Fragment {
                                         }
                                     });*/
 
+                                }else if(model.getposition().equals("Report")){
+                                    userQuestion.child(question_id).child("position").setValue("Reported");
+                                    userQuestion.child(question_id).child("reported").setValue("yes");
+                                    reportValue++;
+                                    userQuestion.child(question_id).child("reportedTimes").setValue(reportValue);
+                                    Toast.makeText(getActivity(), "Reported successful", Toast.LENGTH_LONG).show();
+                                }else {
+                                    reportReason();
+
                                 }
 
                             }
@@ -233,13 +291,20 @@ public class Activities extends Fragment {
         recyclerView.setAdapter(adapter);
         adapter.startListening();
     }
+
+    private void reportReason() {
+        Toast.makeText(getActivity(), "Reporting reason!!", Toast.LENGTH_LONG).show();
+
+    }
+
     public static class QuestionViewHolder extends RecyclerView.ViewHolder{
         TextView Questions;
         WebView Answers;
-        TextView       Likes;
+        TextView       Likes,reports;
+        ImageButton showReport;
         CircularImageView AskerImage;
         CircularImageView AnswererImage;
-        Button Flagbtn,Askername,topic;
+        Button Flagbtn,Askername,topic,editAns;
         ShineButton up,down;
         SwitchCompat aSwitch;
         int countLikes;
@@ -247,8 +312,11 @@ public class Activities extends Fragment {
         DatabaseReference Likesref,root;
         public QuestionViewHolder(@NonNull View itemView) {
             super(itemView);
+            reports=itemView.findViewById(R.id.countreports);
+            showReport=itemView.findViewById(R.id.showReportStatus);
             Questions=itemView.findViewById(R.id.AllQuestion);
             Flagbtn=itemView.findViewById(R.id.flagBtn);
+            editAns=itemView.findViewById(R.id.editAns);
             aSwitch=itemView.findViewById(R.id.switchAns);
             root= FirebaseDatabase.getInstance().getReference();
             Answers=itemView.findViewById(R.id.Answer2ques);
