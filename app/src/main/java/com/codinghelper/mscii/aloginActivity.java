@@ -121,7 +121,7 @@ public class aloginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = txtEmail.getText().toString().trim();
+                final String email = txtEmail.getText().toString().trim();
                 String password = txtPassword.getText().toString().trim();
                 if (TextUtils.isEmpty(email)) {
                     txtEmail.setError("enter email");

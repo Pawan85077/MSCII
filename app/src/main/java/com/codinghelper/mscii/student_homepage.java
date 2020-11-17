@@ -214,8 +214,7 @@ public class student_homepage extends AppCompatActivity {
                         final String Simg2 =String.valueOf(dataSnapshot.child("states2").getValue());
 
                         if(Simg1.equals("no")&&Simg2.equals("no")){
-                            firebaseAuth.getInstance().signOut();
-                            new User(student_homepage.this).removeUser();
+                            FirebaseAuth.getInstance().signOut();
                             startActivity(new Intent(student_homepage.this, sloginActivity.class));
                             Toast.makeText(getApplicationContext(), "successfully logout!", Toast.LENGTH_SHORT).show();
                             finish();
@@ -320,7 +319,6 @@ public class student_homepage extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         reference.removeValue();
-                                        new User(student_homepage.this).removeUser();
                                         user.delete()
                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override

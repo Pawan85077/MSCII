@@ -36,12 +36,12 @@ public class MainActivity extends AwesomeSplash {
         auth= FirebaseAuth.getInstance();
         currentuser=FirebaseAuth.getInstance().getCurrentUser();
         Root= FirebaseDatabase.getInstance().getReference().child("studentDetail");
-        User user=new User(MainActivity.this);
-        if(user.getEmail()!=""){
-            updateUserStatus("online");
+            if(currentuser!=null){
+         //   updateUserStatus("online");
             startActivity(new Intent(MainActivity.this, smallSplashScreen.class));
             finish();
         }
+
     }
 
    /* @Override
@@ -109,7 +109,7 @@ public class MainActivity extends AwesomeSplash {
         configSplash.setAnimTitleDuration(1000);
         //logo
         configSplash.setLogoSplash(R.drawable.lo);
-        configSplash.setAnimLogoSplashDuration(1000);
+        configSplash.setAnimLogoSplashDuration(3000);
         configSplash.setAnimLogoSplashTechnique(Techniques.FadeIn);
 
     }

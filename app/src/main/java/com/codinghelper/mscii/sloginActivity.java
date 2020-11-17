@@ -124,8 +124,6 @@ public class sloginActivity extends AppCompatActivity {
                                                                 public void onComplete(@NonNull Task<Void> task) {
                                                                    if(task.isSuccessful()){
                                                                        progressDialog.dismiss();
-                                                                       User user=new User(sloginActivity.this);
-                                                                       user.setEmail(email);
                                                                        startActivity(new Intent(sloginActivity.this, student_homepage.class));
                                                                      //  finish();
                                                                    }

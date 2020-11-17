@@ -9,8 +9,7 @@
     android:orientation="vertical"
     android:layout_weight="0.6"
     android:background="@color/grey_10"
-    android:stateListAnimator="@null"
-    android:layout_marginTop="60dp">
+    android:stateListAnimator="@null">
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/composeMessageFAB"

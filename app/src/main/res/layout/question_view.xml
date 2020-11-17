@@ -34,7 +34,6 @@
                 android:textColor="#AE000000"
                 android:textSize="15sp" />
 
-
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"

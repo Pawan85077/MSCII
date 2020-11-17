@@ -105,8 +105,7 @@ public class AdminHomeFragment extends Fragment {
                 }
             }
         });
-
-        getActivity().setTitle("Homepage");
+        getActivity().setTitle("Home");
         return view;
     }
 
@@ -122,56 +121,7 @@ public class AdminHomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        //inflate menu
-        inflater.inflate(R.menu.admin_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //handle menu item selected
-        int id = item.getItemId();
-
-        if(id == R.id.action_refresh){
-            Toast.makeText(getContext().getApplicationContext(),"Refresh",Toast.LENGTH_SHORT).show();
-        }
-        if(id == R.id.action_admin_logout){
-            //Toast.makeText(getContext().getApplicationContext(),"Logout Clicked",Toast.LENGTH_SHORT).show();
-
-            AlertDialog.Builder builder=new AlertDialog.Builder(getContext(),R.style.Theme_AppCompat_Light_Dialog_MinWidth);
-            builder.setTitle("Logout confirmation");
-            builder.setIcon(R.drawable.ic_warning);
-            builder.setMessage("Are you sure ?\n" +
-                    "Do you really wanna logout ?");
-
-            builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    firebaseAuth.getInstance().signOut();
-                    new User(getContext()).removeUser();
-                    startActivity(new Intent(getContext(), aloginActivity.class));
-                    Toast.makeText(getContext().getApplicationContext(), "successfully logout!", Toast.LENGTH_SHORT).show();
-                }
-            });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.cancel();
-                    Toast.makeText(getContext().getApplicationContext(), "Logout cancelled :)", Toast.LENGTH_SHORT).show();
-                }
-            });
-            builder.show();
-
-
-
-        }
-        if(id == R.id.action_view_student){
-            Toast.makeText(getContext().getApplicationContext(),"View students profile",Toast.LENGTH_SHORT).show();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
 
 }

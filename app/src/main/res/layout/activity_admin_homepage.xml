@@ -7,12 +7,27 @@
     tools:context=".AdminHomepage">
 
 
-    <include
-        android:id="@+id/admin_toolbar"
-        layout="@layout/admin_toolbar"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="vertical"
+        android:id="@+id/layoutToolbaradmin">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/admin_toolbar"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:elevation="4dp" />
+
+    </LinearLayout>
 
 
     <FrameLayout
+        android:layout_below="@+id/layoutToolbaradmin"
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
