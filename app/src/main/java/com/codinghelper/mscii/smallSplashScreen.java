@@ -111,7 +111,7 @@ public class smallSplashScreen extends AppCompatActivity {
                 @Override
                 public void run() {
                     try {
-                 //       bar.setVisibility(View.VISIBLE);
+                        bar.setVisibility(View.VISIBLE);
                         sleep(4000);
                     }catch (Exception e){
                         e.printStackTrace();
