@@ -31,6 +31,7 @@ public class MainActivity extends AwesomeSplash {
     @Override
    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+      //  getWindow().setBackgroundDrawable(null);
         hideNavigationBar();
 
         auth= FirebaseAuth.getInstance();
