@@ -33,6 +33,30 @@
                 android:text=" Questions"
                 android:textColor="#AE000000"
                 android:textSize="15sp" />
+            <ImageButton
+                android:id="@+id/qreport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/ic_baseline_error_24"
+                android:visibility="invisible"/>
+
+
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageButton
+        android:layout_alignParentEnd="true"
+        android:id="@+id/threeDot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/tranparent"
+        android:src="@drawable/ic_baseline_more_vert_24" />
+</RelativeLayout>
+
+
+
+
 
         </LinearLayout>
         <LinearLayout
@@ -94,9 +118,10 @@
                         android:id="@+id/switchAns"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="View  "
+                        android:textSize="10sp"
+                        android:text=" View "
                         android:textColor="@color/blue_900"
-                        android:background="@color/amber_300"/>
+                        android:background="@color/tranparent"/>
 
                 </LinearLayout>
 
@@ -163,11 +188,13 @@
             app:small_shine_color="@color/bg_spalsh"
             app:shine_count="8"
             app:siShape="@raw/star"
+            android:visibility="invisible"
             app:btn_fill_color="#FFC107"/>
         <TextView
             android:id="@+id/countLikes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             android:layout_gravity="center"
             android:text="0"/>
     </LinearLayout>

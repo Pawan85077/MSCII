@@ -9,6 +9,7 @@
     </style>
     <style name="my_app" parent="AppTheme.NoActionBar">
         <item name="android:windowBackground">@drawable/auto_splash</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
     </style>
     <style name="my_app.CenterAnimation">
         <item name="android:windowBackground">@drawable/auto_splash</item>

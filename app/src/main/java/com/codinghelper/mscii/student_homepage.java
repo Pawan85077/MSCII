@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.NotificationCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -19,6 +20,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -54,6 +56,7 @@ public class student_homepage extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
     String currentUserID;
+    BottomNavigationView navView;
     DatabaseReference reference,Rootref,deleteref,Root;
 
 
@@ -81,7 +84,7 @@ public class student_homepage extends AppCompatActivity {
         Root= FirebaseDatabase.getInstance().getReference().child("studentDetail");
         Rootref=FirebaseDatabase.getInstance().getReference();
         NavigationView navigationView =(NavigationView) findViewById(R.id.nav_view);
-        BottomNavigationView navView = (BottomNavigationView)findViewById(R.id.nav_view_home);
+        navView = (BottomNavigationView)findViewById(R.id.nav_view_home);
         View view=navigationView.inflateHeaderView(R.layout.student_nav_header);
         final ImageView imageView=(ImageView)view.findViewById(R.id.nimg);
         final TextView textView=(TextView)view.findViewById(R.id.ntitle);
@@ -116,6 +119,7 @@ public class student_homepage extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         updateUserStatus("online");
 
     }
@@ -125,6 +129,9 @@ public class student_homepage extends AppCompatActivity {
         super.onStop();
       //  updateUserStatus("offline");
     }
+
+
+
 
 
     private void updateUserStatus(String state) {

@@ -81,8 +81,9 @@ public class answeringActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 String file =String.valueOf(dataSnapshot.child("Answer").getValue());
-
-                Answer.setText(file);
+                if(!file.equals("Not answered yet!!")){
+                    Answer.setText(file);
+                }
 
             }
 
@@ -288,19 +289,26 @@ public class answeringActivity extends AppCompatActivity {
             reference.child(receiver_question_Id).child("position").setValue("update");
         }
         super.onPause();
-    }/*
+    }*/
 
 
 
-  /*  @Override
+    @Override
     protected void onStop() {
         if(Sans.equals("Not answered yet!!")){
             reference.child(receiver_question_Id).child("position").setValue("answer");
         }else {
-            reference.child(receiver_question_Id).child("position").setValue("update");
-        }
-        super.onStop();
-    }*/
+            if(Sans2.equals("yes")){
+                reference.child(receiver_question_Id).child("position").setValue("Reported");
+            }else {
+                reference.child(receiver_question_Id).child("position").setValue("Report");
+            }
+        }        super.onStop();
+    }
 
-
+    @Override
+    protected void onResume() {
+        reference.child(receiver_question_Id).child("position").setValue("Live");
+        super.onResume();
+    }
 }

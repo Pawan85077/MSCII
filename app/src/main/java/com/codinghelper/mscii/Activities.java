@@ -1,6 +1,8 @@
 package com.codinghelper.mscii;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,11 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -24,6 +29,10 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -84,6 +93,15 @@ public class Activities extends Fragment {
                     protected void onBindViewHolder(@NonNull final QuestionViewHolder holder, int position, @NonNull final StudentQuestion model) {
                         holder.Questions.setText(model.getQuestionAsked());
 
+                        if (model.getAnswer().equals("Not answered yet!!")) {
+                            holder.up.setVisibility(View.INVISIBLE);
+                            holder.up.setEnabled(false);
+                            holder.Likes.setVisibility(View.INVISIBLE);
+                        } else {
+                            holder.up.setVisibility(View.VISIBLE);
+                            holder.up.setEnabled(true);
+                            holder.Likes.setVisibility(View.VISIBLE);
+                        }
 
                         holder.aSwitch.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -93,6 +111,7 @@ public class Activities extends Fragment {
                                     holder.Answers.setVisibility(View.VISIBLE);
                                     if (model.getAnswer().equals("Not answered yet!!")) {
                                         holder.up.setVisibility(View.INVISIBLE);
+                                        holder.up.setEnabled(false);
                                         holder.Likes.setVisibility(View.INVISIBLE);
                                         holder.Answers.loadData("Not answered yet", "text/html", null);
                                     } else {
@@ -100,6 +119,7 @@ public class Activities extends Fragment {
                                         holder.Answers.getSettings().setJavaScriptEnabled(true);
                                         holder.Answers.loadData(model.getAnswer(), "text/html", null);
                                         holder.up.setVisibility(View.VISIBLE);
+                                        holder.up.setEnabled(true);
                                         holder.Likes.setVisibility(View.VISIBLE);
                                     }
                                 }else {
@@ -115,15 +135,103 @@ public class Activities extends Fragment {
                         Picasso.get().load(model.getAskerImage()).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(holder.AskerImage);
                         Picasso.get().load(model.getAnswererImage()).fit().noFade().placeholder(R.drawable.main_stud).into(holder.AnswererImage);
                         final String question_id=getRef(position).getKey();
+
+                        holder.tdot.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                PopupMenu popupMenu=new PopupMenu(getActivity(),holder.tdot);
+                                popupMenu.getMenuInflater().inflate(R.menu.popup_menu,popupMenu.getMenu());
+                                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                                    @Override
+                                    public boolean onMenuItemClick(MenuItem menuItem) {
+                                        int id = menuItem.getItemId();
+                                        if (id == R.id.qr) {
+
+
+                                            final AlertDialog.Builder builder=new AlertDialog.Builder(getActivity(),R.style.Theme_AppCompat_Light_Dialog_MinWidth);
+                                            builder.setTitle("Why to report?");
+                                            String[] items={"Inappropriate","Invalid","Irrevalent","Stupidity"};
+                                            int checkeditem=0;
+                                            final String[] temp = new String[1];
+                                            builder.setSingleChoiceItems(items, checkeditem, new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    switch (i){
+                                                        case 0:
+                                                            temp[0] ="Inappropriate";
+                                                            break;
+                                                        case 1:
+                                                            temp[0] ="Invalid";
+                                                            break;
+                                                        case 2:
+                                                            temp[0] ="Irrevalent";
+                                                            break;
+                                                        case 3:
+                                                            temp[0] ="Stupidity";
+                                                            break;
+                                                    }
+                                                }
+
+
+                                            });
+                                            builder.setPositiveButton("confirm", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    if(temp[0]!=null){
+                                                        userQuestion.child(question_id).child("QreportReason").setValue(temp[0]);
+                                                    }else {
+                                                        userQuestion.child(question_id).child("QreportReason").setValue("Inappropriate");
+
+                                                    }
+                                                    userQuestion.child(question_id).child("Qreported").setValue("yes");
+                                                    Toast.makeText(getActivity(), "Reported successful", Toast.LENGTH_LONG).show();
+
+
+
+                                                }
+                                            });
+                                            builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    dialogInterface.cancel();
+                                                }
+                                            });
+                                            AlertDialog dialog =builder.create();
+                                            dialog.setCanceledOnTouchOutside(true);
+                                            dialog.show();
+
+
+
+
+                                        }
+
+
+                                        return true;
+                                    }
+                                });
+                                popupMenu.show();
+                            }
+                        });
+
+
+
                         userQuestion.child(question_id).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 String Sfinal =String.valueOf(dataSnapshot.child("FinalAnswererId").getValue());
                                 String Sreport =String.valueOf(dataSnapshot.child("reportedTimes").getValue());
                                 String Ssreport =String.valueOf(dataSnapshot.child("reported").getValue());
+                                String Sqreport =String.valueOf(dataSnapshot.child("Qreported").getValue());
                                 holder.showReport.setVisibility(View.INVISIBLE);
                                 holder.showReport.setEnabled(false);
                                 holder.reports.setVisibility(View.INVISIBLE);
+                                holder.Qreport.setVisibility(View.INVISIBLE);
+                                holder.Qreport.setEnabled(false);
+
+                                if(Sqreport.equals("yes")){
+                                    holder.Qreport.setVisibility(View.VISIBLE);
+                                    holder.Qreport.setEnabled(true);
+                                }
                                 if(Ssreport.equals("yes")){
                                     holder.showReport.setVisibility(View.VISIBLE);
                                     holder.showReport.setEnabled(true);
@@ -139,6 +247,7 @@ public class Activities extends Fragment {
                                             Intent profileIntent = new Intent(getActivity(), answeringActivity.class);
                                             profileIntent.putExtra("question_id", question_id);
                                             profileIntent.putExtra("current_answerer_id", currentUserId);
+                                            userQuestion.child(question_id).child("position").setValue("Live");
                                             startActivity(profileIntent);
                                         }
                                     });
@@ -151,6 +260,88 @@ public class Activities extends Fragment {
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                        holder.Qreport.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+
+                                userQuestion.child(question_id).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        String report = String.valueOf(dataSnapshot.child("QreportReason").getValue());
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_Light_Dialog_MinWidth);
+                                        builder.setTitle("Reporting reason:-");
+                                        builder.setMessage(report);
+                                        builder.setNeutralButton("Un-report", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                root.child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                        String Madmod =String.valueOf(dataSnapshot.child("Level").getValue());
+                                                        if(Madmod.equals("moderator")){
+                                                            userQuestion.child(question_id).child("Qreported").setValue("no");
+                                                            Toast.makeText(getActivity(),"Un-reported successfully!!", Toast.LENGTH_SHORT).show();
+                                                        }else {
+                                                            Toast.makeText(getActivity(),"Only moderator can make answer Un-reported!!", Toast.LENGTH_SHORT).show();
+
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                    }
+                                                });
+
+
+
+                                            }
+                                        });
+                                        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                root.child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                        String Madmod =String.valueOf(dataSnapshot.child("Level").getValue());
+                                                        if(Madmod.equals("moderator")){
+                                                            Likesref.child(question_id).removeValue();
+                                                            userQuestion.child(question_id).removeValue();
+                                                            Toast.makeText(getActivity(),"answer deleted successfully!!", Toast.LENGTH_SHORT).show();
+                                                        }else {
+                                                            Toast.makeText(getActivity(),"Only moderator can delete answer!!", Toast.LENGTH_SHORT).show();
+
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                    }
+                                                });
+                                            }
+                                        });
+                                        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.cancel();
+
+                                            }
+                                        });
+                                        builder.show();
+
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+
 
                             }
                         });
@@ -223,7 +414,7 @@ public class Activities extends Fragment {
                         holder.showReport.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                reportReason();
+                                reportReason(question_id);
                             }
                         });
                         holder.Flagbtn.setText(model.getposition());
@@ -265,27 +456,58 @@ public class Activities extends Fragment {
                                     });*/
 
                                 }else if(model.getposition().equals("Report")){
-                                    userQuestion.child(question_id).child("position").setValue("Reported");
-                                    userQuestion.child(question_id).child("reported").setValue("yes");
-                                    userQuestion.child(question_id).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    final AlertDialog.Builder builder=new AlertDialog.Builder(getActivity(),R.style.Theme_AppCompat_Light_Dialog_MinWidth);
+                                    builder.setTitle("Why to report?");
+                                    String[] items={"Inappropriate","Invalid","Irrevalent","Stupidity"};
+                                    int checkeditem=0;
+                                    final String[] temp = new String[1];
+                                    builder.setSingleChoiceItems(items, checkeditem, new DialogInterface.OnClickListener() {
                                         @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            String Sfinal =String.valueOf(dataSnapshot.child("reportedTimes").getValue());
-                                            reportValue=Integer.parseInt(Sfinal);
-                                            reportValue++;
-                                            userQuestion.child(question_id).child("reportedTimes").setValue(reportValue);
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                           switch (i){
+                                               case 0:
+                                                   temp[0] ="Inappropriate";
+                                                   break;
+                                               case 1:
+                                                   temp[0] ="Invalid";
+                                                   break;
+                                               case 2:
+                                                   temp[0] ="Irrevalent";
+                                                   break;
+                                               case 3:
+                                                   temp[0] ="Stupidity";
+                                                   break;
 
+                                           }
                                         }
 
+
+                                    });
+                                    builder.setPositiveButton("confirm", new DialogInterface.OnClickListener() {
                                         @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                                            if(temp[0] != null){
+                                                report( temp[0],question_id);
+                                            }else {
+                                                report( "Inappropriate",question_id);
+                                            }
 
                                         }
                                     });
+                                    builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.cancel();
+                                        }
+                                    });
+                                    AlertDialog dialog =builder.create();
+                                    dialog.setCanceledOnTouchOutside(true);
+                                    dialog.show();
 
-                                    Toast.makeText(getActivity(), "Reported successful", Toast.LENGTH_LONG).show();
+
                                 }else {
-                                    reportReason();
+                                    reportReason(question_id);
 
                                 }
 
@@ -306,8 +528,110 @@ public class Activities extends Fragment {
         adapter.startListening();
     }
 
-    private void reportReason() {
-        Toast.makeText(getActivity(), "Reporting reason!!", Toast.LENGTH_LONG).show();
+    private void report(String s, final String question_id) {
+        userQuestion.child(question_id).child("reportReason").setValue(s);
+        userQuestion.child(question_id).child("position").setValue("Reported");
+        userQuestion.child(question_id).child("reported").setValue("yes");
+        userQuestion.child(question_id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String Sfinal =String.valueOf(dataSnapshot.child("reportedTimes").getValue());
+                reportValue=Integer.parseInt(Sfinal);
+                reportValue++;
+                userQuestion.child(question_id).child("reportedTimes").setValue(reportValue);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        Toast.makeText(getActivity(), "Reported successful", Toast.LENGTH_LONG).show();
+    }
+
+    private void reportReason(final String question_id) {
+        userQuestion.child(question_id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String report = String.valueOf(dataSnapshot.child("reportReason").getValue());
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_Light_Dialog_MinWidth);
+                builder.setTitle("Reporting reason:-");
+                builder.setMessage(report);
+                builder.setNeutralButton("Un-report", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        root.child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                String Madmod =String.valueOf(dataSnapshot.child("Level").getValue());
+                                if(Madmod.equals("moderator")){
+                                    userQuestion.child(question_id).child("position").setValue("Report");
+                                    userQuestion.child(question_id).child("reported").setValue("no");
+                                    Toast.makeText(getActivity(),"Un-reported successfully!!", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    Toast.makeText(getActivity(),"Only moderator can make answer Un-reported!!", Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+
+
+                    }
+                });
+                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        root.child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                String Madmod =String.valueOf(dataSnapshot.child("Level").getValue());
+                                if(Madmod.equals("moderator")){
+                                    userQuestion.child(question_id).child("Answer").setValue("Not answered yet!!");
+                                    userQuestion.child(question_id).child("position").setValue("answer");
+                                    userQuestion.child(question_id).child("AnswererImage").setValue("https://firebasestorage.googleapis.com/v0/b/mscii-8cb88.appspot.com/o/skull%20(1).png?alt=media&token=22a5e53b-4270-40b9-bbf2-41109c135557");
+                                    userQuestion.child(question_id).child("AnswererId").setValue("Not yet");
+                                    userQuestion.child(question_id).child("FinalAnswererId").setValue("Not yet");
+                                    userQuestion.child(question_id).child("reportedTimes").setValue(0);
+                                    userQuestion.child(question_id).child("reportReason").setValue("");
+                                    userQuestion.child(question_id).child("reported").setValue("no");
+                                    Likesref.child(question_id).removeValue();
+                                    Toast.makeText(getActivity(),"answer deleted successfully!!", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    Toast.makeText(getActivity(),"Only moderator can delete answer!!", Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                });
+                builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+
+                    }
+                });
+                builder.show();
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
@@ -315,7 +639,7 @@ public class Activities extends Fragment {
         TextView Questions;
         WebView Answers;
         TextView       Likes,reports;
-        ImageButton showReport;
+        ImageButton showReport,tdot,Qreport;
         CircularImageView AskerImage;
         CircularImageView AnswererImage;
         Button Flagbtn,Askername,topic,editAns;
@@ -327,6 +651,8 @@ public class Activities extends Fragment {
         public QuestionViewHolder(@NonNull View itemView) {
             super(itemView);
             reports=itemView.findViewById(R.id.countreports);
+            tdot=itemView.findViewById(R.id.threeDot);
+            Qreport=itemView.findViewById(R.id.qreport);
             showReport=itemView.findViewById(R.id.showReportStatus);
             Questions=itemView.findViewById(R.id.AllQuestion);
             Flagbtn=itemView.findViewById(R.id.flagBtn);

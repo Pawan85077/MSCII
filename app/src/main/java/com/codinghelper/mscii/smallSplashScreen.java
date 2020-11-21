@@ -43,6 +43,7 @@ public class smallSplashScreen extends AppCompatActivity {
         setTheme(R.style.my_app);
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+        getWindow().setNavigationBarColor(getResources().getColor(R.color.colorPrimary));
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_small_splash_screen);
@@ -52,12 +53,12 @@ public class smallSplashScreen extends AppCompatActivity {
         reference= FirebaseDatabase.getInstance().getReference().child("studentDetail");
 
         if(user!=null){
+            bar.setVisibility(View.VISIBLE);
 
             //   updateUserStatus("online");
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    bar.setVisibility(View.VISIBLE);
 
                     if(dataSnapshot.hasChild(user.getUid())){
                         Thread thread=new Thread()
@@ -141,7 +142,7 @@ public class smallSplashScreen extends AppCompatActivity {
         ViewGroup container = (ViewGroup) findViewById(R.id.container);
 
         ViewCompat.animate(logoImageView)
-                .translationY(-250)
+                .translationY(-400)
                 .setStartDelay(STARTUP_DELAY)
                 .setDuration(ANIM_ITEM_DURATION).setInterpolator(
                 new DecelerateInterpolator(1.2f)).start();
