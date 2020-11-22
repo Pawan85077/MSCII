@@ -1,24 +1,16 @@
 package com.codinghelper.mscii;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.annotation.SuppressLint;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
@@ -30,6 +22,8 @@ public class AdminComposeMessage extends AppCompatActivity {
     Admin_composeTo_Recycler_Adapter admin_composeTo_recycler_adapter;
     ArrayList<Admin_composeRecyclerValue_from_AddRecipients> admin_composeRecyclerValue_from_addRecipientsArrayList = new ArrayList<>();
 
+    private Button composeSendButton;
+
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -37,12 +31,15 @@ public class AdminComposeMessage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_compose_message);
 
-        final ExtendedFloatingActionButton addRecepientsFAB = findViewById(R.id.add_RecepientsFAB);
+        final ExtendedFloatingActionButton clearSelectionFAB = findViewById(R.id.clear_selectionFAB);
 
         Toolbar toolbar = findViewById(R.id.compose_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        //defining Buttons
+        composeSendButton = (Button)findViewById(R.id.composeSendButton);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +52,6 @@ public class AdminComposeMessage extends AppCompatActivity {
 
         AdminComposeToRecyclerView = findViewById(R.id.composeTo_RecyclerView);
 //        admin_composeTo_recycler_adapter = new Admin_composeTo_Recycler_Adapter();
-//
 //        AdminComposeToRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 //        AdminComposeToRecyclerView.setAdapter(admin_composeTo_recycler_adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
@@ -64,7 +60,7 @@ public class AdminComposeMessage extends AppCompatActivity {
         AdminComposeToRecyclerView.setAdapter(new Admin_composeTo_Recycler_Adapter(admin_composeRecyclerValue_from_addRecipientsArrayList));
 
 
-        addRecepientsFAB.setOnClickListener(new View.OnClickListener() {
+        clearSelectionFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
@@ -73,6 +69,15 @@ public class AdminComposeMessage extends AppCompatActivity {
             }
         });
 
+        //int totalItems = admin_composeTo_recycler_adapter.getItemCount();
+        //String s = Integer()
+
+        composeSendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(AdminComposeMessage.this, "dsdgfghfg", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

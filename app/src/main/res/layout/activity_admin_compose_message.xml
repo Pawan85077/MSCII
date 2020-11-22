@@ -101,7 +101,7 @@
                     android:stateListAnimator="@null">
 
                     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                        android:id="@+id/add_RecepientsFAB"
+                        android:id="@+id/clear_selectionFAB"
                         android:layout_width="wrap_content"
                         android:layout_height="55dp"
                         android:layout_alignParentEnd="true"
