@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +66,7 @@ public class Activities extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_activities, container, false);
+        setHasOptionsMenu(true);
         recyclerView=(RecyclerView)v.findViewById(R.id.Question_recycle);
         mAuth=FirebaseAuth.getInstance();
         currentUserId=mAuth.getCurrentUser().getUid();
@@ -695,6 +699,477 @@ public class Activities extends Fragment {
         }
     }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.search_qn,menu);
+        MenuItem item=menu.findItem(R.id.search_question);
+        SearchView searchView=(SearchView)item.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                processsearch(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                processsearch(s);
+                return false;
+            }
+        });
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    private void processsearch(String s) {
+        FirebaseRecyclerOptions<StudentQuestion> options=
+                new FirebaseRecyclerOptions.Builder<StudentQuestion>()
+                        .setQuery(userQuestion.orderByChild("QuestionAsked").startAt(s).endAt(s+"\uf8ff"),StudentQuestion.class)
+                        .build();
 
 
+
+        FirebaseRecyclerAdapter<StudentQuestion,QuestionViewHolder> adapter=
+                new FirebaseRecyclerAdapter<StudentQuestion, QuestionViewHolder>(options) {
+                    @Override
+                    protected void onBindViewHolder(@NonNull final QuestionViewHolder holder, int position, @NonNull final StudentQuestion model) {
+                        holder.Questions.setText(model.getQuestionAsked());
+
+                        if (model.getAnswer().equals("Not answered yet!!")) {
+                            holder.up.setVisibility(View.INVISIBLE);
+                            holder.up.setEnabled(false);
+                            holder.Likes.setVisibility(View.INVISIBLE);
+                        } else {
+                            holder.up.setVisibility(View.VISIBLE);
+                            holder.up.setEnabled(true);
+                            holder.Likes.setVisibility(View.VISIBLE);
+                        }
+
+                        holder.aSwitch.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (holder.aSwitch.isChecked()) {
+
+                                    holder.Answers.setVisibility(View.VISIBLE);
+                                    if (model.getAnswer().equals("Not answered yet!!")) {
+                                        holder.up.setVisibility(View.INVISIBLE);
+                                        holder.up.setEnabled(false);
+                                        holder.Likes.setVisibility(View.INVISIBLE);
+                                        holder.Answers.loadData("Not answered yet", "text/html", null);
+                                    } else {
+                                        //  holder.Answers.setText(model.getAnswer());
+                                        holder.Answers.getSettings().setJavaScriptEnabled(true);
+                                        holder.Answers.loadData(model.getAnswer(), "text/html", null);
+                                        holder.up.setVisibility(View.VISIBLE);
+                                        holder.up.setEnabled(true);
+                                        holder.Likes.setVisibility(View.VISIBLE);
+                                    }
+                                }else {
+                                    holder.Answers.loadData("","text/html",null);
+                                    holder.Answers.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                        });
+
+
+                        holder.Askername.setText(model.getAskerName());
+                        holder.topic.setText(model.getTopic());
+                        Picasso.get().load(model.getAskerImage()).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(holder.AskerImage);
+                        Picasso.get().load(model.getAnswererImage()).fit().noFade().placeholder(R.drawable.main_stud).into(holder.AnswererImage);
+                        final String question_id=getRef(position).getKey();
+
+                        holder.tdot.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                PopupMenu popupMenu=new PopupMenu(getActivity(),holder.tdot);
+                                popupMenu.getMenuInflater().inflate(R.menu.popup_menu,popupMenu.getMenu());
+                                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                                    @Override
+                                    public boolean onMenuItemClick(MenuItem menuItem) {
+                                        int id = menuItem.getItemId();
+                                        if (id == R.id.qr) {
+
+
+                                            final AlertDialog.Builder builder=new AlertDialog.Builder(getActivity(),R.style.Theme_AppCompat_Light_Dialog_MinWidth);
+                                            builder.setTitle("Why to report?");
+                                            String[] items={"Inappropriate","Invalid","Irrevalent","Stupidity"};
+                                            int checkeditem=0;
+                                            final String[] temp = new String[1];
+                                            builder.setSingleChoiceItems(items, checkeditem, new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    switch (i){
+                                                        case 0:
+                                                            temp[0] ="Inappropriate";
+                                                            break;
+                                                        case 1:
+                                                            temp[0] ="Invalid";
+                                                            break;
+                                                        case 2:
+                                                            temp[0] ="Irrevalent";
+                                                            break;
+                                                        case 3:
+                                                            temp[0] ="Stupidity";
+                                                            break;
+                                                    }
+                                                }
+
+
+                                            });
+                                            builder.setPositiveButton("confirm", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    if(temp[0]!=null){
+                                                        userQuestion.child(question_id).child("QreportReason").setValue(temp[0]);
+                                                    }else {
+                                                        userQuestion.child(question_id).child("QreportReason").setValue("Inappropriate");
+
+                                                    }
+                                                    userQuestion.child(question_id).child("Qreported").setValue("yes");
+                                                    Toast.makeText(getActivity(), "Reported successful", Toast.LENGTH_LONG).show();
+
+
+
+                                                }
+                                            });
+                                            builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    dialogInterface.cancel();
+                                                }
+                                            });
+                                            AlertDialog dialog =builder.create();
+                                            dialog.setCanceledOnTouchOutside(true);
+                                            dialog.show();
+
+
+
+
+                                        }
+
+
+                                        return true;
+                                    }
+                                });
+                                popupMenu.show();
+                            }
+                        });
+
+
+
+                        userQuestion.child(question_id).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                String Sfinal =String.valueOf(dataSnapshot.child("FinalAnswererId").getValue());
+                                String Sreport =String.valueOf(dataSnapshot.child("reportedTimes").getValue());
+                                String Ssreport =String.valueOf(dataSnapshot.child("reported").getValue());
+                                String Sqreport =String.valueOf(dataSnapshot.child("Qreported").getValue());
+                                holder.showReport.setVisibility(View.INVISIBLE);
+                                holder.showReport.setEnabled(false);
+                                holder.reports.setVisibility(View.INVISIBLE);
+                                holder.Qreport.setVisibility(View.INVISIBLE);
+                                holder.Qreport.setEnabled(false);
+
+                                if(Sqreport.equals("yes")){
+                                    holder.Qreport.setVisibility(View.VISIBLE);
+                                    holder.Qreport.setEnabled(true);
+                                }
+                                if(Ssreport.equals("yes")){
+                                    holder.showReport.setVisibility(View.VISIBLE);
+                                    holder.showReport.setEnabled(true);
+                                    holder.reports.setVisibility(View.VISIBLE);
+                                    holder.reports.setText(Sreport);
+                                }
+                                if(Sfinal.equals(currentUserId)){
+                                    holder.editAns.setVisibility(View.VISIBLE);
+                                    holder.editAns.setEnabled(true);
+                                    holder.editAns.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Intent profileIntent = new Intent(getActivity(), answeringActivity.class);
+                                            profileIntent.putExtra("question_id", question_id);
+                                            profileIntent.putExtra("current_answerer_id", currentUserId);
+                                            userQuestion.child(question_id).child("position").setValue("Live");
+                                            startActivity(profileIntent);
+                                        }
+                                    });
+                                }else{
+                                    holder.editAns.setVisibility(View.INVISIBLE);
+                                    holder.editAns.setEnabled(false);
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                        holder.Qreport.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+
+                                userQuestion.child(question_id).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        String report = String.valueOf(dataSnapshot.child("QreportReason").getValue());
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_Light_Dialog_MinWidth);
+                                        builder.setTitle("Reporting reason:-");
+                                        builder.setMessage(report);
+                                        builder.setNeutralButton("Un-report", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                root.child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                        String Madmod =String.valueOf(dataSnapshot.child("Level").getValue());
+                                                        if(Madmod.equals("moderator")){
+                                                            userQuestion.child(question_id).child("Qreported").setValue("no");
+                                                            Toast.makeText(getActivity(),"Un-reported successfully!!", Toast.LENGTH_SHORT).show();
+                                                        }else {
+                                                            Toast.makeText(getActivity(),"Only moderator can make answer Un-reported!!", Toast.LENGTH_SHORT).show();
+
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                    }
+                                                });
+
+
+
+                                            }
+                                        });
+                                        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                root.child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                        String Madmod =String.valueOf(dataSnapshot.child("Level").getValue());
+                                                        if(Madmod.equals("moderator")){
+                                                            Likesref.child(question_id).removeValue();
+                                                            userQuestion.child(question_id).removeValue();
+                                                            Toast.makeText(getActivity(),"answer deleted successfully!!", Toast.LENGTH_SHORT).show();
+                                                        }else {
+                                                            Toast.makeText(getActivity(),"Only moderator can delete answer!!", Toast.LENGTH_SHORT).show();
+
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                    }
+                                                });
+                                            }
+                                        });
+                                        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.cancel();
+
+                                            }
+                                        });
+                                        builder.show();
+
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+
+
+                            }
+                        });
+                        holder.Askername.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent profileIntent=new Intent(getActivity(),Show_profile_Activity.class);
+                                profileIntent.putExtra("visit_user_id",model.getaskerUID());
+                                startActivity(profileIntent);
+                            }
+                        });
+                        holder.AnswererImage.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                userQuestion.child(question_id).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        String Sfinal =String.valueOf(dataSnapshot.child("FinalAnswererId").getValue());
+                                        Intent profileIntent=new Intent(getActivity(),Show_profile_Activity.class);
+                                        profileIntent.putExtra("visit_user_id",Sfinal);
+                                        startActivity(profileIntent);
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+                        });
+                        holder.AskerImage.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent profileIntent=new Intent(getActivity(),Show_profile_Activity.class);
+                                profileIntent.putExtra("visit_user_id",model.getaskerUID());
+                                startActivity(profileIntent);
+                            }
+                        });
+                        holder.setLikesButtonStatus(question_id);
+
+                        holder.up.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Likechecker =true;
+                                Likesref.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if(Likechecker){
+                                            if(dataSnapshot.child(question_id).hasChild(currentUserId)){
+                                                Likesref.child(question_id).child(currentUserId).removeValue();
+                                                Likechecker = false;
+                                            }else {
+                                                Likesref.child(question_id).child(currentUserId).setValue(true);
+
+                                                Likechecker = false;
+
+
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+                        });
+                        holder.showReport.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                reportReason(question_id);
+                            }
+                        });
+                        holder.Flagbtn.setText(model.getposition());
+                        holder.Flagbtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if(model.getposition().equals("answer")){
+                                    if(!model.getaskerUID().equals(currentUserId)){
+                                        userQuestion.child(question_id).child("AnswererId").setValue(currentUserId);
+                                        Intent profileIntent = new Intent(getActivity(), answeringActivity.class);
+                                        profileIntent.putExtra("question_id", question_id);
+                                        profileIntent.putExtra("current_answerer_id", currentUserId);
+                                        startActivity(profileIntent);
+                                        userQuestion.child(question_id).child("position").setValue("Live");
+                                    }else{
+                                        Toast.makeText(getActivity(), "you cant answer ur question", Toast.LENGTH_LONG).show();
+                                    }
+
+
+                                }else if(model.getposition().equals("Live")){
+
+                                   /* root.child(currentUserId).addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            String Simg = String.valueOf(dataSnapshot.child("imageUrl").getValue());*/
+                                    String jk=userQuestion.child(question_id).child("people").push().getKey();
+                                    userQuestion.child(question_id).child("people").child(jk).child("peopleUID").setValue(currentUserId);
+
+                                    Intent profileIntent = new Intent(getActivity(), LiveActivity.class);
+                                    profileIntent.putExtra("question_id", question_id);
+                                    profileIntent.putExtra("pid",jk);
+                                    startActivity(profileIntent);
+                                    //  }
+
+                                       /* @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });*/
+
+                                }else if(model.getposition().equals("Report")){
+                                    final AlertDialog.Builder builder=new AlertDialog.Builder(getActivity(),R.style.Theme_AppCompat_Light_Dialog_MinWidth);
+                                    builder.setTitle("Why to report?");
+                                    String[] items={"Inappropriate","Invalid","Irrevalent","Stupidity"};
+                                    int checkeditem=0;
+                                    final String[] temp = new String[1];
+                                    builder.setSingleChoiceItems(items, checkeditem, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            switch (i){
+                                                case 0:
+                                                    temp[0] ="Inappropriate";
+                                                    break;
+                                                case 1:
+                                                    temp[0] ="Invalid";
+                                                    break;
+                                                case 2:
+                                                    temp[0] ="Irrevalent";
+                                                    break;
+                                                case 3:
+                                                    temp[0] ="Stupidity";
+                                                    break;
+
+                                            }
+                                        }
+
+
+                                    });
+                                    builder.setPositiveButton("confirm", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                                            if(temp[0] != null){
+                                                report( temp[0],question_id);
+                                            }else {
+                                                report( "Inappropriate",question_id);
+                                            }
+
+                                        }
+                                    });
+                                    builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.cancel();
+                                        }
+                                    });
+                                    AlertDialog dialog =builder.create();
+                                    dialog.setCanceledOnTouchOutside(true);
+                                    dialog.show();
+
+
+                                }else {
+                                    reportReason(question_id);
+
+                                }
+
+                            }
+                        });
+                    }
+
+                    @NonNull
+                    @Override
+                    public QuestionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.question_view,parent,false);
+                        QuestionViewHolder viewHolder=new QuestionViewHolder(view);
+                        progressDialog.dismiss();
+                        return viewHolder;
+                    }
+                };
+
+        recyclerView.setAdapter(adapter);
+        adapter.startListening();
+
+
+
+    }
 }
