@@ -1,14 +1,17 @@
 package com.codinghelper.mscii;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Admin_composeTo_Recycler_Adapter extends RecyclerView.Adapter<Admin_composeTo_Recycler_Adapter.AdminComposeToViewHolder>{
 
@@ -31,6 +34,10 @@ public class Admin_composeTo_Recycler_Adapter extends RecyclerView.Adapter<Admin
     public void onBindViewHolder(@NonNull AdminComposeToViewHolder holder, int position) {
 
         Admin_composeRecyclerValue_from_AddRecipients admin_composeRecyclerValue_from_addRecipients = admin_composeRecyclerValue_from_addRecipientsList.get(position);
+        Random rnd = new Random();
+        int currentColour = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+        holder.parentLL.setBackgroundColor(currentColour);
+
         holder.textDepartmentName.setText(admin_composeRecyclerValue_from_addRecipients.getDepartmentName());
         holder.textSessionName.setText(admin_composeRecyclerValue_from_addRecipients.getSessionName());
 
@@ -44,9 +51,11 @@ public class Admin_composeTo_Recycler_Adapter extends RecyclerView.Adapter<Admin
     class AdminComposeToViewHolder extends RecyclerView.ViewHolder{
 
         TextView textDepartmentName,textSessionName;
+        LinearLayout parentLL;
         public AdminComposeToViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            parentLL = (LinearLayout)itemView.findViewById(R.id.parentLL);
             textDepartmentName = (TextView)itemView.findViewById(R.id.riciverDepartmentName);
             textSessionName = (TextView)itemView.findViewById(R.id.riciverSessionName);
         }
