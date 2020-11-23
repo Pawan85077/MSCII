@@ -9,6 +9,12 @@
     tools:context=".Explore">
 
     <!-- TODO: Update blank fragment layout -->
+<ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
 
     <EditText
@@ -16,7 +22,6 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:hint=" Search"
-        android:paddingStart="10dp"
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:background="@color/white"
@@ -24,11 +29,20 @@
         android:textSize="20sp"/>
 
 
-        <Spinner
-            android:id="@+id/selectTopic"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_toRightOf="@id/search"/>
+
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_toEndOf="@+id/search"
+    android:layout_marginTop="45dp">
+    <Spinner
+        android:id="@+id/selectTopic"
+        android:layout_width="30dp"
+        android:background="@drawable/ic_dropdown"
+        android:layout_height="30dp"/>
+</RelativeLayout>
+
 
 
 
@@ -53,7 +67,7 @@
         android:layout_below="@id/buttonAsk"
         android:layout_centerHorizontal="true"/>
 
-<ScrollView
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@id/Lrecycle"
@@ -339,7 +353,7 @@
 
 
 
-</ScrollView>
+</RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/qqRecycle"
@@ -352,3 +366,6 @@
 
 
 </RelativeLayout>
+</ScrollView>
+</RelativeLayout>
+
