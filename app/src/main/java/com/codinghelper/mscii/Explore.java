@@ -54,13 +54,13 @@ import java.util.HashMap;
  */
 public class Explore extends Fragment {
     private EditText SearchBar;
-    private Button Askbtn,flyGame;
+    private Button Askbtn;
     private DatabaseReference Root,userQuestion,Likesref;
     private FirebaseAuth auth;
     private String currentUserID;
     String[] selectTopic = {"--Select Topic--","Computer","MAths","physics"};
     String selectedTopic;
-    ImageButton Computer;
+    ImageButton Computer,flyGame;
     long value;
     boolean Likechecker = false;
     Integer j;
@@ -98,7 +98,7 @@ public class Explore extends Fragment {
         recyclerView2.setLayoutManager(linearLayoutManager2);
         Askbtn=(Button)v.findViewById(R.id.buttonAsk);
         Likesref= FirebaseDatabase.getInstance().getReference().child("LikesC");
-        flyGame=(Button)v.findViewById(R.id.game);
+        flyGame=(ImageButton)v.findViewById(R.id.game);
         auth=FirebaseAuth.getInstance();
         currentUserID=auth.getCurrentUser().getUid();
         userQuestion=FirebaseDatabase.getInstance().getReference().child("Questions");
