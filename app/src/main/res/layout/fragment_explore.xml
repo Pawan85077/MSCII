@@ -348,12 +348,15 @@
 
 
 </RelativeLayout>
+        <RelativeLayout
+            android:layout_below="@+id/sub_relative"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
-            android:layout_below="@+id/sub_relative"
             android:layout_width="70dp"
             android:layout_height="60dp"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             app:cardCornerRadius="10dp">
             <LinearLayout
@@ -375,6 +378,7 @@
                     android:textSize="15sp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+        </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/qqRecycle"
