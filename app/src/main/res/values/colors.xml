@@ -332,4 +332,9 @@
     <color name="grey_1000">#1a1a1a</color>
 
 
+    <!-- for music player-->
+    <color name="colorPrimary2">#444b5e</color>
+    <color name="colorPrimaryDark2">#444b5e</color>
+    <color name="colorAccent2">#D81B60</color>
+
 </resources>

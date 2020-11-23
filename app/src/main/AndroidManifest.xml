@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AdminAddRecepients"></activity>
+        <activity android:name=".PlayerActivity"></activity>
+        <activity android:name=".Tunes" />
+        <activity android:name=".AdminAddRecepients" />
         <activity android:name=".AdminComposeMessage" />
         <activity
             android:name=".Status_viewer"
@@ -90,8 +92,7 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".MainActivity"
-            android:noHistory="true">
-        </activity>
+            android:noHistory="true" />
         <activity
             android:name=".smallSplashScreen"
             android:noHistory="true"
@@ -105,6 +106,16 @@
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
+
+        <!--        For music player-->
+<!--        <activity android:name=".Tunes">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+<!--        <activity android:name=".PlayerActivity"></activity>-->
 
         <receiver android:name=".Alarm" />
     </application>

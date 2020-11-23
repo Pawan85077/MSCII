@@ -64,6 +64,8 @@ public class editProfile extends AppCompatActivity {
     private Button btn_upload;
     private Button btn_chooseb;
     private Button btn_uploadb,delpro,btn_uploadSong;
+
+    private Button mp;             // For music player
     private EditText status;
     private ImageButton status_btn;
     private ImageView imageView;
@@ -87,6 +89,8 @@ public class editProfile extends AppCompatActivity {
         btn_uploadb=findViewById(R.id.uploadImgb);
         delpro=findViewById(R.id.delpropic);
         btn_choose=findViewById(R.id.chooseImg);
+
+        mp=findViewById(R.id.musicPlayer);                           // For music player
         user=FirebaseAuth.getInstance().getCurrentUser();
         reference=FirebaseDatabase.getInstance().getReference();
         btn_upload=findViewById(R.id.uploadImg);
@@ -98,6 +102,14 @@ public class editProfile extends AppCompatActivity {
         String[] studentSem = {"--Select semister--","I","II","III","IV","V","VI"};
         String[] studentSong = {"--Select song--","Rainbow","Despacito","let me love you","Tum he Ana","teddy","Tujhe kitna Chahne Lage"};
         firebaseAuth = FirebaseAuth.getInstance();
+
+        mp.setOnClickListener(new View.OnClickListener() {                  // For music player
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(editProfile.this, Tunes.class));
+            }
+        });
+
         btn_choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
