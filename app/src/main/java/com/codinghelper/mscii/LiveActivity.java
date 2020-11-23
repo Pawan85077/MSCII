@@ -102,7 +102,6 @@ public class LiveActivity extends AppCompatActivity {
 
 
 
-
         reference.child(receiver_question_Id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -203,6 +202,8 @@ public class LiveActivity extends AppCompatActivity {
     }
     @Override
     public void onStart(){
+      //  reference.child(receiver_question_Id).child("position").setValue("Live");
+
         super.onStart();
 
 
@@ -449,4 +450,5 @@ public class LiveActivity extends AppCompatActivity {
         super.onBackPressed();
         referencetopeople.child(receiver_pid).removeValue();
     }
+
 }

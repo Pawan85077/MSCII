@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
     android:layout_marginTop="50dp"
+    android:layout_marginBottom="40dp"
     tools:context=".Explore">
 
     <!-- TODO: Update blank fragment layout -->
@@ -354,10 +355,15 @@
             android:layout_centerHorizontal="true"
             android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
         <androidx.cardview.widget.CardView
             android:layout_width="70dp"
             android:layout_height="60dp"
-            android:layout_marginTop="10dp"
             app:cardCornerRadius="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -378,6 +384,24 @@
                     android:textSize="15sp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="10dp"
+                app:cardCornerRadius="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/plus"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_add"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            </LinearLayout>
         </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -392,5 +416,9 @@
 
 </RelativeLayout>
 </ScrollView>
+  <!--  <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/try_rec"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>-->
 </RelativeLayout>
 

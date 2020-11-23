@@ -133,7 +133,8 @@ public class answeringActivity extends AppCompatActivity {
                         Intent profileIntent = new Intent(answeringActivity.this, LiveActivity.class);
                         profileIntent.putExtra("question_id", receiver_question_Id);
                         profileIntent.putExtra("pid",jk);
-                        startActivity(profileIntent);
+              //  reference.child(receiver_question_Id).child("position").setValue("Live");
+                startActivity(profileIntent);
 
                    /* }
 
@@ -293,7 +294,7 @@ public class answeringActivity extends AppCompatActivity {
 
 
 
-    @Override
+  /*  @Override
     protected void onStop() {
         if(Sans.equals("Not answered yet!!")){
             reference.child(receiver_question_Id).child("position").setValue("answer");
@@ -310,5 +311,5 @@ public class answeringActivity extends AppCompatActivity {
     protected void onResume() {
         reference.child(receiver_question_Id).child("position").setValue("Live");
         super.onResume();
-    }
+    }*/
 }

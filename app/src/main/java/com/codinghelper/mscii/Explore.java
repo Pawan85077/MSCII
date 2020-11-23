@@ -65,7 +65,7 @@ public class Explore extends Fragment {
     boolean Likechecker = false;
     Integer j;
     int reportValue;
-    private RecyclerView recyclerView,recyclerView2;
+    private RecyclerView recyclerView,recyclerView2,recyclerView3;
 
 
 
@@ -93,9 +93,15 @@ public class Explore extends Fragment {
 
         recyclerView2=(RecyclerView)v.findViewById(R.id.Lrecycle);
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
-        linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager2.setReverseLayout(true);
+        linearLayoutManager2.setStackFromEnd(true);
         recyclerView2.setLayoutManager(linearLayoutManager2);
+
+       /* recyclerView3=(RecyclerView)v.findViewById(R.id.try_rec);
+        LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(getContext());
+        linearLayoutManager3.setReverseLayout(true);
+        linearLayoutManager3.setStackFromEnd(true);
+        recyclerView3.setLayoutManager(linearLayoutManager3);*/
         Askbtn=(Button)v.findViewById(R.id.buttonAsk);
         Likesref= FirebaseDatabase.getInstance().getReference().child("LikesC");
         flyGame=(ImageButton)v.findViewById(R.id.game);
