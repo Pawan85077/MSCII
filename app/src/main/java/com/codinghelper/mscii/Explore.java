@@ -83,6 +83,7 @@ public class Explore extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_explore, container, false);
+
         SearchBar=(EditText)v.findViewById(R.id.search);
         Computer=(ImageButton)v.findViewById(R.id.ComputerBtn);
         recyclerView=(RecyclerView)v.findViewById(R.id.qqRecycle);
