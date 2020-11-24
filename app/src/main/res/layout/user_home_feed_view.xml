@@ -1,84 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp">
-        <RelativeLayout
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/user_updated_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/main_stud"
-        app:civ_border="false"/>
-        <TextView
-            android:id="@+id/user_updated_name"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/main_stud"
+                android:layout_margin="5dp"
+                app:civ_border="false"/>
+
+            <TextView
+                android:id="@+id/user_updated_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Student Name"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" has updated"
+                android:textColor="@android:color/black"
+                android:layout_gravity="center"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" his/her"
+                android:textColor="@android:color/black"
+                android:layout_gravity="center"
+                android:textSize="16sp"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <ImageView
+                    android:id="@+id/home_threedot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_baseline_more_vert_24"/>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/user_updated_image"
-            android:text="user name"
-            android:layout_marginStart="10dp"
-            android:textSize="16sp"/>
-        <TextView
-            android:id="@+id/tt1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/user_updated_name"
-            android:textSize="16sp"
-            android:text=" has updated their profile"/>
+            android:orientation="horizontal">
 
-            <View
-                android:id="@+id/viewto1"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:layout_below="@+id/user_updated_image"
-                android:background="@color/black"/>
+            <TextView
+                android:id="@+id/updated_thing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55dp"
+                android:text="Profile pic/song/bio"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+            <ImageButton
+                android:id="@+id/home_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/ic_baseline_error_24"
+               android:visibility="invisible"/>
+        </LinearLayout>
 
-        </RelativeLayout>
-        <RelativeLayout
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="55dp">
+            android:layout_marginTop="10dp">
             <ImageView
                 android:id="@+id/user_updated_big_image"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:src="@drawable/main_stud"
-                android:layout_centerHorizontal="true"
-                android:visibility="invisible"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_marginTop="55dp">
+                android:layout_width="400dp"
+                android:layout_height="400dp"
+                android:layout_gravity="center"
+                android:background="@drawable/error_img"
+                android:visibility="gone"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
             <TextView
                 android:id="@+id/user_updated_bio"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="updated Bio"
-                android:layout_centerInParent="true"
-                android:textSize="20dp"
-                android:visibility="invisible"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_marginTop="55dp">
-            <ImageButton
-                android:id="@+id/user_updated_song"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_play_circle_outline_black_24dp"
-                android:layout_centerInParent="true"
-                android:visibility="invisible"/>
-        </RelativeLayout>
+                android:text="Student Bio"
+                android:layout_margin="50dp"
+                android:textStyle="bold"
+                android:fontFamily="casual"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:visibility="gone"/>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
 
-    </androidx.cardview.widget.CardView>
-</RelativeLayout>
+            <ImageView
+                android:id="@+id/user_updated_song"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_play_arrow_black_24dp"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/ic_baseline_favorite_border_24"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="like"
+                        android:textSize="14sp"
+                        android:layout_gravity="center"
+                        android:textColor="@android:color/black"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/poke"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="poke"
+                        android:layout_gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/black"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
