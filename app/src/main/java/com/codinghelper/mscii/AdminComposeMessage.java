@@ -18,12 +18,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.concurrent.Delayed;
 
 public class AdminComposeMessage extends AppCompatActivity {
@@ -37,6 +43,11 @@ public class AdminComposeMessage extends AppCompatActivity {
     private Button composeSendButton;
     private EditText composeMessageSubject,composeMessageBody;
 
+    //dekh ke re baba
+    private FirebaseAuth auth;
+    private String currentAdminID;
+    private DatabaseReference RootNode, adminMessage;
+
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -45,6 +56,12 @@ public class AdminComposeMessage extends AppCompatActivity {
         setContentView(R.layout.activity_admin_compose_message);
 
         final ExtendedFloatingActionButton clearSelectionFAB = findViewById(R.id.clear_selectionFAB);
+
+        //dekh ke re baba
+        auth=FirebaseAuth.getInstance();
+        currentAdminID=auth.getCurrentUser().getUid();
+        adminMessage=FirebaseDatabase.getInstance().getReference().child("adminMessages");
+        RootNode= FirebaseDatabase.getInstance().getReference().child("adminDetail");
 
         Toolbar toolbar = findViewById(R.id.compose_toolbar);
         setSupportActionBar(toolbar);
@@ -95,6 +112,9 @@ public class AdminComposeMessage extends AppCompatActivity {
                 int n = AdminComposeToRecyclerView.getAdapter().getItemCount();
                 final String messageSubject = composeMessageSubject.getText().toString();
                 final String messageBody = composeMessageBody.getText().toString();
+                final String to = new String();
+                StringBuilder builder = new StringBuilder(to);
+                String newTo = new String();
 
                 //EditTexts Should not be empty
                 if (TextUtils.isEmpty(messageSubject)) {
@@ -103,74 +123,61 @@ public class AdminComposeMessage extends AppCompatActivity {
                     composeMessageBody.setError("Message Body is empty..!!");
                 }else{
                     //Actual messageSending work done here
-                    //Toast.makeText(AdminComposeMessage.this, "dsdgfghfg  " + department, Toast.LENGTH_SHORT).show();
+                    //for getting to list
+                    for (int position = 0; position< n; position++)
+                    {
+                        final String receiverDepartment = admin_composeTo_getter_setters.get(position).getDepartmentName();
+                        final String receiverSession = admin_composeTo_getter_setters.get(position).getSessionName();
+                        builder.append("[").append(receiverDepartment).append("(").append(receiverSession).append(")]  ");
+                        newTo = builder.toString();
+                    }
                     for (int position = 0; position< n; position++)
                     {
 
-                        String receiverDepartment = admin_composeTo_getter_setters.get(position).getDepartmentName();
-                        String receiverSession = admin_composeTo_getter_setters.get(position).getSessionName();
-                        Toast.makeText(AdminComposeMessage.this, receiverDepartment+" " + receiverSession, Toast.LENGTH_SHORT).show();
+                        final String receiverDepartment = admin_composeTo_getter_setters.get(position).getDepartmentName();
+                        final String receiverSession = admin_composeTo_getter_setters.get(position).getSessionName();
+                        final String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                        final String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
 
-                        //Yaha Bhejna hai Message
-                        //Toast.makeText(AdminComposeMessage.this, receiverDepartment+" " + receiverSession, Toast.LENGTH_SHORT).show();
 
-//                        final String question = SearchBar.getText().toString();
-//                        final String Topic = selectedTopic;
-//                        if (TextUtils.isEmpty(question)){
-//                            SearchBar.setError("Ask your question!!");
-//                            SearchBar.setFocusable(true);
-//                        }else if (Topic.equals("--Select Topic--")){
-//                            Toast.makeText(getActivity(), "select Topic related to your question!!", Toast.LENGTH_LONG).show();
-//                        }else{
-//                            SearchBar.setText("");
-//                            recyclerView.setVisibility(View.INVISIBLE);
-//                            recyclerView.setEnabled(false);
-//                            //  userQuestion.push().child("QuestionAsked").setValue(question)
-//                            //unconfirmed change but working fine addvalueeentlistner
-//                            Root.child(currentUserID).addListenerForSingleValueEvent(new ValueEventListener() {
-//                                @Override
-//                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                                    if (dataSnapshot.exists()) {
-//                                        String key=userQuestion.push().getKey();
-//                                        String Simg =String.valueOf(dataSnapshot.child("imageUrl").getValue());
-//                                        String Sname =String.valueOf(dataSnapshot.child("username").getValue());
-//                                        value= (long)dataSnapshot.child("countQ").getValue();
-//                                        value=value+1;
-//                                        Root.child(currentUserID).child("countQ").setValue(value);
-//                                        HashMap rec=new HashMap();
-//                                        rec.put("QuestionAsked",question);
-//                                        rec.put("askerUID",currentUserID);
-//                                        rec.put("Answer","Not answered yet!!");
-//                                        rec.put("AskerImage",Simg);
-//                                        rec.put("Topic",Topic);
-//                                        rec.put("position","answer");
-//                                        rec.put("AnswererImage","https://firebasestorage.googleapis.com/v0/b/mscii-8cb88.appspot.com/o/skull%20(1).png?alt=media&token=22a5e53b-4270-40b9-bbf2-41109c135557");
-//                                        rec.put("AnswererId","Not yet");
-//                                        rec.put("FinalAnswererId","Not yet");
-//                                        rec.put("AskerName",Sname);
-//                                        rec.put("AnswererName","unknown");
-//                                        rec.put("reportedTimes",0);
-//                                        userQuestion.child(key).updateChildren(rec).addOnCompleteListener(new OnCompleteListener() {
-//                                            @Override
-//                                            public void onComplete(@NonNull Task task) {
-//                                                if(task.isSuccessful()){
-//                                                    Toast.makeText(getActivity(), "Go to Activities <3", Toast.LENGTH_LONG).show();
-//
-//                                                }
-//                                            }
-//                                        });
-//
-//
-//                                    }
-//                                }
-//
-//                                @Override
-//                                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                                }
-//                            });
-//
-//                        }
+                        //unconfirmed changes addValueEventListener
+                        final String finalNewTo = newTo;
+                        RootNode.child(currentAdminID).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    String key=adminMessage.push().getKey();
+
+                                    HashMap recA=new HashMap();
+                                    recA.put("senderDepartmentID",currentAdminID);
+                                    recA.put("messageSubject",messageSubject);
+                                    recA.put("messageBody",messageBody);
+                                    recA.put("sentTo", finalNewTo);
+                                    recA.put("Likes",0);
+                                    recA.put("Date",currentDate);
+                                    recA.put("Time",currentTime);
+                                    recA.put("Discussion",null);
+
+                                    adminMessage.child(receiverSession).child(receiverDepartment).child(key).updateChildren(recA).addOnCompleteListener(new OnCompleteListener() {
+                                        @Override
+                                        public void onComplete(@NonNull Task task) {
+                                            if(task.isSuccessful()){
+                                                Toast.makeText(getApplicationContext(), "Message Sent", Toast.LENGTH_LONG).show();
+                                                composeMessageSubject.setText(null);
+                                                composeMessageBody.setText(null);
+                                            }
+                                        }
+                                    });
+
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
 
                         //errors
                     }
