@@ -22,8 +22,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,11 +36,11 @@ public class Admin_activity extends AppCompatActivity {
     private Spinner spinner;
     List<String> list;
 
-    EditText t_email,t_phoneno,t_tempassword,t_conpassword;
+    EditText t_email,t_phoneno,t_tempassword,t_conpassword,t_name;
     String Aposition="";
     String Account="Admin";
     private Button btn_register;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference,root;
     ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
 
@@ -47,6 +50,7 @@ public class Admin_activity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_activity);
 
         t_email=(EditText)findViewById(R.id.afemail);
+        t_name=(EditText)findViewById(R.id.adminName);
         t_phoneno=(EditText)findViewById(R.id.afpn);
         t_tempassword=(EditText)findViewById(R.id.afsp);
         t_conpassword=(EditText)findViewById(R.id.afcp);
@@ -56,6 +60,8 @@ public class Admin_activity extends AppCompatActivity {
 
 
         databaseReference= FirebaseDatabase.getInstance().getReference("adminDetail");
+        root= FirebaseDatabase.getInstance().getReference();
+
         firebaseAuth=FirebaseAuth.getInstance();
 
         spinner = (Spinner) findViewById(R.id.spinner);
@@ -77,7 +83,7 @@ public class Admin_activity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i){
                     case 0:
-                        Toast.makeText(getApplicationContext(),"Not Selected",Toast.LENGTH_SHORT).show();
+                        Aposition="Not selected";
                         break;
                     case 1:
                         Aposition="Principal";
@@ -108,8 +114,9 @@ public class Admin_activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final String email = t_email.getText().toString().trim();
+                final String name = t_name.getText().toString().trim();
                 final String phoneno = t_phoneno.getText().toString();
-                String password = t_tempassword.getText().toString().trim();
+                final String password = t_tempassword.getText().toString().trim();
                 String conpassword = t_conpassword.getText().toString().trim();
 
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -118,7 +125,17 @@ public class Admin_activity extends AppCompatActivity {
                     return;
                 }
 
+                if (Aposition.equals("Not selected")) {
+                    Toast.makeText(getApplicationContext(), "Admin type not selected!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
+
+                if (TextUtils.isEmpty(name)) {
+                    t_name.setError("enter name");
+                    t_name.setFocusable(true);
+                    return;
+                }
                 if (TextUtils.isEmpty(email)) {
                     t_email.setError("enter email");
                     t_email.setFocusable(true);
@@ -148,46 +165,69 @@ public class Admin_activity extends AppCompatActivity {
 
 
                 if (password.equals(conpassword)) {
-
                     progressDialog.show();
 
-                    firebaseAuth.createUserWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(Admin_activity.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
+                    root.child("adminExist").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                         //   String Apositions =String.valueOf(dataSnapshot.child(Aposition).getValue());
+                          //  Toast.makeText(getApplicationContext(), Apositions, Toast.LENGTH_SHORT).show();
+                            if(dataSnapshot.hasChild(Aposition)){
+                                progressDialog.dismiss();
+                                Toast.makeText(getApplicationContext(), "Account already exist with "+Aposition, Toast.LENGTH_SHORT).show();
+                            }else {
 
-                                        adminDetail information = new adminDetail(
-                                                Aposition,
-                                                email,
-                                                phoneno,
-                                                Account
-
-                                        );
-
-                                        FirebaseDatabase.getInstance().getReference("adminDetail")
-                                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                firebaseAuth.createUserWithEmailAndPassword(email, password)
+                                        .addOnCompleteListener(Admin_activity.this, new OnCompleteListener<AuthResult>() {
                                             @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                progressDialog.dismiss();
-                                                Toast.makeText(getApplicationContext(), "Register complete", Toast.LENGTH_SHORT).show();
-                                                startActivity(new Intent(Admin_activity.this, aloginActivity.class));
+                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                if (task.isSuccessful()) {
+
+                                                    adminDetail information = new adminDetail(
+                                                            Aposition,
+                                                            email,
+                                                            phoneno,
+                                                            Account,
+                                                            name
+
+                                                    );
+
+                                                    FirebaseDatabase.getInstance().getReference("adminDetail")
+                                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                            .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            progressDialog.dismiss();
+                                                            root.child("adminExist").child(Aposition).setValue("yes");
+                                                            Toast.makeText(getApplicationContext(), "Register complete", Toast.LENGTH_SHORT).show();
+                                                            startActivity(new Intent(Admin_activity.this, aloginActivity.class));
+                                                        }
+                                                    });
+
+
+                                                } else {
+
+                                                    progressDialog.dismiss();
+
+                                                    Toast.makeText(getApplicationContext(), "Authontication failed", Toast.LENGTH_SHORT).show();
+
+                                                }
+
+                                                // ...
                                             }
                                         });
 
 
-                                    } else {
+                            }
+                        }
 
-                                        progressDialog.dismiss();
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                        Toast.makeText(getApplicationContext(), "Authontication failed", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
-                                    }
 
-                                    // ...
-                                }
-                            });
                 } else {
                     Toast.makeText(getApplicationContext(), "password not matched", Toast.LENGTH_SHORT).show();
 

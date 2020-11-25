@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Student Fragment"
+        android:text="all student appear here"
         android:textSize="40sp"
         android:textColor="#FFEB3B"
         android:textStyle="bold"

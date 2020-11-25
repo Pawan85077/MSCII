@@ -51,9 +51,9 @@ public class AdminHomepage extends AppCompatActivity {
         //handle menu item selected
         int id = item.getItemId();
 
-        if(id == R.id.action_refresh){
-            Toast.makeText(getApplicationContext(),"Refresh",Toast.LENGTH_SHORT).show();
-        }
+//        if(id == R.id.action_refresh){
+//            Toast.makeText(getApplicationContext(),"Refresh",Toast.LENGTH_SHORT).show();
+//        }
         if(id == R.id.action_admin_logout){
             //Toast.makeText(getContext().getApplicationContext(),"Logout Clicked",Toast.LENGTH_SHORT).show();
 
@@ -81,9 +81,9 @@ public class AdminHomepage extends AppCompatActivity {
 
 
         }
-        if(id == R.id.action_view_student){
-            Toast.makeText(getApplicationContext(),"View students profile",Toast.LENGTH_SHORT).show();
-        }
+//        if(id == R.id.action_view_student){
+//            Toast.makeText(getApplicationContext(),"View students profile",Toast.LENGTH_SHORT).show();
+//        }
         return super.onOptionsItemSelected(item);
     }
 

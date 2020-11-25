@@ -71,7 +71,8 @@
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:layout_below="@+id/edit_status"
-            android:background="@drawable/spinner_admin_signup" />
+            android:background="@drawable/spinner_admin_signup"
+            android:visibility="gone"/>
       <!--  <Spinner
             android:id="@+id/song"
             android:layout_width="match_parent"
@@ -84,7 +85,8 @@
             android:orientation="horizontal"
             android:weightSum="2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone">
             <Button
                 android:id="@+id/chooseImgb"
                 android:layout_width="0dp"
@@ -109,7 +111,8 @@
             android:id="@+id/upload_song"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="upload song"/>
+            android:text="upload song"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/musicPlayer"

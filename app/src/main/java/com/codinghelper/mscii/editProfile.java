@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -76,9 +77,11 @@ public class editProfile extends AppCompatActivity {
     private StorageReference storageReference,referencetTo;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
+    Spinner spinCourse;
     String selectedSem;
     String selectedsong;
     String songUrl;
+    LinearLayout layout;
     DatabaseReference reference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,12 +92,14 @@ public class editProfile extends AppCompatActivity {
         btn_uploadb=findViewById(R.id.uploadImgb);
         delpro=findViewById(R.id.delpropic);
         btn_choose=findViewById(R.id.chooseImg);
+        layout=(LinearLayout)findViewById(R.id.ll5);
 
         mp=findViewById(R.id.musicPlayer);                           // For music player
         user=FirebaseAuth.getInstance().getCurrentUser();
         reference=FirebaseDatabase.getInstance().getReference();
         btn_upload=findViewById(R.id.uploadImg);
         imageView=findViewById(R.id.imgView);
+        spinCourse = (Spinner) findViewById(R.id.studsem);
         status=findViewById(R.id.edit_status);
         status_btn=findViewById(R.id.status_confirm_bt);
         storage=FirebaseStorage.getInstance();
@@ -151,21 +156,40 @@ public class editProfile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                reference.child("studentDetail").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                reference.child("studentDetail").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChild("imageUrl")){
-                           String picUrl= String.valueOf(dataSnapshot.child("imageUrl").getValue());
+                        if(dataSnapshot.hasChild(user.getUid())){
+                            String picUrl= String.valueOf(dataSnapshot.child("imageUrl").getValue());
                             referencetTo=FirebaseStorage.getInstance().getReferenceFromUrl(picUrl);
                             referencetTo.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(editProfile.this,"Pic deleted",Toast.LENGTH_SHORT).show();
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Toast.makeText(editProfile.this,"Pic deleted",Toast.LENGTH_SHORT).show();
 
-                    }
-                });
+                                }
+                            });
+                        }else {
+                            reference.child("adminDetail").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    String picUrl= String.valueOf(dataSnapshot.child("imageUrl").getValue());
+                                    referencetTo=FirebaseStorage.getInstance().getReferenceFromUrl(picUrl);
+                                    referencetTo.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Toast.makeText(editProfile.this,"Pic deleted",Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
                         }
-
                     }
 
                     @Override
@@ -174,14 +198,7 @@ public class editProfile extends AppCompatActivity {
                     }
                 });
 
-                //  referencetTo=FirebaseStorage.getInstance().getReferenceFromUrl(Simg);
-               /* referencetTo.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(editProfile.this,"Pic deleted",Toast.LENGTH_SHORT).show();
 
-                    }
-                });*/
             }
         });
         status_btn.setOnClickListener(new View.OnClickListener() {
@@ -193,34 +210,49 @@ public class editProfile extends AppCompatActivity {
                     status.setFocusable(true);
                     return;
                 }else{
-             //       HashMap<String,String> pstatus=new HashMap<>();
-             //       pstatus.put("Userstatus",updatestatus);
-                    reference.child("studentDetail").child(user.getUid()).child("userstatus").setValue(updatestatus)
-                         .addOnCompleteListener(new OnCompleteListener<Void>() {
-                             @Override
-                             public void onComplete(@NonNull Task<Void> task) {
-                                 if(task.isSuccessful()){
-                                     String id=reference.child("PublicView").push().getKey();
-                                     reference.child("PublicView").child(id).child("peopleUID").setValue(user.getUid());
-                                     reference.child("PublicView").child(id).child("publicBio").setValue(updatestatus);
-                                     Toast.makeText(editProfile.this,"Status Uploded!!",Toast.LENGTH_SHORT).show();
-                                 }else {
-                                     String message=task.getException().getMessage();
-                                     Toast.makeText(editProfile.this,"Error:"+message,Toast.LENGTH_SHORT).show();
-                                 }
-                             }
-                         });
 
 
+                    reference.child("studentDetail").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.hasChild(user.getUid())){
+                                reference.child("studentDetail").child(user.getUid()).child("userstatus").setValue(updatestatus)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful()){
+                                                    String id=reference.child("PublicView").push().getKey();
+                                                    reference.child("PublicView").child(id).child("peopleUID").setValue(user.getUid());
+                                                    reference.child("PublicView").child(id).child("publicBio").setValue(updatestatus);
+                                                    Toast.makeText(editProfile.this,"Status Uploded!!",Toast.LENGTH_SHORT).show();
+                                                }else {
+                                                    String message=task.getException().getMessage();
+                                                    Toast.makeText(editProfile.this,"Error:"+message,Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+                            }else {
+                                reference.child("adminDetail").child(user.getUid()).child("userstatus").setValue(updatestatus)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(editProfile.this,"Status Uploded!!",Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
 
+                            }
+                        }
 
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                        }
+                    });
 
                 }
 
             }
         });
-        Spinner spinCourse = (Spinner) findViewById(R.id.studsem);
         ArrayAdapter<String> courseAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, studentSem);
         courseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinCourse.setAdapter(courseAdapter);
@@ -255,6 +287,35 @@ public class editProfile extends AppCompatActivity {
 
 
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        spinCourse.setVisibility(View.GONE);
+        layout.setVisibility(View.GONE);
+        btn_uploadSong.setVisibility(View.GONE);
+        reference.child("studentDetail").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild(user.getUid())){
+                    spinCourse.setVisibility(View.VISIBLE);
+                    layout.setVisibility(View.VISIBLE);
+                    btn_uploadSong.setVisibility(View.VISIBLE);
+                }else {
+                    spinCourse.setVisibility(View.GONE);
+                    layout.setVisibility(View.GONE);
+                    btn_uploadSong.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void SelectImage(){
         Intent intent=new Intent();
         intent.setType("image/*");
@@ -379,16 +440,38 @@ public class editProfile extends AppCompatActivity {
                         public void onSuccess(final Uri uri) {
                       //      HashMap<String,String> hashMap=new HashMap<>();
                       //      hashMap.put("imageUrl",String.valueOf(uri));
-                            reference.child("studentDetail").child(user.getUid()).child("imageUrl").setValue(String.valueOf(uri))
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            reference.child("studentDetail").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
-                                public void onSuccess(Void aVoid) {
-                                    String id=reference.child("PublicView").push().getKey();
-                                    reference.child("PublicView").child(id).child("peopleUID").setValue(user.getUid());
-                                    reference.child("PublicView").child(id).child("publicImage").setValue(String.valueOf(uri));
-                                    Toast.makeText(editProfile.this,"Finally completed!!",Toast.LENGTH_SHORT).show();
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    if(dataSnapshot.hasChild(user.getUid())){
+                                        reference.child("studentDetail").child(user.getUid()).child("imageUrl").setValue(String.valueOf(uri))
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        String id=reference.child("PublicView").push().getKey();
+                                                        reference.child("PublicView").child(id).child("peopleUID").setValue(user.getUid());
+                                                        reference.child("PublicView").child(id).child("publicImage").setValue(String.valueOf(uri));
+                                                        Toast.makeText(editProfile.this,"Finally completed!!",Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                    }else {
+                                        reference.child("adminDetail").child(user.getUid()).child("imageUrl").setValue(String.valueOf(uri))
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Toast.makeText(editProfile.this,"Finally completed!!",Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
                                 }
                             });
+
 
                         }
                     });

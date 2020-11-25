@@ -54,11 +54,11 @@ public class AdminProfileFragment extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
         user=firebaseAuth.getCurrentUser();
-        reference= FirebaseDatabase.getInstance().getReference().child("studentDetail").child(user.getUid());
+        reference= FirebaseDatabase.getInstance().getReference().child("adminDetail").child(user.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String Sname =String.valueOf(dataSnapshot.child("username").getValue());
+                String Sname =String.valueOf(dataSnapshot.child("adminName").getValue());
                 name.setText(Sname);
                 Pname.setText(Sname);
 
@@ -70,7 +70,7 @@ public class AdminProfileFragment extends Fragment {
                 Picasso.get().load(Simg).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(imageView);
                 String Sstatus =String.valueOf(dataSnapshot.child("userstatus").getValue());
                 status.setText(Sstatus);
-                String Sdepartment =String.valueOf(dataSnapshot.child("Scourse").getValue());
+                String Sdepartment =String.valueOf(dataSnapshot.child("position").getValue());
                 Pdepartment.setText(Sdepartment);
 
             }

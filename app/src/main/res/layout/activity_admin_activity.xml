@@ -58,6 +58,23 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/adname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextLabel"
+                android:layout_marginTop="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/adminName"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:hint="Name"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/slogin" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/emal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
