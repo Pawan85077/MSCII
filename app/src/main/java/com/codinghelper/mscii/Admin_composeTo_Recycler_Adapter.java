@@ -35,8 +35,8 @@ public class Admin_composeTo_Recycler_Adapter extends RecyclerView.Adapter<Admin
 
         Admin_composeRecyclerValue_from_AddRecipients admin_composeRecyclerValue_from_addRecipients = admin_composeRecyclerValue_from_addRecipientsList.get(position);
         Random rnd = new Random();
-        int currentColour = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-        holder.parentLL.setBackgroundColor(currentColour);
+        int randomColour = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+        holder.parentLL.setBackgroundColor(randomColour);
 
         holder.textDepartmentName.setText(admin_composeRecyclerValue_from_addRecipients.getDepartmentName());
         holder.textSessionName.setText(admin_composeRecyclerValue_from_addRecipients.getSessionName());
@@ -48,14 +48,6 @@ public class Admin_composeTo_Recycler_Adapter extends RecyclerView.Adapter<Admin
         return admin_composeRecyclerValue_from_addRecipientsList.size();
     }
 
-
-//    public String getDepartment(int position) {
-//        return admin_composeRecyclerValue_from_addRecipientsList.get(position).getDepartmentName();
-//    }
-//
-//    public String getSession(int position) {
-//        return admin_composeRecyclerValue_from_addRecipientsList.get(position).getSessionName();
-//    }
 
     class AdminComposeToViewHolder extends RecyclerView.ViewHolder{
 
