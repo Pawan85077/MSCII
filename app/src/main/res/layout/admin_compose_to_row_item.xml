@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:text="Session :"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                android:textColor="#A8FFFFFF"
+                android:textColor="#BCFFFFFF"
                 android:textSize="11dp" />
 
             <TextView
@@ -48,7 +48,7 @@
                 android:layout_marginLeft="3dp"
                 android:text="2018-2021"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                android:textColor="#A8FFFFFF"
+                android:textColor="#BCFFFFFF"
                 android:textSize="11dp" />
 
         </LinearLayout>

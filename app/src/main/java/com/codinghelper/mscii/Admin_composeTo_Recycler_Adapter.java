@@ -48,6 +48,15 @@ public class Admin_composeTo_Recycler_Adapter extends RecyclerView.Adapter<Admin
         return admin_composeRecyclerValue_from_addRecipientsList.size();
     }
 
+
+//    public String getDepartment(int position) {
+//        return admin_composeRecyclerValue_from_addRecipientsList.get(position).getDepartmentName();
+//    }
+//
+//    public String getSession(int position) {
+//        return admin_composeRecyclerValue_from_addRecipientsList.get(position).getSessionName();
+//    }
+
     class AdminComposeToViewHolder extends RecyclerView.ViewHolder{
 
         TextView textDepartmentName,textSessionName;
