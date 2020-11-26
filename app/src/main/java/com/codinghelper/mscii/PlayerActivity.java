@@ -11,7 +11,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,6 +77,7 @@ public class PlayerActivity extends AppCompatActivity {
 
                                                   }
                                               });
+
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,6 +140,11 @@ public class PlayerActivity extends AppCompatActivity {
                 updateSeekBar.start();
                 sb.getProgressDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
                 sb.getThumb().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+                RotateAnimation rotateAnimation=new RotateAnimation(0,180, Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+                rotateAnimation.setDuration(mp.getDuration());
+                rotateAnimation.setInterpolator(new LinearInterpolator());
+                ImageView imageView=(ImageView)findViewById(R.id.album_art);
+                imageView.startAnimation(rotateAnimation);
             }
         });
 
