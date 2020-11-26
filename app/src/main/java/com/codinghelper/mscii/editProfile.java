@@ -160,7 +160,7 @@ public class editProfile extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.hasChild(user.getUid())){
-                            String picUrl= String.valueOf(dataSnapshot.child("imageUrl").getValue());
+                            String picUrl= String.valueOf(dataSnapshot.child(user.getUid()).child("imageUrl").getValue());
                             referencetTo=FirebaseStorage.getInstance().getReferenceFromUrl(picUrl);
                             referencetTo.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -170,7 +170,7 @@ public class editProfile extends AppCompatActivity {
                                 }
                             });
                         }else {
-                            reference.child("adminDetail").addListenerForSingleValueEvent(new ValueEventListener() {
+                            reference.child("adminDetail").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     String picUrl= String.valueOf(dataSnapshot.child("imageUrl").getValue());

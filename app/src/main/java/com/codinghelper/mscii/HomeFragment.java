@@ -53,6 +53,11 @@ import com.sackcentury.shinebuttonlib.ShineButton;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.security.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,10 +65,12 @@ import java.io.IOException;
 public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private DatabaseReference root;
+    private DatabaseReference root,Likesref,Pokesref;
     private FirebaseAuth mAuth;
     private String currentUserId;
     ProgressDialog progressDialog;
+    boolean Likechecker = false;
+    boolean Pokechecker=false;
 
 
     public HomeFragment() {
@@ -87,6 +94,9 @@ public class HomeFragment extends Fragment {
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+        Likesref= FirebaseDatabase.getInstance().getReference().child("LikesC");
+        Pokesref= FirebaseDatabase.getInstance().getReference().child("PokesC");
+
 
 
 
@@ -108,27 +118,11 @@ public class HomeFragment extends Fragment {
 
                         final String public_id=getRef(position).getKey();
 
-                     // holder.username.setText(model.getPublicUserName());
-                     // Picasso.get().load(model.getPublicImgURL()).fit().centerCrop().noFade().placeholder(R.drawable.main_stud).into(holder.userImage);
                       holder.userBigImage.setVisibility(View.GONE);
                       holder.userBio.setVisibility(View.GONE);
                       holder.UserSong.setVisibility(View.GONE);
                       holder.report.setVisibility(View.GONE);
-                       /* root.child("PublicView").child(public_id).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                String Sreport =String.valueOf(dataSnapshot.child("Qreported").getValue());
 
-                                if(Sreport.equals("Yes")){
-                                    holder.report.setVisibility(View.VISIBLE);
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });*/
                       root.child("studentDetail").child(model.getpeopleUID()).addValueEventListener(new ValueEventListener() {
                           @Override
                           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -154,7 +148,11 @@ public class HomeFragment extends Fragment {
                       root.child("PublicView").child(public_id).addValueEventListener(new ValueEventListener() {
                           @Override
                           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                              String Feedreport =String.valueOf(dataSnapshot.child("Feedreported").getValue());
 
+                                  if(Feedreport.equals("yes")){
+                                      holder.report.setVisibility(View.VISIBLE);
+                                  }
 
 
                                   if(dataSnapshot.child("publicImage").exists()){
@@ -195,6 +193,166 @@ public class HomeFragment extends Fragment {
 
                           }
                       });
+
+                      holder.report.setOnClickListener(new View.OnClickListener() {
+                          @Override
+                          public void onClick(View view) {
+
+
+
+                              root.child("PublicView").child(public_id).addListenerForSingleValueEvent(new ValueEventListener() {
+                                  @Override
+                                  public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                      String report = String.valueOf(dataSnapshot.child("FeedreportReason").getValue());
+                                      AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_Light_Dialog_MinWidth);
+                                      builder.setTitle("Reporting reason:-");
+                                      builder.setMessage(report);
+                                      builder.setNeutralButton("Un-report", new DialogInterface.OnClickListener() {
+                                          @Override
+                                          public void onClick(DialogInterface dialogInterface, int i) {
+                                              root.child("studentDetail").child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                  @Override
+                                                  public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                      String Madmod =String.valueOf(dataSnapshot.child("Level").getValue());
+                                                      if(Madmod.equals("moderator")){
+                                                          root.child("PublicView").child(public_id).child("Feedreported").setValue("no");
+                                                          Toast.makeText(getActivity(),"Un-reported successfully!!", Toast.LENGTH_SHORT).show();
+                                                      }else {
+
+                                                          Toast.makeText(getActivity(),"Only moderator can Un-report !!", Toast.LENGTH_SHORT).show();
+
+                                                      }
+                                                  }
+
+                                                  @Override
+                                                  public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                  }
+                                              });
+
+
+
+                                          }
+                                      });
+                                      builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                          @Override
+                                          public void onClick(DialogInterface dialogInterface, int i) {
+
+                                              root.child("studentDetail").child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                  @Override
+                                                  public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                      String Madmod =String.valueOf(dataSnapshot.child("Level").getValue());
+                                                      if(Madmod.equals("moderator")||currentUserId.equals(model.getpeopleUID())){
+                                                          root.child("PublicView").child(public_id).removeValue();
+                                                          Toast.makeText(getActivity(),"Post deleted successfully!!", Toast.LENGTH_SHORT).show();
+                                                      }else {
+
+                                                          root.child("studentDetail").child(model.getpeopleUID()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                              @Override
+                                                              public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                  String musername =String.valueOf(dataSnapshot.child("username").getValue());
+                                                                  Toast.makeText(getActivity(),"Only moderator/"+musername+" can delete this post!!", Toast.LENGTH_SHORT).show();
+
+                                                              }
+
+                                                              @Override
+                                                              public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                              }
+                                                          });
+                                                      }
+                                                  }
+
+                                                  @Override
+                                                  public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                  }
+                                              });
+                                          }
+                                      });
+                                      builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                                          @Override
+                                          public void onClick(DialogInterface dialogInterface, int i) {
+                                              dialogInterface.cancel();
+
+                                          }
+                                      });
+                                      builder.show();
+
+                                  }
+                                  @Override
+                                  public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                  }
+                              });
+
+
+
+
+
+                          }
+                      });
+                        holder.setPokessButtonStatus(public_id);
+                        holder.poke.setOnClickListener(new View.OnClickListener() {
+                          @Override
+                          public void onClick(View view) {
+                              Pokechecker =true;
+                              Pokesref.addValueEventListener(new ValueEventListener() {
+                                  @Override
+                                  public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                      if(Pokechecker){
+                                          if(dataSnapshot.child(public_id).hasChild(currentUserId)){
+                                              Pokesref.child(public_id).child(currentUserId).removeValue();
+                                              Pokechecker = false;
+                                          }else {
+                                              Pokesref.child(public_id).child(currentUserId).setValue(true);
+
+                                              Pokechecker = false;
+
+
+                                          }
+                                      }
+                                  }
+
+                                  @Override
+                                  public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                  }
+                              });
+                          }
+                      });
+                        holder.setLikesButtonStatus(public_id);
+                        holder.heart.setOnClickListener(new View.OnClickListener() {
+                          @Override
+                          public void onClick(View view) {
+
+                              Likechecker =true;
+                              Likesref.addValueEventListener(new ValueEventListener() {
+                                  @Override
+                                  public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                      if(Likechecker){
+                                          if(dataSnapshot.child(public_id).hasChild(currentUserId)){
+                                              Likesref.child(public_id).child(currentUserId).removeValue();
+                                              Likechecker = false;
+                                          }else {
+                                              Likesref.child(public_id).child(currentUserId).setValue(true);
+
+                                              Likechecker = false;
+
+
+                                          }
+                                      }
+                                  }
+
+                                  @Override
+                                  public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                  }
+                              });
+
+                          }
+                      });
+
                       holder.threedot.setOnClickListener(new View.OnClickListener() {
                           @Override
                           public void onClick(View view) {
@@ -205,9 +363,8 @@ public class HomeFragment extends Fragment {
                                   public boolean onMenuItemClick(MenuItem menuItem) {
                                       int id = menuItem.getItemId();
                                       if (id == R.id.qr) {
-                                          Toast.makeText(getActivity(), "nhi krenge report too ka !!", Toast.LENGTH_LONG).show();
 
-                                            /*  final AlertDialog.Builder builder=new AlertDialog.Builder(getActivity(),R.style.Theme_AppCompat_Light_Dialog_MinWidth);
+                                              AlertDialog.Builder builder=new AlertDialog.Builder(getActivity(),R.style.Theme_AppCompat_Light_Dialog_MinWidth);
                                               builder.setTitle("Why to report?");
                                               String[] items={"Inappropriate","Invalid","Irrevalent","Stupidity"};
                                               int checkeditem=0;
@@ -237,12 +394,12 @@ public class HomeFragment extends Fragment {
                                                   @Override
                                                   public void onClick(DialogInterface dialogInterface, int i) {
                                                       if(temp[0]!=null){
-                                                          root.child("PublicView").child(public_id).child("QreportReason").setValue(temp[0]);
+                                                          root.child("PublicView").child(public_id).child("FeedreportReason").setValue(temp[0]);
                                                       }else {
-                                                          root.child("PublicView").child(public_id).child("QreportReason").setValue("Inappropriate");
+                                                          root.child("PublicView").child(public_id).child("FeedreportReason").setValue("Inappropriate");
 
                                                       }
-                                                      root.child("PublicView").child(public_id).child("Qreported").setValue("yes");
+                                                      root.child("PublicView").child(public_id).child("Feedreported").setValue("yes");
                                                       Toast.makeText(getActivity(), "Reported successful", Toast.LENGTH_LONG).show();
 
 
@@ -257,7 +414,7 @@ public class HomeFragment extends Fragment {
                                               });
                                               AlertDialog dialog =builder.create();
                                               dialog.setCanceledOnTouchOutside(true);
-                                              dialog.show();*/
+                                              dialog.show();
                                       }
 
 
@@ -285,11 +442,14 @@ public class HomeFragment extends Fragment {
     }
 
     public static class QuestionViewHolder extends RecyclerView.ViewHolder{
-        TextView username,gender,updated;
-        TextView userBio;
-        ImageView userBigImage,UserSong,threedot;
+        TextView username,gender,updated,like_count;
+        TextView userBio,poked;
+        ImageView userBigImage,UserSong,threedot,heart,poke;
         CircularImageView userImage;
         ImageButton report;
+        DatabaseReference Likesref,Pokesref;
+        String currentUserId;
+        int countLikes;
         public QuestionViewHolder(@NonNull View itemView) {
             super(itemView);
             username=itemView.findViewById(R.id.user_updated_name);
@@ -300,9 +460,63 @@ public class HomeFragment extends Fragment {
             gender=itemView.findViewById(R.id.gender);
             updated=itemView.findViewById(R.id.updated_thing);
             threedot=itemView.findViewById(R.id.home_threedot);
-            report=itemView.findViewById(R.id.home_error);
+            report=itemView.findViewById(R.id.home_error_btn);
+            poked=itemView.findViewById(R.id.home_poked);
+            heart=itemView.findViewById(R.id.home_heart);
+            poke=itemView.findViewById(R.id.home_poke);
+            like_count=itemView.findViewById(R.id.home_like_count);
+            Likesref= FirebaseDatabase.getInstance().getReference().child("LikesC");
+            Pokesref= FirebaseDatabase.getInstance().getReference().child("PokesC");
+            currentUserId=FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
 
         }
 
+        public void setLikesButtonStatus(final String public_id) {
+            Likesref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.child(public_id).hasChild(currentUserId)){
+                        countLikes=(int)dataSnapshot.child(public_id).getChildrenCount();
+                          heart.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                        like_count.setText(Integer.toString(countLikes));
+
+
+                    }else {
+                        countLikes=(int)dataSnapshot.child(public_id).getChildrenCount();
+                          heart.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+                        like_count.setText(Integer.toString(countLikes));
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+        public void setPokessButtonStatus(final String public_id) {
+            Pokesref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.child(public_id).hasChild(currentUserId)){
+                        poke.setBackgroundResource(R.drawable.poked);
+                        poked.setText("poked");
+
+
+                    }else {
+                        poke.setBackgroundResource(R.drawable.poke);
+                        poked.setText("poke");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
 }
