@@ -70,7 +70,7 @@ public class AdminHomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.admin_fragment_home, container, false);
 
         final ExtendedFloatingActionButton composeMessageFAB = view.findViewById(R.id.composeMessageFAB);
-        composeMessageFAB.shrink();
+        composeMessageFAB.extend();
 
         Rootref= FirebaseDatabase.getInstance().getReference();
         firebaseAuth = FirebaseAuth.getInstance();
