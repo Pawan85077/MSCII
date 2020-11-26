@@ -46,7 +46,7 @@ public class AdminComposeMessage extends AppCompatActivity {
     //dekh ke re baba
     private FirebaseAuth auth;
     private String currentAdminID;
-    private DatabaseReference RootNode, adminMessage;
+    private DatabaseReference RootNode,adminToAdminMessage, adminMessage;
 
 
     @SuppressLint("RestrictedApi")
@@ -61,6 +61,7 @@ public class AdminComposeMessage extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
         currentAdminID=auth.getCurrentUser().getUid();
         adminMessage=FirebaseDatabase.getInstance().getReference().child("adminMessages");
+        adminToAdminMessage = FirebaseDatabase.getInstance().getReference().child("adminToAdminMessage");
         RootNode= FirebaseDatabase.getInstance().getReference().child("adminDetail");
 
         Toolbar toolbar = findViewById(R.id.compose_toolbar);
@@ -112,7 +113,12 @@ public class AdminComposeMessage extends AppCompatActivity {
                 int n = AdminComposeToRecyclerView.getAdapter().getItemCount();
                 final String messageSubject = composeMessageSubject.getText().toString();
                 final String messageBody = composeMessageBody.getText().toString();
+                final String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                final String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
                 final String to = new String();
+                final String[] mainKey = new String[1];
+                final String[] senderImgURL = new String[1];
+                final String[] senderDepartment = new String[1];
                 StringBuilder builder = new StringBuilder(to);
                 String newTo = new String();
 
@@ -131,17 +137,59 @@ public class AdminComposeMessage extends AppCompatActivity {
                         builder.append("[").append(receiverDepartment).append("(").append(receiverSession).append(")]  ");
                         newTo = builder.toString();
                     }
+
+                    //admin to admin messages
+                    final String finalNewTo = newTo;
+                    RootNode.child(currentAdminID).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                mainKey[0] =adminToAdminMessage.push().getKey();
+                                senderImgURL[0] =String.valueOf(dataSnapshot.child("imageUrl").getValue());
+                                senderDepartment[0] =String.valueOf(dataSnapshot.child("position").getValue());
+
+                                HashMap recB=new HashMap();
+                                recB.put("senderDepartmentID",currentAdminID);
+                                recB.put("messageTitle",messageSubject);
+                                recB.put("messageBody",messageBody);
+                                recB.put("receiverName", finalNewTo);
+                                recB.put("LikeCount",0);
+                                recB.put("dateOfPost",currentDate);
+                                recB.put("timeOfPost",currentTime);
+                                recB.put("senderImage", senderImgURL[0]);
+                                recB.put("senderDepartmentName", senderDepartment[0]);
+                                recB.put("Discussion","");
+
+                                adminToAdminMessage.child(mainKey[0]).updateChildren(recB).addOnCompleteListener(new OnCompleteListener() {
+                                    @Override
+                                    public void onComplete(@NonNull Task task) {
+                                        if(task.isSuccessful()){
+                                            Toast.makeText(getApplicationContext(), "Sending messages...", Toast.LENGTH_LONG).show();
+//                                            composeMessageSubject.setText(null);
+//                                            composeMessageBody.setText(null);
+                                        }
+                                    }
+                                });
+
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    //messages to specific departments
                     for (int position = 0; position< n; position++)
                     {
 
                         final String receiverDepartment = admin_composeTo_getter_setters.get(position).getDepartmentName();
                         final String receiverSession = admin_composeTo_getter_setters.get(position).getSessionName();
-                        final String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-                        final String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
 
 
                         //unconfirmed changes addValueEventListener
-                        final String finalNewTo = newTo;
                         RootNode.child(currentAdminID).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -150,19 +198,21 @@ public class AdminComposeMessage extends AppCompatActivity {
 
                                     HashMap recA=new HashMap();
                                     recA.put("senderDepartmentID",currentAdminID);
-                                    recA.put("messageSubject",messageSubject);
+                                    recA.put("messageTitle",messageSubject);
                                     recA.put("messageBody",messageBody);
-                                    recA.put("sentTo", finalNewTo);
-                                    recA.put("Likes",0);
-                                    recA.put("Date",currentDate);
-                                    recA.put("Time",currentTime);
-                                    recA.put("Discussion",null);
+                                    recA.put("receiverName", finalNewTo);
+                                    recA.put("LikeCount",0);
+                                    recA.put("dateOfPost",currentDate);
+                                    recA.put("timeOfPost",currentTime);
+                                    recA.put("senderImage", senderImgURL[0]);
+                                    recA.put("senderDepartmentName", senderDepartment[0]);
+                                    recA.put("keyForDiscussion",mainKey[0]);
 
                                     adminMessage.child(receiverSession).child(receiverDepartment).child(key).updateChildren(recA).addOnCompleteListener(new OnCompleteListener() {
                                         @Override
                                         public void onComplete(@NonNull Task task) {
                                             if(task.isSuccessful()){
-                                                Toast.makeText(getApplicationContext(), "Message Sent", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(getApplicationContext(), "Message Sent Successfully :)", Toast.LENGTH_LONG).show();
                                                 composeMessageSubject.setText(null);
                                                 composeMessageBody.setText(null);
                                             }
