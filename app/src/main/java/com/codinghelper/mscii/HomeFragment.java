@@ -178,8 +178,8 @@ public class HomeFragment extends Fragment {
                                       public void onClick(View view) {
 
 
-                                          Intent profileIntent=new Intent(getActivity(),Show_profile_Activity.class);
-                                          profileIntent.putExtra("visit_user_id",model.getpeopleUID());
+                                          Intent profileIntent=new Intent(getActivity(),PlayerActivity.class);
+                                          profileIntent.putExtra("visit_song",model.getPublicSong());
                                           startActivity(profileIntent);
 
                                       }

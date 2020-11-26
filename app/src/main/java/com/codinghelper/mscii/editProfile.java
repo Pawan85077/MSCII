@@ -108,12 +108,7 @@ public class editProfile extends AppCompatActivity {
         String[] studentSong = {"--Select song--","Rainbow","Despacito","let me love you","Tum he Ana","teddy","Tujhe kitna Chahne Lage"};
         firebaseAuth = FirebaseAuth.getInstance();
 
-        mp.setOnClickListener(new View.OnClickListener() {                  // For music player
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(editProfile.this, Tunes.class));
-            }
-        });
+
 
         btn_choose.setOnClickListener(new View.OnClickListener() {
             @Override
