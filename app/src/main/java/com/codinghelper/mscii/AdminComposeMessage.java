@@ -153,7 +153,7 @@ public class AdminComposeMessage extends AppCompatActivity {
                                 recB.put("messageTitle",messageSubject);
                                 recB.put("messageBody",messageBody);
                                 recB.put("receiverName", finalNewTo);
-                                recB.put("likeCount",0);
+                                recB.put("likeCount","0");
                                 recB.put("dateOfPost",currentDate);
                                 recB.put("timeOfPost",currentTime);
                                 recB.put("senderImage", senderImgURL[0]);
@@ -201,7 +201,7 @@ public class AdminComposeMessage extends AppCompatActivity {
                                     recA.put("messageTitle",messageSubject);
                                     recA.put("messageBody",messageBody);
                                     recA.put("receiverName", finalNewTo);
-                                    recA.put("likeCount",0);
+                                    recA.put("likeCount","0");
                                     recA.put("dateOfPost",currentDate);
                                     recA.put("timeOfPost",currentTime);
                                     recA.put("senderImage", senderImgURL[0]);

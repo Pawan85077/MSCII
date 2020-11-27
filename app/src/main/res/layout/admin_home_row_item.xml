@@ -109,7 +109,12 @@
                         android:textColor="@color/grey_60"
                         android:text="I am a good boy and you are bad boy. I dont know what you are doing but I am eating samosha with green chatni..."
                         android:lineSpacingExtra="4dp"
+                        android:cursorVisible="true"
+                        android:textCursorDrawable="@color/black"
                         android:textIsSelectable="true"
+                        android:textColorLink="@color/blue_400"
+                        android:textColorHighlight="@color/blue_100"
+                        android:autoLink="all"
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                         android:padding="2dp"/>
 
