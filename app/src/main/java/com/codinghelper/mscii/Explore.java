@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -61,7 +62,8 @@ public class Explore extends Fragment {
     String[] selectTopic = {"--Select Topic--","Computer","C","C++","java","Python","Data structure","Programming","Competitive coding","Physics","Math","Hindi",
     "Bio","Geo","History","English","Others"};
     String selectedTopic;
-    ImageButton Computer,flyGame,C,Cplus,java,python,ds,pro,cp,hindi,bio,hist,geo,phy,math,add;
+    CardView Computer,flyGame,C,Cplus,java,python,ds,pro,cp,hindi,bio,hist,geo,phy,math;
+    ImageButton add;
     long value;
     boolean Likechecker = false;
     Integer j;
@@ -86,21 +88,21 @@ public class Explore extends Fragment {
         View v= inflater.inflate(R.layout.fragment_explore, container, false);
 
         SearchBar=(EditText)v.findViewById(R.id.search);
-        Computer=(ImageButton)v.findViewById(R.id.ComputerBtn);
-        C=(ImageButton)v.findViewById(R.id.CBtn);
-        Cplus=(ImageButton)v.findViewById(R.id.CplusplusBtn);
-        java=(ImageButton)v.findViewById(R.id.javaBtn);
-        python=(ImageButton)v.findViewById(R.id.pythonBtn);
-        ds=(ImageButton)v.findViewById(R.id.DSBtn);
-        pro=(ImageButton)v.findViewById(R.id.ProgBtn);
-        cp=(ImageButton)v.findViewById(R.id.CPBtn);
-        hindi=(ImageButton)v.findViewById(R.id.HindiBtn);
-        bio=(ImageButton)v.findViewById(R.id.BioBtn);
-        hist=(ImageButton)v.findViewById(R.id.HistoryBtn);
-        geo=(ImageButton)v.findViewById(R.id.GeographyBtn);
-        phy=(ImageButton)v.findViewById(R.id.PhyBtn);
-        math=(ImageButton)v.findViewById(R.id.MathBtn);
-        add=(ImageButton)v.findViewById(R.id.plus);
+        Computer=(CardView) v.findViewById(R.id.ComputerBtn);
+        C=(CardView)v.findViewById(R.id.CBtn);
+        Cplus=(CardView)v.findViewById(R.id.CplusplusBtn);
+        java=(CardView)v.findViewById(R.id.javaBtn);
+        python=(CardView)v.findViewById(R.id.pythonBtn);
+        ds=(CardView)v.findViewById(R.id.DSBtn);
+        pro=(CardView)v.findViewById(R.id.ProgBtn);
+        cp=(CardView)v.findViewById(R.id.CPBtn);
+        hindi=(CardView)v.findViewById(R.id.HindiBtn);
+        bio=(CardView)v.findViewById(R.id.BioBtn);
+        hist=(CardView)v.findViewById(R.id.HistoryBtn);
+        geo=(CardView)v.findViewById(R.id.GeographyBtn);
+        phy=(CardView)v.findViewById(R.id.PhyBtn);
+        math=(CardView)v.findViewById(R.id.MathBtn);
+        add=(ImageButton) v.findViewById(R.id.plus);
 
         recyclerView=(RecyclerView)v.findViewById(R.id.qqRecycle);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -108,7 +110,7 @@ public class Explore extends Fragment {
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        recyclerView2=(RecyclerView)v.findViewById(R.id.Lrecycle);
+        recyclerView2=(RecyclerView)v.findViewById(R.id.LiveRecycle);
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
         linearLayoutManager2.setReverseLayout(true);
         linearLayoutManager2.setStackFromEnd(true);
@@ -119,9 +121,9 @@ public class Explore extends Fragment {
         linearLayoutManager3.setReverseLayout(true);
         linearLayoutManager3.setStackFromEnd(true);
         recyclerView3.setLayoutManager(linearLayoutManager3);*/
-        Askbtn=(Button)v.findViewById(R.id.buttonAsk);
+        Askbtn=(Button)v.findViewById(R.id.search_ask_btn);
         Likesref= FirebaseDatabase.getInstance().getReference().child("LikesC");
-        flyGame=(ImageButton)v.findViewById(R.id.game);
+        flyGame=(CardView) v.findViewById(R.id.game);
         auth=FirebaseAuth.getInstance();
         currentUserID=auth.getCurrentUser().getUid();
         userQuestion=FirebaseDatabase.getInstance().getReference().child("Questions");

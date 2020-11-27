@@ -44,29 +44,49 @@
 </RelativeLayout>
 
 
-
+<RelativeLayout
+    android:id="@+id/buttonAsk"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/search"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="10dp">
 
     <Button
-        android:id="@+id/buttonAsk"
+        android:id="@+id/search_ask_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/search"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/s_bg"
+        android:background="@drawable/ripple_btbg"
         android:fontFamily="monospace"
+        android:textColor="@color/colorAccent"
         android:text="ask"
         android:textAllCaps="false"
         android:textSize="16sp"/>
+</RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Lrecycle"
-        android:layout_width="327dp"
-        android:layout_height="152dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/no_live"
-        android:layout_below="@id/buttonAsk"
-        android:layout_centerHorizontal="true"/>
+
+        <RelativeLayout
+            android:id="@+id/Lrecycle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buttonAsk"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp">
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="50dp">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/LiveRecycle"
+                    android:layout_width="327dp"
+                    android:layout_height="152dp"
+                    android:background="@drawable/no_live"/>
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+
+
 
 <RelativeLayout
     android:id="@+id/sub_relative"
@@ -87,18 +107,20 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <androidx.cardview.widget.CardView
-                android:id="@+id/Computer"
+                android:id="@+id/ComputerBtn"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="10dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <ImageButton
-                        android:id="@+id/ComputerBtn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
@@ -113,11 +135,14 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
-                android:id="@+id/Maths"
+                android:id="@+id/CBtn"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="10dp"
                 android:layout_below="@id/buttonAsk"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 app:cardCornerRadius="10dp">
@@ -126,7 +151,6 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <ImageButton
-                        android:id="@+id/CBtn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
@@ -141,18 +165,20 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
-                android:id="@+id/Physics"
+                android:id="@+id/CplusplusBtn"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="10dp"
                 android:layout_below="@id/buttonAsk"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="10dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <ImageButton
-                        android:id="@+id/CplusplusBtn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
@@ -167,20 +193,22 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
-                android:id="@+id/English"
+                android:id="@+id/javaBtn"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:layout_below="@id/buttonAsk"
                 android:layout_marginBottom="10dp"
                 android:layout_margin="10dp"
                 android:layout_marginLeft="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="10dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <ImageButton
-                        android:id="@+id/javaBtn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
@@ -202,19 +230,22 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/pythonBtn"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="10dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <ImageButton
-                        android:id="@+id/pythonBtn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
@@ -229,18 +260,21 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:id="@+id/DSBtn"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:layout_below="@id/buttonAsk"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="10dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <ImageButton
-                        android:id="@+id/DSBtn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
@@ -256,18 +290,21 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:id="@+id/ProgBtn"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_below="@id/buttonAsk"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="10dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <ImageButton
-                        android:id="@+id/ProgBtn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
@@ -283,11 +320,15 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:id="@+id/CPBtn"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:layout_below="@id/buttonAsk"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:layout_marginTop="10dp"
                 app:cardCornerRadius="10dp">
 
@@ -297,7 +338,6 @@
                     android:orientation="vertical">
 
                     <ImageButton
-                        android:id="@+id/CPBtn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
@@ -321,20 +361,22 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/Hindi"
+                android:id="@+id/HindiBtn"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="10dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <ImageButton
-                        android:id="@+id/HindiBtn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
@@ -349,19 +391,21 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
-                android:id="@+id/Bio"
+                android:id="@+id/BioBtn"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:layout_below="@id/buttonAsk"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="10dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <ImageButton
-                        android:id="@+id/BioBtn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
@@ -376,19 +420,21 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
-                android:id="@+id/History"
+                android:id="@+id/HistoryBtn"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_below="@id/buttonAsk"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="10dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <ImageButton
-                        android:id="@+id/HistoryBtn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
@@ -403,13 +449,16 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
-                android:id="@+id/Geography"
+                android:id="@+id/GeographyBtn"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:layout_below="@id/buttonAsk"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="10dp">
 
                 <LinearLayout
@@ -418,7 +467,6 @@
                     android:orientation="vertical">
 
                     <ImageButton
-                        android:id="@+id/GeographyBtn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
@@ -442,17 +490,19 @@
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/Links"
+                android:id="@+id/PhyBtn"
                 android:layout_width="70dp"
                 android:layout_marginBottom="10dp"
                 android:layout_height="60dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="10dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <ImageButton
-                        android:id="@+id/PhyBtn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
@@ -468,17 +518,20 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/MathBtn"
                 android:layout_width="70dp"
                 android:layout_marginBottom="10dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="10dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <ImageButton
-                        android:id="@+id/MathBtn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
@@ -521,18 +574,21 @@
                 android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/game"
             android:layout_width="70dp"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginStart="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
                 <ImageButton
-                    android:id="@+id/game"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
@@ -552,18 +608,20 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginStart="10dp"
+                android:clickable="true"
+                android:background="@drawable/ic_add"
+
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="10dp">
-                <LinearLayout
+
+                <ImageButton
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <ImageButton
-                        android:id="@+id/plus"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:background="@drawable/ic_add"/>
-                </LinearLayout>
+                    android:id="@+id/plus"
+                    android:background="@drawable/ripple_btbg"
+                    android:src="@drawable/ic_add"/>
+
             </androidx.cardview.widget.CardView>
             </LinearLayout>
             </RelativeLayout>
@@ -572,12 +630,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/qqRecycle"
-        android:layout_below="@+id/buttonAsk"
+        android:layout_below="@+id/search"
         android:background="@color/white"
-        android:layout_width="300dp"
+        android:layout_width="327dp"
         android:visibility="gone"
         android:layout_centerHorizontal="true"
-        android:layout_height="wrap_content"/>
+        android:layout_height="300dp"/>
 
 
 </RelativeLayout>
