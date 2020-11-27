@@ -53,8 +53,13 @@ public class Signup_student extends AppCompatActivity {
     String selectedSession;
     ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
-    String[] studentCourse = {"--Select Course--","BCA","BBA","B.Com","B.Sc.Physics","B.Sc.Chemistry","B.Sc.Mathematics"};
-    String[] studentSession = {"--Select Session--","2017-2020","2018-2021","2019-2022"};
+    String[] studentCourse = {"--Select Course--","Physics Hons.", "Chemistry Hons.", "Mathematics Hons.", "Botany Hons.",
+            "Zoology Hons.", "Bio-Technology", "Computer Application", "Computer Maintenance", "Information Technology",
+            "Fashion Designing", "Business Administration", "Clinical Nutrition and Dietetics", "Commerce", "Economics Hons.",
+            "Geography Hons.", "History Hons.", "Home Science", "Philosophy Hons.", "Political Science", "Psychology Hons.",
+            "Hindi Hons.", "English Hons.", "Bengali Hons.", "Sanskrit Hons.", "Urdu Hons.", "Khadia Hons.", "Khuruk Hons.",
+            "Mundali Hons.", "Nagpuri Hons.", "Kurmal Hons."};
+    String[] studentSession = {"--Select Session--","2016-2019","2017-2020","2018-2021","2019-2022","2020-2023"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

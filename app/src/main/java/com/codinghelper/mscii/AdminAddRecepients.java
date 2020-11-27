@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AdminAddRecepients extends AppCompatActivity implements View.OnClickListener {
@@ -55,31 +56,19 @@ public class AdminAddRecepients extends AppCompatActivity implements View.OnClic
         buttonAdd.setOnClickListener(this);
         buttonSubmitList.setOnClickListener(this);
 
+        String[] studentCourse = {"--Select Course--","Physics Hons.", "Chemistry Hons.", "Mathematics Hons.", "Botany Hons.",
+                "Zoology Hons.", "Bio-Technology", "Computer Application", "Computer Maintenance", "Information Technology",
+                "Fashion Designing", "Business Administration", "Clinical Nutrition and Dietetics", "Commerce", "Economics Hons.",
+                "Geography Hons.", "History Hons.", "Home Science", "Philosophy Hons.", "Political Science", "Psychology Hons.",
+                "Hindi Hons.", "English Hons.", "Bengali Hons.", "Sanskrit Hons.", "Urdu Hons.", "Khadia Hons.", "Khuruk Hons.",
+                "Mundali Hons.", "Nagpuri Hons.", "Kurmal Hons."};
+        String[] studentSession = {"--Select Session--","2016-2019","2017-2020","2018-2021","2019-2022","2020-2023"};
+
         //DEPARTMENT lIST ITEMS
-        departmentsLists.add("--Select Department--");
-        departmentsLists.add("BCA");
-        departmentsLists.add("IT");
-        departmentsLists.add("BCM");
-        departmentsLists.add("BBA");
-        departmentsLists.add("Maths");
-        departmentsLists.add("Physics Department");
-        departmentsLists.add("Chemistry Department");
-        departmentsLists.add("Botany");
-        departmentsLists.add("Zoology");
-        departmentsLists.add("Bio Technology");
+        departmentsLists.addAll(Arrays.asList(studentCourse));
 
         //SESSION lIST ITEM
-        sessionLists.add("--Select Session--");
-        sessionLists.add("2016-19");
-        sessionLists.add("2017-20");
-        sessionLists.add("2018-21");
-        sessionLists.add("2019-22");
-        sessionLists.add("2020-23");
-        sessionLists.add("2021-24");
-        sessionLists.add("2021-25");
-        sessionLists.add("2022-26");
-        sessionLists.add("2023-27");
-        sessionLists.add("2024-28");
+        sessionLists.addAll(Arrays.asList(studentSession));
 
 
     }
