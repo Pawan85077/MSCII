@@ -58,9 +58,10 @@ public class Explore extends Fragment {
     private DatabaseReference Root,userQuestion,Likesref;
     private FirebaseAuth auth;
     private String currentUserID;
-    String[] selectTopic = {"--Select Topic--","Computer","MAths","physics"};
+    String[] selectTopic = {"--Select Topic--","Computer","C","C++","java","Python","Data structure","Programming","Competitive coding","Physics","Math","Hindi",
+    "Bio","Geo","History","English","Others"};
     String selectedTopic;
-    ImageButton Computer,flyGame;
+    ImageButton Computer,flyGame,C,Cplus,java,python,ds,pro,cp,hindi,bio,hist,geo,phy,math,add;
     long value;
     boolean Likechecker = false;
     Integer j;
@@ -86,6 +87,21 @@ public class Explore extends Fragment {
 
         SearchBar=(EditText)v.findViewById(R.id.search);
         Computer=(ImageButton)v.findViewById(R.id.ComputerBtn);
+        C=(ImageButton)v.findViewById(R.id.CBtn);
+        Cplus=(ImageButton)v.findViewById(R.id.CplusplusBtn);
+        java=(ImageButton)v.findViewById(R.id.javaBtn);
+        python=(ImageButton)v.findViewById(R.id.pythonBtn);
+        ds=(ImageButton)v.findViewById(R.id.DSBtn);
+        pro=(ImageButton)v.findViewById(R.id.ProgBtn);
+        cp=(ImageButton)v.findViewById(R.id.CPBtn);
+        hindi=(ImageButton)v.findViewById(R.id.HindiBtn);
+        bio=(ImageButton)v.findViewById(R.id.BioBtn);
+        hist=(ImageButton)v.findViewById(R.id.HistoryBtn);
+        geo=(ImageButton)v.findViewById(R.id.GeographyBtn);
+        phy=(ImageButton)v.findViewById(R.id.PhyBtn);
+        math=(ImageButton)v.findViewById(R.id.MathBtn);
+        add=(ImageButton)v.findViewById(R.id.plus);
+
         recyclerView=(RecyclerView)v.findViewById(R.id.qqRecycle);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setReverseLayout(true);
@@ -146,10 +162,123 @@ public class Explore extends Fragment {
         Computer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), ComputerActivity.class));
+                Intent profileIntent=new Intent(getActivity(), ComputerActivity.class);
+                profileIntent.putExtra("Topic","Computer");
+                startActivity(profileIntent);
+            }
+        });
+        C.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent profileIntent=new Intent(getActivity(), ComputerActivity.class);
+                profileIntent.putExtra("Topic","C");
+                startActivity(profileIntent);
+            }
+        });
+        Cplus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent profileIntent=new Intent(getActivity(), ComputerActivity.class);
+                profileIntent.putExtra("Topic","C++");
+                startActivity(profileIntent);
+            }
+        });
+        java.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent profileIntent=new Intent(getActivity(), ComputerActivity.class);
+                profileIntent.putExtra("Topic","java");
+                startActivity(profileIntent);
+            }
+        });
+        python.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent profileIntent=new Intent(getActivity(), ComputerActivity.class);
+                profileIntent.putExtra("Topic","Python");
+                startActivity(profileIntent);
+            }
+        });
+        ds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent profileIntent=new Intent(getActivity(), ComputerActivity.class);
+                profileIntent.putExtra("Topic","Data structure");
+                startActivity(profileIntent);
+            }
+        });
+        pro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent profileIntent=new Intent(getActivity(), ComputerActivity.class);
+                profileIntent.putExtra("Topic","Programming");
+                startActivity(profileIntent);
+            }
+        });
+        cp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent profileIntent=new Intent(getActivity(), ComputerActivity.class);
+                profileIntent.putExtra("Topic","Competitive coding");
+                startActivity(profileIntent);
+            }
+        });
+        hindi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent profileIntent=new Intent(getActivity(), ComputerActivity.class);
+                profileIntent.putExtra("Topic","Hindi");
+                startActivity(profileIntent);
+            }
+        });
+        bio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent profileIntent=new Intent(getActivity(), ComputerActivity.class);
+                profileIntent.putExtra("Topic","Bio");
+                startActivity(profileIntent);
+            }
+        });
+        hist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent profileIntent=new Intent(getActivity(), ComputerActivity.class);
+                profileIntent.putExtra("Topic","History");
+                startActivity(profileIntent);
+            }
+        });
+        geo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent profileIntent=new Intent(getActivity(), ComputerActivity.class);
+                profileIntent.putExtra("Topic","Geo");
+                startActivity(profileIntent);
+            }
+        });
+        phy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent profileIntent=new Intent(getActivity(), ComputerActivity.class);
+                profileIntent.putExtra("Topic","Physics");
+                startActivity(profileIntent);
+            }
+        });
+        math.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent profileIntent=new Intent(getActivity(), ComputerActivity.class);
+                profileIntent.putExtra("Topic","Math");
+                startActivity(profileIntent);
+            }
+        });
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "To add your App to MCR-infotech, contact to the moderator!", Toast.LENGTH_LONG).show();
 
             }
         });
+
 
         //  questionRoot.child("Question_Asked").setValue("");
 
