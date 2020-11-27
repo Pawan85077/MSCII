@@ -8,7 +8,9 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -61,6 +63,9 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class editProfile extends AppCompatActivity {
+
+    public static final String MY_PREF="MyPrefs";
+    public static final String ID="IdKey";
     private Button btn_choose;
     private Button btn_upload;
     private Button btn_chooseb;
@@ -160,6 +165,9 @@ public class editProfile extends AppCompatActivity {
                             referencetTo.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
+                                    SharedPreferences preferences=getSharedPreferences(MY_PREF,Context.MODE_PRIVATE);
+                                    String channel=(preferences.getString(ID,""));
+                                    reference.child("PublicView").child(channel).removeValue();
                                     Toast.makeText(editProfile.this,"Pic deleted",Toast.LENGTH_SHORT).show();
 
                                 }
@@ -444,6 +452,11 @@ public class editProfile extends AppCompatActivity {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
                                                         String id=reference.child("PublicView").push().getKey();
+                                                        SharedPreferences.Editor editor=getSharedPreferences(MY_PREF, Context.MODE_PRIVATE).edit();
+                                                        editor.putString(ID,id);
+                                                        editor.apply();
+
+
                                                         reference.child("PublicView").child(id).child("peopleUID").setValue(user.getUid());
                                                         reference.child("PublicView").child(id).child("publicImage").setValue(String.valueOf(uri));
                                                         Toast.makeText(editProfile.this,"Finally completed!!",Toast.LENGTH_SHORT).show();
