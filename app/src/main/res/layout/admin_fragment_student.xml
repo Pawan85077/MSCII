@@ -2,15 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/nav_student1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#BFBF43D5">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="all student appear here"
-        android:textSize="40sp"
-        android:textColor="#FFEB3B"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Admin_student_recycle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </RelativeLayout>

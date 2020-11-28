@@ -141,6 +141,8 @@ public class Find_friend_activity extends AppCompatActivity {
     }
 
 
+
+
    /* private void updateUserStatus(String state) {
         String saveCurrentTime, saveCurrentDate;
         Calendar calendar=Calendar.getInstance();
