@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.style.LineHeightSpan;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,6 +48,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
+
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 public class AdminHomeFragment extends Fragment {
 
@@ -141,7 +145,7 @@ public class AdminHomeFragment extends Fragment {
                 new FirebaseRecyclerAdapter<Admin_Home_Getter_Setter, AdminHomeFragment.AdminMessageViewHolder>(options) {
 
                     @Override
-                    protected void onBindViewHolder(@NonNull AdminMessageViewHolder holder, int position, @NonNull Admin_Home_Getter_Setter model) {
+                    protected void onBindViewHolder(@NonNull final AdminMessageViewHolder holder, int position, @NonNull Admin_Home_Getter_Setter model) {
                         holder.senderDepartmentName.setText(model.getSenderDepartmentName());
                         holder.receiverName.setText(model.getReceiverName());
                         holder.messageTitle.setText(model.getMessageTitle());
@@ -162,6 +166,28 @@ public class AdminHomeFragment extends Fragment {
                                 Toast.makeText(view.getContext(), "Discussion Tab Clicked", Toast.LENGTH_SHORT).show();
                             }
                         });
+
+                        final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) holder.receiverLayout.getLayoutParams();
+                        holder.expandReceiver.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                params.height = params.WRAP_CONTENT;
+                                holder.receiverLayout.setLayoutParams(params);
+                                holder.expandReceiver.setVisibility(View.GONE);
+                                holder.collapseReceiver.setVisibility(View.VISIBLE);
+                            }
+                        });
+
+                        holder.collapseReceiver.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                params.height = 123;
+                                holder.receiverLayout.setLayoutParams(params);
+                                holder.expandReceiver.setVisibility(View.VISIBLE);
+                                holder.collapseReceiver.setVisibility(View.GONE);
+                            }
+                        });
+
                     }
 
                     @NonNull
@@ -180,9 +206,9 @@ public class AdminHomeFragment extends Fragment {
 
     public static class AdminMessageViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView senderImage,likes;
+        ImageView senderImage,likes,expandReceiver,collapseReceiver;
         TextView senderDepartmentName, receiverName, messageTitle, messageBody, likeCount, timeOfPost, dateOfPost;
-        LinearLayout discussionLinearLayout;
+        LinearLayout discussionLinearLayout,receiverLayout;
 
         public AdminMessageViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -197,7 +223,9 @@ public class AdminHomeFragment extends Fragment {
             discussionLinearLayout = itemView.findViewById(R.id.message_Discussion);
             dateOfPost = itemView.findViewById(R.id.dateOFPost);
             timeOfPost = itemView.findViewById(R.id.timeOfPost);
-
+            expandReceiver = itemView.findViewById(R.id.expandReceiver);
+            collapseReceiver = itemView.findViewById(R.id.collapseReceiver);
+            receiverLayout = itemView.findViewById(R.id.receiverLayout);
 
 
         }

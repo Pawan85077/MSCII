@@ -53,12 +53,12 @@ public class Signup_student extends AppCompatActivity {
     String selectedSession;
     ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
-    String[] studentCourse = {"--Select Course--","Physics Hons.", "Chemistry Hons.", "Mathematics Hons.", "Botany Hons.",
-            "Zoology Hons.", "Bio-Technology", "Computer Application", "Computer Maintenance", "Information Technology",
-            "Fashion Designing", "Business Administration", "Clinical Nutrition and Dietetics", "Commerce", "Economics Hons.",
-            "Geography Hons.", "History Hons.", "Home Science", "Philosophy Hons.", "Political Science", "Psychology Hons.",
-            "Hindi Hons.", "English Hons.", "Bengali Hons.", "Sanskrit Hons.", "Urdu Hons.", "Khadia Hons.", "Khuruk Hons.",
-            "Mundali Hons.", "Nagpuri Hons.", "Kurmal Hons."};
+    String[] studentCourse = {"--Select Course--","Physics Honours", "Chemistry Honours", "Mathematics Honours", "Botany Honours",
+            "Zoology Honours", "Bio-Technology", "Computer Application", "Computer Maintenance", "Information Technology",
+            "Fashion Designing", "Business Administration", "Clinical Nutrition and Dietetics", "Commerce", "Economics Honours",
+            "Geography Honours", "History Honours", "Home Science", "Philosophy Honours", "Political Science", "Psychology Honours",
+            "Hindi Honours", "English Honours", "Bengali Honours", "Sanskrit Honours", "Urdu Honours", "Khadia Honours", "Khuruk Honours",
+            "Mundali Honours", "Nagpuri Honours", "Kurmal Honours"};
     String[] studentSession = {"--Select Session--","2016-2019","2017-2020","2018-2021","2019-2022","2020-2023"};
 
     @Override

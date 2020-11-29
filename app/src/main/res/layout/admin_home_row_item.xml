@@ -49,6 +49,7 @@
                     android:textColor="@color/grey_90"
                     android:padding="3dp"/>
                 <LinearLayout
+                    android:id="@+id/receiverLayout"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:orientation="horizontal"
@@ -61,18 +62,41 @@
                         android:layout_height="wrap_content"
                         android:text="To :-"
                         android:textSize="15dp"
+                        android:textColor="@color/grey_80"
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                         android:padding="2dp"/>
                     <TextView
                         android:id="@+id/receiverName"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text="Receiver's name"
-                        android:textSize="15dp"
+                        android:textSize="13dp"
                         android:layout_marginLeft="3dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                         android:textColor="@color/blue_grey_400"
                         android:padding="2dp"/>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/expandReceiver"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_expand"
+                            app:tint="@color/grey_80"
+                            android:layout_centerInParent="true"
+                            />
+                        <ImageView
+                            android:id="@+id/collapseReceiver"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_colapse"
+                            app:tint="@color/grey_80"
+                            android:layout_centerInParent="true"
+                            android:visibility="gone"/>
+                    </RelativeLayout>
 
                 </LinearLayout>
 

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -69,7 +70,7 @@ public class AdminMessage extends Fragment {
                         new FirebaseRecyclerAdapter<Admin_Home_Getter_Setter, AdminHomeFragment.AdminMessageViewHolder>(options) {
 
                             @Override
-                            protected void onBindViewHolder(@NonNull AdminHomeFragment.AdminMessageViewHolder holder, int position, @NonNull Admin_Home_Getter_Setter model) {
+                            protected void onBindViewHolder(@NonNull final AdminHomeFragment.AdminMessageViewHolder holder, int position, @NonNull Admin_Home_Getter_Setter model) {
                                 holder.senderDepartmentName.setText(model.getSenderDepartmentName());
                                 holder.receiverName.setText(model.getReceiverName());
                                 holder.messageTitle.setText(model.getMessageTitle());
@@ -88,6 +89,27 @@ public class AdminMessage extends Fragment {
                                     @Override
                                     public void onClick(View view) {
                                         Toast.makeText(view.getContext(), "Discussion Tab Clicked", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                                final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) holder.receiverLayout.getLayoutParams();
+                                holder.expandReceiver.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        params.height = params.WRAP_CONTENT;
+                                        holder.receiverLayout.setLayoutParams(params);
+                                        holder.expandReceiver.setVisibility(View.GONE);
+                                        holder.collapseReceiver.setVisibility(View.VISIBLE);
+                                    }
+                                });
+
+                                holder.collapseReceiver.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        params.height = 123;
+                                        holder.receiverLayout.setLayoutParams(params);
+                                        holder.expandReceiver.setVisibility(View.VISIBLE);
+                                        holder.collapseReceiver.setVisibility(View.GONE);
                                     }
                                 });
                             }
