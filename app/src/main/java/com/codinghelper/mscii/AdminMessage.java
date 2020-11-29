@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,9 +25,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-public class AdminMessage extends Fragment {
+public class AdminMessage extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     RecyclerView RecyclerView;
+    SwipeRefreshLayout adminMessageSwipeRefresh;
     DatabaseReference Rootref;
     FirebaseAuth firebaseAuth;
     String currentUserID;
@@ -40,7 +42,9 @@ public class AdminMessage extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
         currentUserID=firebaseAuth.getCurrentUser().getUid();
         RecyclerView = v.findViewById(R.id.admin_feed_student_recyclerView);
-        RecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adminMessageSwipeRefresh = v.findViewById(R.id.adminMessageSwipeRefresh);
+        adminMessageSwipeRefresh.setOnRefreshListener(this);
+        //RecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         progressDialog = new ProgressDialog(getContext(),R.style.AlertDialogTheme);
         progressDialog.setMessage("loading..");
 
@@ -135,5 +139,23 @@ public class AdminMessage extends Fragment {
         });
 
 
+    }
+
+    @Override
+    public void onRefresh() {
+        onStart();
+        loadRecyclerViewData();
+    }
+
+    private void loadRecyclerViewData() {
+        onSuccess();
+        onFailure();
+    }
+
+    private void onSuccess() {
+        adminMessageSwipeRefresh.setRefreshing(false);
+    }
+    private void onFailure() {
+        adminMessageSwipeRefresh.setRefreshing(false);
     }
 }

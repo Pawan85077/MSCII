@@ -29,9 +29,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.provider.FontsContractCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -51,13 +53,14 @@ import com.squareup.picasso.Picasso;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
-public class AdminHomeFragment extends Fragment {
+public class AdminHomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     public AdminHomeFragment(){
         //Public home fragment
     }
 
     RecyclerView AdminRecyclerView;
+    SwipeRefreshLayout adminSwipeRefreshLayout;
     //Admin_Recycler_Adapter admin_recycler_adapter;
 
     DatabaseReference Rootref;
@@ -81,9 +84,15 @@ public class AdminHomeFragment extends Fragment {
         currentUserID=firebaseAuth.getCurrentUser().getUid();
         adminToAdminMessage = FirebaseDatabase.getInstance().getReference().child("adminToAdminMessage");
         AdminRecyclerView = view.findViewById(R.id.admin_home_RecyclerView);
-        AdminRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adminSwipeRefreshLayout = view.findViewById(R.id.adminSwipeRefreshLayout);
+        adminSwipeRefreshLayout.setOnRefreshListener(this);
+
+
+
+        //AdminRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,true));
         //admin_recycler_adapter = new Admin_Recycler_Adapter();
-        //AdminRecyclerView.setAdapter(admin_recycler_adapter);
+        //AdminRecyclerView.setAdapter(admin_recycler_adapter);p
+
         //recyclerView.setHasFixedSize(true);
         progressDialog = new ProgressDialog(getContext(),R.style.AlertDialogTheme);
         progressDialog.setMessage("loading..");
@@ -201,6 +210,24 @@ public class AdminHomeFragment extends Fragment {
                 };
         AdminRecyclerView.setAdapter(adapter);
         adapter.startListening();
+    }
+
+    @Override
+    public void onRefresh() {
+        onStart();
+        loadRecyclerViewData();
+    }
+
+    private void loadRecyclerViewData() {
+        onSuccess();
+        onFailure();
+    }
+
+    private void onSuccess() {
+        adminSwipeRefreshLayout.setRefreshing(false);
+    }
+    private void onFailure() {
+        adminSwipeRefreshLayout.setRefreshing(false);
     }
 
 
