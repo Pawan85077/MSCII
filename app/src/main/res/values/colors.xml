@@ -332,9 +332,10 @@
     <color name="grey_1000">#1a1a1a</color>
 
 
-    <!-- for music player-->
+    <!-- for music player and also for onBoardingStepper screen-->
     <color name="colorPrimary2">#444b5e</color>
     <color name="colorPrimaryDark2">#444b5e</color>
     <color name="colorAccent2">#D81B60</color>
+    <color name="colorTransparentWhite2">#cccccc</color>
 
 </resources>

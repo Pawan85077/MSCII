@@ -69,5 +69,13 @@
         <item>2024-28</item>
     </string-array>
 
+    <!--    For Privacy Policy Link    -->
+    <string name="link">
+        <a href="http://marwaricollegeranchi.ac.in/">Terms Of Use</a>
+    </string>
+    <string name="link2">
+        <a href="http://marwaricollegeranchi.ac.in/login.aspx">Privacy Policy</a>
+    </string>
+
 
 </resources>
