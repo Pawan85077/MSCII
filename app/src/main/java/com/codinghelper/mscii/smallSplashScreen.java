@@ -6,9 +6,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.ViewPropertyAnimatorCompat;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
@@ -51,6 +53,25 @@ public class smallSplashScreen extends AppCompatActivity {
         user=firebaseAuth.getCurrentUser();
         bar=(ProgressBar)findViewById(R.id.spbar);
         reference= FirebaseDatabase.getInstance().getReference().child("studentDetail");
+
+//        SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+//        boolean previouslyStarted= prefs.getBoolean(getString(R.string.pref_previously_started), false);
+//        if(!previouslyStarted){
+//            SharedPreferences.Editor edit=prefs.edit();
+//            edit.putBoolean(getString(getString(R.string.pref_previously_started), Boolean.TRUE));
+//            edit.commit();
+//            showHelp();
+//        }
+
+
+        // For One Time OnBoarding Screen
+
+        Boolean isFirstRun= getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("isFirstRun", true);
+        if(isFirstRun){
+            startActivity(new Intent(smallSplashScreen.this, OnBoardingStepper.class));
+        }
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("isFirstRun", false).commit();
+
 
         if(user!=null){
             bar.setVisibility(View.VISIBLE);
@@ -126,6 +147,10 @@ public class smallSplashScreen extends AppCompatActivity {
         }
 
     }
+
+    private void showHelp() {
+    }
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
 

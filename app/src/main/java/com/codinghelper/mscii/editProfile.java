@@ -72,7 +72,6 @@ public class editProfile extends AppCompatActivity {
     private Button btn_uploadb,delpro,btn_uploadSong;
 
     private Button mp;             // For music player
-    private Button ob;             // For Onboarding screen
     private EditText status;
     private ImageButton status_btn;
     private ImageView imageView;
@@ -101,7 +100,6 @@ public class editProfile extends AppCompatActivity {
         layout=(LinearLayout)findViewById(R.id.ll5);
 
         mp=findViewById(R.id.musicPlayer);                           // For music player
-        ob=findViewById(R.id.onBoarding);                            // For Onboarding screen
         user=FirebaseAuth.getInstance().getCurrentUser();
         reference=FirebaseDatabase.getInstance().getReference();
         btn_upload=findViewById(R.id.uploadImg);
@@ -116,13 +114,6 @@ public class editProfile extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
 
-
-        ob.setOnClickListener(new View.OnClickListener() {                  // For onBoarding Screen
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(editProfile.this, OnBoardingStepper.class));
-            }
-        });
         btn_choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

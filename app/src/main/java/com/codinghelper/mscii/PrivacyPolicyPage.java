@@ -28,7 +28,7 @@ public class PrivacyPolicyPage extends AppCompatActivity {
         text3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(PrivacyPolicyPage.this, editProfile.class));
+                startActivity(new Intent(PrivacyPolicyPage.this, First.class));
             }
         });
     }

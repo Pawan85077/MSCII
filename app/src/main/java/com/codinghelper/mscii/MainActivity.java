@@ -117,6 +117,6 @@ public class MainActivity extends AwesomeSplash {
 
     @Override
     public void animationsFinished() {
-    startActivity(new Intent(MainActivity.this,First.class));
+    startActivity(new Intent(MainActivity.this, OnBoardingStepper.class));
     }
 }

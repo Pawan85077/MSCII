@@ -31,15 +31,14 @@ public class OnBoardingStepper extends AppCompatActivity {
 
 
         viewPager=(ViewPager)findViewById(R.id.viewPager);
-        dots=(LinearLayout)findViewById(R.id.dots);
-
+        dots=(LinearLayout)findViewById(R.id.dots);                  // For Dots
         back= (Button)findViewById(R.id.previous2);
         next= (Button)findViewById(R.id.next2);
 
         obsa= new OnBoardingSliderAdapter(this);
         viewPager.setAdapter(obsa);
 
-        addDotsIndicator(0);
+        addDotsIndicator(0);                               // Call dots
         viewPager.addOnPageChangeListener(viewListener);
 
         next.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +56,7 @@ public class OnBoardingStepper extends AppCompatActivity {
         });
     }
 
-    public void addDotsIndicator(int position){
+    public void addDotsIndicator(int position){                            // dots function definition
         nDots= new TextView[3];
         for(int i=0; i<nDots.length; i++){
             nDots[i]= new TextView(this);
