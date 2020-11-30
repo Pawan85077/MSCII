@@ -21,7 +21,7 @@
             android:icon="@drawable/ic_dashboard"
             android:title="Dashboard" />
 
-        <itemp
+        <item
             android:id="@+id/nav_chat"
             android:icon="@drawable/ic_chat"
             android:title="Chat" />
