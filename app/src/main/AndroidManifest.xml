@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PrivacyPolicyPage"></activity>
+        <activity android:name=".PrivacyPolicyPage" />
         <activity android:name=".OnBoardingStepper" />
         <activity android:name=".PlayerActivity" />
         <activity android:name=".Tunes" />
@@ -116,6 +116,7 @@
         <!-- </activity> -->
         <!-- <activity android:name=".PlayerActivity"></activity> -->
         <receiver android:name=".Alarm" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

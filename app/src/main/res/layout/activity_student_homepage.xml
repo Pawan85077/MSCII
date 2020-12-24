@@ -3,75 +3,100 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/student_homepage"
-    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".student_homepage"
     tools:openDrawer="start">
-
-
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+<!--        <androidx.core.widget.NestedScrollView-->
+<!--            android:id="@+id/nested_scroll_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:scrollbars="none"-->
+<!--            android:scrollingCache="true">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:descendantFocusability="blocksDescendants"-->
+<!--                android:orientation="vertical">-->
+
+
+<!--            </LinearLayout>-->
+
+<!--        </androidx.core.widget.NestedScrollView>-->
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/navigation_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorPrimary"
+            app:titleTextColor="@color/white"
+            app:contentInsetStartWithNavigation="0dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/Theme.AppCompat.Light.NoActionBar"
+            />
+
+
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-            <androidx.appcompat.widget.Toolbar
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@color/colorPrimaryDark"
-                    android:id="@+id/navigation_toolbar"
-                    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    android:elevation="4dp" />
-
-
-
-        <fragment
-        android:id="@+id/navHostfrag"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/layoutToolbar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        app:defaultNavHost="true"
-        android:layout_above="@+id/nav_view_home"
-        app:navGraph="@navigation/main"/>
+            <fragment
+                android:id="@+id/navHostfrag"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/nav_view_home"
+                android:layout_below="@+id/layoutToolbar"
+                app:defaultNavHost="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:navGraph="@navigation/main" />
 
 
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/nav_view_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:background="@color/colorPrimary"
+                app:itemIconTint="@drawable/bottom_navigation_color_state"
+                app:itemTextColor="@drawable/bottom_navigation_color_state"
+                app:itemRippleColor="@color/colorAccent"
+                app:labelVisibilityMode="labeled"
+                app:menu="@menu/bottom_nav_menu"
+                app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+                tools:layout_editor_absoluteX="42dp" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/nav_view_home"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom"
-            android:background="?android:attr/windowBackground"
-            app:menu="@menu/bottom_nav_menu"
-            app:itemIconTint="@color/bg_spalsh"
-            app:labelVisibilityMode="labeled"
-            app:itemTextColor="@color/black"
-            app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
-            tools:layout_editor_absoluteX="42dp"/>
+            <!--            uper ye dalna hai-->
+            <!--            app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"-->
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
     </RelativeLayout>
 
 
+
+
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:id="@+id/nav_view"
-        app:menu="@menu/student_drawer_menu"/>
-
+        app:menu="@menu/student_drawer_menu"
+        android:scrollbars="none"/>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

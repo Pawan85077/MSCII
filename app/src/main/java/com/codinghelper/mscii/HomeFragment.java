@@ -13,6 +13,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
@@ -97,9 +98,6 @@ public class HomeFragment extends Fragment {
         Likesref= FirebaseDatabase.getInstance().getReference().child("LikesC");
         Pokesref= FirebaseDatabase.getInstance().getReference().child("PokesC");
 
-
-
-
         return v;
     }
 
@@ -158,6 +156,7 @@ public class HomeFragment extends Fragment {
                                   if(dataSnapshot.child("publicImage").exists()){
                                   holder.updated.setText("Profile pic");
                                   holder.userBigImage.setVisibility(View.VISIBLE);
+                                  holder.dividerLikeAndPoke.setVisibility(View.GONE);
                                   String Simg =String.valueOf(dataSnapshot.child("publicImage").getValue());
                                   Picasso.get().load(Simg).fit().noFade().placeholder(R.drawable.error_img).into(holder.userBigImage);
 
@@ -450,6 +449,8 @@ public class HomeFragment extends Fragment {
         DatabaseReference Likesref,Pokesref;
         String currentUserId;
         int countLikes;
+        View dividerLikeAndPoke;
+
         public QuestionViewHolder(@NonNull View itemView) {
             super(itemView);
             username=itemView.findViewById(R.id.user_updated_name);
@@ -468,6 +469,9 @@ public class HomeFragment extends Fragment {
             Likesref= FirebaseDatabase.getInstance().getReference().child("LikesC");
             Pokesref= FirebaseDatabase.getInstance().getReference().child("PokesC");
             currentUserId=FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+            dividerLikeAndPoke = itemView.findViewById(R.id.dividerLikeAndPoke);
+
 
 
 
@@ -519,4 +523,6 @@ public class HomeFragment extends Fragment {
             });
         }
     }
+
+
 }

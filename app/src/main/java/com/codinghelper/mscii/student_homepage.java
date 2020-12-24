@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.NotificationCompat;
 import androidx.core.view.GravityCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -57,8 +58,9 @@ public class student_homepage extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
     String currentUserID;
-    BottomNavigationView navView;
     DatabaseReference reference,Rootref,deleteref,Root;
+    BottomNavigationView navView;
+    Toolbar toolbar;
 
 
 
@@ -69,7 +71,7 @@ public class student_homepage extends AppCompatActivity {
 
 
 
-        Toolbar toolbar = findViewById(R.id.navigation_toolbar);
+        toolbar = findViewById(R.id.navigation_toolbar);
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.student_homepage);
@@ -107,13 +109,29 @@ public class student_homepage extends AppCompatActivity {
 
             }
         });
-        AppBarConfiguration appBarConfiguration=new AppBarConfiguration.Builder(R.id.nav_profile,R.id.nav_dashboard,R.id.nav_home,R.id.nav_chat,R.id.nav_notification,R.id.nav_developer,R.id.navigation_explore,R.id.navigation_activities,R.id.navigation_grade,R.id.nav_admin_feed)
+        AppBarConfiguration appBarConfiguration=new AppBarConfiguration.Builder(R.id.nav_profile,R.id.nav_dashboard,R.id.nav_home,R.id.nav_chat,R.id.nav_notification,R.id.nav_developer,R.id.navigation_explore,R.id.navigation_activities,R.id.navigation_grade,R.id.nav_admin_feed,R.id.navigation_settings)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this,R.id.navHostfrag);
         NavigationUI.setupActionBarWithNavController(this,navController,appBarConfiguration);
         NavigationUI.setupWithNavController(navigationView,navController);
         NavigationUI.setupWithNavController(navView,navController);
+
+//        NestedScrollView nested_content = (NestedScrollView) findViewById(R.id.nested_scroll_view);
+//        nested_content.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+//            @Override
+//            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//                Toast.makeText(student_homepage.this, "her here hrer hre", Toast.LENGTH_SHORT).show();
+//                if (scrollY < oldScrollY) { // up
+//                    animateNavigation(false);
+//                    animateSearchBar(false);
+//                }
+//                if (scrollY > oldScrollY) { // down
+//                    animateNavigation(true);
+//                    animateSearchBar(true);
+//                }
+//            }
+//        });
 
     }
 
@@ -132,6 +150,26 @@ public class student_homepage extends AppCompatActivity {
     }
 
 
+//    Animate tabbar and bottom navigation bar
+//    boolean isNavigationHide = false;
+//
+//    private void animateNavigation(final boolean hide) {
+//        if (isNavigationHide && hide || !isNavigationHide && !hide) return;
+//        isNavigationHide = hide;
+//        int moveY = hide ? (2 * navView.getHeight()) : 0;
+//        navView.animate().translationY(moveY).setStartDelay(100).setDuration(300).start();
+//        Toast.makeText(this, "animate Navigation", Toast.LENGTH_SHORT).show();
+//    }
+//
+//    boolean isSearchBarHide = false;
+//
+//    private void animateSearchBar(final boolean hide) {
+//        if (isSearchBarHide && hide || !isSearchBarHide && !hide) return;
+//        isSearchBarHide = hide;
+//        int moveY = hide ? -(2 * toolbar.getHeight()) : 0;
+//        toolbar.animate().translationY(moveY).setStartDelay(100).setDuration(300).start();
+//        Toast.makeText(this, "animate Toolbar", Toast.LENGTH_SHORT).show();
+//    }
 
 
 

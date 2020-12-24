@@ -7,6 +7,24 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+<!--    <resources>-->
+<!--        <color name="primary">#3F51B5</color>-->
+<!--        <color name="primary_dark">#303F9F</color>-->
+<!--        <color name="primary_light">#C5CAE9</color>-->
+<!--        <color name="accent">#FF4081</color>-->
+<!--        <color name="primary_text">#212121</color>-->
+<!--        <color name="secondary_text">#757575</color>-->
+<!--        <color name="icons">#FFFFFF</color>-->
+<!--        <color name="divider">#BDBDBD</color>-->
+<!--        &lt;!&ndash; yaha se niche. &ndash;&gt;-->
+<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+<!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+<!--        <item name="colorAccent">@color/colorAccent</item>-->
+<!--    </resources>-->
+
+
+
     <style name="my_app" parent="AppTheme.NoActionBar">
         <item name="android:windowBackground">@drawable/auto_splash</item>
         <item name="android:navigationBarColor">@color/colorPrimary</item>
