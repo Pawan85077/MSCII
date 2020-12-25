@@ -25,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
@@ -35,6 +36,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -55,15 +57,15 @@ import java.util.HashMap;
  */
 public class Explore extends Fragment {
     private EditText SearchBar;
-    private Button Askbtn;
+    private ExtendedFloatingActionButton Askbtn;
     private DatabaseReference Root,userQuestion,Likesref;
     private FirebaseAuth auth;
     private String currentUserID;
     String[] selectTopic = {"--Select Topic--","Computer","C","C++","java","Python","Data structure","Programming","Competitive coding","Physics","Math","Hindi",
     "Bio","Geo","History","English","Others"};
     String selectedTopic;
-    CardView Computer,flyGame,C,Cplus,java,python,ds,pro,cp,hindi,bio,hist,geo,phy,math;
-    ImageButton add;
+    LinearLayout Computer,flyGame,C,Cplus,java,python,ds,pro,cp,hindi,bio,hist,geo,phy,math,add;
+    CardView quickLinksCardView;
     long value;
     boolean Likechecker = false;
     Integer j;
@@ -88,21 +90,23 @@ public class Explore extends Fragment {
         View v= inflater.inflate(R.layout.fragment_explore, container, false);
 
         SearchBar=(EditText)v.findViewById(R.id.search);
-        Computer=(CardView) v.findViewById(R.id.ComputerBtn);
-        C=(CardView)v.findViewById(R.id.CBtn);
-        Cplus=(CardView)v.findViewById(R.id.CplusplusBtn);
-        java=(CardView)v.findViewById(R.id.javaBtn);
-        python=(CardView)v.findViewById(R.id.pythonBtn);
-        ds=(CardView)v.findViewById(R.id.DSBtn);
-        pro=(CardView)v.findViewById(R.id.ProgBtn);
-        cp=(CardView)v.findViewById(R.id.CPBtn);
-        hindi=(CardView)v.findViewById(R.id.HindiBtn);
-        bio=(CardView)v.findViewById(R.id.BioBtn);
-        hist=(CardView)v.findViewById(R.id.HistoryBtn);
-        geo=(CardView)v.findViewById(R.id.GeographyBtn);
-        phy=(CardView)v.findViewById(R.id.PhyBtn);
-        math=(CardView)v.findViewById(R.id.MathBtn);
-        add=(ImageButton) v.findViewById(R.id.plus);
+        Computer=(LinearLayout) v.findViewById(R.id.ComputerBtn);
+        C=(LinearLayout)v.findViewById(R.id.CBtn);
+        Cplus=(LinearLayout)v.findViewById(R.id.CplusplusBtn);
+        java=(LinearLayout)v.findViewById(R.id.javaBtn);
+        python=(LinearLayout)v.findViewById(R.id.pythonBtn);
+        ds=(LinearLayout)v.findViewById(R.id.DSBtn);
+        pro=(LinearLayout)v.findViewById(R.id.ProgBtn);
+        cp=(LinearLayout)v.findViewById(R.id.CPBtn);
+        hindi=(LinearLayout)v.findViewById(R.id.HindiBtn);
+        bio=(LinearLayout)v.findViewById(R.id.BioBtn);
+        hist=(LinearLayout)v.findViewById(R.id.HistoryBtn);
+        geo=(LinearLayout)v.findViewById(R.id.GeographyBtn);
+        phy=(LinearLayout)v.findViewById(R.id.PhyBtn);
+        math=(LinearLayout)v.findViewById(R.id.MathBtn);
+        add=(LinearLayout) v.findViewById(R.id.plus);
+
+        quickLinksCardView = (CardView) v.findViewById(R.id.quickLinksCardView);
 
         recyclerView=(RecyclerView)v.findViewById(R.id.qqRecycle);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -121,9 +125,9 @@ public class Explore extends Fragment {
         linearLayoutManager3.setReverseLayout(true);
         linearLayoutManager3.setStackFromEnd(true);
         recyclerView3.setLayoutManager(linearLayoutManager3);*/
-        Askbtn=(Button)v.findViewById(R.id.search_ask_btn);
+        Askbtn=(ExtendedFloatingActionButton) v.findViewById(R.id.search_ask_btn);
         Likesref= FirebaseDatabase.getInstance().getReference().child("LikesC");
-        flyGame=(CardView) v.findViewById(R.id.game);
+        flyGame=(LinearLayout) v.findViewById(R.id.game);
         auth=FirebaseAuth.getInstance();
         currentUserID=auth.getCurrentUser().getUid();
         userQuestion=FirebaseDatabase.getInstance().getReference().child("Questions");
