@@ -47,6 +47,25 @@
     <string name="link2">
         <a href="http://marwaricollegeranchi.ac.in/login.aspx">Privacy Policy</a>
     </string>
+
+<!--    For QuickLinks in Explore Student -->
+    <string name="college_websiteQL">
+        <a href="http://www.marwaricollegeranchi.ac.in/">College website</a>
+    </string>
+
+    <string name="placement_driveQL">
+        <a href="http://www.marwaricollegeranchi.ac.in/Placement.aspx">Placement drive</a>
+    </string>
+
+    <string name="scholarship_websiteQL">
+        <a href="https://ekalyan.cgg.gov.in/">Scholarship website</a>
+    </string>
+
+    <string name="chancellor_portalQL">
+        <a href="https://jharkhanduniversities.nic.in/home">Chancellor portal</a>
+    </string>
+
+
     <string name="title_activity_settings">SettingsActivity</string>
 
     <!-- Preference Titles -->

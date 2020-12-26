@@ -567,11 +567,14 @@
                         android:paddingLeft="20dp">
 
                         <TextView
+                            android:id="@+id/QL_College_website"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:text="College website"
+                            android:text="@string/college_websiteQL"
                             android:textColor="@color/grey_80"
+                            android:textColorHighlight="@color/grey_80"
+                            android:textColorLink="@color/grey_80"
                             android:textSize="15dp"
                             app:drawableEndCompat="@drawable/ic_right"
                             android:drawableTint="@color/grey_80"/>
@@ -584,11 +587,14 @@
                             android:layout_marginRight="20dp"/>
 
                         <TextView
+                            android:id="@+id/QL_Placement_drive"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:text="Placment drive"
+                            android:text="@string/placement_driveQL"
                             android:textColor="@color/grey_80"
+                            android:textColorHighlight="@color/grey_80"
+                            android:textColorLink="@color/grey_80"
                             android:textSize="15dp"
                             app:drawableEndCompat="@drawable/ic_right"
                             android:drawableTint="@color/grey_80"/>
@@ -601,11 +607,14 @@
                             android:layout_marginRight="20dp"/>
 
                         <TextView
+                            android:id="@+id/QL_Scholarship_website"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:text="Scholarship website"
+                            android:text="@string/scholarship_websiteQL"
                             android:textColor="@color/grey_80"
+                            android:textColorHighlight="@color/grey_80"
+                            android:textColorLink="@color/grey_80"
                             android:textSize="15dp"
                             app:drawableEndCompat="@drawable/ic_right"
                             android:drawableTint="@color/grey_80"/>
@@ -618,11 +627,14 @@
                             android:layout_marginRight="20dp"/>
 
                         <TextView
+                            android:id="@+id/QL_Chancellor_portal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:text="Chancellor portal"
+                            android:text="@string/chancellor_portalQL"
                             android:textColor="@color/grey_80"
+                            android:textColorHighlight="@color/grey_80"
+                            android:textColorLink="@color/grey_80"
                             android:textSize="15dp"
                             app:drawableEndCompat="@drawable/ic_right"
                             android:drawableTint="@color/grey_80"/>

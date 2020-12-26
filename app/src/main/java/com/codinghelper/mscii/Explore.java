@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -65,6 +66,7 @@ public class Explore extends Fragment {
     "Bio","Geo","History","English","Others"};
     String selectedTopic;
     LinearLayout Computer,flyGame,C,Cplus,java,python,ds,pro,cp,hindi,bio,hist,geo,phy,math,add;
+    private TextView QL_College_website, QL_Placement_drive, QL_Scholarship_website, QL_Chancellor_portal;
     CardView quickLinksCardView;
     long value;
     boolean Likechecker = false;
@@ -107,6 +109,19 @@ public class Explore extends Fragment {
         add=(LinearLayout) v.findViewById(R.id.plus);
 
         quickLinksCardView = (CardView) v.findViewById(R.id.quickLinksCardView);
+
+        //QuickLinks TextViews
+        QL_College_website = (TextView)v.findViewById(R.id.QL_College_website);
+        QL_Placement_drive = (TextView)v.findViewById(R.id.QL_Placement_drive);
+        QL_Scholarship_website = (TextView)v.findViewById(R.id.QL_Scholarship_website);
+        QL_Chancellor_portal = (TextView)v.findViewById(R.id.QL_Chancellor_portal);
+
+        //accessing Links
+        QL_College_website.setMovementMethod(LinkMovementMethod.getInstance());
+        QL_Placement_drive.setMovementMethod(LinkMovementMethod.getInstance());
+        QL_Scholarship_website.setMovementMethod(LinkMovementMethod.getInstance());
+        QL_Chancellor_portal.setMovementMethod(LinkMovementMethod.getInstance());
+
 
         recyclerView=(RecyclerView)v.findViewById(R.id.qqRecycle);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
