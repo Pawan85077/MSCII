@@ -376,9 +376,19 @@ public class Explore extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                recyclerView.setVisibility(View.VISIBLE);
-                recyclerView.setEnabled(true);
+
+                ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
                 String question = editable.toString();
+                if (question.equals("")){
+                    params.height=0;
+                    recyclerView.setLayoutParams(params);
+                    recyclerView.setVisibility(View.INVISIBLE);
+                }else {
+                    recyclerView.setVisibility(View.VISIBLE);
+                    params.height=600;
+                    recyclerView.setLayoutParams(params);
+                    recyclerView.setEnabled(true);
+                }
                 processsearch(question);
 
             }

@@ -14,708 +14,717 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <EditText
-                android:id="@+id/search"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/white"
-                android:drawableStart="@drawable/ic_baseline_search_24"
-                android:hint=" Ask something..."
-                android:paddingLeft="9dp"
-                android:textSize="20sp" />
-
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="32dp"
-                android:layout_marginRight="23dp">
-
-                <Spinner
-                    android:id="@+id/selectTopic"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/ic_dropdown" />
-
-            </RelativeLayout>
-
-
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/search_ask_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="55dp"
-                android:layout_below="@+id/search"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/green_50"
-                android:elevation="6dp"
-                android:paddingLeft="16dp"
-                android:paddingTop="10dp"
-                android:paddingRight="16dp"
-                android:paddingBottom="10dp"
-                android:text="post query"
-                android:textAlignment="textStart"
-                android:textColor="@color/green_500"
-                android:textSize="15dp"
-                app:icon="@drawable/ic_baseline_search_24"
-                app:iconGravity="start"
-                app:iconSize="25dp"
-                app:iconTint="@color/green_500"
-                app:strokeColor="@color/green_500"
-                app:strokeWidth="0.1dp"
-                tools:ignore="RtlCompat" />
-
-
-            <TextView
-                android:id="@+id/liveTextView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/search_ask_btn"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:text="Live activities"
-                android:textColor="@color/black"
-                android:textSize="17dp" />
+                android:layout_height="wrap_content">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/Lrecycle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/liveTextView"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginRight="10dp">
+
+                <EditText
+                    android:id="@+id/search"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/white"
+                    android:drawableStart="@drawable/ic_baseline_search_24"
+                    android:hint=" Ask something..."
+                    android:paddingLeft="9dp"
+                    android:textSize="20sp" />
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginRight="23dp">
+
+                    <Spinner
+                        android:id="@+id/selectTopic"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/ic_dropdown" />
+
+                </RelativeLayout>
+
+
+                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                    android:id="@+id/search_ask_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="55dp"
+                    android:layout_below="@+id/search"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/green_50"
+                    android:elevation="6dp"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="10dp"
+                    android:text="post query"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/green_500"
+                    android:textSize="15dp"
+                    app:icon="@drawable/ic_baseline_search_24"
+                    app:iconGravity="start"
+                    app:iconSize="25dp"
+                    app:iconTint="@color/green_500"
+                    app:strokeColor="@color/green_500"
+                    app:strokeWidth="0.1dp"
+                    tools:ignore="RtlCompat" />
+
+
+                <TextView
+                    android:id="@+id/liveTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/qqRecycle"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Live activities"
+                    android:textColor="@color/black"
+                    android:textSize="17dp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/Lrecycle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/liveTextView"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginRight="10dp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/LiveRecycle"
+                        android:layout_width="match_parent"
+                        android:layout_height="152dp"
+                        android:background="@drawable/no_live"
+                        android:padding="5dp" />
+
+                </androidx.cardview.widget.CardView>
+
+
+                <TextView
+                    android:id="@+id/quickCategories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Lrecycle"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Filtered choices"
+                    android:textColor="@color/black"
+                    android:textSize="17dp" />
+
+                <RelativeLayout
+                    android:id="@+id/sub_relative"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/quickCategories"
+                    android:layout_marginTop="7dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="8dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/ComputerBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/colorPrimary"
+                                    android:src="@drawable/compicon"
+                                    />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="center"
+                                    android:text="Computer"
+                                    android:textColor="#CE000000"
+                                    android:textSize="8dp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/CBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/colorPrimary"
+                                    android:src="@drawable/c" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="center"
+                                    android:text="C lang."
+                                    android:textColor="#CE000000"
+                                    android:textSize="8dp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/CplusplusBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/colorPrimary"
+                                    android:src="@drawable/cplus" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="center"
+                                    android:text="C++ lang."
+                                    android:textColor="#CE000000"
+                                    android:textSize="8dp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/javaBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/colorPrimary"
+                                    android:src="@drawable/java" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="center"
+                                    android:text="JAVA lang."
+                                    android:textColor="#CE000000"
+                                    android:textSize="8dp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/pythonBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/colorPrimary"
+                                    android:src="@drawable/python" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="center"
+                                    android:text="Python lang."
+                                    android:textColor="#CE000000"
+                                    android:textSize="8dp" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="8dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/DSBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/colorPrimary"
+                                    android:src="@drawable/ds" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="center"
+                                    android:text="DS/Algo."
+                                    android:textColor="#CE000000"
+                                    android:textSize="8dp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ProgBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/colorPrimary"
+                                    android:src="@drawable/program" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="center"
+                                    android:text="Programming"
+                                    android:textColor="#CE000000"
+                                    android:textSize="8dp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/CPBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/colorPrimary"
+                                    android:src="@drawable/cp" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="center"
+                                    android:text="Competative \ncoding"
+                                    android:textColor="#CE000000"
+                                    android:textSize="8dp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/HindiBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/colorPrimary"
+                                    android:src="@drawable/ic_hindi_black_24dp" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="center"
+                                    android:text="Hindi"
+                                    android:textColor="#CE000000"
+                                    android:textSize="8dp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/BioBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/colorPrimary"
+                                    android:src="@drawable/bio" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="center"
+                                    android:text="Bio"
+                                    android:textColor="#CE000000"
+                                    android:textSize="8dp" />
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="8dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal">
+
+
+                            <LinearLayout
+                                android:id="@+id/HistoryBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/colorPrimary"
+                                    android:src="@drawable/history" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="center"
+                                    android:text="History"
+                                    android:textColor="#CE000000"
+                                    android:textSize="8dp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/GeographyBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/colorPrimary"
+                                    android:src="@drawable/geo" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="center"
+                                    android:text="Geography"
+                                    android:textColor="#CE000000"
+                                    android:textSize="8dp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/PhyBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/colorPrimary"
+                                    android:src="@drawable/phy" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="center"
+                                    android:text="Physics"
+                                    android:textColor="#CE000000"
+                                    android:textSize="8dp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/MathBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/colorPrimary"
+                                    android:src="@drawable/math" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="center"
+                                    android:text="Maths"
+                                    android:textColor="#CE000000"
+                                    android:textSize="8dp" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/quickLinksText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/sub_relative"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Quick links"
+                    android:textColor="@color/black"
+                    android:textSize="17dp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/quickLinksCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/quickLinksText"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="30dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="20dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="College website"
+                            android:textColor="@color/grey_80"
+                            android:textSize="15dp"
+                            app:drawableEndCompat="@drawable/ic_right"
+                            android:drawableTint="@color/grey_80"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey_10"
+                            android:layout_marginLeft="50dp"
+                            android:layout_marginRight="20dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="Placment drive"
+                            android:textColor="@color/grey_80"
+                            android:textSize="15dp"
+                            app:drawableEndCompat="@drawable/ic_right"
+                            android:drawableTint="@color/grey_80"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey_10"
+                            android:layout_marginLeft="50dp"
+                            android:layout_marginRight="20dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="Scholarship website"
+                            android:textColor="@color/grey_80"
+                            android:textSize="15dp"
+                            app:drawableEndCompat="@drawable/ic_right"
+                            android:drawableTint="@color/grey_80"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey_10"
+                            android:layout_marginLeft="50dp"
+                            android:layout_marginRight="20dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="Chancellor portal"
+                            android:textColor="@color/grey_80"
+                            android:textSize="15dp"
+                            app:drawableEndCompat="@drawable/ic_right"
+                            android:drawableTint="@color/grey_80"/>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/miniGames"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/quickLinksCardView"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Mini games"
+                    android:textColor="@color/black"
+                    android:textSize="17dp" />
+
+                <RelativeLayout
+                    android:id="@+id/gamesRelativeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/miniGames"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/game"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/white"
+                                app:backgroundTint="@color/colorPrimary"
+                                android:src="@drawable/splash_icon" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:gravity="center"
+                                android:text="Fly Fish"
+                                android:textColor="#CE000000"
+                                android:textSize="8dp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/plus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/white"
+                                app:backgroundTint="@color/colorPrimary"
+                                android:src="@drawable/ic_add" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:gravity="center"
+                                android:text="Add project"
+                                android:textColor="#CE000000"
+                                android:textSize="8dp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/LiveRecycle"
-                    android:layout_width="match_parent"
-                    android:layout_height="152dp"
-                    android:background="@drawable/no_live"
-                    android:padding="5dp" />
-
-            </androidx.cardview.widget.CardView>
-
-
-            <TextView
-                android:id="@+id/quickCategories"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/Lrecycle"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:text="Filtered choices"
-                android:textColor="@color/black"
-                android:textSize="17dp" />
-
-            <RelativeLayout
-                android:id="@+id/sub_relative"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/quickCategories"
-                android:layout_marginTop="7dp">
-
-                <LinearLayout
-                    android:id="@+id/ll1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/qqRecycle"
+                    android:layout_width="327dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/search_ask_btn"
                     android:layout_centerHorizontal="true"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="8dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:id="@+id/ComputerBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:orientation="vertical">
-
-                            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="@color/white"
-                                app:backgroundTint="@color/colorPrimary"
-                                android:src="@drawable/compicon"
-                                />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:gravity="center"
-                                android:text="Computer"
-                                android:textColor="#CE000000"
-                                android:textSize="8dp" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/CBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:orientation="vertical">
-
-                            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="@color/white"
-                                app:backgroundTint="@color/colorPrimary"
-                                android:src="@drawable/c" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:gravity="center"
-                                android:text="C lang."
-                                android:textColor="#CE000000"
-                                android:textSize="8dp" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/CplusplusBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:orientation="vertical">
-
-                            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="@color/white"
-                                app:backgroundTint="@color/colorPrimary"
-                                android:src="@drawable/cplus" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:gravity="center"
-                                android:text="C++ lang."
-                                android:textColor="#CE000000"
-                                android:textSize="8dp" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/javaBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:orientation="vertical">
-
-                            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="@color/white"
-                                app:backgroundTint="@color/colorPrimary"
-                                android:src="@drawable/java" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:gravity="center"
-                                android:text="JAVA lang."
-                                android:textColor="#CE000000"
-                                android:textSize="8dp" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/pythonBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:orientation="vertical">
-
-                            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="@color/white"
-                                app:backgroundTint="@color/colorPrimary"
-                                android:src="@drawable/python" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:gravity="center"
-                                android:text="Python lang."
-                                android:textColor="#CE000000"
-                                android:textSize="8dp" />
-
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="8dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:id="@+id/DSBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:orientation="vertical">
-
-                            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="@color/white"
-                                app:backgroundTint="@color/colorPrimary"
-                                android:src="@drawable/ds" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:gravity="center"
-                                android:text="DS/Algo."
-                                android:textColor="#CE000000"
-                                android:textSize="8dp" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/ProgBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:orientation="vertical">
-
-                            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="@color/white"
-                                app:backgroundTint="@color/colorPrimary"
-                                android:src="@drawable/program" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:gravity="center"
-                                android:text="Programming"
-                                android:textColor="#CE000000"
-                                android:textSize="8dp" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/CPBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:orientation="vertical">
-
-                            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="@color/white"
-                                app:backgroundTint="@color/colorPrimary"
-                                android:src="@drawable/cp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:gravity="center"
-                                android:text="Competative \ncoding"
-                                android:textColor="#CE000000"
-                                android:textSize="8dp" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/HindiBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:orientation="vertical">
-
-                            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="@color/white"
-                                app:backgroundTint="@color/colorPrimary"
-                                android:src="@drawable/ic_hindi_black_24dp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:gravity="center"
-                                android:text="Hindi"
-                                android:textColor="#CE000000"
-                                android:textSize="8dp" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/BioBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:orientation="vertical">
-
-                            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="@color/white"
-                                app:backgroundTint="@color/colorPrimary"
-                                android:src="@drawable/bio" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:gravity="center"
-                                android:text="Bio"
-                                android:textColor="#CE000000"
-                                android:textSize="8dp" />
-
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="8dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="horizontal">
-
-
-                        <LinearLayout
-                            android:id="@+id/HistoryBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:orientation="vertical">
-
-                            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="@color/white"
-                                app:backgroundTint="@color/colorPrimary"
-                                android:src="@drawable/history" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:gravity="center"
-                                android:text="History"
-                                android:textColor="#CE000000"
-                                android:textSize="8dp" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/GeographyBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:orientation="vertical">
-
-                            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="@color/white"
-                                app:backgroundTint="@color/colorPrimary"
-                                android:src="@drawable/geo" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:gravity="center"
-                                android:text="Geography"
-                                android:textColor="#CE000000"
-                                android:textSize="8dp" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/PhyBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:orientation="vertical">
-
-                            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="@color/white"
-                                app:backgroundTint="@color/colorPrimary"
-                                android:src="@drawable/phy" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:gravity="center"
-                                android:text="Physics"
-                                android:textColor="#CE000000"
-                                android:textSize="8dp" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/MathBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:orientation="vertical">
-
-                            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="@color/white"
-                                app:backgroundTint="@color/colorPrimary"
-                                android:src="@drawable/math" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:gravity="center"
-                                android:text="Maths"
-                                android:textColor="#CE000000"
-                                android:textSize="8dp" />
-
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
+                    android:background="@color/white"
+                    android:visibility="invisible"/>
 
 
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/quickLinksText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/sub_relative"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:text="Quick links"
-                android:textColor="@color/black"
-                android:textSize="17dp" />
+        </LinearLayout>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/quickLinksCardView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/quickLinksText"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="30dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingLeft="20dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:text="College website"
-                        android:textColor="@color/grey_80"
-                        android:textSize="15dp"
-                        app:drawableEndCompat="@drawable/ic_right"
-                        android:drawableTint="@color/grey_80"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey_10"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginRight="20dp"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:text="Placment drive"
-                        android:textColor="@color/grey_80"
-                        android:textSize="15dp"
-                        app:drawableEndCompat="@drawable/ic_right"
-                        android:drawableTint="@color/grey_80"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey_10"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginRight="20dp"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:text="Scholarship website"
-                        android:textColor="@color/grey_80"
-                        android:textSize="15dp"
-                        app:drawableEndCompat="@drawable/ic_right"
-                        android:drawableTint="@color/grey_80"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey_10"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginRight="20dp"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:text="Chancellor portal"
-                        android:textColor="@color/grey_80"
-                        android:textSize="15dp"
-                        app:drawableEndCompat="@drawable/ic_right"
-                        android:drawableTint="@color/grey_80"/>
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/miniGames"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/quickLinksCardView"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:text="Mini games"
-                android:textColor="@color/black"
-                android:textSize="17dp" />
-
-            <RelativeLayout
-                android:id="@+id/gamesRelativeLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/miniGames"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/game"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:orientation="vertical">
-
-                        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
-                            app:backgroundTint="@color/colorPrimary"
-                            android:src="@drawable/splash_icon" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:gravity="center"
-                            android:text="Fly Fish"
-                            android:textColor="#CE000000"
-                            android:textSize="8dp" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/plus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:orientation="vertical">
-
-                        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
-                            app:backgroundTint="@color/colorPrimary"
-                            android:src="@drawable/ic_add" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:gravity="center"
-                            android:text="Add project"
-                            android:textColor="#CE000000"
-                            android:textSize="8dp" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/qqRecycle"
-                android:layout_width="327dp"
-                android:layout_height="300dp"
-                android:layout_centerHorizontal="true"
-                android:background="@color/white"
-                android:visibility="gone" />
-
-
-        </RelativeLayout>
     </ScrollView>
     <!--  <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/try_rec"
