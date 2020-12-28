@@ -643,10 +643,10 @@ public class Activities extends Fragment {
         ImageButton showReport, tdot, Qreport;
         CircularImageView AskerImage;
         CircularImageView AnswererImage;
-        Button Flagbtn, editAns;
+        Chip Flagbtn, editAns;
         ShineButton up, down;
         SwitchCompat aSwitch;
-        Chip topic;
+        TextView topic;
         int countLikes;
         String currentUserId;
         DatabaseReference Likesref, root;
