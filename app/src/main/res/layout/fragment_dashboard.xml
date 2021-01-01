@@ -7,70 +7,71 @@
     android:layout_marginTop="50dp"
     tools:context=".dashboardFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+<!--    Removed for now-->
+<!--    <com.google.android.material.appbar.AppBarLayout-->
+<!--        android:id="@+id/app_bar_layout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="150dp"-->
+<!--        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">-->
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:contentScrim="?attr/colorPrimaryDark"
-            android:background="@color/colorPrimaryDark"
-            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Headline"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+<!--        <com.google.android.material.appbar.CollapsingToolbarLayout-->
+<!--            android:id="@+id/collapsing_toolbar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            app:contentScrim="?attr/colorPrimaryDark"-->
+<!--            android:background="@color/colorPrimaryDark"-->
+<!--            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Headline"-->
+<!--            app:layout_scrollFlags="scroll|exitUntilCollapsed">-->
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
 
-                <LinearLayout
-                    android:id="@+id/hiiName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Hii Sandeep..."
-                        android:textSize="25dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="16dp"
-                        android:textColor="#000000"
-                        android:textStyle="bold"/>
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/hiiName"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical">-->
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Hii Sandeep..."-->
+<!--                        android:textSize="25dp"-->
+<!--                        android:layout_marginLeft="16dp"-->
+<!--                        android:layout_marginTop="16dp"-->
+<!--                        android:textColor="#000000"-->
+<!--                        android:textStyle="bold"/>-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="LEVEL 21"
-                        android:textSize="15dp"
-                        android:layout_marginLeft="20dp"
-                        android:textColor="#B0000000"/>
-                </LinearLayout>
-                <com.mikhaellopez.circularimageview.CircularImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_margin="20dp"
-                    android:background="@drawable/main_stud"/>
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="LEVEL 21"-->
+<!--                        android:textSize="15dp"-->
+<!--                        android:layout_marginLeft="20dp"-->
+<!--                        android:textColor="#B0000000"/>-->
+<!--                </LinearLayout>-->
+<!--                <com.mikhaellopez.circularimageview.CircularImageView-->
+<!--                    android:layout_width="40dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_margin="20dp"-->
+<!--                    android:background="@drawable/main_stud"/>-->
 
-            </RelativeLayout>
+<!--            </RelativeLayout>-->
 
-            <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:contentInsetStartWithNavigation="0dp"
-            app:layout_collapseMode="pin"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="My Dashboard"
-            app:titleTextColor="@color/black"/>
+<!--            <androidx.appcompat.widget.Toolbar-->
+<!--            android:id="@+id/toolbar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="?attr/actionBarSize"-->
+<!--            app:contentInsetStartWithNavigation="0dp"-->
+<!--            app:layout_collapseMode="pin"-->
+<!--            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
+<!--            app:title="My Dashboard"-->
+<!--            app:titleTextColor="@color/black"/>-->
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+<!--        </com.google.android.material.appbar.CollapsingToolbarLayout>-->
 
-    </com.google.android.material.appbar.AppBarLayout>
+<!--    </com.google.android.material.appbar.AppBarLayout>-->
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -122,14 +123,14 @@
                                 android:layout_height="match_parent"
                                 android:layout_centerInParent="true"
                                 android:src="@drawable/shape_circle"
-                                android:tint="@color/orange_400"/>
+                                app:tint="@color/orange_400" />
 
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_centerInParent="true"
                                 android:src="@drawable/ic_level"
-                                android:tint="@android:color/white" />
+                                app:tint="@android:color/white" />
 
                         </RelativeLayout>
 
@@ -191,14 +192,14 @@
                                 android:layout_height="match_parent"
                                 android:layout_centerInParent="true"
                                 android:src="@drawable/shape_circle"
-                                android:tint="@color/indigo_400" />
+                                app:tint="@color/indigo_400" />
 
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_centerInParent="true"
                                 android:src="@drawable/ic_friends"
-                                android:tint="@android:color/white" />
+                                app:tint="@android:color/white" />
 
                         </RelativeLayout>
 
@@ -270,14 +271,14 @@
                                 android:layout_height="match_parent"
                                 android:layout_centerInParent="true"
                                 android:src="@drawable/shape_circle"
-                                android:tint="@color/red_300" />
+                                app:tint="@color/red_300" />
 
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_centerInParent="true"
                                 android:src="@drawable/ic_question_answered"
-                                android:tint="@android:color/white" />
+                                app:tint="@android:color/white" />
 
                         </RelativeLayout>
 
@@ -340,14 +341,14 @@
                                 android:layout_height="match_parent"
                                 android:layout_centerInParent="true"
                                 android:src="@drawable/shape_circle"
-                                android:tint="@color/light_green_500" />
+                                app:tint="@color/light_green_500" />
 
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_centerInParent="true"
                                 android:src="@drawable/ic_upvotes"
-                                android:tint="@android:color/white" />
+                                app:tint="@android:color/white" />
 
                         </RelativeLayout>
 
@@ -831,7 +832,8 @@
                         android:scrollbars="none"
                         android:background="@color/grey_10"
                         android:padding="2dp"
-                        android:layout_margin="2dp">
+                        android:layout_margin="2dp"
+                        android:visibility="gone">
 <!--                        ye uper karna hai...-->
 <!--                        android:visibility="gone"-->
 
@@ -935,7 +937,7 @@
                                         android:layout_height="match_parent">
 
                                         <ImageView
-                                            android:id="@+id/tenthMarkssheetImageView"
+                                            android:id="@+id/tenthMarksSheetImageView"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:background="#FFFFFF"
@@ -944,7 +946,7 @@
                                             android:layout_margin="2dp"
                                             android:visibility="invisible"/>
                                         <ProgressBar
-                                            android:id="@+id/tenthMarkssheetProgress"
+                                            android:id="@+id/tenthMarksSheetProgress"
                                             android:layout_width="30dp"
                                             android:layout_height="30dp"
                                             android:foregroundGravity="center"
@@ -954,7 +956,7 @@
                                             android:indeterminateTintMode="src_atop"
                                             android:indeterminateTint="@color/light_blue_600"/>
                                         <Button
-                                            android:id="@+id/tenthMarkssheetUpload"
+                                            android:id="@+id/tenthMarksSheetUpload"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="10dp"
@@ -1096,10 +1098,13 @@
                         android:fillViewport="true"
                         android:measureAllChildren="false"
                         android:scrollbars="none"
-                        android:background="@color/pink_100"
+                        android:background="@color/grey_10"
                         android:padding="2dp"
                         android:layout_margin="2dp"
                         android:visibility="gone">
+                        <!--                        ye uper karna hai...-->
+                        <!--                        android:visibility="gone"-->
+
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -1107,134 +1112,191 @@
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
 
+                            <!--                         12th Admit card-->
                             <androidx.cardview.widget.CardView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp">
+                                android:id="@+id/twelfthAdmitCard"
+                                android:layout_width="100dp"
+                                android:layout_height="120dp"
+                                android:layout_margin="5dp"
+                                app:cardBackgroundColor="#FFFFFF">
                                 <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="fill_parent"
                                     android:orientation="vertical">
                                     <TextView
+                                        android:id="@+id/twelfthAdmitText"
                                         android:layout_width="match_parent"
-                                        android:layout_height="50dp"
-                                        android:text="10th \n Admit card"
-                                        android:gravity="center"/>
-                                    <Button
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="25dp"
+                                        android:text="Admit\ncard"
+                                        android:textColor="@color/black"
+                                        android:textSize="10dp"
                                         android:layout_margin="5dp"
-                                        android:text="UPLOAD"/>
+                                        android:gravity="center"/>
+                                    <View
+                                        android:id="@+id/twelfthAdmitLine"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1px"
+                                        android:background="@color/grey_10" />
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+                                        <ImageView
+                                            android:id="@+id/twelfthAdmitImageView"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="#FFFFFF"
+                                            android:padding="4dp"
+                                            android:layout_centerInParent="true"
+                                            android:layout_margin="2dp"
+                                            android:visibility="invisible"/>
+                                        <ProgressBar
+                                            android:id="@+id/twelfthAdmitProgress"
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:foregroundGravity="center"
+                                            android:layout_centerInParent="true"
+                                            android:visibility="visible"
+                                            android:indeterminate="true"
+                                            android:indeterminateTintMode="src_atop"
+                                            android:indeterminateTint="@color/light_blue_600"/>
+                                        <Button
+                                            android:id="@+id/twelfthAdmitUpload"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="10dp"
+                                            android:text="UPLOAD"
+                                            android:gravity="center"
+                                            android:layout_centerInParent="true"/>
+
+                                    </RelativeLayout>
+
                                 </LinearLayout>
 
                             </androidx.cardview.widget.CardView>
 
+                            <!--                         12th Markssheet card-->
                             <androidx.cardview.widget.CardView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp">
+                                android:id="@+id/twelfthMarkssheetCard"
+                                android:layout_width="100dp"
+                                android:layout_height="120dp"
+                                android:layout_margin="5dp"
+                                app:cardBackgroundColor="#FFFFFF">
                                 <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="fill_parent"
                                     android:orientation="vertical">
                                     <TextView
+                                        android:id="@+id/twelfthMarkssheetText"
                                         android:layout_width="match_parent"
-                                        android:layout_height="50dp"
-                                        android:text="10th \n Admit card"
-                                        android:gravity="center"/>
-                                    <Button
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="25dp"
+                                        android:text="Marks\nSheet"
+                                        android:textColor="@color/black"
+                                        android:textSize="10dp"
                                         android:layout_margin="5dp"
-                                        android:text="UPLOAD"/>
+                                        android:gravity="center"/>
+                                    <View
+                                        android:id="@+id/twelfthMarkssheetLine"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1px"
+                                        android:background="@color/grey_10" />
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+                                        <ImageView
+                                            android:id="@+id/twelfthMarksSheetImageView"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="#FFFFFF"
+                                            android:padding="4dp"
+                                            android:layout_centerInParent="true"
+                                            android:layout_margin="2dp"
+                                            android:visibility="invisible"/>
+                                        <ProgressBar
+                                            android:id="@+id/twelfthMarksSheetProgress"
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:foregroundGravity="center"
+                                            android:layout_centerInParent="true"
+                                            android:visibility="visible"
+                                            android:indeterminate="true"
+                                            android:indeterminateTintMode="src_atop"
+                                            android:indeterminateTint="@color/light_blue_600"/>
+                                        <Button
+                                            android:id="@+id/twelfthMarksSheetUpload"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="10dp"
+                                            android:text="UPLOAD"
+                                            android:gravity="center"
+                                            android:layout_centerInParent="true"/>
+
+                                    </RelativeLayout>
+
                                 </LinearLayout>
 
                             </androidx.cardview.widget.CardView>
 
+                            <!--                         12th Matriculation card-->
                             <androidx.cardview.widget.CardView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp">
+                                android:id="@+id/twelfthMatriculationCard"
+                                android:layout_width="100dp"
+                                android:layout_height="120dp"
+                                android:layout_margin="5dp"
+                                app:cardBackgroundColor="#FFFFFF">
                                 <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="fill_parent"
                                     android:orientation="vertical">
                                     <TextView
+                                        android:id="@+id/twelfthMatriculationText"
                                         android:layout_width="match_parent"
-                                        android:layout_height="50dp"
-                                        android:text="10th \n Admit card"
-                                        android:gravity="center"/>
-                                    <Button
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="25dp"
+                                        android:text="Matriculation\ncertificate"
+                                        android:textColor="@color/black"
+                                        android:textSize="10dp"
                                         android:layout_margin="5dp"
-                                        android:text="UPLOAD"/>
-                                </LinearLayout>
-
-                            </androidx.cardview.widget.CardView>
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp">
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="50dp"
-                                        android:text="10th \n Admit card"
                                         android:gravity="center"/>
-                                    <Button
+                                    <View
+                                        android:id="@+id/twelfthMatriculationLine"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="5dp"
-                                        android:text="UPLOAD"/>
-                                </LinearLayout>
+                                        android:layout_height="1px"
+                                        android:background="@color/grey_10" />
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
 
-                            </androidx.cardview.widget.CardView>
+                                        <ImageView
+                                            android:id="@+id/twelfthMatriculationImageView"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="#FFFFFF"
+                                            android:padding="4dp"
+                                            android:layout_centerInParent="true"
+                                            android:layout_margin="2dp"
+                                            android:visibility="invisible"/>
+                                        <ProgressBar
+                                            android:id="@+id/twelfthMatriculationProgress"
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:foregroundGravity="center"
+                                            android:layout_centerInParent="true"
+                                            android:visibility="visible"
+                                            android:indeterminate="true"
+                                            android:indeterminateTintMode="src_atop"
+                                            android:indeterminateTint="@color/light_blue_600"/>
+                                        <Button
+                                            android:id="@+id/twelfthMatriculationUpload"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="10dp"
+                                            android:text="UPLOAD"
+                                            android:gravity="center"
+                                            android:layout_centerInParent="true"/>
 
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp">
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="50dp"
-                                        android:text="10th \n Admit card"
-                                        android:gravity="center"/>
-                                    <Button
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="5dp"
-                                        android:text="UPLOAD"/>
-                                </LinearLayout>
+                                    </RelativeLayout>
 
-                            </androidx.cardview.widget.CardView>
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp">
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="50dp"
-                                        android:text="10th \n Admit card"
-                                        android:gravity="center"/>
-                                    <Button
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="5dp"
-                                        android:text="UPLOAD"/>
                                 </LinearLayout>
 
                             </androidx.cardview.widget.CardView>
@@ -1297,159 +1359,496 @@
                         android:layout_height="1px"
                         android:background="@color/grey_10" />
 
-                    <HorizontalScrollView
+                    <LinearLayout
                         android:id="@+id/graduationDocCardScroll"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:fillViewport="true"
-                        android:measureAllChildren="false"
-                        android:scrollbars="none"
-                        android:background="@color/blue_100"
+                        android:background="@color/grey_10"
                         android:padding="2dp"
                         android:layout_margin="2dp"
+                        android:orientation="vertical"
                         android:visibility="gone">
+                        <!--                        ye uper karna hai...-->
+                        <!--                        android:visibility="gone"-->
 
-                        <LinearLayout
+<!--                    Graduation College ID-->
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/collegeIDCard"
+                            android:layout_width="100dp"
+                            android:layout_height="120dp"
+                            android:layout_margin="5dp"
+                            app:cardBackgroundColor="#FFFFFF">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:id="@+id/collegeIDtext"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="25dp"
+                                    android:text="College\nID card"
+                                    android:textColor="@color/black"
+                                    android:textSize="10dp"
+                                    android:layout_margin="5dp"
+                                    android:gravity="center"/>
+                                <View
+                                    android:id="@+id/CollegeIDLine"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1px"
+                                    android:background="@color/grey_10" />
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <ImageView
+                                        android:id="@+id/collegeID_ImageView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="#FFFFFF"
+                                        android:padding="4dp"
+                                        android:layout_centerInParent="true"
+                                        android:layout_margin="2dp"
+                                        android:visibility="invisible"/>
+                                    <ProgressBar
+                                        android:id="@+id/collegeID_Progress"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:foregroundGravity="center"
+                                        android:layout_centerInParent="true"
+                                        android:visibility="visible"
+                                        android:indeterminate="true"
+                                        android:indeterminateTintMode="src_atop"
+                                        android:indeterminateTint="@color/light_blue_600"/>
+                                    <Button
+                                        android:id="@+id/collegeID_Upload"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="10dp"
+                                        android:text="UPLOAD"
+                                        android:gravity="center"
+                                        android:layout_centerInParent="true"/>
+
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:text="Marks-Sheets"
+                            android:textColor="@color/grey_80"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="0dp"
+                            android:layout_marginLeft="10dp"
+                            />
 
-                            <androidx.cardview.widget.CardView
+                        <HorizontalScrollView
+                            android:id="@+id/graduationMarksSheetCardScroll"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:fillViewport="true"
+                            android:measureAllChildren="false"
+                            android:scrollbars="none"
+                            android:padding="2dp"
+                            android:layout_marginLeft="10dp"
+                            >
+
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="5dp">
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="50dp"
-                                        android:text="10th \n Admit card"
-                                        android:gravity="center"/>
-                                    <Button
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="5dp"
-                                        android:text="UPLOAD"/>
-                                </LinearLayout>
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
 
-                            </androidx.cardview.widget.CardView>
+                                <!--                         Sem 1 MarksSheet-->
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/sem1MarksSheetCard"
+                                    android:layout_width="100dp"
+                                    android:layout_height="120dp"
+                                    android:layout_margin="5dp"
+                                    app:cardBackgroundColor="#FFFFFF">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="fill_parent"
+                                        android:orientation="vertical">
+                                        <TextView
+                                            android:id="@+id/sem1MarksSheetText"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="25dp"
+                                            android:text="Sem 1\nmarks-sheet"
+                                            android:textColor="@color/black"
+                                            android:textSize="10dp"
+                                            android:layout_margin="5dp"
+                                            android:gravity="center"/>
+                                        <View
+                                            android:id="@+id/sem1MarksSheetLine"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1px"
+                                            android:background="@color/grey_10" />
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
 
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp">
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="50dp"
-                                        android:text="10th \n Admit card"
-                                        android:gravity="center"/>
-                                    <Button
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="5dp"
-                                        android:text="UPLOAD"/>
-                                </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/sem1MarksSheetImageView"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:background="#FFFFFF"
+                                                android:padding="4dp"
+                                                android:layout_centerInParent="true"
+                                                android:layout_margin="2dp"
+                                                android:visibility="invisible"/>
+                                            <ProgressBar
+                                                android:id="@+id/sem1MarksSheetProgress"
+                                                android:layout_width="30dp"
+                                                android:layout_height="30dp"
+                                                android:foregroundGravity="center"
+                                                android:layout_centerInParent="true"
+                                                android:visibility="visible"
+                                                android:indeterminate="true"
+                                                android:indeterminateTintMode="src_atop"
+                                                android:indeterminateTint="@color/light_blue_600"/>
+                                            <Button
+                                                android:id="@+id/sem1MarksSheetUpload"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="10dp"
+                                                android:text="UPLOAD"
+                                                android:gravity="center"
+                                                android:layout_centerInParent="true"/>
 
-                            </androidx.cardview.widget.CardView>
+                                        </RelativeLayout>
 
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp">
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="50dp"
-                                        android:text="10th \n Admit card"
-                                        android:gravity="center"/>
-                                    <Button
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="5dp"
-                                        android:text="UPLOAD"/>
-                                </LinearLayout>
+                                    </LinearLayout>
 
-                            </androidx.cardview.widget.CardView>
+                                </androidx.cardview.widget.CardView>
 
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp">
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="50dp"
-                                        android:text="10th \n Admit card"
-                                        android:gravity="center"/>
-                                    <Button
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="5dp"
-                                        android:text="UPLOAD"/>
-                                </LinearLayout>
+                                <!--                         Sem 2 MarksSheet-->
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/sem2MarksSheetCard"
+                                    android:layout_width="100dp"
+                                    android:layout_height="120dp"
+                                    android:layout_margin="5dp"
+                                    app:cardBackgroundColor="#FFFFFF">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="fill_parent"
+                                        android:orientation="vertical">
+                                        <TextView
+                                            android:id="@+id/sem2MarksSheetText"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="25dp"
+                                            android:text="Sem 2\nmarks-sheet"
+                                            android:textColor="@color/black"
+                                            android:textSize="10dp"
+                                            android:layout_margin="5dp"
+                                            android:gravity="center"/>
+                                        <View
+                                            android:id="@+id/sem2MarksSheetLine"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1px"
+                                            android:background="@color/grey_10" />
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
 
-                            </androidx.cardview.widget.CardView>
+                                            <ImageView
+                                                android:id="@+id/sem2MarksSheetImageView"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:background="#FFFFFF"
+                                                android:padding="4dp"
+                                                android:layout_centerInParent="true"
+                                                android:layout_margin="2dp"
+                                                android:visibility="invisible"/>
+                                            <ProgressBar
+                                                android:id="@+id/sem2MarksSheetProgress"
+                                                android:layout_width="30dp"
+                                                android:layout_height="30dp"
+                                                android:foregroundGravity="center"
+                                                android:layout_centerInParent="true"
+                                                android:visibility="visible"
+                                                android:indeterminate="true"
+                                                android:indeterminateTintMode="src_atop"
+                                                android:indeterminateTint="@color/light_blue_600"/>
+                                            <Button
+                                                android:id="@+id/sem2MarksSheetUpload"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="10dp"
+                                                android:text="UPLOAD"
+                                                android:gravity="center"
+                                                android:layout_centerInParent="true"/>
 
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp">
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="50dp"
-                                        android:text="10th \n Admit card"
-                                        android:gravity="center"/>
-                                    <Button
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="5dp"
-                                        android:text="UPLOAD"/>
-                                </LinearLayout>
+                                        </RelativeLayout>
 
-                            </androidx.cardview.widget.CardView>
+                                    </LinearLayout>
 
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp">
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="50dp"
-                                        android:text="10th \n Admit card"
-                                        android:gravity="center"/>
-                                    <Button
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="5dp"
-                                        android:text="UPLOAD"/>
-                                </LinearLayout>
+                                </androidx.cardview.widget.CardView>
 
-                            </androidx.cardview.widget.CardView>
+                                <!--                         Sem 3 MarksSheet-->
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/sem3MarksSheetCard"
+                                    android:layout_width="100dp"
+                                    android:layout_height="120dp"
+                                    android:layout_margin="5dp"
+                                    app:cardBackgroundColor="#FFFFFF">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="fill_parent"
+                                        android:orientation="vertical">
+                                        <TextView
+                                            android:id="@+id/sem3MarksSheetText"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="25dp"
+                                            android:text="Sem 3\nmarks-sheet"
+                                            android:textColor="@color/black"
+                                            android:textSize="10dp"
+                                            android:layout_margin="5dp"
+                                            android:gravity="center"/>
+                                        <View
+                                            android:id="@+id/sem3MarksSheetLine"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1px"
+                                            android:background="@color/grey_10" />
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
 
-                        </LinearLayout>
+                                            <ImageView
+                                                android:id="@+id/sem3MarksSheetImageView"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:background="#FFFFFF"
+                                                android:padding="4dp"
+                                                android:layout_centerInParent="true"
+                                                android:layout_margin="2dp"
+                                                android:visibility="invisible"/>
+                                            <ProgressBar
+                                                android:id="@+id/sem3MarksSheetProgress"
+                                                android:layout_width="30dp"
+                                                android:layout_height="30dp"
+                                                android:foregroundGravity="center"
+                                                android:layout_centerInParent="true"
+                                                android:visibility="visible"
+                                                android:indeterminate="true"
+                                                android:indeterminateTintMode="src_atop"
+                                                android:indeterminateTint="@color/light_blue_600"/>
+                                            <Button
+                                                android:id="@+id/sem3MarksSheetUpload"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="10dp"
+                                                android:text="UPLOAD"
+                                                android:gravity="center"
+                                                android:layout_centerInParent="true"/>
 
-                    </HorizontalScrollView>
+                                        </RelativeLayout>
+
+                                    </LinearLayout>
+
+                                </androidx.cardview.widget.CardView>
+
+                                <!--                         Sem 4 MarksSheet-->
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/sem4MarksSheetCard"
+                                    android:layout_width="100dp"
+                                    android:layout_height="120dp"
+                                    android:layout_margin="5dp"
+                                    app:cardBackgroundColor="#FFFFFF">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="fill_parent"
+                                        android:orientation="vertical">
+                                        <TextView
+                                            android:id="@+id/sem4MarksSheetText"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="25dp"
+                                            android:text="Sem 4\nmarks-sheet"
+                                            android:textColor="@color/black"
+                                            android:textSize="10dp"
+                                            android:layout_margin="5dp"
+                                            android:gravity="center"/>
+                                        <View
+                                            android:id="@+id/sem4MarksSheetLine"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1px"
+                                            android:background="@color/grey_10" />
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
+
+                                            <ImageView
+                                                android:id="@+id/sem4MarksSheetImageView"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:background="#FFFFFF"
+                                                android:padding="4dp"
+                                                android:layout_centerInParent="true"
+                                                android:layout_margin="2dp"
+                                                android:visibility="invisible"/>
+                                            <ProgressBar
+                                                android:id="@+id/sem4MarksSheetProgress"
+                                                android:layout_width="30dp"
+                                                android:layout_height="30dp"
+                                                android:foregroundGravity="center"
+                                                android:layout_centerInParent="true"
+                                                android:visibility="visible"
+                                                android:indeterminate="true"
+                                                android:indeterminateTintMode="src_atop"
+                                                android:indeterminateTint="@color/light_blue_600"/>
+                                            <Button
+                                                android:id="@+id/sem4MarksSheetUpload"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="10dp"
+                                                android:text="UPLOAD"
+                                                android:gravity="center"
+                                                android:layout_centerInParent="true"/>
+
+                                        </RelativeLayout>
+
+                                    </LinearLayout>
+
+                                </androidx.cardview.widget.CardView>
+
+                                <!--                         Sem 5 MarksSheet-->
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/sem5MarksSheetCard"
+                                    android:layout_width="100dp"
+                                    android:layout_height="120dp"
+                                    android:layout_margin="5dp"
+                                    app:cardBackgroundColor="#FFFFFF">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="fill_parent"
+                                        android:orientation="vertical">
+                                        <TextView
+                                            android:id="@+id/sem5MarksSheetText"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="25dp"
+                                            android:text="Sem 5\nmarks-sheet"
+                                            android:textColor="@color/black"
+                                            android:textSize="10dp"
+                                            android:layout_margin="5dp"
+                                            android:gravity="center"/>
+                                        <View
+                                            android:id="@+id/sem5MarksSheetLine"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1px"
+                                            android:background="@color/grey_10" />
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
+
+                                            <ImageView
+                                                android:id="@+id/sem5MarksSheetImageView"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:background="#FFFFFF"
+                                                android:padding="4dp"
+                                                android:layout_centerInParent="true"
+                                                android:layout_margin="2dp"
+                                                android:visibility="invisible"/>
+                                            <ProgressBar
+                                                android:id="@+id/sem5MarksSheetProgress"
+                                                android:layout_width="30dp"
+                                                android:layout_height="30dp"
+                                                android:foregroundGravity="center"
+                                                android:layout_centerInParent="true"
+                                                android:visibility="visible"
+                                                android:indeterminate="true"
+                                                android:indeterminateTintMode="src_atop"
+                                                android:indeterminateTint="@color/light_blue_600"/>
+                                            <Button
+                                                android:id="@+id/sem5MarksSheetUpload"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="10dp"
+                                                android:text="UPLOAD"
+                                                android:gravity="center"
+                                                android:layout_centerInParent="true"/>
+
+                                        </RelativeLayout>
+
+                                    </LinearLayout>
+
+                                </androidx.cardview.widget.CardView>
+
+                                <!--                         Sem 6 MarksSheet-->
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/sem6MarksSheetCard"
+                                    android:layout_width="100dp"
+                                    android:layout_height="120dp"
+                                    android:layout_margin="5dp"
+                                    app:cardBackgroundColor="#FFFFFF">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="fill_parent"
+                                        android:orientation="vertical">
+                                        <TextView
+                                            android:id="@+id/sem6MarksSheetText"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="25dp"
+                                            android:text="Sem 6\nmarks-sheet"
+                                            android:textColor="@color/black"
+                                            android:textSize="10dp"
+                                            android:layout_margin="5dp"
+                                            android:gravity="center"/>
+                                        <View
+                                            android:id="@+id/sem6MarksSheetLine"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1px"
+                                            android:background="@color/grey_10" />
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
+
+                                            <ImageView
+                                                android:id="@+id/sem6MarksSheetImageView"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:background="#FFFFFF"
+                                                android:padding="4dp"
+                                                android:layout_centerInParent="true"
+                                                android:layout_margin="2dp"
+                                                android:visibility="invisible"/>
+                                            <ProgressBar
+                                                android:id="@+id/sem6MarksSheetProgress"
+                                                android:layout_width="30dp"
+                                                android:layout_height="30dp"
+                                                android:foregroundGravity="center"
+                                                android:layout_centerInParent="true"
+                                                android:visibility="visible"
+                                                android:indeterminate="true"
+                                                android:indeterminateTintMode="src_atop"
+                                                android:indeterminateTint="@color/light_blue_600"/>
+                                            <Button
+                                                android:id="@+id/sem6MarksSheetUpload"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="10dp"
+                                                android:text="UPLOAD"
+                                                android:gravity="center"
+                                                android:layout_centerInParent="true"/>
+
+                                        </RelativeLayout>
+
+                                    </LinearLayout>
+
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+                        </HorizontalScrollView>
+
+
+
+
+
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
