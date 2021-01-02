@@ -80,4 +80,14 @@
         android:name="com.codinghelper.mscii.Help_and_feedback"
         android:label="Feedback"
         tools:layout="@layout/fragment_help_and_feedback" />
+    <fragment
+        android:id="@+id/nav_share"
+        android:name="com.codinghelper.mscii.Share"
+        android:label="Share"
+        tools:layout="@layout/fragment_share" />
+    <fragment
+        android:id="@+id/nav_rateUs"
+        android:name="com.codinghelper.mscii.Rate_us"
+        android:label="Rate us"
+        tools:layout="@layout/fragment_rate_us" />
 </navigation>

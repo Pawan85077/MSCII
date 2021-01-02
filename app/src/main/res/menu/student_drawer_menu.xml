@@ -70,27 +70,31 @@
 
     <item android:title="Share">
         <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_rateUs"
-                android:icon="@drawable/ic_rate_us"
-                android:title="Rate us" />
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_share"
+                    android:icon="@drawable/ic_share"
+                    android:title="Share" />
+                <item
+                    android:id="@+id/nav_rateUs"
+                    android:icon="@drawable/ic_rate_us"
+                    android:title="Rate us" />
+            </group>
         </menu>
     </item>
 
     <item android:title="About">
         <menu>
-            <item
-                android:id="@+id/nav_about_app"
-                android:icon="@drawable/ic_about_app"
-                android:title="About app" />
-            <item
-                android:id="@+id/nav_privacy_policy"
-                android:icon="@drawable/ic_policy"
-                android:title="Policy" />
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_about_app"
+                    android:icon="@drawable/ic_about_app"
+                    android:title="About app" />
+                <item
+                    android:id="@+id/nav_privacy_policy"
+                    android:icon="@drawable/ic_policy"
+                    android:title="Policy" />
+            </group>
         </menu>
     </item>
 </menu>

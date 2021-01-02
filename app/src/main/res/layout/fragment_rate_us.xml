@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".E_election"
+    tools:context=".Rate_us"
     android:layout_marginTop="50dp"
     android:layout_marginBottom="50dp">
 
@@ -19,23 +19,21 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No need to hustle and bustle...!!!"
-        android:layout_above="@+id/election_textView"
-        android:layout_marginLeft="10dp"
+        android:text="Your rating matters"
         android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_above="@+id/rate_usText_view"
+        android:textSize="25dp"
         android:textColor="@color/grey_80"
-        android:textSize="20dp"/>
+        android:layout_centerInParent="true"/>
 
     <TextView
-        android:id="@+id/election_textView"
+        android:id="@+id/rate_usText_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="e-Election platform"
-        android:layout_centerInParent="true"
-        android:layout_margin="10dp"
-        android:gravity="center"
+        android:text="Rate us"
+        android:gravity="center_horizontal"
+        android:textSize="45dp"
         android:textColor="@color/grey_80"
-        android:textSize="45dp"/>
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>
