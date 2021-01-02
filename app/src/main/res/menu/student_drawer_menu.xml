@@ -38,31 +38,59 @@
 
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Utilities">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_Election"
+                    android:icon="?attr/actionModePasteDrawable"
+                    android:title="e-Election" />
+                <item
+                    android:id="@+id/nav_question_bank"
+                    android:icon="@drawable/ic_question_bank"
+                    android:title="Question bank" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Contact us">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_developer"
+                    android:icon="@drawable/ic_developer"
+                    android:title="Developers" />
+                <item
+                    android:id="@+id/nav_HelpAndFeedback"
+                    android:icon="@drawable/ic_help_feedback"
+                    android:title="Help and feedback" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Share">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_share"
                 android:title="Share" />
             <item
-                android:id="@+id/nav_developer"
-                android:icon="@drawable/ic_developer"
-                android:title="Developers" />
-            <item
-                android:id="@+id/nav_Election"
-                android:icon="?attr/actionModePasteDrawable"
-                android:title="e-Election" />
-            <item
-                android:id="@+id/nav_bank"
-                android:icon="@drawable/ic_question_bank"
-                android:title="Question bank" />
-
-            <item
-                android:id="@+id/nav_HelpAndFeedback"
-                android:icon="@drawable/ic_help_feedback"
-                android:title="Help and feedback" />
-
+                android:id="@+id/nav_rateUs"
+                android:icon="@drawable/ic_rate_us"
+                android:title="Rate us" />
         </menu>
     </item>
 
+    <item android:title="About">
+        <menu>
+            <item
+                android:id="@+id/nav_about_app"
+                android:icon="@drawable/ic_about_app"
+                android:title="About app" />
+            <item
+                android:id="@+id/nav_privacy_policy"
+                android:icon="@drawable/ic_policy"
+                android:title="Policy" />
+        </menu>
+    </item>
 </menu>

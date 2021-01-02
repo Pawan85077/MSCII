@@ -65,5 +65,19 @@
         android:name="com.codinghelper.mscii.SettingsFragment"
         android:label="Settings"
         tools:layout="@layout/fragment_settings" />
-
+    <fragment
+        android:id="@+id/nav_Election"
+        android:name="com.codinghelper.mscii.E_election"
+        android:label="e-Election"
+        tools:layout="@layout/fragment_e_election" />
+    <fragment
+        android:id="@+id/nav_question_bank"
+        android:name="com.codinghelper.mscii.Question_bank"
+        android:label="Question bank"
+        tools:layout="@layout/fragment_question_bank" />
+    <fragment
+        android:id="@+id/nav_HelpAndFeedback"
+        android:name="com.codinghelper.mscii.Help_and_feedback"
+        android:label="Feedback"
+        tools:layout="@layout/fragment_help_and_feedback" />
 </navigation>
