@@ -113,7 +113,8 @@ public class student_homepage extends AppCompatActivity {
                 R.id.nav_dashboard,R.id.nav_home,R.id.nav_chat,R.id.nav_notification,
                 R.id.nav_developer,R.id.navigation_explore,R.id.navigation_activities,
                 R.id.navigation_grade,R.id.nav_admin_feed,R.id.navigation_settings, R.id.nav_Election,
-                R.id.nav_question_bank,R.id.nav_HelpAndFeedback,R.id.nav_share,R.id.nav_rateUs)
+                R.id.nav_question_bank,R.id.nav_HelpAndFeedback,R.id.nav_share,R.id.nav_rateUs,
+                R.id.nav_about_app,R.id.nav_privacy_policy)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this,R.id.navHostfrag);

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".About_app"
+    android:layout_marginTop="50dp"
+    android:layout_marginBottom="50dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="We are working on it :)"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Curious about oue app ??\nHere's solution"
+        android:layout_above="@+id/election_textView"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/grey_80"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/election_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="About app"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:textColor="@color/grey_80"
+        android:textSize="45dp"/>
+
+</RelativeLayout>

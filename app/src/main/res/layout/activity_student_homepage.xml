@@ -96,7 +96,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/student_drawer_menu"
-        android:scrollbars="none"/>
+        android:scrollbars="none"
+        android:paddingBottom="20dp"/>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
