@@ -90,7 +90,7 @@ public class Signup_student extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedCourse = parent.getItemAtPosition(position).toString();
-                if (selectedCourse!="--Select Course--") {
+                if (!selectedCourse.equals("--Select Course--")) {
                     Toast.makeText(parent.getContext(), selectedCourse, Toast.LENGTH_SHORT).show();
                 }
             }
