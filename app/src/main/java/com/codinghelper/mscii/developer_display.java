@@ -11,15 +11,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-/**
- * A simple {@link Fragment} subclass.
- * create an instance of this fragment.
- */
+
 public class developer_display extends Fragment {
 
     public developer_display() {
         // Required empty public constructor
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
