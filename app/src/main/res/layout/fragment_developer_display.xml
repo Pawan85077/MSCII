@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_marginTop="50dp"
+    android:background="@color/white"
     tools:context=".developer_display">
 
 
@@ -58,10 +59,10 @@
                         app:fontFamily="sans-serif-thin" />
 
                     <TextView
-                        android:layout_width="300dp"
+                        android:layout_width="310dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Your choice Our responsibility"
+                        android:text="Your choice, Our responsibility"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textColor="@color/grey_3"
                         app:fontFamily="sans-serif-medium" />
@@ -274,7 +275,7 @@
                     android:layout_marginTop="15dp"
                     android:text="Our app provides a quality experiences and support services that lead to connect with your college in every aspect with teachers, friends and with every department. It helps you to collaborate with your professors. Our app provides a quality experiences and support services that lead to connect with your college in every aspect with teachers, friends and with every department. It helps you to collaborate with your professors.\n\nOur app provides a quality experiences and support services that lead to connect with your college in every aspect with every department.."
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textColor="@color/grey_60"
+                    android:textColor="@color/grey_80"
                     app:fontFamily="sans-serif-light" />
 
             </LinearLayout>
