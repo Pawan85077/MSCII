@@ -120,7 +120,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Aim behind making this app is that, we wanted to provide a platform to all college students and teachers a single platform to run all college related or general need smoothly."
+                        android:text="Aim behind making this app is that, we wanted to provide a platform for all college students and teachers where all college related or general need runs smoothly."
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/grey_90" />
 
