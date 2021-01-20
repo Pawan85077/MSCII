@@ -1,283 +1,370 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileFragment">
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/Edit_admin_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:backgroundTint="#F4FFF4"
+        android:layout_margin="16dp"
+        android:text="Edit profile"
+        android:textSize="15dp"
+        android:textColor="@color/green_500"
+        android:textAlignment="textStart"
+        app:icon="@drawable/ic_create"
+        app:iconSize="25dp"
+        app:iconGravity="start"
+        app:iconTint="@color/green_500"
+        android:elevation="6dp"
+        app:strokeColor="@color/green_500"
+        app:strokeWidth="0.1dp"
+        tools:ignore="RtlCompat" />
 
 
-    <LinearLayout
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:background="@drawable/splash_bg"
-            android:padding="20dp">
-
-
-            <com.mikhaellopez.circularimageview.CircularImageView
-                android:id="@+id/admin_profile_image"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:src="@drawable/main_stud"
-                android:layout_centerHorizontal="true"
-                app:civ_border="false"/>
-
-
-            <TextView
-                android:id="@+id/admin_pro_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/admin_profile_image"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:includeFontPadding="false"
-                android:text="Admin name"
-                android:textColor="#FFFFFF"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
-
+        android:clipToPadding="false"
+        android:scrollbars="none"
+        android:scrollingCache="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-50dp"
-            android:layout_gravity="center"
-            android:padding="20dp">
-
-            <Button
-                android:id="@+id/Edit_admin_profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/profile_btbg"
-                android:drawableLeft="@android:drawable/ic_menu_edit"
-                android:text="  Edit Profile  "
-                android:textAllCaps="false"
-                android:textColor="@android:color/background_light"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteY="72dp" />
-
-
-        </LinearLayout>
-
-        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="0dp">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-            <LinearLayout
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:orientation="vertical"
-                android:padding="10dp"
-                android:layout_marginRight="20dp">
+                android:background="?attr/colorPrimary">
 
-                <androidx.cardview.widget.CardView
+                <LinearLayout
+                    android:id="@+id/topjust"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="8dp"
-                    app:cardBackgroundColor="@color/colorPrimaryDark">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_alignParentTop="true"
+                    android:padding="20dp">
+
+                    <com.mikhaellopez.circularimageview.CircularImageView
+                        android:id="@+id/admin_profile_image"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/main_stud"
+                        app:civ_shadow="true"
+                        app:civ_shadow_radius="0"
+                        app:civ_border="true"
+                        app:civ_border_width="3dp" />
+
+                    <TextView
+                        android:id="@+id/admin_pro_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Admin name"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="UX Designer"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/grey_10" />
+
+                </LinearLayout>
 
 
-                    <com.google.android.material.textfield.TextInputLayout
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:layout_below="@+id/topjust">-->
+
+<!--                    <com.mikhaellopez.circularimageview.CircularImageView-->
+<!--                        android:id="@+id/admin_profile_image"-->
+<!--                        android:layout_width="130dp"-->
+<!--                        android:layout_height="130dp"-->
+<!--                        android:src="@drawable/main_stud"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        app:civ_border="false"/>-->
+
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/admin_pro_name"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@+id/admin_profile_image"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:includeFontPadding="false"-->
+<!--                        android:text="Admin name"-->
+<!--                        android:textColor="#FFFFFF"-->
+<!--                        android:textSize="25sp"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                </LinearLayout>-->
+
+
+
+            </RelativeLayout>
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="-50dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:padding="20dp">-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/Edit_admin_profile"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/profile_btbg"-->
+<!--                    android:drawableLeft="@android:drawable/ic_menu_edit"-->
+<!--                    android:text="  Edit Profile  "-->
+<!--                    android:textAllCaps="false"-->
+<!--                    android:textColor="@android:color/background_light"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    tools:layout_editor_absoluteY="72dp" />-->
+
+
+<!--            </LinearLayout>-->
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:layout_marginRight="20dp">
+
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="5dp">
+                        android:layout_marginBottom="8dp"
+                        app:cardBackgroundColor="@color/colorPrimaryDark">
 
-                        <TextView
-                            android:id="@+id/status"
+
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="47dp"
-                            android:layout_marginBottom="10dp"
-                            android:text="Current Status"
-                            android:textStyle="bold"
-                            android:textSize="18sp"
-                            android:textColor="#000" />
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp">
 
-                        <TextView
-                            android:id="@+id/admin_status_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:drawableLeft="@android:drawable/btn_star_big_on"
-                            android:drawablePadding="10dp"
-                            android:text="hey! I'm using MCR infotech :)"
-                            android:textColor="#44423C"
-                            android:textSize="18sp" />
+                            <TextView
+                                android:id="@+id/status"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="47dp"
+                                android:layout_marginBottom="10dp"
+                                android:text="Current Status"
+                                android:textStyle="bold"
+                                android:textSize="18sp"
+                                android:textColor="#000" />
 
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="8dp">
+                            <TextView
+                                android:id="@+id/admin_status_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:drawableLeft="@android:drawable/btn_star_big_on"
+                                android:drawablePadding="10dp"
+                                android:text="hey! I'm using MCR infotech :)"
+                                android:textColor="#44423C"
+                                android:textSize="18sp" />
 
 
-                    <com.google.android.material.textfield.TextInputLayout
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="5dp">
+                        android:layout_marginBottom="8dp">
 
-                        <TextView
-                            android:id="@+id/name"
+
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="47dp"
-                            android:layout_marginBottom="10dp"
-                            android:text="Full Name"
-                            android:textStyle="bold"
-                            android:textSize="18sp"
-                            android:textColor="#000" />
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp">
 
-                        <TextView
-                            android:id="@+id/admin_full_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_person"
-                            android:drawablePadding="10dp"
-                            android:text="Name"
-                            android:textSize="18sp"
-                            android:textColor="#44423C"
-                            android:layout_gravity="center_horizontal"/>
+                            <TextView
+                                android:id="@+id/name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="47dp"
+                                android:layout_marginBottom="10dp"
+                                android:text="Full Name"
+                                android:textStyle="bold"
+                                android:textSize="18sp"
+                                android:textColor="#000" />
+
+                            <TextView
+                                android:id="@+id/admin_full_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawableLeft="@drawable/ic_person"
+                                android:drawablePadding="10dp"
+                                android:text="Name"
+                                android:textSize="18sp"
+                                android:textColor="#44423C"
+                                android:layout_gravity="center_horizontal"/>
 
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                </androidx.cardview.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
 
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="8dp"
-                    app:cardBackgroundColor="@color/colorPrimaryDark">
-
-                    <com.google.android.material.textfield.TextInputLayout
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="5dp">
+                        android:layout_marginBottom="8dp"
+                        app:cardBackgroundColor="@color/colorPrimaryDark">
 
-                        <TextView
-                            android:id="@+id/phone"
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="47dp"
-                            android:layout_marginBottom="10dp"
-                            android:text="Phone"
-                            android:textColor="#000"
-                            android:textStyle="bold"
-                            android:textSize="18sp"/>
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp">
 
-                        <TextView
-                            android:id="@+id/admin_pro_phone"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_phone"
-                            android:drawablePadding="10dp"
-                            android:text="phone number"
-                            android:textColor="#44423C"
-                            android:textSize="18sp"
-                            android:layout_gravity="center_horizontal"/>
+                            <TextView
+                                android:id="@+id/phone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="47dp"
+                                android:layout_marginBottom="10dp"
+                                android:text="Phone"
+                                android:textColor="#000"
+                                android:textStyle="bold"
+                                android:textSize="18sp"/>
 
-
-                    </com.google.android.material.textfield.TextInputLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="8dp">
+                            <TextView
+                                android:id="@+id/admin_pro_phone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawableLeft="@drawable/ic_phone"
+                                android:drawablePadding="10dp"
+                                android:text="phone number"
+                                android:textColor="#44423C"
+                                android:textSize="18sp"
+                                android:layout_gravity="center_horizontal"/>
 
 
-                    <com.google.android.material.textfield.TextInputLayout
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="5dp">
+                        android:layout_marginBottom="8dp">
 
-                        <TextView
-                            android:id="@+id/email"
+
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="47dp"
-                            android:layout_marginBottom="10dp"
-                            android:text="Email"
-                            android:textStyle="bold"
-                            android:textColor="#000"
-                            android:textSize="18sp"/>
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp">
 
-                        <TextView
-                            android:id="@+id/admin_pro_email"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_email"
-                            android:drawablePadding="10dp"
-                            android:text="email"
-                            android:textColor="#44423C"
-                            android:textSize="18sp"
-                            android:layout_gravity="center_horizontal"/>
+                            <TextView
+                                android:id="@+id/email"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="47dp"
+                                android:layout_marginBottom="10dp"
+                                android:text="Email"
+                                android:textStyle="bold"
+                                android:textColor="#000"
+                                android:textSize="18sp"/>
+
+                            <TextView
+                                android:id="@+id/admin_pro_email"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawableLeft="@drawable/ic_email"
+                                android:drawablePadding="10dp"
+                                android:text="email"
+                                android:textColor="#44423C"
+                                android:textSize="18sp"
+                                android:layout_gravity="center_horizontal"/>
 
 
-                    </com.google.android.material.textfield.TextInputLayout>
-                </androidx.cardview.widget.CardView>
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="8dp"
-                    app:cardBackgroundColor="@color/colorPrimaryDark">
-
-                    <com.google.android.material.textfield.TextInputLayout
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="5dp">
+                        android:layout_marginBottom="8dp"
+                        app:cardBackgroundColor="@color/colorPrimaryDark">
 
-                        <TextView
-                            android:id="@+id/admin_department"
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="47dp"
-                            android:layout_marginBottom="10dp"
-                            android:text="Department"
-                            android:textColor="#000"
-                            android:textStyle="bold"
-                            android:textSize="18sp"/>
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp">
 
-                        <TextView
-                            android:id="@+id/admin_pro_department"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_work"
-                            android:drawablePadding="16dp"
-                            android:text="department name"
-                            android:textColor="#44423C"
-                            android:textSize="18sp"
-                            android:layout_gravity="center_horizontal"/>
+                            <TextView
+                                android:id="@+id/admin_department"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="47dp"
+                                android:layout_marginBottom="10dp"
+                                android:text="Department"
+                                android:textColor="#000"
+                                android:textStyle="bold"
+                                android:textSize="18sp"/>
 
-
-                    </com.google.android.material.textfield.TextInputLayout>
-                </androidx.cardview.widget.CardView>
-
-
-
-
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+                            <TextView
+                                android:id="@+id/admin_pro_department"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawableLeft="@drawable/ic_work"
+                                android:drawablePadding="16dp"
+                                android:text="department name"
+                                android:textColor="#44423C"
+                                android:textSize="18sp"
+                                android:layout_gravity="center_horizontal"/>
 
 
-</FrameLayout>
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+
+
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</RelativeLayout>

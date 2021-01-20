@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -55,8 +57,12 @@ public class ProfileFragment extends Fragment {
         final TextView status=(TextView)v.findViewById(R.id.status_name);
         final ImageView imageView=(ImageView)v.findViewById(R.id.profile_image);
         final TextView Pcourse=(TextView)v.findViewById(R.id.Pro_course);
+        final TextView qq=(TextView)v.findViewById(R.id.qq);
+        final TextView aa=(TextView)v.findViewById(R.id.aa);
 
-        Button Pedit=(Button)v.findViewById(R.id.Edit_profile);
+
+        final ExtendedFloatingActionButton Pedit=(ExtendedFloatingActionButton) v.findViewById(R.id.Edit_profile);
+        final NestedScrollView scroll_fragmentProfile = (NestedScrollView) v.findViewById(R.id.scroll_fragmentProfile);
 
 
 
@@ -86,6 +92,16 @@ public class ProfileFragment extends Fragment {
                 String Stcourse =String.valueOf(dataSnapshot.child("Scourse").getValue());
                 Pcourse.setText(Stcourse);
 
+                String Qq = String.valueOf(dataSnapshot.child("countQ").getValue());
+                qq.setText(Qq);
+                String Aa = String.valueOf(dataSnapshot.child("countA").getValue());
+                aa.setText(Aa);
+                if (Integer.parseInt(Qq) >= 20 && Integer.parseInt(Aa) >= 20) {
+                    reference.child("Level").setValue("moderator");
+                } else {
+                    reference.child("Level").setValue("");
+                }
+
             }
 
             @Override
@@ -99,6 +115,9 @@ public class ProfileFragment extends Fragment {
                 startActivity(new Intent(getActivity(), editProfile.class));
             }
         });
+
+
+
 
         return  v;
 
