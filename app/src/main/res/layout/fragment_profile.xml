@@ -432,7 +432,4 @@
         app:strokeWidth="0.1dp"
         tools:ignore="RtlCompat" />
 
-
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
