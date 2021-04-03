@@ -17,10 +17,12 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
+            app:titleTextColor="@color/white"
+            app:contentInsetStartWithNavigation="0dp"
             android:id="@+id/admin_toolbar"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/Theme.AppCompat.Light.NoActionBar"
             android:elevation="4dp" />
 
     </LinearLayout>
@@ -41,7 +43,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        app:labelVisibilityMode="selected"
         app:menu="@menu/admin_bottom_navigation"
         android:background="?android:attr/windowBackground"/>
+
 
 </RelativeLayout>
