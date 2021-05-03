@@ -14,24 +14,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<!--        <androidx.core.widget.NestedScrollView-->
-<!--            android:id="@+id/nested_scroll_view"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:scrollbars="none"-->
-<!--            android:scrollingCache="true">-->
+        <!--        <androidx.core.widget.NestedScrollView-->
+        <!--            android:id="@+id/nested_scroll_view"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_alignParentTop="true"-->
+        <!--            android:scrollbars="none"-->
+        <!--            android:scrollingCache="true">-->
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:descendantFocusability="blocksDescendants"-->
-<!--                android:orientation="vertical">-->
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:descendantFocusability="blocksDescendants"-->
+        <!--                android:orientation="vertical">-->
 
 
-<!--            </LinearLayout>-->
+        <!--            </LinearLayout>-->
 
-<!--        </androidx.core.widget.NestedScrollView>-->
+        <!--        </androidx.core.widget.NestedScrollView>-->
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/navigation_toolbar"
@@ -78,6 +78,18 @@
                 app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
                 tools:layout_editor_absoluteX="42dp" />
 
+            <!--            <com.etebarian.meowbottomnavigation.MeowBottomNavigation-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:id="@+id/nav_view_home"-->
+            <!--                app:mbn_circleColor="@color/white"-->
+            <!--                app:mbn_selectedIconColor="#3c415e"-->
+            <!--                app:mbn_countTextColor="@color/white"-->
+            <!--                app:mbn_countBackgroundColor="#ff6f00"-->
+            <!--                app:mbn_defaultIconColor="@color/white"-->
+            <!--                app:mbn_backgroundBottomColor="#3c415e"-->
+            <!--                />-->
+
             <!--            uper ye dalna hai-->
             <!--            app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"-->
 
@@ -98,6 +110,8 @@
         app:menu="@menu/student_drawer_menu"
         android:scrollbars="none"
         android:paddingBottom="20dp"/>
+
+
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

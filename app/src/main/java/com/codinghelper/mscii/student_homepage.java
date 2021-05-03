@@ -151,7 +151,7 @@ public class student_homepage extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-      //  updateUserStatus("offline");
+        //  updateUserStatus("offline");
     }
 
 
@@ -179,21 +179,21 @@ public class student_homepage extends AppCompatActivity {
 
 
     private void updateUserStatus(String state) {
-       String saveCurrentTime, saveCurrentDate;
-       Calendar calendar=Calendar.getInstance();
-       SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
-       saveCurrentDate=currentDate.format(calendar.getTime());
+        String saveCurrentTime, saveCurrentDate;
+        Calendar calendar=Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+        saveCurrentDate=currentDate.format(calendar.getTime());
 
-       SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
-       saveCurrentTime=currentTime.format(calendar.getTime());
+        SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
+        saveCurrentTime=currentTime.format(calendar.getTime());
 
-       HashMap<String,Object> onlineState=new HashMap<>();
-       onlineState.put("time",saveCurrentTime);
-       onlineState.put("date",saveCurrentDate);
-       onlineState.put("state",state);
+        HashMap<String,Object> onlineState=new HashMap<>();
+        onlineState.put("time",saveCurrentTime);
+        onlineState.put("date",saveCurrentDate);
+        onlineState.put("state",state);
 
-       Root.child(currentUserID).child("userOnlineState").updateChildren(onlineState);
-   }
+        Root.child(currentUserID).child("userOnlineState").updateChildren(onlineState);
+    }
 
 
     boolean doubleBackToExitPressedOnce = false;
@@ -294,30 +294,30 @@ public class student_homepage extends AppCompatActivity {
                             builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-            if(!Simg1.equals("no")){
-                            StorageReference referenceDel= FirebaseStorage.getInstance().getReferenceFromUrl(Simg1);
-                            referenceDel.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Rootref.child("studentDetail").child(currentUserID).child("states1").setValue("no");
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(getApplicationContext(),e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
+                                    if(!Simg1.equals("no")){
+                                        StorageReference referenceDel= FirebaseStorage.getInstance().getReferenceFromUrl(Simg1);
+                                        referenceDel.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Rootref.child("studentDetail").child(currentUserID).child("states1").setValue("no");
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(getApplicationContext(),e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
 
-                        if(!Simg2.equals("no")){
-                            StorageReference referencedel=FirebaseStorage.getInstance().getReferenceFromUrl(Simg2);
-                            referencedel.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Rootref.child("studentDetail").child(currentUserID).child("states2").setValue("no");
-                                }
-                            });
-                        }
+                                    if(!Simg2.equals("no")){
+                                        StorageReference referencedel=FirebaseStorage.getInstance().getReferenceFromUrl(Simg2);
+                                        referencedel.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Rootref.child("studentDetail").child(currentUserID).child("states2").setValue("no");
+                                            }
+                                        });
+                                    }
                                     Toast.makeText(getApplicationContext(), "status deleted, now you can logout!!", Toast.LENGTH_SHORT).show();
 
 
