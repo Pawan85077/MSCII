@@ -3,6 +3,8 @@ package com.codinghelper.mscii;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -14,6 +16,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
@@ -32,6 +35,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.codinghelper.mscii.Utils.Tools;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -73,8 +77,8 @@ public class editProfile extends AppCompatActivity {
 
     private Button mp;             // For music player
     private EditText status;
-    private ImageButton status_btn;
-    private ImageView imageView;
+    private CardView status_btn;
+    private ImageView imageViewProfile, imageViewBackground;
     private Uri filePath,resultUri;
     private Uri filePathb,resultUrib;
     private final int PICK_IMAGE_REQUEST=22;
@@ -86,24 +90,32 @@ public class editProfile extends AppCompatActivity {
     String selectedSem;
     String selectedsong;
     String songUrl;
-    LinearLayout layout;
+    LinearLayout layout, studsemLL;
     DatabaseReference reference;
+    int uploadType = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+        initToolbar();
+
         btn_uploadSong=(Button)findViewById(R.id.upload_song);
         btn_chooseb=findViewById(R.id.chooseImgb);
         btn_uploadb=findViewById(R.id.uploadImgb);
         delpro=findViewById(R.id.delpropic);
         btn_choose=findViewById(R.id.chooseImg);
         layout=(LinearLayout)findViewById(R.id.ll5);
+        studsemLL=(LinearLayout)findViewById(R.id.studsemLL);
+
 
         mp=findViewById(R.id.musicPlayer);                           // For music player
         user=FirebaseAuth.getInstance().getCurrentUser();
         reference=FirebaseDatabase.getInstance().getReference();
         btn_upload=findViewById(R.id.uploadImg);
-        imageView=findViewById(R.id.imgView);
+
+        imageViewProfile=findViewById(R.id.imageViewProfile);
+        imageViewBackground=findViewById(R.id.imageViewBackground);
+
         spinCourse = (Spinner) findViewById(R.id.studsem);
         status=findViewById(R.id.edit_status);
         status_btn=findViewById(R.id.status_confirm_bt);
@@ -290,22 +302,40 @@ public class editProfile extends AppCompatActivity {
 
     }
 
+    private void initToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.editToolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_close);
+        toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.grey_60), PorterDuff.Mode.SRC_ATOP);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Edit details");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.grey_5)));
 
+        Tools.setSystemBarColor(this, R.color.grey_5);
+        Tools.setSystemBarLight(this);
+
+    }
     @Override
     protected void onStart() {
         super.onStart();
-        spinCourse.setVisibility(View.GONE);
+        studsemLL.setVisibility(View.GONE);
         layout.setVisibility(View.GONE);
         btn_uploadSong.setVisibility(View.GONE);
         reference.child("studentDetail").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild(user.getUid())){
-                    spinCourse.setVisibility(View.VISIBLE);
+                    studsemLL.setVisibility(View.VISIBLE);
                     layout.setVisibility(View.VISIBLE);
                     btn_uploadSong.setVisibility(View.VISIBLE);
                 }else {
-                    spinCourse.setVisibility(View.GONE);
+                    studsemLL.setVisibility(View.GONE);
                     layout.setVisibility(View.GONE);
                     btn_uploadSong.setVisibility(View.GONE);
                 }
@@ -319,6 +349,7 @@ public class editProfile extends AppCompatActivity {
     }
 
     private void SelectImage(){
+        uploadType = 1;
         Intent intent=new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -354,11 +385,24 @@ public class editProfile extends AppCompatActivity {
                 resultUri=result.getUri();
                 File file=new File(resultUri.getPath());
                 int file_size=Integer.parseInt(String.valueOf(file.length()/1024));
-                Toast.makeText(editProfile.this,String.valueOf(file_size)+"kb",Toast.LENGTH_SHORT).show();
+                if (uploadType == 1){
+                    Toast.makeText(editProfile.this,"Profile pic. is of "+String.valueOf(file_size)+"kb",Toast.LENGTH_SHORT).show();
+                }
+                if (uploadType == 2){
+                    Toast.makeText(editProfile.this,"Background pic. is of "+String.valueOf(file_size)+"kb",Toast.LENGTH_SHORT).show();
+                }
+                //Toast.makeText(editProfile.this,String.valueOf(file_size)+"kb",Toast.LENGTH_SHORT).show();
                 Bitmap bitmap = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),resultUri);
-                imageView.setImageBitmap(bitmap);
+                if (uploadType == 1){
+                    imageViewProfile.setVisibility(View.VISIBLE);
+                    imageViewProfile.setImageBitmap(bitmap);
+                }
+                if (uploadType == 2){
+                    imageViewBackground.setVisibility(View.VISIBLE);
+                    imageViewBackground.setImageBitmap(bitmap);
+                }
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -504,6 +548,7 @@ public class editProfile extends AppCompatActivity {
 
 
     private void SelectImageb(){
+        uploadType = 2;
         Intent intent=new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -557,5 +602,10 @@ public class editProfile extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

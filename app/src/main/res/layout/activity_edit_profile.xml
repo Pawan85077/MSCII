@@ -1,124 +1,397 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".editProfile">
+    android:orientation="vertical"
+    tools:context=".editProfile"
+    android:background="@color/grey_5">
 
-    <LinearLayout
-
-    android:id="@+id/layout_button"
-    android:orientation="horizontal"
-    android:layout_alignParentTop="true"
-    android:weightSum="2"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="20dp">
-    <Button
-        android:id="@+id/chooseImg"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="choose image"/>
-
-    <Button
-        android:id="@+id/uploadImg"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="upload image" />
-
-</LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/ll4"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_button"
-        android:layout_marginTop="20dp"
-        android:weightSum="2"
-        android:orientation="vertical">
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <ImageView
-            android:id="@+id/imgView"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/editToolbar"
             android:layout_width="match_parent"
-            android:layout_height="100dp"/>
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/white"
+            app:contentInsetStartWithNavigation="0dp"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/Toolbar.Light"
+            app:title="edit details" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edit_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="edit status" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12dp"/>
 
-            <ImageButton
-                android:id="@+id/status_confirm_bt"
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/checkbox_on_background" />
+                android:paddingLeft="10dp"
+                android:textColor="@color/grey_60"
+                android:text="Your status" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <!--    For Editing Status-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    android:gravity="center_horizontal">
+
+                    <EditText
+                        android:id="@+id/edit_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="10dp"
+                        android:hint="edit status"
+                        android:layout_margin="5dp"
+                        android:inputType="textPersonName"
+                        android:background="@color/grey_5"
+                        />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/status_confirm_bt"
+                        android:layout_width="200dp"
+                        android:layout_height="40dp"
+                        android:backgroundTint="@color/colorPrimary"
+                        app:cardCornerRadius="30dp"
+                        android:layout_marginTop="5dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center"
+                            android:gravity="center_horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="10dp"
+                                android:textColor="@color/white"
+                                android:text="Save n Upload"
+                                android:drawablePadding="10dp"
+                                android:drawableStart="@drawable/ic_done"/>
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:textColor="@color/grey_60"
+                android:text="Profile picture" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <!--    For uploading profile Picture-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageViewProfile"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:visibility="gone"/>
+
+                    <LinearLayout
+                        android:id="@+id/layout_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2"
+                        android:padding="3dp">
+
+                        <Button
+                            android:id="@+id/chooseImg"
+                            style="@style/Button.Primary.Borderless"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/btn_rect_primary"
+                            android:text="choose image"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            app:fontFamily="sans-serif-thin" />
+
+                        <Button
+                            android:id="@+id/uploadImg"
+                            style="@style/Button.Primary.Borderless"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/btn_rect_primary"
+                            android:text="upload image"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            app:fontFamily="sans-serif-thin" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--    Background image pic currently gone-->
+            <LinearLayout
+                android:id="@+id/ll5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/grey_60"
+                    android:text="Background Image" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"/>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imageViewBackground"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:visibility="gone"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            android:padding="3dp">
+
+                            <Button
+                                android:id="@+id/chooseImgb"
+                                style="@style/Button.Primary.Borderless"
+                                android:layout_width="0dp"
+                                android:layout_height="45dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/btn_rect_primary"
+                                android:text="choose image"
+                                android:textAllCaps="false"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                app:fontFamily="sans-serif-thin" />
+
+                            <Button
+                                android:id="@+id/uploadImgb"
+                                style="@style/Button.Primary.Borderless"
+                                android:layout_width="0dp"
+                                android:layout_height="45dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/btn_rect_primary"
+                                android:text="upload image"
+                                android:textAllCaps="false"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                app:fontFamily="sans-serif-thin" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <!--    Student semester Currently gone-->
+            <LinearLayout
+                android:id="@+id/studsemLL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" >
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/grey_60"
+                    android:text="Current semester" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"/>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/white"
+                    android:padding="3dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center_vertical">
+
+                    <Spinner
+                        android:id="@+id/studsem"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/spinner_admin_signup" />
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+                <Button
+                    style="@style/Button.Primary.Borderless"
+                    android:id="@+id/delpropic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Delete profile pic."
+                    android:background="@drawable/btn_rect_primary"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    app:fontFamily="sans-serif-thin" />
+
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+                <Button
+                    style="@style/Button.Primary.Borderless"
+                    android:id="@+id/upload_song"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Upload profile song"
+                    android:visibility="gone"
+                    android:background="@drawable/btn_rect_primary"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    app:fontFamily="sans-serif-thin"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:visibility="gone">
+                <Button
+                    style="@style/Button.Primary.Borderless"
+                    android:id="@+id/musicPlayer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Music Player"
+                    android:background="@drawable/btn_rect_primary"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    app:fontFamily="sans-serif-thin"/>
+
+            </androidx.cardview.widget.CardView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
         </LinearLayout>
-        <Spinner
-            android:id="@+id/studsem"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_below="@+id/edit_status"
-            android:background="@drawable/spinner_admin_signup"
-            android:visibility="gone"/>
-      <!--  <Spinner
-            android:id="@+id/song"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_below="@+id/studsem"
-            android:background="@drawable/spinner_admin_signup" />-->
-        <LinearLayout
+    </androidx.core.widget.NestedScrollView>
 
-            android:id="@+id/ll5"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone">
-            <Button
-                android:id="@+id/chooseImgb"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="choose image"/>
 
-            <Button
-                android:id="@+id/uploadImgb"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="upload image" />
 
-        </LinearLayout>
-        <Button
-            android:id="@+id/delpropic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Delete profile pic"/>
-        <Button
-            android:id="@+id/upload_song"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="upload song"
-            android:visibility="gone"/>
 
-        <Button
-            android:id="@+id/musicPlayer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Music Player"/>
-    </LinearLayout>
-    
-</RelativeLayout>
+</LinearLayout>

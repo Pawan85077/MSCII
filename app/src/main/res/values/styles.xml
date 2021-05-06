@@ -78,4 +78,9 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <style name="Toolbar.Light" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/grey_5</item>
+        <item name="colorControlNormal">@color/grey_60</item>
+        <item name="android:textColorPrimary">@color/grey_60</item>
+    </style>
 </resources>
