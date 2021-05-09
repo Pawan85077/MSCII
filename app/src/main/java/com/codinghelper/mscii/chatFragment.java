@@ -37,7 +37,6 @@ public class chatFragment extends Fragment {
     String currentUserID;
 
 
-
     public chatFragment() {
         // Required empty public constructor
     }
@@ -47,7 +46,7 @@ public class chatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_chat, container, false);
+        View v = inflater.inflate(R.layout.fragment_chat, container, false);
         firebaseAuth = FirebaseAuth.getInstance();
       /* ref.child("GlobalChat").setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -56,17 +55,16 @@ public class chatFragment extends Fragment {
 
             }
         });*/
-        viewPager=(ViewPager)v.findViewById(R.id.chattab);
-        currentUserID=firebaseAuth.getCurrentUser().getUid();
-        tabsAccessorAdaptor=new TabsAccessorAdaptor(getChildFragmentManager());
+        viewPager = (ViewPager) v.findViewById(R.id.chattab);
+        currentUserID = firebaseAuth.getCurrentUser().getUid();
+        tabsAccessorAdaptor = new TabsAccessorAdaptor(getChildFragmentManager());
         viewPager.setAdapter(tabsAccessorAdaptor);
-        Root= FirebaseDatabase.getInstance().getReference().child("studentDetail");
-        tabLayout=(TabLayout)v.findViewById(R.id.main_tab);
+        Root = FirebaseDatabase.getInstance().getReference().child("studentDetail");
+        tabLayout = (TabLayout) v.findViewById(R.id.main_tab);
         tabLayout.setupWithViewPager(viewPager);
         getActivity().setTitle("Chat");
         return v;
     }
-
 
 
 }

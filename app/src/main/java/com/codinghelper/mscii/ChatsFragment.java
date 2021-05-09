@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,6 +57,7 @@ public class ChatsFragment extends Fragment {
         ChatsRef = FirebaseDatabase.getInstance().getReference().child("Friend list").child(currentUserID);
         UserRef = FirebaseDatabase.getInstance().getReference().child("studentDetail");
         chatsList.setLayoutManager(new LinearLayoutManager(getContext()));
+        //chatsList.addItemDecoration(new DividerItemDecoration(chatsList.getContext(), DividerItemDecoration.HORIZONTAL));
         return v;
     }
 
