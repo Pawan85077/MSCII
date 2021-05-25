@@ -1,36 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".FriendChat">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
-        android:layout_marginTop="50dp"
         android:id="@+id/status_cantain"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:orientation="horizontal">
-    <com.mikhaellopez.circularimageview.CircularImageView
-        android:id="@+id/user_profile_status"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:src="@drawable/main_stud"
-        app:civ_border="false"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tap to update status"
-        android:textSize="20sp"
-        android:layout_gravity="center"/>
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/user_profile_status"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/main_stud"
+            app:civ_border="false" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:text="Tap to update status"
+            android:layout_marginLeft="5dp"
+            android:textSize="20sp" />
     </LinearLayout>
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@color/grey_10"
+        android:layout_below="@+id/status_cantain" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/friend_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/status_cantain"
-        />
+        android:layout_below="@+id/divider2"
+        android:layout_marginTop="10dp" />
 </RelativeLayout>
